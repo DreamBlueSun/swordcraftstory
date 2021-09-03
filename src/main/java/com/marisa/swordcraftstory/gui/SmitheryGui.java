@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
 /**
@@ -16,11 +15,8 @@ import net.minecraft.util.text.StringTextComponent;
 
 public class SmitheryGui extends Screen {
 
-    private static final int BTN_WIDTH = 52;
-    private static final int BTN_HEIGHT = 100;
-
     public static void open() {
-        Minecraft.getInstance().displayGuiScreen(new SmitheryGui(new StringTextComponent("test")));
+        Minecraft.getInstance().displayGuiScreen(new SmitheryGui());
     }
 
     Button button1;
@@ -30,22 +26,24 @@ public class SmitheryGui extends Screen {
     Button button5;
     ResourceLocation SMITHERY_GUI_TEXTURE = new ResourceLocation("swordcraftstory", "textures/gui/smithing.png");
 
-    protected SmitheryGui(ITextComponent titleIn) {
-        super(titleIn);
+    protected SmitheryGui() {
+        super(new StringTextComponent("smithery_gui_main"));
     }
 
     @Override
     protected void init() {
         this.minecraft.keyboardListener.enableRepeatEvents(true);
-        this.button1 = new Button(this.width / 2 - 25, this.height / 2 - (75 - 17), 50, 20, new StringTextComponent("制作"), (button) -> {
+        int x = this.width / 2 - 25;
+        int y = this.height / 2 - 58;
+        this.button1 = new Button(x, y, 50, 20, new StringTextComponent("制作"), (button) -> {
         });
-        this.button2 = new Button(this.width / 2 - 25, this.height / 2 - (75 - 17 - 25), 50, 20, new StringTextComponent("强化"), (button) -> {
+        this.button2 = new Button(x, y + 25, 50, 20, new StringTextComponent("强化"), (button) -> {
         });
-        this.button3 = new Button(this.width / 2 - 25, this.height / 2 - (75 - 17 - (25 * 2)), 50, 20, new StringTextComponent("强刃"), (button) -> {
+        this.button3 = new Button(x, y + 50, 50, 20, new StringTextComponent("强刃"), (button) -> {
         });
-        this.button4 = new Button(this.width / 2 - 25, this.height / 2 - (75 - 17 - (25 * 3)), 50, 20, new StringTextComponent("解体"), (button) -> {
+        this.button4 = new Button(x, y + 75, 50, 20, new StringTextComponent("解体"), (button) -> {
         });
-        this.button5 = new Button(this.width / 2 - 25, this.height / 2 - (75 - 17 - (25 * 4)), 50, 20, new StringTextComponent("修理"), (button) -> {
+        this.button5 = new Button(x, y + 100, 50, 20, new StringTextComponent("修理"), (button) -> {
         });
         this.addButton(button1);
         this.addButton(button2);
