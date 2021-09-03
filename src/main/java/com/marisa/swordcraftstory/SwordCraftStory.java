@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory;
 
+import com.marisa.swordcraftstory.event.EventHandler;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -29,6 +30,9 @@ public class SwordCraftStory {
     public SwordCraftStory() {
 
         ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
 
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
