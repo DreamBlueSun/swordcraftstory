@@ -41,14 +41,15 @@ public class SmithingBlock extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isRemote || handIn != Hand.MAIN_HAND) {
+        if (!worldIn.isRemote || handIn != Hand.MAIN_HAND) {
             return ActionResultType.SUCCESS;
         } else {
             ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (stack.getItem() instanceof Hammer) {
                 SmitheryGui.open();
             }
-            return ActionResultType.SUCCESS;
         }
+        return ActionResultType.SUCCESS;
+
     }
 }

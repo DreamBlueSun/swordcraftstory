@@ -1,7 +1,7 @@
 {
   "itemGroup.combat_group": "铸剑物语:战斗",
   "item.swordcraftstory.hammer": "铁锤",
-  "item.swordcraftstory:smithing_block": "锻冶台",
+  "block.swordcraftstory.smithing_block": "锻冶台",
   "item.swordcraftstory.iron_ore": "铁矿石",
   "item.swordcraftstory.sword_mould": "剑模具",
   "item.swordcraftstory.bow_mould": "弓模具",
