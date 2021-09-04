@@ -1,10 +1,13 @@
 package com.marisa.swordcraftstory.gui;
 
+import com.marisa.swordcraftstory.item.combat.Combat;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -32,7 +35,7 @@ public class SmitheryGui extends Screen {
 
     @Override
     protected void init() {
-        this.minecraft.keyboardListener.enableRepeatEvents(true);
+        Minecraft.getInstance().keyboardListener.enableRepeatEvents(true);
         int x = this.width / 2 - 25;
         int y = this.height / 2 - 58;
         this.button1 = new Button(x, y, 50, 20, new StringTextComponent("制作"), (button) -> {
@@ -44,6 +47,18 @@ public class SmitheryGui extends Screen {
         this.button4 = new Button(x, y + 75, 50, 20, new StringTextComponent("解体"), (button) -> {
         });
         this.button5 = new Button(x, y + 100, 50, 20, new StringTextComponent("修理"), (button) -> {
+            Minecraft instance = Minecraft.getInstance();
+            if (instance.player != null) {
+                PlayerInventory inv = instance.player.inventory;
+                for (int i = 0; i < inv.mainInventory.size(); i++) {
+                    ItemStack stack = inv.mainInventory.get(i);
+                    if (stack.getItem() instanceof Combat) {
+                        stack.setDamage(0);
+                        inv.setInventorySlotContents(i,stack);
+                    }
+                }
+                instance.displayGuiScreen(null);
+            }
         });
         this.addButton(button1);
         this.addButton(button2);

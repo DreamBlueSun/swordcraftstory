@@ -1,6 +1,7 @@
 {
   "itemGroup.combat_group": "swordcraftstory:combat",
   "item.swordcraftstory.hammer": "hammer",
+  "item.swordcraftstory:smithing_block": "smithing table",
   "item.swordcraftstory.iron_ore": "iron ore",
   "item.swordcraftstory.sword_mould": "sword mould",
   "item.swordcraftstory.bow_mould": "bow mould",

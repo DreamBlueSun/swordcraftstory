@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "swordcraftstory:block/smithing_block_model" }
+  }
+}

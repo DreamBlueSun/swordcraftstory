@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BBB",
+    "BBB"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:smooth_stone"
+    },
+    "B": {
+      "item": "minecraft:dirt"
+    }
+  },
+  "result": {
+    "item": "swordcraftstory:smithing_block",
+    "count": 1
+  }
+}
