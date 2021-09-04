@@ -124,7 +124,7 @@ public class DamageCountUtils {
      * @date 2021/9/4 0004 2:30
      **/
     private static void arrowDamage(Entity e, Damage damage) {
-        damage.setP(2.0F);
+        damage.setR(2.0F);
         if (e instanceof PlayerEntity) {
             ItemStack arrowSlot = ((PlayerEntity) e).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (!arrowSlot.isEmpty()) {
@@ -134,7 +134,7 @@ public class DamageCountUtils {
                 }
             }
         } else {
-            damage.addP(8.0F);
+            damage.setP(8.0F);
         }
     }
 
@@ -201,6 +201,7 @@ public class DamageCountUtils {
         if (v3 > 0) {
             v += v3;
         }
+        //TODO 举盾时抵挡80%物理伤害
         return Math.max(v, 1.0F);
     }
 
