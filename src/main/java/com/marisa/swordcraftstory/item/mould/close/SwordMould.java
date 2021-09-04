@@ -1,6 +1,7 @@
-package com.marisa.swordcraftstory.item.combat;
+package com.marisa.swordcraftstory.item.mould.close;
 
 import com.marisa.swordcraftstory.group.GroupRegistry;
+import com.marisa.swordcraftstory.item.mould.Mould;
 
 /**
  * @description:

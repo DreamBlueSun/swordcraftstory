@@ -30,11 +30,19 @@ public class Defense {
         this.p = p;
     }
 
+    public void addP(int p) {
+        this.p += p;
+    }
+
     public int getM() {
         return m;
     }
 
     public void setM(int m) {
         this.m = m;
+    }
+
+    public void addM(int m) {
+        this.m += m;
     }
 }

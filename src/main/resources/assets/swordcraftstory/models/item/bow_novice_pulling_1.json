@@ -1,0 +1,6 @@
+{
+  "parent": "swordcraftstory:item/bow_novice",
+  "textures": {
+    "layer0": "swordcraftstory:item/bow_novice_pulling_1"
+  }
+}

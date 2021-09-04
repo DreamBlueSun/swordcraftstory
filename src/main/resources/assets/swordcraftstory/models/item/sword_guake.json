@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "swordcraftstory:item/sword_novice"
+    "layer0": "swordcraftstory:item/sword_guake"
   },
   "display": {
     "thirdperson_righthand": {
@@ -12,13 +12,13 @@
       ],
       "translation": [
         0,
-        6,
+        8,
         2
       ],
       "scale": [
-        2.0,
-        2.0,
-        0.8
+        3.6,
+        3.6,
+        0.5
       ]
     },
     "thirdperson_lefthand": {
@@ -29,13 +29,13 @@
       ],
       "translation": [
         0,
-        6,
+        8,
         2
       ],
       "scale": [
-        2.0,
-        2.0,
-        0.8
+        3.6,
+        3.6,
+        0.5
       ]
     },
     "firstperson_righthand": {

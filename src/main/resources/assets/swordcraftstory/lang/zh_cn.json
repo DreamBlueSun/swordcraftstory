@@ -1,7 +1,10 @@
 {
   "itemGroup.combat_group": "铸剑物语:战斗",
   "item.swordcraftstory.hammer": "铁锤",
+  "item.swordcraftstory.iron_ore": "铁矿石",
   "item.swordcraftstory.sword_mould": "剑模具",
   "item.swordcraftstory.bow_mould": "弓模具",
-  "item.swordcraftstory.sword_novice": "初心者匕首"
+  "item.swordcraftstory.sword_guake": "薙草之稻光",
+  "item.swordcraftstory.sword_novice": "初心者匕首",
+  "item.swordcraftstory.bow_novice": "初心者之弓"
 }

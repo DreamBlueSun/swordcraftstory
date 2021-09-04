@@ -1,3 +1,11 @@
 {
-"item.swordcraftstory.sword_mould":"swordMould"
+  "itemGroup.combat_group": "swordcraftstory:combat",
+  "item.swordcraftstory.hammer": "hammer",
+  "item.swordcraftstory.iron_ore": "iron ore",
+  "item.swordcraftstory.sword_mould": "sword mould",
+  "item.swordcraftstory.bow_mould": "bow mould",
+  "item.swordcraftstory.sword_guake": "sword guake",
+  "item.swordcraftstory.sword_novice": "sword novice",
+  "item.swordcraftstory.bow_novice": "bow novice"
 }
+

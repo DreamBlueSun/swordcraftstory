@@ -1,5 +1,7 @@
 package com.marisa.swordcraftstory.util;
 
+import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.combat.RangedCombat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -7,7 +9,6 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.BowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
@@ -92,12 +93,7 @@ public class DamageCountUtils {
                 break;
         }
         //计算防御
-        Defense defense = new Defense();
-        if (target instanceof LivingEntity) {
-            LivingEntity e = (LivingEntity) target;
-            defense.setP(e.getTotalArmorValue());
-            defense.setM((int) e.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
-        }
+        Defense defense = defense(target);
         //结果
         return count(damage, defense);
     }
@@ -128,15 +124,17 @@ public class DamageCountUtils {
      * @date 2021/9/4 0004 2:30
      **/
     private static void arrowDamage(Entity e, Damage damage) {
-        damage.setP(5.0F);
+        damage.setP(2.0F);
         if (e instanceof PlayerEntity) {
             ItemStack arrowSlot = ((PlayerEntity) e).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (!arrowSlot.isEmpty()) {
                 Item item = arrowSlot.getItem();
-                if (item instanceof BowItem) {
-//                        damage = 5.0F;
+                if (item instanceof RangedCombat) {
+                    damage.setP(((RangedCombat) item).getAtk());
                 }
             }
+        } else {
+            damage.addP(8.0F);
         }
     }
 
@@ -154,6 +152,32 @@ public class DamageCountUtils {
         if (e instanceof EnderDragonEntity) {
             damage.setP(36.0F);
         }
+    }
+
+    /**
+     * @param target 目标实体
+     * @return com.marisa.swordcraftstory.util.Defense
+     * @description
+     * @date 2021/9/4 0004 6:55
+     **/
+    private static Defense defense(Entity target) {
+        Defense defense = new Defense();
+        if (target instanceof LivingEntity) {
+            LivingEntity e = (LivingEntity) target;
+            defense.setP(e.getTotalArmorValue());
+            defense.setM((int) e.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
+            //计入武器防御力
+            ItemStack slot = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+            if (!slot.isEmpty()) {
+                Item item = slot.getItem();
+                if (item instanceof Combat) {
+                    Combat c = (Combat) item;
+                    defense.addP(c.getDef());
+                    defense.addM(c.getPhy());
+                }
+            }
+        }
+        return defense;
     }
 
     /**

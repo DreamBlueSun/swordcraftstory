@@ -36,12 +36,20 @@ public class Damage {
         this.p = p;
     }
 
+    public void addP(float p) {
+        this.p += p;
+    }
+
     public float getM() {
         return m;
     }
 
     public void setM(float m) {
         this.m = m;
+    }
+
+    public void addM(float m) {
+        this.m += m;
     }
 
     public float getR() {
@@ -52,12 +60,8 @@ public class Damage {
         this.r = r;
     }
 
-    public float total() {
-        float v = this.p + this.m + this.r;
-        if (v < 1.0F) {
-            v = 1.0F;
-        }
-        return v;
+    public void addR(float r) {
+        this.r += r;
     }
 
 }
