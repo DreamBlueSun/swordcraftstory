@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.mould.ranged;
 
-import com.marisa.swordcraftstory.group.GroupRegistry;
+import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.mould.Mould;
 
 /**
@@ -11,6 +11,6 @@ import com.marisa.swordcraftstory.item.mould.Mould;
 public class BowMould extends Mould {
 
     public BowMould() {
-        super(new Properties().group(GroupRegistry.COMBAT_GROUP));
+        super(new Properties().group(StoryGroup.COMBAT_GROUP));
     }
 }

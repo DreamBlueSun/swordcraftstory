@@ -1,10 +1,10 @@
 package com.marisa.swordcraftstory.item;
 
 import com.marisa.swordcraftstory.block.BlockRegistry;
-import com.marisa.swordcraftstory.group.GroupRegistry;
-import com.marisa.swordcraftstory.item.combat.close.SwordGuake;
-import com.marisa.swordcraftstory.item.combat.close.SwordNovice;
-import com.marisa.swordcraftstory.item.combat.ranged.BowNovice;
+import com.marisa.swordcraftstory.group.StoryGroup;
+import com.marisa.swordcraftstory.item.special.SwordGuake;
+import com.marisa.swordcraftstory.item.combat.close.NoviceSword;
+import com.marisa.swordcraftstory.item.combat.ranged.NoviceBow;
 import com.marisa.swordcraftstory.item.mould.close.SwordMould;
 import com.marisa.swordcraftstory.item.mould.ranged.BowMould;
 import com.marisa.swordcraftstory.item.ore.IronOre;
@@ -29,13 +29,10 @@ public class ItemRegistry {
     public static RegistryObject<Item> SWORD_MOULD = ITEMS.register("sword_mould", SwordMould::new);
     public static RegistryObject<Item> BOW_MOULD = ITEMS.register("bow_mould", BowMould::new);
     //武器
-    public static RegistryObject<Item> SWORD_NOVICE = ITEMS.register("sword_novice", SwordNovice::new);
-    public static RegistryObject<Item> BOW_NOVICE = ITEMS.register("bow_novice", BowNovice::new);
+    public static RegistryObject<Item> NOVICE_SWORD = ITEMS.register("novice_sword", NoviceSword::new);
+    public static RegistryObject<Item> NOVICE_BOW = ITEMS.register("novice_bow", NoviceBow::new);
     public static RegistryObject<Item> SWORD_GUAKE = ITEMS.register("sword_guake", SwordGuake::new);
     //方块物品
-    public static RegistryObject<Item> SMITHING_BLOCK = ITEMS.register("smithing_block", () -> new BlockItem(BlockRegistry.SMITHING_BLOCK.get(), new Item.Properties().group(GroupRegistry.COMBAT_GROUP)));
-
-    //GUI测试
-//    public static RegistryObject<Item> GUI_TEST = ITEMS.register("gui_test", GuiTest::new);
+    public static RegistryObject<Item> SMITHING_BLOCK = ITEMS.register("smithing_block", () -> new BlockItem(BlockRegistry.SMITHING_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
 
 }

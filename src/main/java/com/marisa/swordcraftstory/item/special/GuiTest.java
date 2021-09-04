@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.special;
 
-import com.marisa.swordcraftstory.group.GroupRegistry;
+import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.gui.SmitheryGui;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.DistExecutor;
 
 public class GuiTest extends Item {
     public GuiTest() {
-        super(new Properties().group(GroupRegistry.COMBAT_GROUP));
+        super(new Properties().group(StoryGroup.COMBAT_GROUP));
     }
 
     @Override

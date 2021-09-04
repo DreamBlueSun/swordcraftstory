@@ -1,18 +1,18 @@
 package com.marisa.swordcraftstory.item.combat.close;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.CloseCombat;
+import com.marisa.swordcraftstory.item.combat.Novice;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 
 /**
- * @description: 初心者匕首-挂科专属皮肤
+ * @description: 初心者匕首
  * @date: 2021/9/1 0001 22:27
  */
 
-public class SwordGuake extends CloseCombat {
+public class NoviceSword extends Novice {
 
-    public SwordGuake() {
+    public NoviceSword() {
         super(1, 7, 3, 0, 0, new IItemTier() {
             @Override
             public int getMaxUses() {
@@ -41,7 +41,7 @@ public class SwordGuake extends CloseCombat {
 
             @Override
             public Ingredient getRepairMaterial() {
-                return Ingredient.fromItems(ItemRegistry.SWORD_GUAKE.get());
+                return Ingredient.fromItems(ItemRegistry.NOVICE_SWORD.get());
             }
         });
     }

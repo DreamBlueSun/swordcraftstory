@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.ore;
 
-import com.marisa.swordcraftstory.group.GroupRegistry;
+import com.marisa.swordcraftstory.group.StoryGroup;
 import net.minecraft.item.Item;
 
 /**
@@ -11,6 +11,6 @@ import net.minecraft.item.Item;
 public class IronOre extends Item {
 
     public IronOre() {
-        super(new Properties().group(GroupRegistry.COMBAT_GROUP));
+        super(new Properties().group(StoryGroup.COMBAT_GROUP));
     }
 }

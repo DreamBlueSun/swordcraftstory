@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item.combat;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.marisa.swordcraftstory.group.GroupRegistry;
+import com.marisa.swordcraftstory.group.StoryGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -56,7 +56,7 @@ public abstract class CloseCombat extends SwordItem implements Combat {
     private int tec;
 
     public CloseCombat(final int rank, final int atk, final int def, final int phy, final int agl, final IItemTier tier) {
-        super(tier, atk, 0.0F, new Item.Properties().group(GroupRegistry.COMBAT_GROUP));
+        super(tier, atk, 0.0F, new Item.Properties().group(StoryGroup.COMBAT_GROUP));
         this.rank = rank;
         this.def = def;
         this.phy = phy;

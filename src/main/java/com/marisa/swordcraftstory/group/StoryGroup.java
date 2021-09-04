@@ -7,7 +7,7 @@ import net.minecraft.item.ItemGroup;
  * @date: 2021/9/1 0001 23:48
  */
 
-public class GroupRegistry {
+public class StoryGroup {
 
     public static ItemGroup COMBAT_GROUP = new CombatGroup();
 

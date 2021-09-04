@@ -1,19 +1,19 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "swordcraftstory:item/bow_novice"
+    "layer0": "swordcraftstory:item/novice_sword"
   },
   "display": {
     "thirdperson_righthand": {
       "rotation": [
         -90,
-        90,
-        -90
+        -90,
+        180
       ],
       "translation": [
         0,
-        -1,
-        -1
+        6,
+        2
       ],
       "scale": [
         2.0,
@@ -25,12 +25,12 @@
       "rotation": [
         -90,
         90,
-        90
+        180
       ],
       "translation": [
         0,
-        -1,
-        -1
+        6,
+        2
       ],
       "scale": [
         2.0,
@@ -45,9 +45,9 @@
         25
       ],
       "translation": [
-        1.13,
+        0,
         4,
-        1.13
+        -2
       ],
       "scale": [
         2.0,
@@ -62,9 +62,9 @@
         -25
       ],
       "translation": [
-        1.13,
+        0,
         4,
-        1.13
+        -2
       ],
       "scale": [
         2.0,
@@ -72,27 +72,5 @@
         0.8
       ]
     }
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "pulling": 1
-      },
-      "model": "swordcraftstory:item/bow_novice_pulling_0"
-    },
-    {
-      "predicate": {
-        "pulling": 1,
-        "pull": 0.65
-      },
-      "model": "swordcraftstory:item/bow_novice_pulling_1"
-    },
-    {
-      "predicate": {
-        "pulling": 1,
-        "pull": 0.9
-      },
-      "model": "swordcraftstory:item/bow_novice_pulling_2"
-    }
-  ]
+  }
 }

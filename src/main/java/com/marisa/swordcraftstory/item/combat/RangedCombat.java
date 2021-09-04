@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item.combat;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.marisa.swordcraftstory.group.GroupRegistry;
+import com.marisa.swordcraftstory.group.StoryGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -60,7 +60,7 @@ public abstract class RangedCombat extends BowItem implements Combat {
     private int tec;
 
     public RangedCombat(final int rank, final int atk, final int def, final int phy, final int agl, final int dur) {
-        super(new Item.Properties().maxDamage(dur).group(GroupRegistry.COMBAT_GROUP));
+        super(new Item.Properties().maxDamage(dur).group(StoryGroup.COMBAT_GROUP));
         this.rank = rank;
         this.atk = atk;
         this.def = def;

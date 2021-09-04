@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.special;
 
-import com.marisa.swordcraftstory.group.GroupRegistry;
+import com.marisa.swordcraftstory.group.StoryGroup;
 import net.minecraft.item.Item;
 
 /**
@@ -10,6 +10,6 @@ import net.minecraft.item.Item;
 
 public class Hammer extends Item {
     public Hammer() {
-        super(new Properties().group(GroupRegistry.COMBAT_GROUP));
+        super(new Properties().group(StoryGroup.COMBAT_GROUP));
     }
 }

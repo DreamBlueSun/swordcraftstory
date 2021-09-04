@@ -16,9 +16,9 @@ import java.util.List;
  * @date: 2021/9/4 0004 6:35
  */
 
-public class BowNovice extends RangedCombat {
+public class NoviceBow extends RangedCombat {
 
-    public BowNovice() {
+    public NoviceBow() {
         super(1, 4, 1, 0, -5, 50);
     }
 
