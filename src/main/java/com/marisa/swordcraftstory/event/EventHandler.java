@@ -1,15 +1,11 @@
 package com.marisa.swordcraftstory.event;
 
-import com.marisa.swordcraftstory.item.combat.Combat;
 import com.marisa.swordcraftstory.util.DamageCountUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -39,14 +35,6 @@ public class EventHandler {
     public void damageEvent(LivingDamageEvent event) {
         //修改伤害计算
         event.setAmount(DamageCountUtils.damageResult(event.getSource(), event.getEntity(), event.getAmount()));
-    }
-
-    @SubscribeEvent
-    public void playerAttackEvent(AttackEntityEvent event) {
-        ItemStack stack = event.getPlayer().getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-        if (stack.getItem() instanceof Combat) {
-            ((Combat) stack.getItem()).incrTec(stack);
-        }
     }
 
 }
