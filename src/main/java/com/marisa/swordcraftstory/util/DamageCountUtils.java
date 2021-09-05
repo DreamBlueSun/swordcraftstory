@@ -8,12 +8,11 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
 import net.minecraft.util.DamageSource;
 
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * @description:
@@ -94,7 +93,48 @@ public class DamageCountUtils {
         //计算防御
         Defense defense = defense(target);
         //结果
-        return count(damage, defense);
+        float count = count(damage, defense);
+        //计算暴击
+        count = critical(source, count);
+        return count;
+    }
+
+    private static final int CRITICAL_BASE_NUM = 50;
+
+    /**
+     * @param source 伤害来源
+     * @param count  未执行暴击的伤害数值
+     * @return float
+     * @description 伤害数值执行暴击逻辑
+     * @date 2021/9/5 0005 11:30
+     **/
+    private static float critical(DamageSource source, float count) {
+        int may = 0;
+        boolean critical = false;
+        ItemStack stack;
+        switch (source.getDamageType()) {
+            case "player":
+            case "arrow":
+                may = CRITICAL_BASE_NUM;
+                if (source.getTrueSource() instanceof PlayerEntity) {
+                    stack = ((PlayerEntity) source.getTrueSource()).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+                    if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
+                        Combat item = (Combat) stack.getItem();
+                        may = CRITICAL_BASE_NUM + (item.getTec(stack) / 5);
+                    }
+                }
+                break;
+            case "mob":
+                may = CRITICAL_BASE_NUM;
+                break;
+        }
+        if (may != 0) {
+            critical = CRITICAL_BASE_NUM > new Random().nextInt(1000);
+        }
+        if (critical) {
+            count = count * 2;
+        }
+        return count;
     }
 
     /**
@@ -106,12 +146,11 @@ public class DamageCountUtils {
      **/
     private static void playerDamage(PlayerEntity e, Damage damage) {
         damage.setP(1.0F);
-        ItemStack playerSlot = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-        if (!playerSlot.isEmpty()) {
-            Item item = playerSlot.getItem();
-            if (item instanceof SwordItem) {
-                damage.setP(((SwordItem) item).getAttackDamage() + 1.0F);
-            }
+        ItemStack stack = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+        if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
+            Combat item = (Combat) stack.getItem();
+            damage.setP(item.getAtk(stack));
+            item.incrTec(stack);
         }
     }
 
@@ -127,9 +166,9 @@ public class DamageCountUtils {
         if (e instanceof PlayerEntity) {
             ItemStack stack = ((PlayerEntity) e).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
+                damage.setR(0.0F);
                 Combat item = (Combat) stack.getItem();
                 damage.setP(item.getAtk(stack));
-                damage.setR(0.0F);
                 item.incrTec(stack);
             }
         } else {
