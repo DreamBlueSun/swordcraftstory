@@ -1,6 +1,8 @@
 package com.marisa.swordcraftstory.gui;
 
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.net.Networking;
+import com.marisa.swordcraftstory.net.SendPack;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -49,6 +51,7 @@ public class SmitheryGui extends Screen {
         this.button5 = new Button(x, y + 100, 50, 20, new StringTextComponent("修理"), (button) -> {
             Minecraft instance = Minecraft.getInstance();
             if (instance.player != null) {
+                Networking.INSTANCE.sendToServer(new SendPack("smithery.repairAll"));
                 PlayerInventory inv = instance.player.inventory;
                 for (int i = 0; i < inv.mainInventory.size(); i++) {
                     ItemStack stack = inv.mainInventory.get(i);
