@@ -14,6 +14,11 @@ public interface Combat {
      */
     int MAX_TEC = 255;
 
+    /**
+     * 武器最大磨合度
+     */
+    int CRITICAL_BASE_NUM = 50;
+
     int getRank();
 
     int getAtk(ItemStack stack);

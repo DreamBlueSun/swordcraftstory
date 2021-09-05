@@ -99,8 +99,6 @@ public class DamageCountUtils {
         return count;
     }
 
-    private static final int CRITICAL_BASE_NUM = 50;
-
     /**
      * @param source 伤害来源
      * @param count  未执行暴击的伤害数值
@@ -115,21 +113,21 @@ public class DamageCountUtils {
         switch (source.getDamageType()) {
             case "player":
             case "arrow":
-                may = CRITICAL_BASE_NUM;
+                may = Combat.CRITICAL_BASE_NUM;
                 if (source.getTrueSource() instanceof PlayerEntity) {
                     stack = ((PlayerEntity) source.getTrueSource()).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
                     if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
                         Combat item = (Combat) stack.getItem();
-                        may = CRITICAL_BASE_NUM + (item.getTec(stack) / 5);
+                        may = Combat.CRITICAL_BASE_NUM + (item.getTec(stack) / 5);
                     }
                 }
                 break;
             case "mob":
-                may = CRITICAL_BASE_NUM;
+                may = Combat.CRITICAL_BASE_NUM;
                 break;
         }
         if (may != 0) {
-            critical = CRITICAL_BASE_NUM > new Random().nextInt(1000);
+            critical = Combat.CRITICAL_BASE_NUM > new Random().nextInt(1000);
         }
         if (critical) {
             count = count * 2;

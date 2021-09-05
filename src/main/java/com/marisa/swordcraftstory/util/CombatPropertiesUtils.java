@@ -33,6 +33,9 @@ public class CombatPropertiesUtils {
                 .appendString("   ").appendSibling(new TranslationTextComponent(String.valueOf(combat.getPhy(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("敏捷    ").mergeStyle(TextFormatting.YELLOW)
                 .appendString("   ").appendSibling(new TranslationTextComponent(String.valueOf(combat.getAgl(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+        float critical = (float) (Combat.CRITICAL_BASE_NUM + (combat.getTec(stack) / 5)) / 10;
+        tooltip.add(new TranslationTextComponent("暴击几率").mergeStyle(TextFormatting.YELLOW)
+                .appendString("   ").appendSibling(new TranslationTextComponent(critical + "%").mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("磨合进度").mergeStyle(TextFormatting.YELLOW)
                 .appendString("   ").appendSibling(new TranslationTextComponent(getTec(stack) + "/255").mergeStyle(TextFormatting.LIGHT_PURPLE)));
     }
