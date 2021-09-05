@@ -1,5 +1,7 @@
 package com.marisa.swordcraftstory.item.combat;
 
+import net.minecraft.item.ItemStack;
+
 /**
  * @description:
  * @date: 2021/9/4 0004 6:57
@@ -14,15 +16,30 @@ public interface Combat {
 
     int getRank();
 
-    int getAtk();
+    int getAtk(ItemStack stack);
 
-    int getDef();
+    int getDef(ItemStack stack);
 
-    int getPhy();
+    int getPhy(ItemStack stack);
 
-    int getAgl();
+    int getAgl(ItemStack stack);
 
-    int getDur();
+    //暂定技能消耗Dur
+    int getDur(ItemStack stack);
 
-    int getTec();
+    /**
+     * @param stack ITEM_STACK
+     * @return int
+     * @description 获取当前物品的磨合度
+     * @date 2021/9/5 0005 9:16
+     **/
+    int getTec(ItemStack stack);
+
+    /**
+     * @param stack ITEM_STACK
+     * @return int
+     * @description 增加当前物品的磨合度
+     * @date 2021/9/5 0005 9:16
+     **/
+    void incrTec(ItemStack stack);
 }

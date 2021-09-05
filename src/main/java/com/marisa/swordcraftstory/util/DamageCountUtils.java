@@ -1,7 +1,6 @@
 package com.marisa.swordcraftstory.util;
 
 import com.marisa.swordcraftstory.item.combat.Combat;
-import com.marisa.swordcraftstory.item.combat.RangedCombat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -126,12 +125,12 @@ public class DamageCountUtils {
     private static void arrowDamage(Entity e, Damage damage) {
         damage.setR(2.0F);
         if (e instanceof PlayerEntity) {
-            ItemStack arrowSlot = ((PlayerEntity) e).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-            if (!arrowSlot.isEmpty()) {
-                Item item = arrowSlot.getItem();
-                if (item instanceof RangedCombat) {
-                    damage.setP(((RangedCombat) item).getAtk());
-                }
+            ItemStack stack = ((PlayerEntity) e).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+            if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
+                Combat item = (Combat) stack.getItem();
+                damage.setP(item.getAtk(stack));
+                damage.setR(0.0F);
+                item.incrTec(stack);
             }
         } else {
             damage.setP(8.0F);
@@ -167,14 +166,11 @@ public class DamageCountUtils {
             defense.setP(e.getTotalArmorValue());
             defense.setM((int) e.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
             //计入武器防御力
-            ItemStack slot = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-            if (!slot.isEmpty()) {
-                Item item = slot.getItem();
-                if (item instanceof Combat) {
-                    Combat c = (Combat) item;
-                    defense.addP(c.getDef());
-                    defense.addM(c.getPhy());
-                }
+            ItemStack stack = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+            if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
+                Combat item = (Combat) stack.getItem();
+                defense.addP(item.getDef(stack));
+                defense.addM(item.getPhy(stack));
             }
         }
         return defense;

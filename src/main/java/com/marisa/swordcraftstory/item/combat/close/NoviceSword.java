@@ -1,16 +1,24 @@
 package com.marisa.swordcraftstory.item.combat.close;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.Novice;
+import com.marisa.swordcraftstory.item.combat.CloseCombat;
+import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * @description: 初心者匕首
  * @date: 2021/9/1 0001 22:27
  */
 
-public class NoviceSword extends Novice {
+public class NoviceSword extends CloseCombat {
 
     public NoviceSword() {
         super(1, 7, 3, 0, 0, new IItemTier() {
@@ -46,4 +54,9 @@ public class NoviceSword extends Novice {
         });
     }
 
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        CombatPropertiesUtils.tipNovice(tooltip);
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
 }
