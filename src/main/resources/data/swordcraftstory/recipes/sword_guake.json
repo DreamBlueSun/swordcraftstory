@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "swordcraftstory:novice_sword",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "swordcraftstory:sword_guake",
+    "count": 1
+  }
+}
