@@ -9,6 +9,7 @@ import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.minecraft.util.DamageSource;
 
 import java.util.Objects;
@@ -145,10 +146,14 @@ public class DamageCountUtils {
     private static void playerDamage(PlayerEntity e, Damage damage) {
         damage.setP(1.0F);
         ItemStack stack = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-        if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
-            Combat item = (Combat) stack.getItem();
-            damage.setP(item.getAtk(stack));
-            item.incrTec(stack);
+        if (!stack.isEmpty()) {
+            if ((stack.getItem() instanceof Combat)) {
+                Combat item = (Combat) stack.getItem();
+                damage.setP(item.getAtk(stack));
+                item.incrTec(stack);
+            } else if (stack.getItem() instanceof SwordItem) {
+                damage.setP(((SwordItem) stack.getItem()).getAttackDamage() + 1.0F);
+            }
         }
     }
 
