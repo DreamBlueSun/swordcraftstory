@@ -1,9 +1,12 @@
 package com.marisa.swordcraftstory.util;
 
+import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.item.combat.Combat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -157,7 +160,9 @@ public class DamageCountUtils {
                 item.incrTec(stack);
             } else if (stack.getItem() instanceof TieredItem) {
                 //非story武器
-                damage.setP(((TieredItem) stack.getItem()).getTier().getAttackDamage() + 1.0F);
+                Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
+                double amount = ((AttributeModifier) attributeModifiers.get(Attributes.ATTACK_DAMAGE).toArray()[0]).getAmount();
+                damage.setP((float) amount + 1.0F);
             }
         }
     }
