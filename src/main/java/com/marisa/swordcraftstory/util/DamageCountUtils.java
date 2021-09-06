@@ -8,8 +8,9 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.TieredItem;
 import net.minecraft.util.DamageSource;
 
 import java.util.Objects;
@@ -46,12 +47,12 @@ public class DamageCountUtils {
                 break;
             case "inFire":
             case "onFire":
-                damage.setM(6.0F);
+                damage.setM(10.0F);
             case "fireball":
-                damage.setM(16.0F);
+                damage.setM(20.0F);
                 break;
             case "lightningBolt":
-                damage.setM(32.0F);
+                damage.setM(30.0F);
                 break;
             case "magic":
             case "indirectMagic":
@@ -69,13 +70,17 @@ public class DamageCountUtils {
             case "dryout":
             case "wither":
             case "explosion":
+            case "hotFloor":
+            case "inWall":
+            case "cramming":
+            case "cactus":
                 damage.setR(2.0F);
                 break;
             case "starve":
                 damage.setR(4.0F);
                 break;
             case "lava":
-                damage.setR(8.0F);
+                damage.setR(10.0F);
                 break;
             case "explosion.player":
                 damage.setR(50.0F);
@@ -83,10 +88,6 @@ public class DamageCountUtils {
             case "outOfWorld":
                 damage.setR(9999.0F);
                 break;
-            case "hotFloor":
-            case "inWall":
-            case "cramming":
-            case "cactus":
             default:
                 damage.setR(1.0F);
                 break;
@@ -126,6 +127,8 @@ public class DamageCountUtils {
             case "mob":
                 may = Combat.CRITICAL_BASE_NUM;
                 break;
+            default:
+                break;
         }
         if (may != 0) {
             critical = Combat.CRITICAL_BASE_NUM > new Random().nextInt(1000);
@@ -140,7 +143,7 @@ public class DamageCountUtils {
      * @param e      伤害来源玩家
      * @param damage 伤害值
      * @return void
-     * @description 玩家伤害计算
+     * @description 玩家普攻伤害计算
      * @date 2021/9/4 0004 3:20
      **/
     private static void playerDamage(PlayerEntity e, Damage damage) {
@@ -148,11 +151,13 @@ public class DamageCountUtils {
         ItemStack stack = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
         if (!stack.isEmpty()) {
             if ((stack.getItem() instanceof Combat)) {
+                //story武器
                 Combat item = (Combat) stack.getItem();
                 damage.setP(item.getAtk(stack));
                 item.incrTec(stack);
-            } else if (stack.getItem() instanceof SwordItem) {
-                damage.setP(((SwordItem) stack.getItem()).getAttackDamage() + 1.0F);
+            } else if (stack.getItem() instanceof TieredItem) {
+                //非story武器
+                damage.setP(((TieredItem) stack.getItem()).getTier().getAttackDamage() + 1.0F);
             }
         }
     }
@@ -167,12 +172,16 @@ public class DamageCountUtils {
     private static void arrowDamage(Entity e, Damage damage) {
         damage.setR(2.0F);
         if (e instanceof PlayerEntity) {
+            damage.setR(0.0F);
             ItemStack stack = ((PlayerEntity) e).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-            if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
-                damage.setR(0.0F);
+            if (stack.isEmpty()) {
+                damage.setP(1.0F);
+            } else if (stack.getItem() instanceof Combat) {
                 Combat item = (Combat) stack.getItem();
                 damage.setP(item.getAtk(stack));
                 item.incrTec(stack);
+            } else if (stack.getItem() instanceof BowItem) {
+                damage.setP(4.0F);
             }
         } else {
             damage.setP(8.0F);
@@ -198,7 +207,7 @@ public class DamageCountUtils {
     /**
      * @param target 目标实体
      * @return com.marisa.swordcraftstory.util.Defense
-     * @description
+     * @description 计算目标实体的防御力
      * @date 2021/9/4 0004 6:55
      **/
     private static Defense defense(Entity target) {
@@ -239,7 +248,7 @@ public class DamageCountUtils {
         if (v3 > 0) {
             v += v3;
         }
-        //TODO 举盾时抵挡80%物理伤害
+        //TODO 举盾时抵挡90%伤害
         return Math.max(v, 1.0F);
     }
 
