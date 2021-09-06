@@ -9,14 +9,14 @@ import net.minecraft.item.ItemStack;
  * @date: 2021/9/1 0001 23:45
  */
 
-public class CombatGroup extends ItemGroup {
+public class GroupCombat extends ItemGroup {
 
-    public CombatGroup() {
+    public GroupCombat() {
         super("combat_group");
     }
 
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(ItemRegistry.SWORD_MOULD.get());
+        return new ItemStack(ItemRegistry.HAMMER.get());
     }
 }

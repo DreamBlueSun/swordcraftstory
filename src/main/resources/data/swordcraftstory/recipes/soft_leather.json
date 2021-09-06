@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:leather",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "swordcraftstory:soft_leather",
+    "count": 8
+  }
+}

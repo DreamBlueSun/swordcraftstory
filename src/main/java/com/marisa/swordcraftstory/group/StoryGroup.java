@@ -9,6 +9,6 @@ import net.minecraft.item.ItemGroup;
 
 public class StoryGroup {
 
-    public static ItemGroup COMBAT_GROUP = new CombatGroup();
+    public static ItemGroup COMBAT_GROUP = new GroupCombat();
 
 }

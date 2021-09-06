@@ -1,11 +1,14 @@
 {
   "itemGroup.combat_group": "铸剑物语:战斗",
   "item.swordcraftstory.hammer": "铁锤",
-  "block.swordcraftstory.smithing_block": "锻冶台",
-  "item.swordcraftstory.iron_ore": "铁矿石",
   "item.swordcraftstory.sword_mould": "剑模具",
   "item.swordcraftstory.bow_mould": "弓模具",
   "item.swordcraftstory.sword_guake": "薙草之稻光",
   "item.swordcraftstory.novice_sword": "初心者匕首",
-  "item.swordcraftstory.novice_bow": "初心者之弓"
+  "item.swordcraftstory.novice_bow": "初心者之弓",
+  "block.swordcraftstory.smithing_block": "锻冶台",
+  "item.swordcraftstory.woundplast": "创可贴",
+  "item.swordcraftstory.grass_leaves": "杂草的叶片",
+  "item.swordcraftstory.soft_leather": "柔软的皮革",
+  "item.swordcraftstory.iron_ore": "铁矿石"
 }
