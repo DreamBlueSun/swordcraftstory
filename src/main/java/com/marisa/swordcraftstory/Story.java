@@ -1,7 +1,9 @@
 package com.marisa.swordcraftstory;
 
 import com.marisa.swordcraftstory.block.BlockRegistry;
+import com.marisa.swordcraftstory.block.tile.TileEntityTypeRegistry;
 import com.marisa.swordcraftstory.event.EventHandler;
+import com.marisa.swordcraftstory.gui.container.ContainerTypeRegistry;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.combat.AttributesRegistry;
 import net.minecraft.block.Block;
@@ -35,6 +37,8 @@ public class Story {
 
         ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BlockRegistry.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        TileEntityTypeRegistry.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ContainerTypeRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         AttributesRegistry.ATTRIBUTES.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.register(new EventHandler());
 

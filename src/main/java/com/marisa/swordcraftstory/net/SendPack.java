@@ -1,11 +1,14 @@
 package com.marisa.swordcraftstory.net;
 
+import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
 import com.marisa.swordcraftstory.item.combat.Combat;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.function.Supplier;
 
@@ -16,32 +19,52 @@ import java.util.function.Supplier;
  */
 
 public class SendPack {
-    private String message;
-//    private static final Logger LOGGER = LogManager.getLogger();
 
-    public SendPack(PacketBuffer buffer) {
-        message = buffer.readString(Short.MAX_VALUE);
-    }
+    private String message;
+
+    private BlockPos blockPos;
 
     public SendPack(String message) {
         this.message = message;
     }
 
-    public void toBytes(PacketBuffer buf) {
-        buf.writeString(this.message);
+    public SendPack(String message, BlockPos blockPos) {
+        this.message = message;
+        this.blockPos = blockPos;
+    }
+
+    public SendPack(PacketBuffer buffer) {
+        this.message = buffer.readString(Short.MAX_VALUE);
+        this.blockPos = buffer.readBlockPos();
+    }
+
+    public void toBytes(PacketBuffer buffer) {
+        buffer.writeString(this.message);
+        buffer.writeBlockPos(this.blockPos);
     }
 
     public void handler(Supplier<NetworkEvent.Context> ctx) {
         ServerPlayerEntity sender = ctx.get().getSender();
         ctx.get().enqueueWork(() -> {
-            if (sender != null && "smithery.repairAll".equals(this.message)) {
-                PlayerInventory inv = sender.inventory;
-                for (int i = 0; i < inv.mainInventory.size(); i++) {
-                    ItemStack stack = inv.mainInventory.get(i);
-                    if (stack.getItem() instanceof Combat) {
-                        stack.setDamage(0);
-                        inv.setInventorySlotContents(i,stack);
-                    }
+            if (sender != null && this.message != null) {
+                switch (this.message) {
+                    case "smithery.intensifyEdge":
+                        SmithingBlockTileEntity smithingBlockTileEntity = (SmithingBlockTileEntity) sender.world.getTileEntity(this.blockPos);
+                        NetworkHooks.openGui(sender, smithingBlockTileEntity, (PacketBuffer packerBuffer) ->
+                                packerBuffer.writeBlockPos(smithingBlockTileEntity.getPos()));
+                        break;
+                    case "smithery.repairAll":
+                        PlayerInventory inv = sender.inventory;
+                        for (int i = 0; i < inv.mainInventory.size(); i++) {
+                            ItemStack stack = inv.mainInventory.get(i);
+                            if (stack.getItem() instanceof Combat) {
+                                stack.setDamage(0);
+                                inv.setInventorySlotContents(i, stack);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         });

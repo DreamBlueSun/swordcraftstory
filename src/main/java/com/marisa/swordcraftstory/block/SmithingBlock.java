@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.block;
 
-import com.marisa.swordcraftstory.gui.SmitheryGui;
+import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
+import com.marisa.swordcraftstory.gui.screen.SmitheryScreen;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.special.Hammer;
 import net.minecraft.block.Block;
@@ -10,13 +11,17 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 /**
  * @description: 锻冶方块实体
@@ -27,6 +32,17 @@ public class SmithingBlock extends Block {
 
     public SmithingBlock() {
         super(Properties.create(Material.ROCK).hardnessAndResistance(5));
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return new SmithingBlockTileEntity();
     }
 
     @Override
@@ -46,7 +62,7 @@ public class SmithingBlock extends Block {
         } else {
             ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (stack.getItem() instanceof Hammer) {
-                SmitheryGui.open();
+                SmitheryScreen.open(pos);
             }
         }
         return ActionResultType.SUCCESS;

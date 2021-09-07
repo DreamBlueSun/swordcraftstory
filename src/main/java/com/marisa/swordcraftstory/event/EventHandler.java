@@ -10,7 +10,7 @@ import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
- * @description:
+ * @description: 非静态事件处理
  * @date: 2021/9/3 0003 20:48
  */
 
