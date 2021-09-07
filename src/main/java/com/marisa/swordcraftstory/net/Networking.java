@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.net;
 
+import com.marisa.swordcraftstory.Story;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -20,7 +21,7 @@ public class Networking {
 
     public static void registerMessage() {
         INSTANCE = NetworkRegistry.newSimpleChannel(
-                new ResourceLocation("swordcraftstory" + ":first_networking"),
+                new ResourceLocation(Story.MOD_ID + ":first_networking"),
                 () -> "1.0", (s) -> true, (s) -> true);
         INSTANCE.registerMessage(nextID(), SendPack.class, SendPack::toBytes, SendPack::new, SendPack::handler);
     }

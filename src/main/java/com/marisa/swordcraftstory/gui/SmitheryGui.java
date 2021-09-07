@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.gui;
 
+import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.combat.Combat;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.SendPack;
@@ -29,7 +30,7 @@ public class SmitheryGui extends Screen {
     Button button3;
     Button button4;
     Button button5;
-    ResourceLocation SMITHERY_GUI_TEXTURE = new ResourceLocation("swordcraftstory", "textures/gui/smithing.png");
+    ResourceLocation SMITHERY_GUI_TEXTURE = new ResourceLocation(Story.MOD_ID, "textures/gui/smithing.png");
 
     protected SmitheryGui() {
         super(new StringTextComponent("smithery_gui_main"));

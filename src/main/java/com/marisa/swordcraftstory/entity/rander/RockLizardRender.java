@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.entity.rander;
 
+import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.entity.instance.mob.RockLizard;
 import com.marisa.swordcraftstory.entity.model.RockLizardModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -27,7 +28,7 @@ public class RockLizardRender extends EntityRenderer<RockLizard> {
 
     @Override
     public ResourceLocation getEntityTexture(RockLizard entity) {
-        return new ResourceLocation("swordcraftstory", "textures/entity/rock_lizard.png");
+        return new ResourceLocation(Story.MOD_ID, "textures/entity/rock_lizard.png");
     }
 
     @Override

@@ -7,7 +7,7 @@ package com.marisa.swordcraftstory.entity;
 
 public class EntityTypeRegistry {
 
-//    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, "swordcraftstory");
+//    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Story.MOD_ID);
 
 //    public static RegistryObject<EntityType<Slime>> SLIME = ENTITIES.register("slime", () ->
 //            EntityType.Builder.create(Slime::new, EntityClassification.MISC).size(3, 0.5F).build("slime")

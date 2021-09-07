@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.item;
 
+import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.combat.close.NoviceSword;
@@ -24,7 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 
 public class ItemRegistry {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "swordcraftstory");
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Story.MOD_ID);
     //锻冶
     public static RegistryObject<Item> HAMMER = ITEMS.register("hammer", Hammer::new);
     //模具

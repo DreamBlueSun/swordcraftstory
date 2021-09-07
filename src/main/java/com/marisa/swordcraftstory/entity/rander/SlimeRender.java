@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.entity.rander;
 
+import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.entity.instance.Slime;
 import com.marisa.swordcraftstory.entity.model.SlimeModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -26,7 +27,7 @@ public class SlimeRender extends EntityRenderer<Slime> {
 
     @Override
     public ResourceLocation getEntityTexture(Slime entity) {
-        return new ResourceLocation("swordcraftstory", "textures/entity/slime.png");
+        return new ResourceLocation(Story.MOD_ID, "textures/entity/slime.png");
     }
 
     @Override

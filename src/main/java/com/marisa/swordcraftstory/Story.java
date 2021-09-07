@@ -23,13 +23,15 @@ import org.apache.logging.log4j.Logger;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("swordcraftstory")
-public class SwordCraftStory {
+@Mod(Story.MOD_ID)
+public class Story {
+
+    public static final String MOD_ID = "swordcraftstory";
 
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOG = LogManager.getLogger();
 
-    public SwordCraftStory() {
+    public Story() {
 
         ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BlockRegistry.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -51,26 +53,26 @@ public class SwordCraftStory {
 
     private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        LOG.info("HELLO FROM PREINIT");
+        LOG.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+        LOG.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("swordcraftstory", "helloworld", () -> {
-            LOGGER.info("Hello world from the MDK");
+        InterModComms.sendTo(Story.MOD_ID, "helloworld", () -> {
+            LOG.info("Hello world from the MDK");
             return "Hello world";
         });
     }
 
     private void processIMC(final InterModProcessEvent event) {
         // some example code to receive and process InterModComms from other mods
-        LOGGER.info("Got IMC {}", event.getIMCStream().
+        LOG.info("Got IMC {}", event.getIMCStream().
                 map(m -> m.getMessageSupplier().get()).
                 collect(Collectors.toList()));
     }
@@ -79,7 +81,7 @@ public class SwordCraftStory {
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        LOG.info("HELLO from server starting");
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
@@ -89,7 +91,7 @@ public class SwordCraftStory {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             // register a new block here
-            LOGGER.info("HELLO from Register Block");
+            LOG.info("HELLO from Register Block");
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.item.combat;
 
+import com.marisa.swordcraftstory.Story;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.fml.RegistryObject;
@@ -12,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 
 public class AttributesRegistry {
-    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, "swordcraftstory");
+    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, Story.MOD_ID);
 
     //武器TEC
     public static final RegistryObject<Attribute> COMBAT_TEC = ATTRIBUTES.register("combat_tec", () -> new RangedAttribute("attribute.name.story.combat_tec", 0.0D, 0.0D, 255.0D).setShouldWatch(false));
