@@ -2,6 +2,9 @@ package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.IntensifyEdgeContainer;
+import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.net.Networking;
+import com.marisa.swordcraftstory.net.SendPack;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -27,10 +30,25 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
     Button button5;
     private final ResourceLocation OBSIDIAN_CONTAINER_RESOURCE = new ResourceLocation(Story.MOD_ID, "textures/gui/intensify_edge_container.png");
 
+    private int pointUsed;
+    private int atkTime;
+    private int defTime;
+    private int aglTime;
+    private int durTime;
+
     public IntensifyEdgeScreen(IntensifyEdgeContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.xSize = textureWidth;
         this.ySize = textureHeight;
+        this.pointUsed = 0;
+        this.atkTime = 0;
+        this.defTime = 0;
+        this.aglTime = 0;
+        this.durTime = 0;
+    }
+
+    private int getPointMax() {
+        return this.getContainer().getPointMax().get(0);
     }
 
     @Override
@@ -39,14 +57,43 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
         int x = this.width / 2 - 79;
         int y = this.height / 2 - 58;
         this.button1 = new Button(x, y, 32, 20, new StringTextComponent("攻击"), (button) -> {
+            if (getPointMax() > this.pointUsed) {
+                this.atkTime++;
+                this.pointUsed++;
+            } else {
+                this.pointUsed -= this.atkTime;
+                this.atkTime = 0;
+            }
         });
         this.button2 = new Button(x + 85, y, 32, 20, new StringTextComponent("防御"), (button) -> {
+            if (getPointMax() > this.pointUsed) {
+                this.defTime++;
+                this.pointUsed++;
+            } else {
+                this.pointUsed -= this.defTime;
+                this.defTime = 0;
+            }
         });
         this.button3 = new Button(x, y + 21, 32, 20, new StringTextComponent("敏捷"), (button) -> {
+            if (getPointMax() > this.pointUsed) {
+                this.aglTime++;
+                this.pointUsed++;
+            } else {
+                this.pointUsed -= this.aglTime;
+                this.aglTime = 0;
+            }
         });
         this.button4 = new Button(x + 85, y + 21, 32, 20, new StringTextComponent("耐久"), (button) -> {
+            if (getPointMax() > this.pointUsed) {
+                this.durTime++;
+                this.pointUsed++;
+            } else {
+                this.pointUsed -= this.durTime;
+                this.durTime = 0;
+            }
         });
         this.button5 = new Button(x + 127, y + 44, 32, 20, new StringTextComponent("确定"), (button) -> {
+            Networking.INSTANCE.sendToServer(new SendPack("smithery.intensifyEdge.done", this.atkTime, this.defTime, this.aglTime, this.durTime));
         });
         this.addButton(button1);
         this.addButton(button2);
@@ -75,15 +122,15 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
         //ATK
-        drawCenteredString(matrixStack, this.font, "2", 64, 47, 0xeb0505);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_ATK * this.atkTime), 64, 47, 0xeb0505);
         //DEF
-        drawCenteredString(matrixStack, this.font, "3", 149, 47, 0xeb0505);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_DEF * this.defTime), 149, 47, 0xeb0505);
         //AGL
-        drawCenteredString(matrixStack, this.font, "1", 64, 68, 0xeb0505);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_AGL * this.aglTime), 64, 68, 0xeb0505);
         //DUR
-        drawCenteredString(matrixStack, this.font, "5", 149, 68, 0xeb0505);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_DUR * this.durTime), 149, 68, 0xeb0505);
         //POINT
-        drawCenteredString(matrixStack, this.font, "1", 64, 89, 0xeb0505);
+        drawCenteredString(matrixStack, this.font, String.valueOf(getPointMax() - this.pointUsed), 64, 89, 0xeb0505);
     }
 
 }

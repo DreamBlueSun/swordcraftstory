@@ -15,9 +15,34 @@ public interface Combat {
     int MAX_TEC = 255;
 
     /**
-     * 武器最大磨合度
+     * 武器基础暴击率
      */
     int CRITICAL_BASE_NUM = 50;
+
+    /**
+     * 武器敏捷加成速度倍率
+     */
+    double AGL_SPEED_BASE_NUM = 0.01D;
+
+    /**
+     * 武器强刃一次ATK提升量
+     */
+    int INTENSIFY_EDGE_ONCE_NUM_ATK = 2;
+
+    /**
+     * 武器强刃一次DEF提升量
+     */
+    int INTENSIFY_EDGE_ONCE_NUM_DEF = 3;
+
+    /**
+     * 武器强刃一次AGL提升量
+     */
+    int INTENSIFY_EDGE_ONCE_NUM_AGL = 1;
+
+    /**
+     * 武器强刃一次DUR提升量
+     */
+    int INTENSIFY_EDGE_ONCE_NUM_DUR = 5;
 
     int getRank();
 
@@ -29,8 +54,9 @@ public interface Combat {
 
     int getAgl(ItemStack stack);
 
-    //暂定技能消耗Dur
     int getDur(ItemStack stack);
+
+    int getDurDamage(ItemStack stack);
 
     /**
      * @param stack ITEM_STACK

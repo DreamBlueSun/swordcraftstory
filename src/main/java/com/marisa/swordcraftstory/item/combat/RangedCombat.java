@@ -53,6 +53,11 @@ public abstract class RangedCombat extends BowItem implements Combat {
      */
     private final int agl;
 
+    /**
+     * 额外耐久度上限
+     */
+    private final int dur;
+
     public RangedCombat(final int rank, final int atk, final int def, final int phy, final int agl, final int dur) {
         super(new Item.Properties().maxDamage(dur).group(StoryGroup.COMBAT_GROUP));
         this.rank = rank;
@@ -60,8 +65,10 @@ public abstract class RangedCombat extends BowItem implements Combat {
         this.def = def;
         this.phy = phy;
         this.agl = agl;
+        this.dur = 0;
     }
 
+    @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         CombatPropertiesUtils.addInformation(this, stack, tooltip);
@@ -72,7 +79,7 @@ public abstract class RangedCombat extends BowItem implements Combat {
         if (equipmentSlot == EquipmentSlotType.MAINHAND && getAgl(stack) != 0) {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             builder.putAll(super.getAttributeModifiers(EquipmentSlotType.MAINHAND));
-            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (0.001 * getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (Combat.AGL_SPEED_BASE_NUM * getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
             return builder.build();
         }
         return super.getAttributeModifiers(equipmentSlot, stack);
@@ -105,7 +112,12 @@ public abstract class RangedCombat extends BowItem implements Combat {
 
     @Override
     public int getDur(ItemStack stack) {
-        return stack.getMaxDamage() - stack.getDamage();
+        return this.dur + CombatPropertiesUtils.getDur(stack);
+    }
+
+    @Override
+    public int getDurDamage(ItemStack stack) {
+        return CombatPropertiesUtils.getDurDamage(stack);
     }
 
     @Override

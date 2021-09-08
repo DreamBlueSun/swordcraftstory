@@ -1,7 +1,9 @@
 package com.marisa.swordcraftstory.block.tile;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
 import com.marisa.swordcraftstory.gui.container.IntensifyEdgeContainer;
+import com.marisa.swordcraftstory.item.combat.Combat;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -26,9 +28,13 @@ public class SmithingBlockTileEntity extends TileEntity implements ITickableTile
 
     private Inventory inventory;
 
+    private IntensifyEdgePointInt pointMax;
+
+
     public SmithingBlockTileEntity() {
         super(TileEntityTypeRegistry.SMITHING_BLOCK_TILE_ENTITY.get());
         this.inventory = new Inventory(1);
+        this.pointMax = new IntensifyEdgePointInt();
     }
 
     @Override
@@ -39,7 +45,7 @@ public class SmithingBlockTileEntity extends TileEntity implements ITickableTile
     @Nullable
     @Override
     public Container createMenu(int sycID, PlayerInventory inventory, PlayerEntity player) {
-        return new IntensifyEdgeContainer(sycID, inventory, this.getPos(), this.world);
+        return new IntensifyEdgeContainer(sycID, inventory, this.getPos(), this.world, this.pointMax);
     }
 
     @Override
@@ -62,5 +68,14 @@ public class SmithingBlockTileEntity extends TileEntity implements ITickableTile
     @Override
     public void tick() {
         //計算物品能否强刃
+        if (!world.isRemote) {
+            ItemStack stack = this.inventory.getStackInSlot(0);
+            int tec = ((Combat) stack.getItem()).getTec(stack);
+            if (tec == Combat.MAX_TEC) {
+                this.pointMax.set(0, 1);
+            } else {
+                this.pointMax.set(0, 0);
+            }
+        }
     }
 }
