@@ -38,6 +38,7 @@ public class SendPack {
 
     public SendPack(String message) {
         this.message = message;
+        this.blockPos = BlockPos.ZERO;
     }
 
     public SendPack(String message, BlockPos blockPos) {
@@ -45,8 +46,9 @@ public class SendPack {
         this.blockPos = blockPos;
     }
 
-    public SendPack(String message, int atkTime, int defTime, int aglTime, int durTime) {
+    public SendPack(String message, BlockPos blockPos, int atkTime, int defTime, int aglTime, int durTime) {
         this.message = message;
+        this.blockPos = blockPos;
         this.atkTime = atkTime;
         this.defTime = defTime;
         this.aglTime = aglTime;
@@ -85,7 +87,7 @@ public class SendPack {
                     case "smithery.intensifyEdge.done":
                         //强刃确定
                         ItemStack inStack = ((SmithingBlockTileEntity) sender.world.getTileEntity(this.blockPos)).getInventory().getStackInSlot(0);
-                        if (((Combat) inStack.getItem()).getTec(inStack) == Combat.MAX_TEC) {
+                        if (!inStack.isEmpty() && ((Combat) inStack.getItem()).getTec(inStack) == Combat.MAX_TEC) {
                             //判定点数正常范围
                             if (this.atkTime + this.defTime + this.aglTime + this.durTime == 1) {
                                 //执行强刃
@@ -109,8 +111,9 @@ public class SendPack {
                         PlayerInventory inv = sender.inventory;
                         for (int i = 0; i < inv.mainInventory.size(); i++) {
                             ItemStack stack = inv.mainInventory.get(i);
-                            if (stack.getItem() instanceof Combat) {
+                            if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
                                 stack.setDamage(0);
+                                CombatPropertiesUtils.setDur(stack, CombatPropertiesUtils.getDurMax(stack));
                                 inv.setInventorySlotContents(i, stack);
                             }
                         }

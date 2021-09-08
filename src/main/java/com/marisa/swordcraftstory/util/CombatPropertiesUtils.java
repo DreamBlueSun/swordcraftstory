@@ -28,20 +28,18 @@ public class CombatPropertiesUtils {
         tooltip.add(new TranslationTextComponent("攻击力").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(combat.getAtk(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("防御力").mergeStyle(TextFormatting.YELLOW)
-//                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(combat.getDef(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(combat.getDef(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
 //        tooltip.add(new TranslationTextComponent("抗性").mergeStyle(TextFormatting.YELLOW)
-                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(combat.getPhy(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+//                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(combat.getPhy(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("敏捷值").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(combat.getAgl(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         float critical = (float) (Combat.CRITICAL_BASE_NUM + (combat.getTec(stack) / 5)) / 10;
         tooltip.add(new TranslationTextComponent("暴击率").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(critical + "%").mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("磨合度").mergeStyle(TextFormatting.YELLOW)
-                .appendString("     ").appendSibling(new TranslationTextComponent(getTec(stack) + "/255").mergeStyle(TextFormatting.LIGHT_PURPLE)));
-        int useNumMax = combat.getDur(stack) + stack.getMaxDamage();
-        int usedNum = combat.getDurDamage(stack) + stack.getDamage();
-        tooltip.add(new TranslationTextComponent("耐久值").mergeStyle(TextFormatting.YELLOW)
-                .appendString("     ").appendSibling(new TranslationTextComponent((useNumMax - usedNum) + "/" + useNumMax).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+                .appendString("     ").appendSibling(new TranslationTextComponent(getTec(stack) + "/" + Combat.MAX_TEC).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+        tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
+                .appendString("     ").appendSibling(new TranslationTextComponent(combat.getDur(stack) + "/" + combat.getDurMax(stack)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
     }
 
     public static int getAtk(ItemStack stack) {
@@ -60,6 +58,7 @@ public class CombatPropertiesUtils {
             v = tag.getInt("story_combat_atk");
         }
         stack.setTagInfo("story_combat_atk", IntNBT.valueOf(v + Combat.INTENSIFY_EDGE_ONCE_NUM_ATK));
+        clearTec(stack);
     }
 
     public static int getDef(ItemStack stack) {
@@ -78,6 +77,7 @@ public class CombatPropertiesUtils {
             v = tag.getInt("story_combat_def");
         }
         stack.setTagInfo("story_combat_def", IntNBT.valueOf(v + Combat.INTENSIFY_EDGE_ONCE_NUM_DEF));
+        clearTec(stack);
     }
 
     public static int getPhy(ItemStack stack) {
@@ -105,6 +105,7 @@ public class CombatPropertiesUtils {
             v = tag.getInt("story_combat_agl");
         }
         stack.setTagInfo("story_combat_agl", IntNBT.valueOf(v + Combat.INTENSIFY_EDGE_ONCE_NUM_AGL));
+        clearTec(stack);
     }
 
     public static int getDur(ItemStack stack) {
@@ -116,46 +117,54 @@ public class CombatPropertiesUtils {
         return v;
     }
 
-    public static int getDurDamage(ItemStack stack) {
-        int v = 0;
-        CompoundNBT tag = stack.getTag();
-        if (tag != null) {
-            v = tag.getInt("story_combat_dur_damage");
-        }
-        return v;
+    public static void setDur(ItemStack stack, int amount) {
+        stack.setTagInfo("story_combat_dur", IntNBT.valueOf(amount));
     }
 
-    /**
-     * 处理dur伤害
-     * 返回溢出的dur伤害
-     */
-    public static int doDurDamage(ItemStack stack, int amount) {
-        int eV = 0;
-        if (amount < 1) {
-            return eV;
-        }
+    public static int getDurMax(ItemStack stack) {
         int v = 0;
         CompoundNBT tag = stack.getTag();
         if (tag != null) {
-            v = tag.getInt("story_combat_dur_damage");
+            v = tag.getInt("story_combat_dur_max");
         }
-        v += amount;
-        int durMax = ((Combat) stack.getItem()).getDur(stack);
-        if (v > durMax) {
-            eV = v - durMax;
-            v = durMax;
-        }
-        stack.setTagInfo("story_combat_dur_damage", IntNBT.valueOf(v));
-        return eV;
+        return v;
     }
 
     public static void intensifyEdgeDur(ItemStack stack) {
         int v = 0;
         CompoundNBT tag = stack.getTag();
         if (tag != null) {
-            v = tag.getInt("story_combat_dur");
+            v = tag.getInt("story_combat_dur_max");
         }
-        stack.setTagInfo("story_combat_dur", IntNBT.valueOf(v + Combat.INTENSIFY_EDGE_ONCE_NUM_DUR));
+        stack.setTagInfo("story_combat_dur_max", IntNBT.valueOf(v + Combat.INTENSIFY_EDGE_ONCE_NUM_DUR));
+        clearTec(stack);
+    }
+
+    /**
+     * 消耗dur修补耐久度
+     */
+    public static void useDur(ItemStack stack) {
+        CompoundNBT tag = stack.getTag();
+        if (tag == null) {
+            return;
+        }
+        int damage = tag.getInt("Damage");
+        if (damage == 0) {
+            return;
+        }
+        int dur = tag.getInt("story_combat_dur");
+        if (dur == 0) {
+            return;
+        }
+        if (dur < damage) {
+            stack.setTagInfo("story_combat_dur", IntNBT.valueOf(0));
+            damage -= dur;
+            stack.setTagInfo("Damage", IntNBT.valueOf(damage));
+        } else {
+            stack.setTagInfo("Damage", IntNBT.valueOf(0));
+            dur -= damage;
+            stack.setTagInfo("story_combat_dur", IntNBT.valueOf(dur));
+        }
     }
 
     public static int getTec(ItemStack stack) {
@@ -176,6 +185,10 @@ public class CombatPropertiesUtils {
         if (v < Combat.MAX_TEC) {
             stack.setTagInfo("story_combat_tec", IntNBT.valueOf(v + 1));
         }
+    }
+
+    public static void clearTec(ItemStack stack) {
+        stack.setTagInfo("story_combat_tec", IntNBT.valueOf(0));
     }
 
 }

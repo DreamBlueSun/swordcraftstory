@@ -56,7 +56,7 @@ public interface Combat {
 
     int getDur(ItemStack stack);
 
-    int getDurDamage(ItemStack stack);
+    int getDurMax(ItemStack stack);
 
     /**
      * @param stack ITEM_STACK

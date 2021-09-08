@@ -163,6 +163,7 @@ public class DamageCountUtils {
                 Combat item = (Combat) stack.getItem();
                 damage.setP(item.getAtk(stack));
                 item.incrTec(stack);
+                CombatPropertiesUtils.useDur(stack);
             } else if (stack.getItem() instanceof TieredItem) {
                 //非story武器
                 Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
@@ -190,6 +191,7 @@ public class DamageCountUtils {
                 Combat item = (Combat) stack.getItem();
                 damage.setP(item.getAtk(stack));
                 item.incrTec(stack);
+                CombatPropertiesUtils.useDur(stack);
             } else if (stack.getItem() instanceof BowItem) {
                 damage.setP(4.0F);
             }
@@ -265,7 +267,7 @@ public class DamageCountUtils {
             LivingEntity livingEntity = (LivingEntity) target;
             Hand handIn = livingEntity.getActiveHand();
             ItemStack stack = livingEntity.getHeldItem(handIn);
-            if (stack.getItem() instanceof ShieldItem) {
+            if (!stack.isEmpty() && stack.getItem() instanceof ShieldItem) {
                 stack.damageItem(Math.max((int) num / 2, 1), livingEntity, (entity) -> entity.sendBreakAnimation(handIn));
                 num = num / 10;
                 //举盾伤害不足1时不受伤

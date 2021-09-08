@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -69,9 +70,12 @@ public class SmithingBlockTileEntity extends TileEntity implements ITickableTile
     public void tick() {
         //計算物品能否强刃
         if (!world.isRemote) {
+            BlockPos pos = this.getPos();
+            this.pointMax.set(1, pos.getX());
+            this.pointMax.set(2, pos.getY());
+            this.pointMax.set(3, pos.getZ());
             ItemStack stack = this.inventory.getStackInSlot(0);
-            int tec = ((Combat) stack.getItem()).getTec(stack);
-            if (tec == Combat.MAX_TEC) {
+            if (!stack.isEmpty() && stack.getItem() instanceof Combat && ((Combat) stack.getItem()).getTec(stack) == Combat.MAX_TEC) {
                 this.pointMax.set(0, 1);
             } else {
                 this.pointMax.set(0, 0);

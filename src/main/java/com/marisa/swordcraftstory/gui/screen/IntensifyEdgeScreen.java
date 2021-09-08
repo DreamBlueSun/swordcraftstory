@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
 import com.marisa.swordcraftstory.gui.container.IntensifyEdgeContainer;
 import com.marisa.swordcraftstory.item.combat.Combat;
 import com.marisa.swordcraftstory.net.Networking;
@@ -11,6 +12,7 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -93,7 +95,9 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
             }
         });
         this.button5 = new Button(x + 127, y + 44, 32, 20, new StringTextComponent("确定"), (button) -> {
-            Networking.INSTANCE.sendToServer(new SendPack("smithery.intensifyEdge.done", this.atkTime, this.defTime, this.aglTime, this.durTime));
+            IntensifyEdgePointInt intensifyEdgeInt = this.getContainer().getPointMax();
+            BlockPos pos = new BlockPos(intensifyEdgeInt.get(1), intensifyEdgeInt.get(2), intensifyEdgeInt.get(3));
+            Networking.INSTANCE.sendToServer(new SendPack("smithery.intensifyEdge.done", pos, this.atkTime, this.defTime, this.aglTime, this.durTime));
         });
         this.addButton(button1);
         this.addButton(button2);

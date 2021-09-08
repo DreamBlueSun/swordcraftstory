@@ -61,7 +61,7 @@ public class SmithingBlock extends Block {
             return ActionResultType.SUCCESS;
         } else {
             ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-            if (stack.getItem() instanceof Hammer) {
+            if (!stack.isEmpty() && stack.getItem() instanceof Hammer) {
                 SmitheryScreen.open(pos);
             }
         }

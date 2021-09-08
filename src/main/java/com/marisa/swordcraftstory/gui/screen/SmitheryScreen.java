@@ -57,7 +57,7 @@ public class SmitheryScreen extends Screen {
                 PlayerInventory inv = instance.player.inventory;
                 for (int i = 0; i < inv.mainInventory.size(); i++) {
                     ItemStack stack = inv.mainInventory.get(i);
-                    if (stack.getItem() instanceof Combat) {
+                    if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
                         stack.setDamage(0);
                         inv.setInventorySlotContents(i, stack);
                     }

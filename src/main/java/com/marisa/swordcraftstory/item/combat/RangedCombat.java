@@ -53,11 +53,6 @@ public abstract class RangedCombat extends BowItem implements Combat {
      */
     private final int agl;
 
-    /**
-     * 额外耐久度上限
-     */
-    private final int dur;
-
     public RangedCombat(final int rank, final int atk, final int def, final int phy, final int agl, final int dur) {
         super(new Item.Properties().maxDamage(dur).group(StoryGroup.COMBAT_GROUP));
         this.rank = rank;
@@ -65,7 +60,6 @@ public abstract class RangedCombat extends BowItem implements Combat {
         this.def = def;
         this.phy = phy;
         this.agl = agl;
-        this.dur = 0;
     }
 
     @Override
@@ -112,12 +106,12 @@ public abstract class RangedCombat extends BowItem implements Combat {
 
     @Override
     public int getDur(ItemStack stack) {
-        return this.dur + CombatPropertiesUtils.getDur(stack);
+        return CombatPropertiesUtils.getDur(stack);
     }
 
     @Override
-    public int getDurDamage(ItemStack stack) {
-        return CombatPropertiesUtils.getDurDamage(stack);
+    public int getDurMax(ItemStack stack) {
+        return CombatPropertiesUtils.getDurMax(stack);
     }
 
     @Override
