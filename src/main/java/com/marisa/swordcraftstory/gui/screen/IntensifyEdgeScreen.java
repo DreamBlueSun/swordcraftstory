@@ -42,11 +42,7 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
         super(screenContainer, inv, titleIn);
         this.xSize = textureWidth;
         this.ySize = textureHeight;
-        this.pointUsed = 0;
-        this.atkTime = 0;
-        this.defTime = 0;
-        this.aglTime = 0;
-        this.durTime = 0;
+        this.atkTime = this.defTime = this.aglTime = this.durTime = this.pointUsed = 0;
     }
 
     private int getPointMax() {
@@ -98,6 +94,7 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
             IntensifyEdgePointInt intensifyEdgeInt = this.getContainer().getPointMax();
             BlockPos pos = new BlockPos(intensifyEdgeInt.get(1), intensifyEdgeInt.get(2), intensifyEdgeInt.get(3));
             Networking.INSTANCE.sendToServer(new SendPack("smithery.intensifyEdge.done", pos, this.atkTime, this.defTime, this.aglTime, this.durTime));
+            this.atkTime = this.defTime = this.aglTime = this.durTime = this.pointUsed = 0;
         });
         this.addButton(button1);
         this.addButton(button2);
@@ -126,15 +123,22 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
         //ATK
-        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_ATK * this.atkTime), 64, 47, 0xeb0505);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_ATK * this.atkTime), 64, 47, 0x1E90FF);
         //DEF
-        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_DEF * this.defTime), 149, 47, 0xeb0505);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_DEF * this.defTime), 149, 47, 0x1E90FF);
         //AGL
-        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_AGL * this.aglTime), 64, 68, 0xeb0505);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_AGL * this.aglTime), 64, 68, 0x1E90FF);
         //DUR
-        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_DUR * this.durTime), 149, 68, 0xeb0505);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_DUR * this.durTime), 149, 68, 0x1E90FF);
         //POINT
-        drawCenteredString(matrixStack, this.font, String.valueOf(getPointMax() - this.pointUsed), 64, 89, 0xeb0505);
+        int point = getPointMax() - this.pointUsed;
+        int color;
+        if (point > 0) {
+            color = 0x00FF7F;
+        } else {
+            color = 0xFF0000;
+        }
+        drawCenteredString(matrixStack, this.font, String.valueOf(getPointMax() - this.pointUsed), 64, 89, color);
     }
 
 }
