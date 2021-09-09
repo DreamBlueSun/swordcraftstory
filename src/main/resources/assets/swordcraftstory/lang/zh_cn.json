@@ -10,5 +10,12 @@
   "item.swordcraftstory.woundplast": "创可贴",
   "item.swordcraftstory.grass_leaves": "杂草的叶片",
   "item.swordcraftstory.soft_leather": "柔软的皮革",
-  "item.swordcraftstory.iron_ore": "铁矿石"
+  "item.swordcraftstory.iron_ore": "铁矿石",
+  "item.swordcraftstory.wings_fossil_ore": "翅膀化石",
+  "item.swordcraftstory.uka_ore": "尤佳矿石",
+  "item.swordcraftstory.big_ore": "大矿石",
+  "item.swordcraftstory.elphus_ore": "艾尔弗伊斯原石",
+  "item.swordcraftstory.slander_ore": "斯兰德原石",
+  "item.swordcraftstory.argenir_ore": "阿吉尼尔矿",
+  "item.swordcraftstory.pretty_ore": "漂亮原石"
 }

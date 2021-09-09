@@ -9,7 +9,7 @@ import com.marisa.swordcraftstory.item.material.GrassLeaves;
 import com.marisa.swordcraftstory.item.material.SoftLeather;
 import com.marisa.swordcraftstory.item.mould.close.SwordMould;
 import com.marisa.swordcraftstory.item.mould.ranged.BowMould;
-import com.marisa.swordcraftstory.item.ore.IronOre;
+import com.marisa.swordcraftstory.item.ore.*;
 import com.marisa.swordcraftstory.item.reply.Woundplast;
 import com.marisa.swordcraftstory.item.special.Hammer;
 import com.marisa.swordcraftstory.item.special.SwordGuake;
@@ -44,5 +44,12 @@ public class ItemRegistry {
     public static RegistryObject<Item> SOFT_LEATHER = ITEMS.register("soft_leather", SoftLeather::new);
     //素材矿石
     public static RegistryObject<Item> IRON_ORE = ITEMS.register("iron_ore", IronOre::new);
+    public static RegistryObject<Item> WINGS_FOSSIL_ORE = ITEMS.register("wings_fossil_ore", WingsFossilOre::new);
+    public static RegistryObject<Item> UKA_ORE = ITEMS.register("uka_ore", UkaOre::new);
+    public static RegistryObject<Item> BIG_ORE = ITEMS.register("big_ore", BigOre::new);
+    public static RegistryObject<Item> ELPHUS_ORE = ITEMS.register("elphus_ore", ElphusOre::new);
+    public static RegistryObject<Item> SLANDER_ORE = ITEMS.register("slander_ore", SlanderOre::new);
+    public static RegistryObject<Item> ARGENIR_ORE = ITEMS.register("argenir_ore", ArgenirOre::new);
+    public static RegistryObject<Item> PRETTY_ORE = ITEMS.register("pretty_ore", PrettyOre::new);
 
 }
