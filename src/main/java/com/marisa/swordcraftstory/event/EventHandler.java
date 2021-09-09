@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.event;
 
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.util.BlockDropItemUtils;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.DamageCountUtils;
 import net.minecraft.entity.Entity;
@@ -50,6 +51,12 @@ public class EventHandler {
         if (damage == 0.0F) {
             event.setCanceled(true);
         }
+    }
+
+    @SubscribeEvent
+    public void blockBreakEvent(BlockEvent.BreakEvent event) {
+        //矿石方块、非创造模式：监听方块破坏掉落矿石
+        BlockDropItemUtils.dropOre(event.getPlayer(), event.getState().getBlock(), event.getPos());
     }
 
 }

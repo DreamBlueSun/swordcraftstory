@@ -1,7 +1,7 @@
-package com.marisa.swordcraftstory.util;
+package com.marisa.swordcraftstory.util.obj;
 
 /**
- * @description:
+ * @description: 伤害
  * @date: 2021/9/4 0004 2:25
  */
 

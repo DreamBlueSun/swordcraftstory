@@ -2,6 +2,8 @@ package com.marisa.swordcraftstory.util;
 
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.util.obj.Damage;
+import com.marisa.swordcraftstory.util.obj.Defense;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -218,7 +220,7 @@ public class DamageCountUtils {
 
     /**
      * @param target 目标实体
-     * @return com.marisa.swordcraftstory.util.Defense
+     * @return com.marisa.swordcraftstory.util.obj.Defense
      * @description 计算目标实体的防御力
      * @date 2021/9/4 0004 6:55
      **/
