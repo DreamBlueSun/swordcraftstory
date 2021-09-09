@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "swordcraftstory:sword_mould",
+      "count": 1
+    },
+    {
+      "item": "swordcraftstory:wings_fossil_ore",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "swordcraftstory:feather_sword",
+    "count": 1
+  }
+}

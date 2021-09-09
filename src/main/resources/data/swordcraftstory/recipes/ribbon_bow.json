@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "swordcraftstory:bow_mould",
+      "count": 1
+    },
+    {
+      "item": "swordcraftstory:pretty_ore",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "swordcraftstory:ribbon_bow",
+    "count": 1
+  }
+}

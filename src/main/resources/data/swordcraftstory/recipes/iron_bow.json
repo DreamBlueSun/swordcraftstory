@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "swordcraftstory:bow_mould",
+      "count": 1
+    },
+    {
+      "item": "swordcraftstory:big_ore",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "swordcraftstory:iron_bow",
+    "count": 1
+  }
+}

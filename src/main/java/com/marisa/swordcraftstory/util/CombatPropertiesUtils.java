@@ -17,8 +17,44 @@ import java.util.List;
 
 public class CombatPropertiesUtils {
 
+    //初心者武器Information
     public static void tipNovice(List<ITextComponent> tooltip) {
         tooltip.add(new TranslationTextComponent("最适合初心者的练习用武器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //细的武器Information
+    public static void tipThin(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("虽然细但比想象的更坚固").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //庄严武器Information
+    public static void tipSolemnity(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("进行精细加工的优雅兵器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //铁的武器Information
+    public static void tipIron(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("特征是宽大结实的刀刃").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //合成武器Information
+    public static void tipSynthesis(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("形状特殊的漂亮武器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //羽毛武器Information
+    public static void tipFeather(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("像羽毛一样轻很好用的武器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //典雅武器Information
+    public static void tipElegance(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("这典雅的外观得到很多好评").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //缎带武器Information
+    public static void tipRibbon(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("附有缎带使武器性能飞跃性地提高").mergeStyle(TextFormatting.WHITE));
     }
 
     public static void addInformation(Combat combat, ItemStack stack, List<ITextComponent> tooltip) {

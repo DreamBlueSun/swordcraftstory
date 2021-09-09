@@ -3,8 +3,8 @@ package com.marisa.swordcraftstory.item;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.combat.close.NoviceSword;
-import com.marisa.swordcraftstory.item.combat.ranged.NoviceBow;
+import com.marisa.swordcraftstory.item.combat.close.*;
+import com.marisa.swordcraftstory.item.combat.ranged.*;
 import com.marisa.swordcraftstory.item.material.GrassLeaves;
 import com.marisa.swordcraftstory.item.material.SoftLeather;
 import com.marisa.swordcraftstory.item.mould.close.SwordMould;
@@ -31,10 +31,26 @@ public class ItemRegistry {
     //模具
     public static RegistryObject<Item> SWORD_MOULD = ITEMS.register("sword_mould", SwordMould::new);
     public static RegistryObject<Item> BOW_MOULD = ITEMS.register("bow_mould", BowMould::new);
-    //武器
+    //武器-特殊
     public static RegistryObject<Item> SWORD_GUAKE = ITEMS.register("sword_guake", SwordGuake::new);
+    //武器-剑
     public static RegistryObject<Item> NOVICE_SWORD = ITEMS.register("novice_sword", NoviceSword::new);
+    public static RegistryObject<Item> THIN_SWORD = ITEMS.register("thin_sword", ThinSword::new);
+    public static RegistryObject<Item> SOLEMNITY_SWORD = ITEMS.register("solemnity_sword", SolemnitySword::new);
+    public static RegistryObject<Item> IRON_SWORD = ITEMS.register("iron_sword", IronSword::new);
+    public static RegistryObject<Item> SYNTHESIS_SWORD = ITEMS.register("synthesis_sword", SynthesisSword::new);
+    public static RegistryObject<Item> FEATHER_SWORD = ITEMS.register("feather_sword", FeatherSword::new);
+    public static RegistryObject<Item> ELEGANCE_SWORD = ITEMS.register("elegance_sword", EleganceSword::new);
+    public static RegistryObject<Item> RIBBON_SWORD = ITEMS.register("ribbon_sword", RibbonSword::new);
+    //武器-弓
     public static RegistryObject<Item> NOVICE_BOW = ITEMS.register("novice_bow", NoviceBow::new);
+    public static RegistryObject<Item> THIN_BOW = ITEMS.register("thin_bow", ThinBow::new);
+    public static RegistryObject<Item> SOLEMNITY_BOW = ITEMS.register("solemnity_bow", SolemnityBow::new);
+    public static RegistryObject<Item> IRON_BOW = ITEMS.register("iron_bow", IronBow::new);
+    public static RegistryObject<Item> SYNTHESIS_BOW = ITEMS.register("synthesis_bow", SynthesisBow::new);
+    public static RegistryObject<Item> FEATHER_BOW = ITEMS.register("feather_bow", FeatherBow::new);
+    public static RegistryObject<Item> ELEGANCE_BOW = ITEMS.register("elegance_bow", EleganceBow::new);
+    public static RegistryObject<Item> RIBBON_BOW = ITEMS.register("ribbon_bow", RibbonBow::new);
     //方块物品
     public static RegistryObject<Item> SMITHING_BLOCK = ITEMS.register("smithing_block", () -> new BlockItem(BlockRegistry.SMITHING_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     //回复道具
@@ -44,12 +60,12 @@ public class ItemRegistry {
     public static RegistryObject<Item> SOFT_LEATHER = ITEMS.register("soft_leather", SoftLeather::new);
     //素材矿石
     public static RegistryObject<Item> IRON_ORE = ITEMS.register("iron_ore", IronOre::new);
-    public static RegistryObject<Item> WINGS_FOSSIL_ORE = ITEMS.register("wings_fossil_ore", WingsFossilOre::new);
-    public static RegistryObject<Item> UKA_ORE = ITEMS.register("uka_ore", UkaOre::new);
-    public static RegistryObject<Item> BIG_ORE = ITEMS.register("big_ore", BigOre::new);
-    public static RegistryObject<Item> ELPHUS_ORE = ITEMS.register("elphus_ore", ElphusOre::new);
     public static RegistryObject<Item> SLANDER_ORE = ITEMS.register("slander_ore", SlanderOre::new);
     public static RegistryObject<Item> ARGENIR_ORE = ITEMS.register("argenir_ore", ArgenirOre::new);
+    public static RegistryObject<Item> BIG_ORE = ITEMS.register("big_ore", BigOre::new);
+    public static RegistryObject<Item> ELPHUS_ORE = ITEMS.register("elphus_ore", ElphusOre::new);
+    public static RegistryObject<Item> WINGS_FOSSIL_ORE = ITEMS.register("wings_fossil_ore", WingsFossilOre::new);
+    public static RegistryObject<Item> UKA_ORE = ITEMS.register("uka_ore", UkaOre::new);
     public static RegistryObject<Item> PRETTY_ORE = ITEMS.register("pretty_ore", PrettyOre::new);
 
 }
