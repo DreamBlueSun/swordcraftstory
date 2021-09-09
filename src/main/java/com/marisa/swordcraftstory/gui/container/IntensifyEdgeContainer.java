@@ -10,7 +10,6 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 /**
  * @description: 强刃Container
@@ -21,14 +20,14 @@ public class IntensifyEdgeContainer extends Container {
 
     private IntensifyEdgePointInt pointMax;
 
-    public IntensifyEdgeContainer(int id, PlayerInventory playerInventory, BlockPos pos, World world, IntensifyEdgePointInt pointMax) {
+    public IntensifyEdgeContainer(int id, PlayerInventory inv, BlockPos pos, IntensifyEdgePointInt pointMax) {
         super(ContainerTypeRegistry.INTENSIFY_EDGE_CONTAINER.get(), id);
         this.pointMax = pointMax;
         trackIntArray(this.pointMax);
         //添加槽位
-        SmithingBlockTileEntity smithingBlockTileEntity = (SmithingBlockTileEntity) world.getTileEntity(pos);
+        SmithingBlockTileEntity smithingBlockTileEntity = (SmithingBlockTileEntity) inv.player.world.getTileEntity(pos);
         this.addSlot(new CombatSlot(smithingBlockTileEntity.getInventory(), 0, 11, 20));
-        layoutPlayerInventorySlots(playerInventory, 10, 108);
+        layoutPlayerInventorySlots(inv, 10, 108);
     }
 
     public IntensifyEdgePointInt getPointMax() {

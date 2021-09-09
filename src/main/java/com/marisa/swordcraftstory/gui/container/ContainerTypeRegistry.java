@@ -2,7 +2,6 @@ package com.marisa.swordcraftstory.gui.container;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.network.PacketBuffer;
@@ -23,5 +22,5 @@ public class ContainerTypeRegistry {
     public static final RegistryObject<ContainerType<IntensifyEdgeContainer>> INTENSIFY_EDGE_CONTAINER =
             CONTAINERS.register("intensify_edge_container", () ->
                     IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
-                            new IntensifyEdgeContainer(windowId, inv, data.readBlockPos(), Minecraft.getInstance().world, new IntensifyEdgePointInt())));
+                            new IntensifyEdgeContainer(windowId, inv, data.readBlockPos(), new IntensifyEdgePointInt())));
 }

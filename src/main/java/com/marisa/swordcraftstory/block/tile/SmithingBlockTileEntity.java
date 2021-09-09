@@ -46,7 +46,7 @@ public class SmithingBlockTileEntity extends TileEntity implements ITickableTile
     @Nullable
     @Override
     public Container createMenu(int sycID, PlayerInventory inventory, PlayerEntity player) {
-        return new IntensifyEdgeContainer(sycID, inventory, this.getPos(), this.world, this.pointMax);
+        return new IntensifyEdgeContainer(sycID, inventory, this.getPos(), this.pointMax);
     }
 
     @Override
