@@ -1,7 +1,7 @@
-package com.marisa.swordcraftstory.item.material;
+package com.marisa.swordcraftstory.item.special;
 
-import com.marisa.swordcraftstory.group.StoryGroup;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -14,19 +14,19 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 杂草的叶片
- * @date: 2021/9/6 0006 21:28
+ * @description:
+ * @date: 2021/9/9 0009 20:44
  */
 
-public class GrassLeaves extends MaterialItem {
-    public GrassLeaves() {
-        super(new Properties().group(StoryGroup.COMBAT_GROUP));
+public abstract class SpecialItem extends Item {
+
+    public SpecialItem(Properties properties) {
+        super(properties);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent("到处都有的普通叶片").mergeStyle(TextFormatting.WHITE));
+        tooltip.add(new TranslationTextComponent("特殊").mergeStyle(TextFormatting.LIGHT_PURPLE));
     }
 }

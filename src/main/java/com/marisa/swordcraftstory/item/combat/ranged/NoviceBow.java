@@ -23,7 +23,7 @@ public class NoviceBow extends RangedCombat {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        CombatPropertiesUtils.tipNovice(tooltip);
         super.addInformation(stack, worldIn, tooltip, flagIn);
+        CombatPropertiesUtils.tipNovice(tooltip);
     }
 }

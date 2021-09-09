@@ -23,6 +23,7 @@ public class CombatPropertiesUtils {
 
     public static void addInformation(Combat combat, ItemStack stack, List<ITextComponent> tooltip) {
         stack.setTagInfo("HideFlags", IntNBT.valueOf(2));
+        tooltip.add(new TranslationTextComponent("武器").mergeStyle(TextFormatting.LIGHT_PURPLE));
         tooltip.add(new TranslationTextComponent("稀有度").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(combat.getRank())).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("攻击力").mergeStyle(TextFormatting.YELLOW)

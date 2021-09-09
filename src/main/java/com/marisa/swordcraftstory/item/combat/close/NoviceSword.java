@@ -56,7 +56,7 @@ public class NoviceSword extends CloseCombat {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        CombatPropertiesUtils.tipNovice(tooltip);
         super.addInformation(stack, worldIn, tooltip, flagIn);
+        CombatPropertiesUtils.tipNovice(tooltip);
     }
 }
