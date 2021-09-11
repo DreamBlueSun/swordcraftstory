@@ -17,7 +17,8 @@ public class CommonEventHandler {
      */
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
-        Networking.registerMessage();
+        event.enqueueWork(Networking::register1);
+        event.enqueueWork(Networking::register2);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.keyband;
 
-import com.marisa.swordcraftstory.gui.screen.StoryPlayerStatusScreen;
+import com.marisa.swordcraftstory.net.Networking;
+import com.marisa.swordcraftstory.net.StoryPlayerPack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.settings.KeyBinding;
@@ -30,7 +31,7 @@ public class KeyBoardInput {
         if (STORY_STATUS_KEY.isPressed()) {
             ClientPlayerEntity player = Minecraft.getInstance().player;
             assert player != null;
-            StoryPlayerStatusScreen.open(player);
+            Networking.STORY_PLAYER_STATUS.sendToServer(new StoryPlayerPack(player.getCachedUniqueIdString(), 0));
         }
     }
 }
