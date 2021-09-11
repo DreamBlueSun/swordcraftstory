@@ -3,16 +3,17 @@ package com.marisa.swordcraftstory.event;
 import com.marisa.swordcraftstory.item.combat.Combat;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
-import com.marisa.swordcraftstory.util.BlockDropItemUtils;
-import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
-import com.marisa.swordcraftstory.util.DamageCountUtils;
-import com.marisa.swordcraftstory.util.PlayerAttributesUtils;
+import com.marisa.swordcraftstory.util.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
@@ -93,6 +94,25 @@ public class EventHandler {
         PlayerEntity player = event.getPlayer();
         StoryPlayerData storyPlayerData = StoryPlayerDataManager.get(player.getCachedUniqueIdString());
         PlayerAttributesUtils.onClone(player, storyPlayerData, event.isWasDeath());
+    }
+
+    @SubscribeEvent
+    public void entityJoinWorld(EntityJoinWorldEvent event) {
+        //mob实体加入世界时，根据最近玩家(64范围)等级增加属性
+        World world = event.getWorld();
+        Entity entity = event.getEntity();
+        if (!world.isRemote && entity instanceof MobEntity) {
+            MobAttributesUtils.onLevelUp(world.getClosestPlayer(entity, 64), (MobEntity) entity);
+        }
+    }
+
+    @SubscribeEvent
+    public void dropExperience(LivingExperienceDropEvent event) {
+        //掉落经验值时，如果是mob，则根据等级增加经验值
+        Entity entity = event.getEntity();
+        if (entity instanceof MobEntity) {
+
+        }
     }
 
 }

@@ -15,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class AttributesRegistry {
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, Story.MOD_ID);
 
-    //武器TEC
-    public static final RegistryObject<Attribute> COMBAT_TEC = ATTRIBUTES.register("combat_tec", () -> new RangedAttribute("attribute.name.story.combat_tec", 0.0D, 0.0D, 255.0D).setShouldWatch(false));
+    //怪物等级
+    public static final RegistryObject<Attribute> MOB_LV = ATTRIBUTES.register("mob_lv", () -> new RangedAttribute("attribute.name.story.mob_lv", 0.0D, 0.0D, 255.0D).setShouldWatch(true));
 
 }

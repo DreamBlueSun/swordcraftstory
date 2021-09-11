@@ -11,7 +11,6 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BowItem;
@@ -48,7 +47,7 @@ public class DamageCountUtils {
                 arrowDamage(source.getTrueSource(), damage);
                 break;
             case "mob":
-                defaultMobDamage((MobEntity) source.getTrueSource(), damage);
+                mobDamage((MobEntity) Objects.requireNonNull(source.getTrueSource()), damage);
                 break;
             case "sweetBerryBush":
                 damage.setP(2.0F);
@@ -203,6 +202,9 @@ public class DamageCountUtils {
             } else if (stack.getItem() instanceof BowItem) {
                 damage.setP(4.0F);
             }
+        } else if (e instanceof MobEntity) {
+            //怪物箭矢伤害
+            damage.setP(6 + (int) ((MobEntity) e).getAttributeValue(Attributes.ATTACK_DAMAGE));
         } else {
             damage.setP(8.0F);
         }
@@ -216,12 +218,8 @@ public class DamageCountUtils {
      * @description 原版怪物伤害计算
      * @date 2021/9/4 0004 2:31
      **/
-    private static void defaultMobDamage(MobEntity e, Damage damage) {
-        damage.setP(24.0F);
-        //TODO 怪物分别个性化指定值
-        if (e instanceof EnderDragonEntity) {
-            damage.setP(36.0F);
-        }
+    private static void mobDamage(MobEntity e, Damage damage) {
+        damage.setP((int) e.getAttributeManager().getAttributeValue(Attributes.ATTACK_DAMAGE));
     }
 
     /**
