@@ -102,7 +102,19 @@ public class DamageCountUtils {
         //计算防御
         Defense defense = defense(target);
         //结果
-        float count = count(damage, defense, target);
+        float count = count(damage, defense);
+        //举盾时消耗受到伤害值50%的耐久来抵挡90%的伤害
+        if (target instanceof LivingEntity && ((LivingEntity) target).isHandActive()) {
+            LivingEntity livingEntity = (LivingEntity) target;
+            Hand handIn = livingEntity.getActiveHand();
+            ItemStack stack = livingEntity.getHeldItem(handIn);
+            if (!stack.isEmpty() && stack.getItem() instanceof ShieldItem) {
+                stack.damageItem(Math.max((int) count / 2, 1), livingEntity, (entity) -> entity.sendBreakAnimation(handIn));
+                count = count / 10;
+                //举盾伤害不足1时不受伤
+                count = count > 1.0F ? count : 0.0F;
+            }
+        }
         //计算暴击
         count = critical(source, count);
         return count;
@@ -156,7 +168,7 @@ public class DamageCountUtils {
      * @description 玩家普攻伤害计算
      * @date 2021/9/4 0004 3:20
      **/
-    private static void playerDamage(PlayerEntity e, Damage damage) {
+    public static void playerDamage(PlayerEntity e, Damage damage) {
         damage.setP(1.0F);
         ItemStack stack = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
         if (!stack.isEmpty()) {
@@ -248,12 +260,11 @@ public class DamageCountUtils {
     /**
      * @param damage  伤害
      * @param defense 防御
-     * @param target  目标实体
      * @return float
      * @description 计算伤害结算值方法
      * @date 2021/9/4 0004 3:41
      **/
-    private static float count(Damage damage, Defense defense, Entity target) {
+    public static float count(Damage damage, Defense defense) {
         float v = 0.0F;
         float v1 = damage.getP() - defense.getP();
         if (v1 > 0) {
@@ -267,20 +278,7 @@ public class DamageCountUtils {
         if (v3 > 0) {
             v += v3;
         }
-        float num = Math.max(v, 1.0F);
-        //举盾时消耗受到伤害值50%的耐久来抵挡90%的伤害
-        if (target instanceof LivingEntity && ((LivingEntity) target).isHandActive()) {
-            LivingEntity livingEntity = (LivingEntity) target;
-            Hand handIn = livingEntity.getActiveHand();
-            ItemStack stack = livingEntity.getHeldItem(handIn);
-            if (!stack.isEmpty() && stack.getItem() instanceof ShieldItem) {
-                stack.damageItem(Math.max((int) num / 2, 1), livingEntity, (entity) -> entity.sendBreakAnimation(handIn));
-                num = num / 10;
-                //举盾伤害不足1时不受伤
-                num = num > 1.0F ? num : 0.0F;
-            }
-        }
-        return num;
+        return Math.max(v, 1.0F);
     }
 
 }
