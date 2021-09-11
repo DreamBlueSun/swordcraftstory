@@ -234,13 +234,13 @@ public class DamageCountUtils {
             LivingEntity e = (LivingEntity) target;
             defense.setP(e.getTotalArmorValue());
             defense.setM((int) e.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
-            //计入武器防御力
-            ItemStack stack = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-            if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
-                Combat item = (Combat) stack.getItem();
-                defense.addP(item.getDef(stack));
-                defense.addM(item.getPhy(stack));
-            }
+            //计入武器防御力（取消计入，在武器属性中添加+盔甲值的NBT）
+//            ItemStack stack = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+//            if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
+//                Combat item = (Combat) stack.getItem();
+//                defense.addP(item.getDef(stack));
+//                defense.addM(item.getPhy(stack));
+//            }
         }
         return defense;
     }

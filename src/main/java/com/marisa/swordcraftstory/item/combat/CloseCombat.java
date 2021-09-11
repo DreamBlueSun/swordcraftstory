@@ -71,10 +71,13 @@ public abstract class CloseCombat extends SwordItem implements Combat {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(final EquipmentSlotType equipmentSlot, final ItemStack stack) {
-        if (equipmentSlot == EquipmentSlotType.MAINHAND && getAgl(stack) != 0) {
+        if (equipmentSlot == EquipmentSlotType.MAINHAND) {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             builder.putAll(super.getAttributeModifiers(EquipmentSlotType.MAINHAND));
-            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (Combat.AGL_SPEED_BASE_NUM * getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(Attributes.ARMOR, new AttributeModifier(StoryUUID.ARMOR, "Armor armor modifier", getDef(stack), AttributeModifier.Operation.ADDITION));
+            if (getAgl(stack) != 0) {
+                builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (Combat.AGL_SPEED_BASE_NUM * getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
+            }
             return builder.build();
         }
         return super.getAttributeModifiers(equipmentSlot, stack);

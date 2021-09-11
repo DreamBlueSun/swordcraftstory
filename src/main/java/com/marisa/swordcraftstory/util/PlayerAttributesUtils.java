@@ -21,7 +21,7 @@ public class PlayerAttributesUtils {
     }
 
     public static void onLevelUp(PlayerEntity player, int lvOffset, boolean heal) {
-        final int maxHealthAdd = lvOffset * 2;
+        final int maxHealthAdd = lvOffset * 40;
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.MAX_HEALTH, new AttributeModifier("Max health modifier", maxHealthAdd, AttributeModifier.Operation.ADDITION));
         player.getAttributeManager().reapplyModifiers(builder.build());
