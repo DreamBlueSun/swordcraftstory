@@ -31,7 +31,7 @@ public class Story {
     public static final String MOD_ID = "swordcraftstory";
 
     // Directly reference a log4j logger.
-    private static final Logger LOG = LogManager.getLogger();
+    public static final Logger LOG = LogManager.getLogger();
 
     public Story() {
 
