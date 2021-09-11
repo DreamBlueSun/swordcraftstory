@@ -102,7 +102,7 @@ public class EventHandler {
         World world = event.getWorld();
         Entity entity = event.getEntity();
         if (!world.isRemote && entity instanceof MobEntity) {
-            MobAttributesUtils.onLevelUp(world.getClosestPlayer(entity, 64), (MobEntity) entity);
+            MobAttributesUtils.onJoinWorld(world.getClosestPlayer(entity, 64), (MobEntity) entity);
         }
     }
 
@@ -111,7 +111,10 @@ public class EventHandler {
         //掉落经验值时，如果是mob，则根据等级增加经验值
         Entity entity = event.getEntity();
         if (entity instanceof MobEntity) {
-
+            int lv = MobAttributesUtils.getLvByName(entity.getDisplayName().getString());
+            if (lv > 0) {
+                event.setDroppedExperience(event.getDroppedExperience() + lv);
+            }
         }
     }
 

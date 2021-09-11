@@ -23,18 +23,16 @@ public class StoryPlayerDataManager {
     }
 
 
+    public static final int LV_NEED_XP_BASE = 11026;
     public static final List<Integer> LV_NEED_XP;
 
     static {
         LV_NEED_XP = new ArrayList<>();
-        LV_NEED_XP.add(0);
-        LV_NEED_XP.add(50);
-        for (int i = 2; i <= 40; i++) {
-            //之后每级需要上一级2倍经验
-            LV_NEED_XP.add(LV_NEED_XP.get(i - 1) * 3);
+        LV_NEED_XP.add(LV_NEED_XP_BASE / 105);
+        for (int i = 1; i < 41; i++) {
+            LV_NEED_XP.add(LV_NEED_XP.get(i - 1) + LV_NEED_XP_BASE * i / 105);
         }
     }
-
     /**
      * 获取当前等级
      *

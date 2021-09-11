@@ -20,7 +20,7 @@ import java.util.Random;
 
 public class MobAttributesUtils {
 
-    public static void onLevelUp(PlayerEntity closestPlayer, MobEntity mobEntity) {
+    public static void onJoinWorld(PlayerEntity closestPlayer, MobEntity mobEntity) {
         if (closestPlayer != null) {
             //mob实体加入世界时，根据最近玩家等级增加属性
             int lv = mobSpanLv(closestPlayer);
@@ -31,16 +31,24 @@ public class MobAttributesUtils {
                     .appendSibling(new TranslationTextComponent(String.valueOf(lv)).mergeStyle(TextFormatting.GREEN)));
         } else if (mobEntity.hasCustomName() && !mobEntity.getDisplayName().getStyle().isEmpty()) {
             //没有玩家(例如世界加载完毕时)时如果有自定义名称、Style不为Empty并且名称格式正确，从名称恢复等级
-            String name = mobEntity.getDisplayName().getString();
-            try {
-                String[] split = name.split("]LV");
-                if (split.length == 2) {
-                    modifyMobAttr(mobEntity, Integer.parseInt(split[1]));
-                }
-            } catch (Exception e) {
-                Story.LOG.error("从名称-" + name + "-恢复等级-异常：", e);
+            int lv = getLvByName(mobEntity.getDisplayName().getString());
+            if (lv > 0) {
+                modifyMobAttr(mobEntity, lv);
             }
         }
+    }
+
+    public static int getLvByName(String displayName) {
+        int lv = 0;
+        try {
+            String[] split = displayName.split("]LV");
+            if (split.length == 2) {
+                lv = Integer.parseInt(split[1]);
+            }
+        } catch (Exception e) {
+            Story.LOG.error("从名称-" + displayName + "-恢复等级-异常：", e);
+        }
+        return lv;
     }
 
     private static int mobSpanLv(PlayerEntity closestPlayer) {
