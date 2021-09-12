@@ -3,12 +3,12 @@ package com.marisa.swordcraftstory.item;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.combat.close.*;
-import com.marisa.swordcraftstory.item.combat.ranged.*;
+import com.marisa.swordcraftstory.item.combat.close.sword.*;
+import com.marisa.swordcraftstory.item.combat.ranged.bow.*;
 import com.marisa.swordcraftstory.item.material.GrassLeaves;
 import com.marisa.swordcraftstory.item.material.SoftLeather;
-import com.marisa.swordcraftstory.item.mould.close.SwordMould;
-import com.marisa.swordcraftstory.item.mould.ranged.BowMould;
+import com.marisa.swordcraftstory.item.mould.close.sword.SwordMould;
+import com.marisa.swordcraftstory.item.mould.ranged.bow.BowMould;
 import com.marisa.swordcraftstory.item.ore.*;
 import com.marisa.swordcraftstory.item.reply.Woundplast;
 import com.marisa.swordcraftstory.item.special.Hammer;
@@ -52,7 +52,9 @@ public class ItemRegistry {
     public static RegistryObject<Item> ELEGANCE_BOW = ITEMS.register("elegance_bow", EleganceBow::new);
     public static RegistryObject<Item> RIBBON_BOW = ITEMS.register("ribbon_bow", RibbonBow::new);
     //方块物品
+    public static RegistryObject<Item> WEAPON_MAKE_BLOCK = ITEMS.register("weapon_make_block", () -> new BlockItem(BlockRegistry.WEAPON_MAKE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> SMITHING_BLOCK = ITEMS.register("smithing_block", () -> new BlockItem(BlockRegistry.SMITHING_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
+    public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     //回复道具
     public static RegistryObject<Item> WOUNDPLAST = ITEMS.register("woundplast", Woundplast::new);
     //素材道具

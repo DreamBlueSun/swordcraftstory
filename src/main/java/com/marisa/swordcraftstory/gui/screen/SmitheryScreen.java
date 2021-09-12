@@ -1,22 +1,17 @@
 package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
-import com.marisa.swordcraftstory.item.combat.Combat;
-import com.marisa.swordcraftstory.net.Networking;
-import com.marisa.swordcraftstory.net.SendPack;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 
 /**
- * @description:
+ * @description: 旧版锻冶菜单GUI
  * @date: 2021/9/2 0002 1:00
  */
 
@@ -46,24 +41,10 @@ public class SmitheryScreen extends Screen {
         this.button2 = new Button(x, y + 25, 50, 20, new StringTextComponent("强化"), (button) -> {
         });
         this.button3 = new Button(x, y + 50, 50, 20, new StringTextComponent("强刃"), (button) -> {
-            Networking.INSTANCE.sendToServer(new SendPack("smithery.intensifyEdge", this.blockPos));
         });
         this.button4 = new Button(x, y + 75, 50, 20, new StringTextComponent("解体"), (button) -> {
         });
         this.button5 = new Button(x, y + 100, 50, 20, new StringTextComponent("修理"), (button) -> {
-            Networking.INSTANCE.sendToServer(new SendPack("smithery.repairAll"));
-            Minecraft instance = Minecraft.getInstance();
-            if (instance.player != null) {
-                PlayerInventory inv = instance.player.inventory;
-                for (int i = 0; i < inv.mainInventory.size(); i++) {
-                    ItemStack stack = inv.mainInventory.get(i);
-                    if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
-                        stack.setDamage(0);
-                        inv.setInventorySlotContents(i, stack);
-                    }
-                }
-                instance.displayGuiScreen(null);
-            }
         });
         this.addButton(button1);
         this.addButton(button2);

@@ -1,12 +1,10 @@
 package com.marisa.swordcraftstory.item.special;
 
-import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.CloseCombat;
+import com.marisa.swordcraftstory.item.combat.close.sword.SwordCombat;
+import com.marisa.swordcraftstory.item.ore.IronOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -22,40 +20,10 @@ import java.util.List;
  * @date: 2021/9/1 0001 22:27
  */
 
-public class SwordGuake extends CloseCombat {
+public class SwordGuake extends SwordCombat {
 
     public SwordGuake() {
-        super(1, 7, 3, 0, 0, new IItemTier() {
-            @Override
-            public int getMaxUses() {
-                return 64;
-            }
-
-            @Override
-            public float getEfficiency() {
-                return 10.0F;
-            }
-
-            @Override
-            public float getAttackDamage() {
-                return -1.0F;
-            }
-
-            @Override
-            public int getHarvestLevel() {
-                return 3;
-            }
-
-            @Override
-            public int getEnchantability() {
-                return 26;
-            }
-
-            @Override
-            public Ingredient getRepairMaterial() {
-                return Ingredient.fromItems(ItemRegistry.SWORD_GUAKE.get());
-            }
-        });
+        super(new IronOre());
     }
 
     @Override

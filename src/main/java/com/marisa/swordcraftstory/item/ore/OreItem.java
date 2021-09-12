@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.item.ore;
 
+import com.marisa.swordcraftstory.item.combat.WeaponInfo;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ import java.util.List;
  * @date: 2021/9/9 0009 20:40
  */
 
-public abstract class OreItem extends Item {
+public abstract class OreItem extends Item implements WeaponInfo {
 
     public OreItem(Properties properties) {
         super(properties);

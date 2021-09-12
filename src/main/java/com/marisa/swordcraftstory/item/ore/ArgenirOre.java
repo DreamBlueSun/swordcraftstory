@@ -1,6 +1,8 @@
 package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
+import com.marisa.swordcraftstory.item.ItemRegistry;
+import com.marisa.swordcraftstory.item.combat.CombatType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -29,5 +31,68 @@ public class ArgenirOre extends OreItem {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(new TranslationTextComponent("总觉得是值得信赖的好矿石").mergeStyle(TextFormatting.WHITE));
+    }
+
+    @Override
+    public ItemStack weaponMake(CombatType type) {
+        switch (type) {
+            case BOW:
+                return ItemRegistry.SOLEMNITY_BOW.get().getDefaultInstance();
+            case SWORD:
+                return ItemRegistry.SOLEMNITY_SWORD.get().getDefaultInstance();
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public int rank() {
+        return 2;
+    }
+
+    @Override
+    public int atk(CombatType type) {
+        switch (type) {
+            case BOW:
+            case SWORD:
+                return 16;
+            default:
+                return 0;
+        }
+    }
+
+    @Override
+    public int def(CombatType type) {
+        switch (type) {
+            case BOW:
+                return 5;
+            case SWORD:
+                return 12;
+            default:
+                return 0;
+        }
+    }
+
+    @Override
+    public int agl(CombatType type) {
+        switch (type) {
+            case BOW:
+                return -5;
+            case SWORD:
+            default:
+                return 0;
+        }
+    }
+
+    @Override
+    public int dur(CombatType type) {
+        switch (type) {
+            case BOW:
+                return 56;
+            case SWORD:
+                return 67;
+            default:
+                return 0;
+        }
     }
 }

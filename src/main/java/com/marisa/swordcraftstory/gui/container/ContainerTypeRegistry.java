@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.gui.container;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.gui.container.IInt.BlockPosIInt;
 import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
@@ -23,4 +24,9 @@ public class ContainerTypeRegistry {
             CONTAINERS.register("intensify_edge_container", () ->
                     IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
                             new IntensifyEdgeContainer(windowId, inv, data.readBlockPos(), new IntensifyEdgePointInt())));
+
+    public static final RegistryObject<ContainerType<WeaponMakeContainer>> WEAPON_MAKE_CONTAINER =
+            CONTAINERS.register("weapon_make_container", () ->
+                    IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                            new WeaponMakeContainer(windowId, inv, data.readBlockPos(), new BlockPosIInt())));
 }

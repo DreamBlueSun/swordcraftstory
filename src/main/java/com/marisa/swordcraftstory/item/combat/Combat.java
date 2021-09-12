@@ -44,6 +44,10 @@ public interface Combat {
      */
     int INTENSIFY_EDGE_ONCE_NUM_DUR = 5;
 
+    boolean isMould();
+
+    CombatType type();
+
     int getRank();
 
     int getAtk(ItemStack stack);

@@ -1,13 +1,17 @@
 package com.marisa.swordcraftstory.net;
 
 import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
+import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.ore.OreItem;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -78,6 +82,33 @@ public class SendPack {
         ctx.get().enqueueWork(() -> {
             if (sender != null && this.message != null) {
                 switch (this.message) {
+                    case "smithery.weaponMake":
+                        //打开制作GUI
+                        WeaponMakeTileEntity weaponMakeTile = (WeaponMakeTileEntity) sender.world.getTileEntity(this.blockPos);
+                        NetworkHooks.openGui(sender, weaponMakeTile, (PacketBuffer packerBuffer) ->
+                                packerBuffer.writeBlockPos(weaponMakeTile.getPos()));
+                        break;
+                    case "smithery.weaponMake.done":
+                        //制作确定
+                        World world = sender.world;
+                        WeaponMakeTileEntity tileEntity = (WeaponMakeTileEntity) world.getTileEntity(this.blockPos);
+                        Inventory inventory = tileEntity.getInventory();
+                        ItemStack makeStack2 = inventory.getStackInSlot(2);
+                        if (!makeStack2.isEmpty()) {
+                            return;
+                        }
+                        ItemStack makeStack0 = inventory.getStackInSlot(0);
+                        ItemStack makeStack1 = inventory.getStackInSlot(1);
+                        if (makeStack0.isEmpty() || makeStack1.isEmpty()) {
+                            return;
+                        }
+                        ItemStack make = ((OreItem) makeStack1.getItem()).weaponMake(((Combat) makeStack0.getItem()).type());
+                        if (!make.isEmpty()) {
+                            inventory.removeStackFromSlot(0);
+                            inventory.removeStackFromSlot(1);
+                            inventory.setInventorySlotContents(2, make);
+                        }
+                        break;
                     case "smithery.intensifyEdge":
                         //打开强刃GUI
                         SmithingBlockTileEntity smithingBlockTileEntity = (SmithingBlockTileEntity) sender.world.getTileEntity(this.blockPos);

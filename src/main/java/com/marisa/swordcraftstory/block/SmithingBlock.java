@@ -1,9 +1,10 @@
 package com.marisa.swordcraftstory.block;
 
 import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
-import com.marisa.swordcraftstory.gui.screen.SmitheryScreen;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.special.Hammer;
+import com.marisa.swordcraftstory.net.Networking;
+import com.marisa.swordcraftstory.net.SendPack;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -24,7 +25,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 /**
- * @description: 锻冶方块实体
+ * @description: 强刃锻冶台方块
  * @date: 2021/9/5 0005 2:25
  */
 
@@ -62,7 +63,7 @@ public class SmithingBlock extends Block {
         } else {
             ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (!stack.isEmpty() && stack.getItem() instanceof Hammer) {
-                SmitheryScreen.open(pos);
+                Networking.INSTANCE.sendToServer(new SendPack("smithery.intensifyEdge", pos));
             }
         }
         return ActionResultType.SUCCESS;

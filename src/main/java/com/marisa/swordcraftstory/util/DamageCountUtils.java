@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.util;
 
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.item.combat.Combat;
-import com.marisa.swordcraftstory.item.combat.RangedCombat;
+import com.marisa.swordcraftstory.item.combat.ranged.RangedCombat;
 import com.marisa.swordcraftstory.util.obj.Damage;
 import com.marisa.swordcraftstory.util.obj.Defense;
 import net.minecraft.entity.Entity;
@@ -175,6 +175,7 @@ public class DamageCountUtils {
             if (stack.getItem() instanceof Combat) {
                 //story武器
                 Combat item = (Combat) stack.getItem();
+                assert !item.isMould();
                 //弓平A伤害为攻击力的一半
                 if (stack.getItem() instanceof RangedCombat) {
                     damage.setP((float) (item.getAtk(stack) / 2));
@@ -207,7 +208,9 @@ public class DamageCountUtils {
             if (stack.isEmpty()) {
                 damage.setP(1.0F);
             } else if (stack.getItem() instanceof Combat) {
+                //story武器
                 Combat item = (Combat) stack.getItem();
+                assert !item.isMould();
                 damage.setP(item.getAtk(stack));
                 item.incrTec(stack);
                 CombatPropertiesUtils.useDur(stack);

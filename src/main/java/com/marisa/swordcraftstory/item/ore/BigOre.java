@@ -1,6 +1,8 @@
 package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
+import com.marisa.swordcraftstory.item.ItemRegistry;
+import com.marisa.swordcraftstory.item.combat.CombatType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -29,5 +31,69 @@ public class BigOre extends OreItem {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(new TranslationTextComponent("非常大的矿石看来可以做出大型武器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    @Override
+    public ItemStack weaponMake(CombatType type) {
+        switch (type) {
+            case BOW:
+                return ItemRegistry.IRON_BOW.get().getDefaultInstance();
+            case SWORD:
+                return ItemRegistry.IRON_SWORD.get().getDefaultInstance();
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public int rank() {
+        return 2;
+    }
+
+    @Override
+    public int atk(CombatType type) {
+        switch (type) {
+            case BOW:
+                return 23;
+            case SWORD:
+                return 21;
+            default:
+                return 0;
+        }
+    }
+
+    @Override
+    public int def(CombatType type) {
+        switch (type) {
+            case BOW:
+                return 6;
+            case SWORD:
+                return 15;
+            default:
+                return 0;
+        }
+    }
+
+    @Override
+    public int agl(CombatType type) {
+        switch (type) {
+            case BOW:
+                return -20;
+            case SWORD:
+            default:
+                return 0;
+        }
+    }
+
+    @Override
+    public int dur(CombatType type) {
+        switch (type) {
+            case BOW:
+                return 50;
+            case SWORD:
+                return 70;
+            default:
+                return 0;
+        }
     }
 }
