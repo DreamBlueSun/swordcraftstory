@@ -28,11 +28,12 @@ public class StoryPlayerDataManager {
 
     static {
         LV_NEED_XP = new ArrayList<>();
-        LV_NEED_XP.add(LV_NEED_XP_BASE / 105);
+        LV_NEED_XP.add(LV_NEED_XP_BASE / 15);
         for (int i = 1; i < 41; i++) {
-            LV_NEED_XP.add(LV_NEED_XP.get(i - 1) + LV_NEED_XP_BASE * i / 105);
+            LV_NEED_XP.add(LV_NEED_XP.get(i - 1) + LV_NEED_XP_BASE * i / 15);
         }
     }
+
     /**
      * 获取当前等级
      *
