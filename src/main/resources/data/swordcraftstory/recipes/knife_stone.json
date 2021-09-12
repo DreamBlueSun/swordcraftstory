@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    " A ",
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "item": "swordcraftstory:omega_stone"
+    },
+    "B": {
+      "item": "swordcraftstory:dopatic_stone"
+    }
+  },
+  "result": {
+    "item": "swordcraftstory:knife_stone",
+    "count": 1
+  }
+}

@@ -61,8 +61,8 @@ public class EventHandler {
 
     @SubscribeEvent
     public void blockBreakEvent(BlockEvent.BreakEvent event) {
-        //矿石方块、非创造模式：监听方块破坏掉落矿石
-        BlockDropItemUtils.dropOre(event.getPlayer(), event.getState().getBlock(), event.getPos());
+        //矿石方块、非创造模式：监听方块破坏掉落素材
+        BlockDropItemUtils.dropItem(event.getPlayer(), event.getState().getBlock(), event.getPos());
     }
 
     @SubscribeEvent

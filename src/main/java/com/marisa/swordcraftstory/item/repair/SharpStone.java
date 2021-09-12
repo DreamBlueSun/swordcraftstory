@@ -1,9 +1,8 @@
-package com.marisa.swordcraftstory.item.reply;
+package com.marisa.swordcraftstory.item.repair;
 
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -15,27 +14,22 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 创可贴
+ * @description: 锋利的石头
  * @date: 2021/9/6 0006 21:26
  */
 
-public class Woundplast extends ReplyItem {
+public class SharpStone extends RepairItem {
 
-    private static final float HEAL_NUM = 200.0F;
+    private static final int REPAIR_NUM = 50;
 
-    public Woundplast() {
-        super(HEAL_NUM);
+    public SharpStone() {
+        super(REPAIR_NUM);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent("贴在伤口上可以回复少量HP").mergeStyle(TextFormatting.WHITE));
-    }
-
-    @Override
-    public SoundEvent getEatSound() {
-        return super.getEatSound();
+        tooltip.add(new TranslationTextComponent("可以使武器变锋利恢复耐久和DUR").mergeStyle(TextFormatting.WHITE));
     }
 }

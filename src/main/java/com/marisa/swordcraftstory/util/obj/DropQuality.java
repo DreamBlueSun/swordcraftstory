@@ -61,7 +61,7 @@ public class DropQuality {
         }
     }
 
-    public static Item asItem(Block block, int quality) {
+    public static Item asOre(Block block, int quality) {
         switch (block.getTranslationKey()) {
             case "block.minecraft.iron_ore":
                 //铁：（1：铁矿石，2：斩铁矿，3：大铁矿石，4：铁刃石，5：钢牙原石）
@@ -150,6 +150,41 @@ public class DropQuality {
                         return Items.AIR;
                     case 1:
                         return ItemRegistry.PRETTY_ORE.get();
+                }
+        }
+        return Items.AIR;
+    }
+
+    public static Item asStone(Block block, int quality) {
+        switch (block.getTranslationKey()) {
+            case "block.minecraft.stone":
+                //石头
+            case "block.minecraft.granite":
+                //花岗岩
+            case "block.minecraft.diorite":
+                //闪长岩
+            case "block.minecraft.andesite":
+                //安山岩
+            case "block.minecraft.sandstone":
+                //沙石
+            case "block.minecraft.end_stone":
+                //末地石
+            case "block.minecraft.prismarine":
+                //海晶石
+            case "block.minecraft.red_sandstone":
+                //红沙石
+            case "block.minecraft.blackstone":
+                //黑石
+                switch (quality) {
+                    case 5:
+                    case 4:
+                        return Items.AIR;
+                    case 3:
+                        return ItemRegistry.SHARP_STONE.get();
+                    case 2:
+                        return ItemRegistry.DOPATIC_STONE.get();
+                    case 1:
+                        return ItemRegistry.OMEGA_STONE.get();
                 }
         }
         return Items.AIR;

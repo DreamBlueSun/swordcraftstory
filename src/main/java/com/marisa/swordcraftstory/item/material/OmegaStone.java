@@ -1,9 +1,8 @@
-package com.marisa.swordcraftstory.item.reply;
+package com.marisa.swordcraftstory.item.material;
 
-
+import com.marisa.swordcraftstory.group.StoryGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -15,27 +14,19 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 创可贴
- * @date: 2021/9/6 0006 21:26
+ * @description: 米加石
+ * @date: 2021/9/6 0006 21:30
  */
 
-public class Woundplast extends ReplyItem {
-
-    private static final float HEAL_NUM = 200.0F;
-
-    public Woundplast() {
-        super(HEAL_NUM);
+public class OmegaStone extends MaterialItem {
+    public OmegaStone() {
+        super(new Properties().group(StoryGroup.COMBAT_GROUP));
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent("贴在伤口上可以回复少量HP").mergeStyle(TextFormatting.WHITE));
-    }
-
-    @Override
-    public SoundEvent getEatSound() {
-        return super.getEatSound();
+        tooltip.add(new TranslationTextComponent("纹路细腻的小石子").mergeStyle(TextFormatting.WHITE));
     }
 }
