@@ -22,7 +22,7 @@ import java.util.List;
 
 public class Woundplast extends ReplyItem {
 
-    private static final float HEAL_NUM = 8.0F;
+    private static final float HEAL_NUM = 200.0F;
 
     public Woundplast() {
         super(HEAL_NUM);
