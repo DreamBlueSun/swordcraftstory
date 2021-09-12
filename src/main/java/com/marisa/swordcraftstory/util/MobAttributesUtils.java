@@ -73,6 +73,10 @@ public class MobAttributesUtils {
             maxHealthAdd += lv * 2;
             maxHealthAdd += lv;
         }
+        //如果生物血量已经大于等于要增加的量，则取消
+        if ((int)mobEntity.getAttributeValue(Attributes.MAX_HEALTH) >= maxHealthAdd) {
+            return;
+        }
         //设置mob属性值
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.MAX_HEALTH, new AttributeModifier("Max health modifier", maxHealthAdd, AttributeModifier.Operation.ADDITION));
