@@ -1,7 +1,6 @@
 package com.marisa.swordcraftstory.util;
 
 import com.google.common.collect.Multimap;
-import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
 import com.marisa.swordcraftstory.util.obj.Damage;
@@ -142,8 +141,8 @@ public class DamageCountUtils {
                 if (source.getTrueSource() instanceof PlayerEntity) {
                     stack = ((PlayerEntity) source.getTrueSource()).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
                     if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
-                        Weapon item = (Weapon) stack.getItem();
-                        may = Weapon.CRITICAL_BASE_NUM + (item.getTec(stack) / 5);
+                        Weapon weapon = (Weapon) stack.getItem();
+                        may = Weapon.CRITICAL_BASE_NUM + (weapon.getTec(stack) / 5);
                     }
                 }
                 break;
@@ -175,14 +174,14 @@ public class DamageCountUtils {
         if (!stack.isEmpty()) {
             if (stack.getItem() instanceof Weapon) {
                 //story武器
-                Weapon item = (Weapon) stack.getItem();
+                Weapon weapon = (Weapon) stack.getItem();
                 //弓平A伤害为攻击力的一半
                 if (stack.getItem() instanceof AbstractRangedWeapon) {
-                    damage.setP((float) (item.getAtk(stack) / 2));
+                    damage.setP((float) (weapon.getAtk(stack) / 2));
                 } else {
-                    damage.setP(item.getAtk(stack));
+                    damage.setP(weapon.getAtk(stack));
                 }
-                item.incrTec(stack);
+                weapon.incrTec(stack);
                 CombatPropertiesUtils.useDur(stack);
             } else if (stack.getItem() instanceof TieredItem) {
                 //非story武器
@@ -209,9 +208,9 @@ public class DamageCountUtils {
                 damage.setP(1.0F);
             } else if (stack.getItem() instanceof Weapon) {
                 //story武器
-                Weapon item = (Weapon) stack.getItem();
-                damage.setP(item.getAtk(stack));
-                item.incrTec(stack);
+                Weapon weapon = (Weapon) stack.getItem();
+                damage.setP(weapon.getAtk(stack));
+                weapon.incrTec(stack);
                 CombatPropertiesUtils.useDur(stack);
             } else if (stack.getItem() instanceof BowItem) {
                 damage.setP(4.0F);
@@ -248,13 +247,6 @@ public class DamageCountUtils {
             LivingEntity e = (LivingEntity) target;
             defense.setP(e.getTotalArmorValue());
             defense.setM((int) e.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
-            //计入武器防御力（取消计入，在武器属性中添加+盔甲值的NBT）
-//            ItemStack stack = e.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-//            if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
-//                Combat item = (Combat) stack.getItem();
-//                defense.addP(item.getDef(stack));
-//                defense.addM(item.getPhy(stack));
-//            }
         }
         return defense;
     }

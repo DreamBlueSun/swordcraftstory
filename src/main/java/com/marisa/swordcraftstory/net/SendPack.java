@@ -3,10 +3,9 @@ package com.marisa.swordcraftstory.net;
 import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponCollapseTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
+import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
-import com.marisa.swordcraftstory.item.mould.Mould;
-import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -153,14 +152,11 @@ public class SendPack {
                         World world4 = sender.world;
                         Inventory inventory4 = ((WeaponCollapseTileEntity) world4.getTileEntity(this.blockPos)).getInventory();
                         ItemStack collapseStack0 = inventory4.getStackInSlot(0);
-                        if (collapseStack0.isEmpty()) {
+                        if (collapseStack0.isEmpty() || !(collapseStack0.getItem() instanceof Weapon)) {
                             return;
                         }
                         ItemStack collapseStack1 = inventory4.getStackInSlot(1);
                         if (!collapseStack1.isEmpty()) {
-                            return;
-                        }
-                        if (collapseStack0.getItem() instanceof Mould) {
                             return;
                         }
                         ItemStack mould = ((Weapon) collapseStack0.getItem()).collapse(collapseStack0);

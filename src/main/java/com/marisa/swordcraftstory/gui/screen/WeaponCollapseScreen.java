@@ -70,15 +70,15 @@ public class WeaponCollapseScreen extends ContainerScreen<WeaponCollapseContaine
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
         List<Slot> slots = this.container.inventorySlots;
         ItemStack stack0 = slots.get(0).getStack();
-        if (stack0.isEmpty() || stack0.getItem() instanceof Mould) {
+        if (stack0.isEmpty() || !(stack0.getItem() instanceof Weapon)) {
             return;
         }
-        Weapon combat = (Weapon) stack0.getItem();
         //显示偏移
         int xs = 76;
         int ys = 44;
+        Weapon weapon = (Weapon) stack0.getItem();
+        ItemStack collapse = weapon.collapse(stack0);
         //ATK
-        ItemStack collapse = combat.collapse(stack0);
         Mould mould = (Mould) collapse.getItem();
         drawCenteredString(matrixStack, this.font, String.valueOf(mould.getAtk(collapse)), xs, ys + 8, 0x8B4513);
         //DEF
