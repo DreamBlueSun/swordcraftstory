@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.util;
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.item.combat.Combat;
 import com.marisa.swordcraftstory.item.combat.Weapon;
-import com.marisa.swordcraftstory.item.combat.ranged.RangedCombat;
+import com.marisa.swordcraftstory.item.combat.ranged.AbstractRangedWeapon;
 import com.marisa.swordcraftstory.util.obj.Damage;
 import com.marisa.swordcraftstory.util.obj.Defense;
 import net.minecraft.entity.Entity;
@@ -178,7 +178,7 @@ public class DamageCountUtils {
                 Combat item = (Combat) stack.getItem();
                 assert !item.isMould();
                 //弓平A伤害为攻击力的一半
-                if (stack.getItem() instanceof RangedCombat) {
+                if (stack.getItem() instanceof AbstractRangedWeapon) {
                     damage.setP((float) (item.getAtk(stack) / 2));
                 } else {
                     damage.setP(item.getAtk(stack));

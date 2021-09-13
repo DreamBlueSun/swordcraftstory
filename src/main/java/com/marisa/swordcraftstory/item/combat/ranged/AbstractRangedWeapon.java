@@ -27,7 +27,7 @@ import java.util.List;
  * 远程武器抽象类
  */
 
-public abstract class RangedCombat extends BowItem implements Weapon, Combat {
+public abstract class AbstractRangedWeapon extends BowItem implements Weapon, Combat {
 
     /**
      * 稀有度级别
@@ -54,7 +54,7 @@ public abstract class RangedCombat extends BowItem implements Weapon, Combat {
      */
     private final int agl;
 
-    public RangedCombat(final int rank, final int atk, final int def, final int agl, final int dur) {
+    public AbstractRangedWeapon(final int rank, final int atk, final int def, final int agl, final int dur) {
         super(new Item.Properties().maxDamage(dur).group(StoryGroup.COMBAT_GROUP));
         this.rank = rank;
         this.atk = atk;

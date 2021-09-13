@@ -11,11 +11,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 羽弓
- * @date: 2021/9/4 0004 6:35
+ * 羽弓
  */
 
-public class FeatherBow extends BowCombat {
+public class FeatherBow extends AbstractBowWeapon {
 
     public FeatherBow() {
         super(new WingsFossilOre());

@@ -11,11 +11,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 庄严之弓
- * @date: 2021/9/4 0004 6:35
+ * 庄严之弓
  */
 
-public class SolemnityBow extends BowCombat {
+public class SolemnityBow extends AbstractBowWeapon {
 
     public SolemnityBow() {
         super(new ArgenirOre());

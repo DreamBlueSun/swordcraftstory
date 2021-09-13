@@ -11,11 +11,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 短弓
- * @date: 2021/9/4 0004 6:35
+ * 短弓
  */
 
-public class ThinBow extends BowCombat {
+public class ThinBow extends AbstractBowWeapon {
 
     public ThinBow() {
         super(new SlanderOre());
