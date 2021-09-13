@@ -19,7 +19,7 @@ import java.util.List;
  * 漂亮原石
  */
 
-public class PrettyOre extends OreItem {
+public class PrettyOre extends AbstractOre {
 
     public PrettyOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));

@@ -17,8 +17,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description:
- * @date: 2021/9/1 0001 1:38
+ * 抽象模具类
  */
 
 public abstract class Mould extends Item implements Combat {
@@ -47,16 +46,6 @@ public abstract class Mould extends Item implements Combat {
     }
 
     @Override
-    public boolean isMould() {
-        return true;
-    }
-
-    @Override
-    public int getRank() {
-        return 0;
-    }
-
-    @Override
     public int getAtk(ItemStack stack) {
         return CombatPropertiesUtils.getAtk(stack);
     }
@@ -77,27 +66,7 @@ public abstract class Mould extends Item implements Combat {
     }
 
     @Override
-    public int getDur(ItemStack stack) {
-        return 0;
-    }
-
-    @Override
     public int getDurMax(ItemStack stack) {
         return CombatPropertiesUtils.getDurMax(stack);
-    }
-
-    @Override
-    public int getTec(ItemStack stack) {
-        return 0;
-    }
-
-    @Override
-    public void incrTec(ItemStack stack) {
-
-    }
-
-    @Override
-    public ItemStack collapse(ItemStack stack) {
-        return null;
     }
 }

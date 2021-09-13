@@ -19,7 +19,7 @@ import java.util.List;
  * 铁矿石
  */
 
-public class IronOre extends OreItem {
+public class IronOre extends AbstractOre {
 
     public IronOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));

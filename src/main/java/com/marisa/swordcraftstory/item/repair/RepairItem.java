@@ -1,7 +1,6 @@
 package com.marisa.swordcraftstory.item.repair;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
@@ -67,10 +66,10 @@ public abstract class RepairItem extends Item {
             NonNullList<ItemStack> stacks = ((PlayerEntity) entityLiving).inventory.mainInventory;
             for (ItemStack itemStack : stacks) {
                 Item item = itemStack.getItem();
-                if (item instanceof Weapon && !((Combat) item).isMould()) {
+                if (item instanceof Weapon) {
                     int damage = itemStack.getDamage();
-                    int dur = ((Combat) item).getDur(itemStack);
-                    int durMax = ((Combat) item).getDurMax(itemStack);
+                    int dur = ((Weapon) item).getDur(itemStack);
+                    int durMax = ((Weapon) item).getDurMax(itemStack);
                     if (damage == 0 && dur == durMax) {
                         continue;
                     }

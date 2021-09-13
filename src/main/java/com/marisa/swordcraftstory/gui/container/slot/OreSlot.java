@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.gui.container.slot;
 
-import com.marisa.swordcraftstory.item.ore.OreItem;
+import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -20,6 +20,6 @@ public class OreSlot extends Slot {
     @Override
     public boolean isItemValid(ItemStack stack) {
         //校验物品堆栈不是空气并且属于Story矿石才可放入Slot
-        return !stack.isEmpty() && stack.getItem() instanceof OreItem;
+        return !stack.isEmpty() && stack.getItem() instanceof AbstractOre;
     }
 }

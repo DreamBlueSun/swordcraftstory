@@ -1,5 +1,6 @@
-package com.marisa.swordcraftstory.item.weapon;
+package com.marisa.swordcraftstory.item.ore;
 
+import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import net.minecraft.item.ItemStack;
 
 /**

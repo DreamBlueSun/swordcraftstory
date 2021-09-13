@@ -1,6 +1,5 @@
 package com.marisa.swordcraftstory.item.ore;
 
-import com.marisa.swordcraftstory.item.weapon.WeaponMake;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,13 +14,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description:
- * @date: 2021/9/9 0009 20:40
+ * 抽象矿石类
  */
 
-public abstract class OreItem extends Item implements WeaponMake {
+public abstract class AbstractOre extends Item implements WeaponMake {
 
-    public OreItem(Properties properties) {
+    public AbstractOre(Properties properties) {
         super(properties);
     }
 

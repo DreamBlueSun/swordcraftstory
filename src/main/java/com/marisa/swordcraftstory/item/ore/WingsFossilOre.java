@@ -19,7 +19,7 @@ import java.util.List;
  * 翅膀化石
  */
 
-public class WingsFossilOre extends OreItem {
+public class WingsFossilOre extends AbstractOre {
 
     public WingsFossilOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));

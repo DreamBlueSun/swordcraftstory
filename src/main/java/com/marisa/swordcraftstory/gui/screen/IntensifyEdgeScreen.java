@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.gui.screen;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
 import com.marisa.swordcraftstory.gui.container.IntensifyEdgeContainer;
-import com.marisa.swordcraftstory.item.weapon.Combat;
+import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.SendPack;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -17,8 +17,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
 /**
- * @description: 强刃Screen
- * @date: 2021/9/7 0007 21:08
+ * 强刃Screen
  */
 
 public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer> {
@@ -123,13 +122,13 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
         //ATK
-        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_ATK * this.atkTime), 64, 47, 0x1E90FF);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Weapon.INTENSIFY_EDGE_ONCE_NUM_ATK * this.atkTime), 64, 47, 0x1E90FF);
         //DEF
-        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_DEF * this.defTime), 149, 47, 0x1E90FF);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Weapon.INTENSIFY_EDGE_ONCE_NUM_DEF * this.defTime), 149, 47, 0x1E90FF);
         //AGL
-        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_AGL * this.aglTime), 64, 68, 0x1E90FF);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Weapon.INTENSIFY_EDGE_ONCE_NUM_AGL * this.aglTime), 64, 68, 0x1E90FF);
         //DUR
-        drawCenteredString(matrixStack, this.font, String.valueOf(Combat.INTENSIFY_EDGE_ONCE_NUM_DUR * this.durTime), 149, 68, 0x1E90FF);
+        drawCenteredString(matrixStack, this.font, String.valueOf(Weapon.INTENSIFY_EDGE_ONCE_NUM_DUR * this.durTime), 149, 68, 0x1E90FF);
         //POINT
         int point = getPointMax() - this.pointUsed;
         int color;

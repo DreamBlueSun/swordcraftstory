@@ -19,7 +19,7 @@ import java.util.List;
  * 阿吉尼尔矿
  */
 
-public class ArgenirOre extends OreItem {
+public class ArgenirOre extends AbstractOre {
 
     public ArgenirOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));

@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.gui.screen;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.WeaponMakeContainer;
 import com.marisa.swordcraftstory.item.mould.Mould;
-import com.marisa.swordcraftstory.item.ore.OreItem;
+import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.SendPack;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -82,7 +82,7 @@ public class WeaponMakeScreen extends ContainerScreen<WeaponMakeContainer> {
             return;
         }
         Mould mould = (Mould) stack0.getItem();
-        OreItem ore = (OreItem) stack1.getItem();
+        AbstractOre ore = (AbstractOre) stack1.getItem();
         //显示偏移
         int xs = 76;
         int ys = 44;

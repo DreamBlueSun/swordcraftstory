@@ -6,7 +6,7 @@ import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
 import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.mould.Mould;
-import com.marisa.swordcraftstory.item.ore.OreItem;
+import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -104,7 +104,7 @@ public class SendPack {
                         if (!makeStack2.isEmpty()) {
                             return;
                         }
-                        ItemStack make = ((OreItem) makeStack1.getItem()).weaponMake(((Combat) makeStack0.getItem()).type());
+                        ItemStack make = ((AbstractOre) makeStack1.getItem()).weaponMake(((Combat) makeStack0.getItem()).type());
                         if (!make.isEmpty()) {
                             inventory.removeStackFromSlot(0);
                             inventory.removeStackFromSlot(1);
@@ -120,10 +120,10 @@ public class SendPack {
                     case "smithery.intensifyEdge.done":
                         //强刃确定
                         ItemStack inStack = ((SmithingBlockTileEntity) sender.world.getTileEntity(this.blockPos)).getInventory().getStackInSlot(0);
-                        if (inStack.isEmpty() || !(inStack.getItem() instanceof Weapon) || (inStack.getItem() instanceof Mould)) {
+                        if (inStack.isEmpty() || !(inStack.getItem() instanceof Weapon)) {
                             return;
                         }
-                        if (((Combat) inStack.getItem()).getTec(inStack) == Combat.MAX_TEC) {
+                        if (((Weapon) inStack.getItem()).getTec(inStack) == Weapon.MAX_TEC) {
                             //判定点数正常范围
                             if (this.atkTime + this.defTime + this.aglTime + this.durTime == 1) {
                                 //执行强刃
@@ -163,7 +163,7 @@ public class SendPack {
                         if (collapseStack0.getItem() instanceof Mould) {
                             return;
                         }
-                        ItemStack mould = ((Combat) collapseStack0.getItem()).collapse(collapseStack0);
+                        ItemStack mould = ((Weapon) collapseStack0.getItem()).collapse(collapseStack0);
                         if (!mould.isEmpty()) {
                             inventory4.removeStackFromSlot(0);
                             inventory4.setInventorySlotContents(1, mould);

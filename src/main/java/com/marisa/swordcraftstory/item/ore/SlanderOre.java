@@ -19,7 +19,7 @@ import java.util.List;
  * 斯兰德原石
  */
 
-public class SlanderOre extends OreItem {
+public class SlanderOre extends AbstractOre {
 
     public SlanderOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));

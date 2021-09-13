@@ -3,7 +3,6 @@ package com.marisa.swordcraftstory.item.weapon.close;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.StoryUUID;
@@ -29,7 +28,7 @@ import java.util.List;
  * @date: 2021/9/4 0004 6:18
  */
 
-public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon, Combat {
+public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
 
     /**
      * 稀有度级别
@@ -78,16 +77,11 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon, C
             builder.putAll(super.getAttributeModifiers(EquipmentSlotType.MAINHAND));
             builder.put(Attributes.ARMOR, new AttributeModifier(StoryUUID.ARMOR, "Armor armor modifier", getDef(stack), AttributeModifier.Operation.ADDITION));
             if (getAgl(stack) != 0) {
-                builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (Combat.AGL_SPEED_BASE_NUM * getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
+                builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (Weapon.AGL_SPEED_BASE_NUM * getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
             return builder.build();
         }
         return super.getAttributeModifiers(equipmentSlot, stack);
-    }
-
-    @Override
-    public boolean isMould() {
-        return false;
     }
 
     @Override

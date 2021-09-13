@@ -2,8 +2,8 @@ package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.WeaponCollapseContainer;
-import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.mould.Mould;
+import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.SendPack;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -73,7 +73,7 @@ public class WeaponCollapseScreen extends ContainerScreen<WeaponCollapseContaine
         if (stack0.isEmpty() || stack0.getItem() instanceof Mould) {
             return;
         }
-        Combat combat = (Combat) stack0.getItem();
+        Weapon combat = (Weapon) stack0.getItem();
         //显示偏移
         int xs = 76;
         int ys = 44;

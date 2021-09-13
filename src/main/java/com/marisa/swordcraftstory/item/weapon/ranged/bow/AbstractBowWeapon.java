@@ -1,10 +1,9 @@
 package com.marisa.swordcraftstory.item.weapon.ranged.bow;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.weapon.Combat;
+import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
-import com.marisa.swordcraftstory.item.ore.OreItem;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.ItemStack;
 
@@ -12,11 +11,11 @@ import net.minecraft.item.ItemStack;
  * 抽象弓类武器
  */
 
-public abstract class AbstractBowWeapon extends AbstractRangedWeapon implements Combat {
+public abstract class AbstractBowWeapon extends AbstractRangedWeapon {
 
     public static final WeaponType TYPE = WeaponType.BOW;
 
-    public AbstractBowWeapon(final OreItem ore) {
+    public AbstractBowWeapon(final AbstractOre ore) {
         super(ore.rank(), ore.atk(TYPE), ore.def(TYPE), ore.agl(TYPE), ore.dur(TYPE));
     }
 

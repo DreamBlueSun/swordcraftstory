@@ -138,23 +138,23 @@ public class DamageCountUtils {
         switch (source.getDamageType()) {
             case "player":
             case "arrow":
-                may = Combat.CRITICAL_BASE_NUM;
+                may = Weapon.CRITICAL_BASE_NUM;
                 if (source.getTrueSource() instanceof PlayerEntity) {
                     stack = ((PlayerEntity) source.getTrueSource()).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
                     if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
-                        Combat item = (Combat) stack.getItem();
-                        may = Combat.CRITICAL_BASE_NUM + (item.getTec(stack) / 5);
+                        Weapon item = (Weapon) stack.getItem();
+                        may = Weapon.CRITICAL_BASE_NUM + (item.getTec(stack) / 5);
                     }
                 }
                 break;
             case "mob":
-                may = Combat.CRITICAL_BASE_NUM;
+                may = Weapon.CRITICAL_BASE_NUM;
                 break;
             default:
                 break;
         }
         if (may != 0) {
-            critical = Combat.CRITICAL_BASE_NUM > new Random().nextInt(1000);
+            critical = Weapon.CRITICAL_BASE_NUM > new Random().nextInt(1000);
         }
         if (critical) {
             count = count * 2;
@@ -175,8 +175,7 @@ public class DamageCountUtils {
         if (!stack.isEmpty()) {
             if (stack.getItem() instanceof Weapon) {
                 //story武器
-                Combat item = (Combat) stack.getItem();
-                assert !item.isMould();
+                Weapon item = (Weapon) stack.getItem();
                 //弓平A伤害为攻击力的一半
                 if (stack.getItem() instanceof AbstractRangedWeapon) {
                     damage.setP((float) (item.getAtk(stack) / 2));
@@ -210,8 +209,7 @@ public class DamageCountUtils {
                 damage.setP(1.0F);
             } else if (stack.getItem() instanceof Weapon) {
                 //story武器
-                Combat item = (Combat) stack.getItem();
-                assert !item.isMould();
+                Weapon item = (Weapon) stack.getItem();
                 damage.setP(item.getAtk(stack));
                 item.incrTec(stack);
                 CombatPropertiesUtils.useDur(stack);

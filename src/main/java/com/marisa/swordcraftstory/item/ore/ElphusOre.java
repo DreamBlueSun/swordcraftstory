@@ -19,7 +19,7 @@ import java.util.List;
  * 艾尔弗伊斯原石
  */
 
-public class ElphusOre extends OreItem {
+public class ElphusOre extends AbstractOre {
 
     public ElphusOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));

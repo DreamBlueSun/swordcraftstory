@@ -19,7 +19,7 @@ import java.util.List;
  * 尤佳矿石
  */
 
-public class UkaOre extends OreItem {
+public class UkaOre extends AbstractOre {
 
     public UkaOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));

@@ -27,7 +27,7 @@ import java.util.List;
  * 远程武器抽象类
  */
 
-public abstract class AbstractRangedWeapon extends BowItem implements Weapon, Combat {
+public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
 
     /**
      * 稀有度级别
@@ -75,17 +75,12 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon, Co
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             builder.putAll(super.getAttributeModifiers(EquipmentSlotType.MAINHAND));
             if (getAgl(stack) != 0) {
-                builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (Combat.AGL_SPEED_BASE_NUM * getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
+                builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (Weapon.AGL_SPEED_BASE_NUM * getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
             builder.put(Attributes.ARMOR, new AttributeModifier(StoryUUID.ARMOR, "Armor armor modifier", getDef(stack), AttributeModifier.Operation.ADDITION));
             return builder.build();
         }
         return super.getAttributeModifiers(equipmentSlot, stack);
-    }
-
-    @Override
-    public boolean isMould() {
-        return false;
     }
 
     @Override

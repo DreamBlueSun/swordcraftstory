@@ -19,7 +19,7 @@ import java.util.List;
  * 大矿石
  */
 
-public class BigOre extends OreItem {
+public class BigOre extends AbstractOre {
 
     public BigOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));

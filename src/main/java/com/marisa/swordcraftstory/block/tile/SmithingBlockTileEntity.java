@@ -3,7 +3,6 @@ package com.marisa.swordcraftstory.block.tile;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
 import com.marisa.swordcraftstory.gui.container.IntensifyEdgeContainer;
-import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -76,7 +75,7 @@ public class SmithingBlockTileEntity extends TileEntity implements ITickableTile
             this.pointMax.set(2, pos.getY());
             this.pointMax.set(3, pos.getZ());
             ItemStack stack = this.inventory.getStackInSlot(0);
-            if (!stack.isEmpty() && stack.getItem() instanceof Weapon && ((Combat) stack.getItem()).getTec(stack) == Combat.MAX_TEC) {
+            if (!stack.isEmpty() && stack.getItem() instanceof Weapon && ((Weapon) stack.getItem()).getTec(stack) == Weapon.MAX_TEC) {
                 this.pointMax.set(0, 1);
             } else {
                 this.pointMax.set(0, 0);
