@@ -1,7 +1,6 @@
 package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
-import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
@@ -81,8 +80,8 @@ public class StoryPlayerStatusScreen extends Screen {
         int AGL = 0;
         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
         if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
-            Combat item = (Combat) stack.getItem();
-            AGL = item.getAgl(stack);
+            Weapon weapon = (Weapon) stack.getItem();
+            AGL = weapon.getAgl(stack);
         }
         font = "敏捷  " + AGL;
         drawCenteredString(matrixStack, this.font, font, xAttr + offset(font), yAttr + 80, 0x8B4513);
