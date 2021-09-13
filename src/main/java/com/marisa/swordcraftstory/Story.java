@@ -5,7 +5,7 @@ import com.marisa.swordcraftstory.block.tile.TileEntityTypeRegistry;
 import com.marisa.swordcraftstory.event.EventHandler;
 import com.marisa.swordcraftstory.gui.container.ContainerTypeRegistry;
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.AttributesRegistry;
+import com.marisa.swordcraftstory.attributes.AttributesRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;

@@ -20,13 +20,19 @@ public class ContainerTypeRegistry {
 
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Story.MOD_ID);
 
-    public static final RegistryObject<ContainerType<IntensifyEdgeContainer>> INTENSIFY_EDGE_CONTAINER =
-            CONTAINERS.register("intensify_edge_container", () ->
-                    IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
-                            new IntensifyEdgeContainer(windowId, inv, data.readBlockPos(), new IntensifyEdgePointInt())));
 
     public static final RegistryObject<ContainerType<WeaponMakeContainer>> WEAPON_MAKE_CONTAINER =
             CONTAINERS.register("weapon_make_container", () ->
                     IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
                             new WeaponMakeContainer(windowId, inv, data.readBlockPos(), new BlockPosIInt())));
+
+    public static final RegistryObject<ContainerType<IntensifyEdgeContainer>> INTENSIFY_EDGE_CONTAINER =
+            CONTAINERS.register("intensify_edge_container", () ->
+                    IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                            new IntensifyEdgeContainer(windowId, inv, data.readBlockPos(), new IntensifyEdgePointInt())));
+
+    public static final RegistryObject<ContainerType<WeaponCollapseContainer>> WEAPON_COLLAPSE_CONTAINER =
+            CONTAINERS.register("weapon_collapse_container", () ->
+                    IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                            new WeaponCollapseContainer(windowId, inv, data.readBlockPos(), new BlockPosIInt())));
 }

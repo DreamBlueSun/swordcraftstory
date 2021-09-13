@@ -88,6 +88,10 @@ public class CombatPropertiesUtils {
         return v;
     }
 
+    public static void setAtk(ItemStack stack, int amount) {
+        stack.setTagInfo("story_combat_atk", IntNBT.valueOf(amount));
+    }
+
     public static void intensifyEdgeAtk(ItemStack stack) {
         int v = 0;
         CompoundNBT tag = stack.getTag();
@@ -105,6 +109,10 @@ public class CombatPropertiesUtils {
             v = tag.getInt("story_combat_def");
         }
         return v;
+    }
+
+    public static void setDef(ItemStack stack, int amount) {
+        stack.setTagInfo("story_combat_def", IntNBT.valueOf(amount));
     }
 
     public static void intensifyEdgeDef(ItemStack stack) {
@@ -133,6 +141,10 @@ public class CombatPropertiesUtils {
             v = tag.getInt("story_combat_agl");
         }
         return v;
+    }
+
+    public static void setAgl(ItemStack stack, int amount) {
+        stack.setTagInfo("story_combat_agl", IntNBT.valueOf(amount));
     }
 
     public static void intensifyEdgeAgl(ItemStack stack) {
@@ -165,6 +177,10 @@ public class CombatPropertiesUtils {
             v = tag.getInt("story_combat_dur_max");
         }
         return v;
+    }
+
+    public static void setDurMax(ItemStack stack, int amount) {
+        stack.setTagInfo("story_combat_dur_max", IntNBT.valueOf(amount));
     }
 
     public static void intensifyEdgeDur(ItemStack stack) {

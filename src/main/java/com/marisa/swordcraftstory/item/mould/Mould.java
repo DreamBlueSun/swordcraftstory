@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.item.mould;
 
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -22,40 +23,8 @@ import java.util.List;
 
 public abstract class Mould extends Item implements Combat {
 
-    /**
-     * 攻击力
-     */
-    private int atk;
-
-    /**
-     * 物理防御力
-     */
-    private int def;
-
-    /**
-     * 敏捷值
-     */
-    private int agl;
-
-    /**
-     * 耐久度
-     */
-    private int durMax;
-
     public Mould(Properties properties) {
         super(properties);
-        this.atk = 0;
-        this.def = 0;
-        this.agl = 0;
-        this.durMax = 0;
-    }
-
-    public Mould(Properties properties, int atk, int def, int agl, int durMax) {
-        super(properties);
-        this.atk = atk;
-        this.def = def;
-        this.agl = agl;
-        this.durMax = durMax;
     }
 
     @Override
@@ -63,13 +32,13 @@ public abstract class Mould extends Item implements Combat {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent("铸模").mergeStyle(TextFormatting.LIGHT_PURPLE));
         tooltip.add(new TranslationTextComponent("攻击力").mergeStyle(TextFormatting.YELLOW)
-                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(this.atk)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(getAtk(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("防御力").mergeStyle(TextFormatting.YELLOW)
-                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(this.def)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(getDef(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("敏捷值").mergeStyle(TextFormatting.YELLOW)
-                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(this.agl)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(getAgl(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
-                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(this.durMax)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+                .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(getDurMax(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
     }
 
     @Override
@@ -89,22 +58,22 @@ public abstract class Mould extends Item implements Combat {
 
     @Override
     public int getAtk(ItemStack stack) {
-        return this.atk;
+        return CombatPropertiesUtils.getAtk(stack);
     }
 
     @Override
     public int getDef(ItemStack stack) {
-        return this.def;
+        return CombatPropertiesUtils.getDef(stack);
     }
 
     @Override
     public int getPhy(ItemStack stack) {
-        return 0;
+        return CombatPropertiesUtils.getPhy(stack);
     }
 
     @Override
     public int getAgl(ItemStack stack) {
-        return this.agl;
+        return CombatPropertiesUtils.getAgl(stack);
     }
 
     @Override
@@ -114,7 +83,7 @@ public abstract class Mould extends Item implements Combat {
 
     @Override
     public int getDurMax(ItemStack stack) {
-        return this.durMax;
+        return CombatPropertiesUtils.getDurMax(stack);
     }
 
     @Override
@@ -125,5 +94,10 @@ public abstract class Mould extends Item implements Combat {
     @Override
     public void incrTec(ItemStack stack) {
 
+    }
+
+    @Override
+    public ItemStack collapse(ItemStack stack) {
+        return null;
     }
 }

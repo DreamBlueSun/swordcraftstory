@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.item.combat;
+package com.marisa.swordcraftstory.attributes;
 
 import com.marisa.swordcraftstory.Story;
 import net.minecraft.entity.ai.attributes.Attribute;

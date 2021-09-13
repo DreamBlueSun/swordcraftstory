@@ -43,7 +43,7 @@ public class WeaponMakeScreen extends ContainerScreen<WeaponMakeContainer> {
         Minecraft.getInstance().keyboardListener.enableRepeatEvents(true);
         int x = this.width / 2;
         int y = this.height / 2;
-        this.button = new Button(x + 70, y - 102, 32, 20, new StringTextComponent("确定"), (button) -> {
+        this.button = new Button(x + 70, y - 102, 32, 20, new StringTextComponent("制作"), (button) -> {
             BlockPos blockPos = this.getContainer().getBlockPos();
             Networking.INSTANCE.sendToServer(new SendPack("smithery.weaponMake.done", blockPos));
         });

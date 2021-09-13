@@ -26,10 +26,6 @@ public class BowMould extends Mould {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));
     }
 
-    public BowMould(int atk, int def, int agl, int durMax) {
-        super(new Properties().group(StoryGroup.COMBAT_GROUP), atk, def, agl, durMax);
-    }
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {

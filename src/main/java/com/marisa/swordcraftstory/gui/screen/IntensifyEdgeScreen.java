@@ -90,7 +90,7 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
                 this.durTime = 0;
             }
         });
-        this.button5 = new Button(x + 127, y + 44, 32, 20, new StringTextComponent("确定"), (button) -> {
+        this.button5 = new Button(x + 127, y + 44, 32, 20, new StringTextComponent("强刃"), (button) -> {
             IntensifyEdgePointInt intensifyEdgeInt = this.getContainer().getPointMax();
             BlockPos pos = new BlockPos(intensifyEdgeInt.get(1), intensifyEdgeInt.get(2), intensifyEdgeInt.get(3));
             Networking.INSTANCE.sendToServer(new SendPack("smithery.intensifyEdge.done", pos, this.atkTime, this.defTime, this.aglTime, this.durTime));

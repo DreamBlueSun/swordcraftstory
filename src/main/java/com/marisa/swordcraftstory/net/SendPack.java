@@ -1,8 +1,10 @@
 package com.marisa.swordcraftstory.net;
 
 import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
+import com.marisa.swordcraftstory.block.tile.WeaponCollapseTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.mould.Mould;
 import com.marisa.swordcraftstory.item.ore.OreItem;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.entity.player.PlayerInventory;
@@ -91,15 +93,14 @@ public class SendPack {
                     case "smithery.weaponMake.done":
                         //制作确定
                         World world = sender.world;
-                        WeaponMakeTileEntity tileEntity = (WeaponMakeTileEntity) world.getTileEntity(this.blockPos);
-                        Inventory inventory = tileEntity.getInventory();
-                        ItemStack makeStack2 = inventory.getStackInSlot(2);
-                        if (!makeStack2.isEmpty()) {
-                            return;
-                        }
+                        Inventory inventory = ((WeaponMakeTileEntity) world.getTileEntity(this.blockPos)).getInventory();
                         ItemStack makeStack0 = inventory.getStackInSlot(0);
                         ItemStack makeStack1 = inventory.getStackInSlot(1);
                         if (makeStack0.isEmpty() || makeStack1.isEmpty()) {
+                            return;
+                        }
+                        ItemStack makeStack2 = inventory.getStackInSlot(2);
+                        if (!makeStack2.isEmpty()) {
                             return;
                         }
                         ItemStack make = ((OreItem) makeStack1.getItem()).weaponMake(((Combat) makeStack0.getItem()).type());
@@ -118,7 +119,10 @@ public class SendPack {
                     case "smithery.intensifyEdge.done":
                         //强刃确定
                         ItemStack inStack = ((SmithingBlockTileEntity) sender.world.getTileEntity(this.blockPos)).getInventory().getStackInSlot(0);
-                        if (!inStack.isEmpty() && ((Combat) inStack.getItem()).getTec(inStack) == Combat.MAX_TEC) {
+                        if (inStack.isEmpty() || !(inStack.getItem() instanceof Combat) || (inStack.getItem() instanceof Mould)) {
+                            return;
+                        }
+                        if (((Combat) inStack.getItem()).getTec(inStack) == Combat.MAX_TEC) {
                             //判定点数正常范围
                             if (this.atkTime + this.defTime + this.aglTime + this.durTime == 1) {
                                 //执行强刃
@@ -135,6 +139,33 @@ public class SendPack {
                                     CombatPropertiesUtils.intensifyEdgeDur(inStack);
                                 }
                             }
+                        }
+                        break;
+                    case "smithery.weaponCollapse":
+                        //打开解体GUI
+                        WeaponCollapseTileEntity weaponCollapseTile = (WeaponCollapseTileEntity) sender.world.getTileEntity(this.blockPos);
+                        NetworkHooks.openGui(sender, weaponCollapseTile, (PacketBuffer packerBuffer) ->
+                                packerBuffer.writeBlockPos(weaponCollapseTile.getPos()));
+                        break;
+                    case "smithery.weaponCollapse.done":
+                        //解体确定
+                        World world4 = sender.world;
+                        Inventory inventory4 = ((WeaponCollapseTileEntity) world4.getTileEntity(this.blockPos)).getInventory();
+                        ItemStack collapseStack0 = inventory4.getStackInSlot(0);
+                        if (collapseStack0.isEmpty()) {
+                            return;
+                        }
+                        ItemStack collapseStack1 = inventory4.getStackInSlot(1);
+                        if (!collapseStack1.isEmpty()) {
+                            return;
+                        }
+                        if (collapseStack0.getItem() instanceof Mould) {
+                            return;
+                        }
+                        ItemStack mould = ((Combat) collapseStack0.getItem()).collapse(collapseStack0);
+                        if (!mould.isEmpty()) {
+                            inventory4.removeStackFromSlot(0);
+                            inventory4.setInventorySlotContents(1, mould);
                         }
                         break;
                     case "smithery.repairAll":

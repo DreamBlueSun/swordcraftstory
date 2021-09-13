@@ -77,4 +77,10 @@ public interface Combat {
      * @date 2021/9/5 0005 9:16
      **/
     void incrTec(ItemStack stack);
+
+    /**
+     * 武器解体获取模具方法
+     */
+    ItemStack collapse(ItemStack stack);
+
 }

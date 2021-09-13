@@ -1,9 +1,12 @@
 package com.marisa.swordcraftstory.item.combat.close.sword;
 
+import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.combat.CombatType;
 import com.marisa.swordcraftstory.item.combat.close.CloseCombat;
 import com.marisa.swordcraftstory.item.ore.OreItem;
+import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
 /**
@@ -52,5 +55,18 @@ public abstract class SwordCombat extends CloseCombat {
     @Override
     public CombatType type() {
         return TYPE;
+    }
+
+    @Override
+    public ItemStack collapse(ItemStack stack) {
+        ItemStack instance = ItemRegistry.SWORD_MOULD.get().getDefaultInstance();
+        CombatPropertiesUtils.setAtk(instance, getAtk(stack) / 7);
+        CombatPropertiesUtils.setDef(instance, getDef(stack) / 7);
+        int agl = getAgl(stack);
+        CombatPropertiesUtils.setAgl(instance, agl > 6 ? agl / 7 : 0);
+        int dur = (getMaxDamage(stack) + getDurMax(stack)) / 7;
+        CombatPropertiesUtils.setDurMax(instance, dur);
+        CombatPropertiesUtils.setDur(instance, dur);
+        return instance;
     }
 }

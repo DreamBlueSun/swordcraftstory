@@ -59,6 +59,7 @@ public class ItemRegistry {
     //方块物品
     public static RegistryObject<Item> WEAPON_MAKE_BLOCK = ITEMS.register("weapon_make_block", () -> new BlockItem(BlockRegistry.WEAPON_MAKE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> SMITHING_BLOCK = ITEMS.register("smithing_block", () -> new BlockItem(BlockRegistry.SMITHING_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
+    public static RegistryObject<Item> WEAPON_COLLAPSE_BLOCK = ITEMS.register("weapon_collapse_block", () -> new BlockItem(BlockRegistry.WEAPON_COLLAPSE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     //修理道具
     public static RegistryObject<Item> SHARP_STONE = ITEMS.register("sharp_stone", SharpStone::new);
