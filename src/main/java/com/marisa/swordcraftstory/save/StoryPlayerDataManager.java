@@ -23,14 +23,15 @@ public class StoryPlayerDataManager {
     }
 
 
-    public static final int LV_NEED_XP_BASE = 11026;
+    public static final int LV_NEED_XP_BASE = 202191;
+    public static final int LV_NEED_XP_OFFSET = 1126;
     public static final List<Integer> LV_NEED_XP;
 
     static {
         LV_NEED_XP = new ArrayList<>();
-        LV_NEED_XP.add(LV_NEED_XP_BASE / 15);
+        LV_NEED_XP.add(LV_NEED_XP_BASE / LV_NEED_XP_OFFSET);
         for (int i = 1; i < 41; i++) {
-            LV_NEED_XP.add(LV_NEED_XP.get(i - 1) + LV_NEED_XP_BASE * i / 15);
+            LV_NEED_XP.add(LV_NEED_XP.get(i - 1) + LV_NEED_XP_BASE * i / LV_NEED_XP_OFFSET);
         }
     }
 
