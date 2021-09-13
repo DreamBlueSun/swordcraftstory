@@ -11,11 +11,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 缎带军刀
- * @date: 2021/9/1 0001 22:27
+ * 缎带军刀
  */
 
-public class RibbonSword extends SwordCombat {
+public class RibbonSword extends AbstractSwordWeapon {
 
     public RibbonSword() {
         super(new PrettyOre());

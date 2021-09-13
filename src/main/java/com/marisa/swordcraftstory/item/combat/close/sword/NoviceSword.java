@@ -11,11 +11,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 初心者匕首
- * @date: 2021/9/1 0001 22:27
+ * 初心者匕首
  */
 
-public class NoviceSword extends SwordCombat {
+public class NoviceSword extends AbstractSwordWeapon {
 
     public NoviceSword() {
         super(new IronOre());

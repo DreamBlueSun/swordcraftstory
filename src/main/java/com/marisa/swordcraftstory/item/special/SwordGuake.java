@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.special;
 
-import com.marisa.swordcraftstory.item.combat.close.sword.SwordCombat;
+import com.marisa.swordcraftstory.item.combat.close.sword.AbstractSwordWeapon;
 import com.marisa.swordcraftstory.item.ore.IronOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
@@ -16,11 +16,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 初心者匕首-挂科专属皮肤
- * @date: 2021/9/1 0001 22:27
+ * 初心者匕首-挂科专属皮肤
  */
 
-public class SwordGuake extends SwordCombat {
+public class SwordGuake extends AbstractSwordWeapon {
 
     public SwordGuake() {
         super(new IronOre());

@@ -11,11 +11,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 合成剑
- * @date: 2021/9/1 0001 22:27
+ * 合成剑
  */
 
-public class SynthesisSword extends SwordCombat {
+public class SynthesisSword extends AbstractSwordWeapon {
 
     public SynthesisSword() {
         super(new ElphusOre());

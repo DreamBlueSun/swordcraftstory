@@ -11,11 +11,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 典雅匕首
- * @date: 2021/9/1 0001 22:27
+ * 典雅匕首
  */
 
-public class EleganceSword extends SwordCombat {
+public class EleganceSword extends AbstractSwordWeapon {
 
     public EleganceSword() {
         super(new UkaOre());

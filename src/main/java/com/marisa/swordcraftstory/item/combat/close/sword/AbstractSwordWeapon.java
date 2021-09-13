@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item.combat.close.sword;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.combat.WeaponType;
-import com.marisa.swordcraftstory.item.combat.close.CloseCombat;
+import com.marisa.swordcraftstory.item.combat.close.AbstractMeleeWeapon;
 import com.marisa.swordcraftstory.item.ore.OreItem;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.IItemTier;
@@ -13,11 +13,11 @@ import net.minecraft.item.crafting.Ingredient;
  * 抽象剑类武器
  */
 
-public abstract class SwordCombat extends CloseCombat {
+public abstract class AbstractSwordWeapon extends AbstractMeleeWeapon {
 
     public static final WeaponType TYPE = WeaponType.SWORD;
 
-    public SwordCombat(final OreItem ore) {
+    public AbstractSwordWeapon(final OreItem ore) {
         super(ore.rank(), ore.atk(TYPE), ore.def(TYPE), ore.agl(TYPE), new IItemTier() {
             @Override
             public int getMaxUses() {

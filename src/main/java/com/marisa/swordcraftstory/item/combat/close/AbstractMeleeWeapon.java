@@ -29,7 +29,7 @@ import java.util.List;
  * @date: 2021/9/4 0004 6:18
  */
 
-public abstract class CloseCombat extends SwordItem implements Weapon, Combat {
+public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon, Combat {
 
     /**
      * 稀有度级别
@@ -56,7 +56,7 @@ public abstract class CloseCombat extends SwordItem implements Weapon, Combat {
      */
     private final int agl;
 
-    public CloseCombat(final int rank, final int atk, final int def, final int agl, final IItemTier tier) {
+    public AbstractMeleeWeapon(final int rank, final int atk, final int def, final int agl, final IItemTier tier) {
         super(tier, atk, 0.0F, new Item.Properties().group(StoryGroup.COMBAT_GROUP));
         this.rank = rank;
         this.atk = atk;
