@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 
 public interface WeaponMake {
 
-    ItemStack weaponMake(WeaponType type);
+    ItemStack weaponMake(ItemStack mouldStack);
 
     int rank();
 

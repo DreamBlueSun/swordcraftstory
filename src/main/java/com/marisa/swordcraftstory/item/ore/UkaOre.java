@@ -2,9 +2,11 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
+import com.marisa.swordcraftstory.item.mould.Mould;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -33,15 +35,20 @@ public class UkaOre extends AbstractOre {
     }
 
     @Override
-    public ItemStack weaponMake(WeaponType type) {
-        switch (type) {
+    public ItemStack weaponMake(ItemStack mouldStack) {
+        ItemStack stack;
+        switch (((Mould) mouldStack.getItem()).type()) {
             case BOW:
-                return ItemRegistry.ELEGANCE_BOW.get().getDefaultInstance();
+                stack = ItemRegistry.ELEGANCE_BOW.get().getDefaultInstance();
+                break;
             case SWORD:
-                return ItemRegistry.ELEGANCE_SWORD.get().getDefaultInstance();
+                stack = ItemRegistry.ELEGANCE_SWORD.get().getDefaultInstance();
+                break;
             default:
-                return null;
+                stack = Items.AIR.getDefaultInstance();
         }
+        addMouldProperties(stack, mouldStack);
+        return stack;
     }
 
     @Override

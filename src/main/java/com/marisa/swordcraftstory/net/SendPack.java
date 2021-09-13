@@ -102,7 +102,7 @@ public class SendPack {
                         if (!makeStack2.isEmpty()) {
                             return;
                         }
-                        ItemStack make = ((AbstractOre) makeStack1.getItem()).weaponMake(((Weapon) makeStack0.getItem()).type());
+                        ItemStack make = ((AbstractOre) makeStack1.getItem()).weaponMake(makeStack0);
                         if (!make.isEmpty()) {
                             inventory.removeStackFromSlot(0);
                             inventory.removeStackFromSlot(1);
