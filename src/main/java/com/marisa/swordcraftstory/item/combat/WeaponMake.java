@@ -8,15 +8,15 @@ import net.minecraft.item.ItemStack;
 
 public interface WeaponMake {
 
-    ItemStack weaponMake(CombatType type);
+    ItemStack weaponMake(WeaponType type);
 
     int rank();
 
-    int atk(CombatType type);
+    int atk(WeaponType type);
 
-    int def(CombatType type);
+    int def(WeaponType type);
 
-    int agl(CombatType type);
+    int agl(WeaponType type);
 
-    int dur(CombatType type);
+    int dur(WeaponType type);
 }

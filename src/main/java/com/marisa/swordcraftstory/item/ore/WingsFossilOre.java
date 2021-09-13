@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.CombatType;
+import com.marisa.swordcraftstory.item.combat.WeaponType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -16,8 +16,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 翅膀化石
- * @date: 2021/9/9 0009 22:59
+ * 翅膀化石
  */
 
 public class WingsFossilOre extends OreItem {
@@ -34,7 +33,7 @@ public class WingsFossilOre extends OreItem {
     }
 
     @Override
-    public ItemStack weaponMake(CombatType type) {
+    public ItemStack weaponMake(WeaponType type) {
         switch (type) {
             case BOW:
                 return ItemRegistry.FEATHER_BOW.get().getDefaultInstance();
@@ -51,7 +50,7 @@ public class WingsFossilOre extends OreItem {
     }
 
     @Override
-    public int atk(CombatType type) {
+    public int atk(WeaponType type) {
         switch (type) {
             case BOW:
                 return 25;
@@ -63,7 +62,7 @@ public class WingsFossilOre extends OreItem {
     }
 
     @Override
-    public int def(CombatType type) {
+    public int def(WeaponType type) {
         switch (type) {
             case BOW:
                 return 7;
@@ -75,7 +74,7 @@ public class WingsFossilOre extends OreItem {
     }
 
     @Override
-    public int agl(CombatType type) {
+    public int agl(WeaponType type) {
         switch (type) {
             case BOW:
                 return -5;
@@ -86,7 +85,7 @@ public class WingsFossilOre extends OreItem {
     }
 
     @Override
-    public int dur(CombatType type) {
+    public int dur(WeaponType type) {
         switch (type) {
             case BOW:
                 return 62;

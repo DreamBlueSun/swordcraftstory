@@ -1,11 +1,10 @@
 package com.marisa.swordcraftstory.item.combat;
 
 /**
- * @description: 武器枚举
- * @date: 2021/9/12 0012 17:02
+ * 武器类型枚举
  */
 
-public enum CombatType {
+public enum WeaponType {
 
     SWORD("剑", 0),
     BOW("弓", 1);
@@ -14,7 +13,7 @@ public enum CombatType {
 
     private int type;
 
-    CombatType(String name, int type) {
+    WeaponType(String name, int type) {
         this.name = name;
         this.type = type;
     }

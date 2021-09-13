@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.item.combat.close.sword;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.CombatType;
+import com.marisa.swordcraftstory.item.combat.WeaponType;
 import com.marisa.swordcraftstory.item.combat.close.CloseCombat;
 import com.marisa.swordcraftstory.item.ore.OreItem;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
@@ -10,13 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
 /**
- * @description: 剑类武器抽象类
- * @date: 2021/9/4 0004 6:18
+ * 抽象剑类武器
  */
 
 public abstract class SwordCombat extends CloseCombat {
 
-    public static final CombatType TYPE = CombatType.SWORD;
+    public static final WeaponType TYPE = WeaponType.SWORD;
 
     public SwordCombat(final OreItem ore) {
         super(ore.rank(), ore.atk(TYPE), ore.def(TYPE), ore.agl(TYPE), new IItemTier() {
@@ -53,7 +52,7 @@ public abstract class SwordCombat extends CloseCombat {
     }
 
     @Override
-    public CombatType type() {
+    public WeaponType type() {
         return TYPE;
     }
 

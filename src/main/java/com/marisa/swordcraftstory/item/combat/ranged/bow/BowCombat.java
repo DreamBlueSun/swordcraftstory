@@ -2,27 +2,26 @@ package com.marisa.swordcraftstory.item.combat.ranged.bow;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.combat.Combat;
-import com.marisa.swordcraftstory.item.combat.CombatType;
+import com.marisa.swordcraftstory.item.combat.WeaponType;
 import com.marisa.swordcraftstory.item.combat.ranged.RangedCombat;
 import com.marisa.swordcraftstory.item.ore.OreItem;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.ItemStack;
 
 /**
- * @description: 弓类武器抽象类
- * @date: 2021/9/4 0004 6:36
+ * 抽象弓类武器
  */
 
 public abstract class BowCombat extends RangedCombat implements Combat {
 
-    public static final CombatType TYPE = CombatType.BOW;
+    public static final WeaponType TYPE = WeaponType.BOW;
 
     public BowCombat(final OreItem ore) {
         super(ore.rank(), ore.atk(TYPE), ore.def(TYPE), ore.agl(TYPE), ore.dur(TYPE));
     }
 
     @Override
-    public CombatType type() {
+    public WeaponType type() {
         return TYPE;
     }
 

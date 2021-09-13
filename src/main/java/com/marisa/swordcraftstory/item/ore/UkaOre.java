@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.CombatType;
+import com.marisa.swordcraftstory.item.combat.WeaponType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -16,8 +16,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 尤佳矿石
- * @date: 2021/9/9 0009 23:02
+ * 尤佳矿石
  */
 
 public class UkaOre extends OreItem {
@@ -34,7 +33,7 @@ public class UkaOre extends OreItem {
     }
 
     @Override
-    public ItemStack weaponMake(CombatType type) {
+    public ItemStack weaponMake(WeaponType type) {
         switch (type) {
             case BOW:
                 return ItemRegistry.ELEGANCE_BOW.get().getDefaultInstance();
@@ -51,7 +50,7 @@ public class UkaOre extends OreItem {
     }
 
     @Override
-    public int atk(CombatType type) {
+    public int atk(WeaponType type) {
         switch (type) {
             case BOW:
                 return 39;
@@ -63,7 +62,7 @@ public class UkaOre extends OreItem {
     }
 
     @Override
-    public int def(CombatType type) {
+    public int def(WeaponType type) {
         switch (type) {
             case BOW:
                 return 10;
@@ -75,7 +74,7 @@ public class UkaOre extends OreItem {
     }
 
     @Override
-    public int agl(CombatType type) {
+    public int agl(WeaponType type) {
         switch (type) {
             case BOW:
                 return -20;
@@ -86,7 +85,7 @@ public class UkaOre extends OreItem {
     }
 
     @Override
-    public int dur(CombatType type) {
+    public int dur(WeaponType type) {
         switch (type) {
             case BOW:
                 return 71;

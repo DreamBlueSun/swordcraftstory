@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.item.mould.ranged.bow;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.combat.CombatType;
+import com.marisa.swordcraftstory.item.combat.WeaponType;
 import com.marisa.swordcraftstory.item.mould.Mould;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -16,8 +16,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description:
- * @date: 2021/9/1 0001 1:37
+ * 弓模具
  */
 
 public class BowMould extends Mould {
@@ -34,7 +33,7 @@ public class BowMould extends Mould {
     }
 
     @Override
-    public CombatType type() {
-        return CombatType.BOW;
+    public WeaponType type() {
+        return WeaponType.BOW;
     }
 }

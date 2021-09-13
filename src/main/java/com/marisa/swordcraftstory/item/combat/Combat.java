@@ -3,8 +3,7 @@ package com.marisa.swordcraftstory.item.combat;
 import net.minecraft.item.ItemStack;
 
 /**
- * @description:
- * @date: 2021/9/4 0004 6:57
+ * 战斗接口
  */
 
 public interface Combat {
@@ -46,7 +45,7 @@ public interface Combat {
 
     boolean isMould();
 
-    CombatType type();
+    WeaponType type();
 
     int getRank();
 
