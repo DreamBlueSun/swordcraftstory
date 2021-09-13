@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.gui.container;
 
 import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
 import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
-import com.marisa.swordcraftstory.gui.container.slot.CombatSlot;
+import com.marisa.swordcraftstory.gui.container.slot.WeaponSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -26,7 +26,7 @@ public class IntensifyEdgeContainer extends Container {
         trackIntArray(this.pointMax);
         //添加槽位
         SmithingBlockTileEntity smithingBlockTileEntity = (SmithingBlockTileEntity) inv.player.world.getTileEntity(pos);
-        this.addSlot(new CombatSlot(smithingBlockTileEntity.getInventory(), 0, 11, 20));
+        this.addSlot(new WeaponSlot(smithingBlockTileEntity.getInventory(), 0, 11, 20));
         layoutPlayerInventorySlots(inv, 10, 108);
     }
 

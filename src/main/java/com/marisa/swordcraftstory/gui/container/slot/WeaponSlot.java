@@ -11,9 +11,9 @@ import net.minecraft.item.ItemStack;
  * @date: 2021/9/8 12:27
  */
 
-public class CombatSlot extends Slot {
+public class WeaponSlot extends Slot {
 
-    public CombatSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+    public WeaponSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
         super(inventoryIn, index, xPosition, yPosition);
     }
 

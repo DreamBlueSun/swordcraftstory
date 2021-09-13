@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.gui.container;
 
 import com.marisa.swordcraftstory.block.tile.WeaponCollapseTileEntity;
 import com.marisa.swordcraftstory.gui.container.IInt.BlockPosIInt;
-import com.marisa.swordcraftstory.gui.container.slot.CombatSlot;
+import com.marisa.swordcraftstory.gui.container.slot.WeaponSlot;
 import com.marisa.swordcraftstory.gui.container.slot.MouldSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -26,7 +26,7 @@ public class WeaponCollapseContainer extends Container {
         trackIntArray(this.posIInt);
         //添加槽位
         WeaponCollapseTileEntity weaponCollapseTile = (WeaponCollapseTileEntity) inv.player.world.getTileEntity(pos);
-        this.addSlot(new CombatSlot(weaponCollapseTile.getInventory(), 0, 36, 20));
+        this.addSlot(new WeaponSlot(weaponCollapseTile.getInventory(), 0, 36, 20));
         this.addSlot(new MouldSlot(weaponCollapseTile.getInventory(), 1, 36 + 94, 20));
         layoutPlayerInventorySlots(inv, 40, 147);
     }

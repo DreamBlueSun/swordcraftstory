@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.gui.container;
 
 import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
 import com.marisa.swordcraftstory.gui.container.IInt.BlockPosIInt;
-import com.marisa.swordcraftstory.gui.container.slot.CombatSlot;
+import com.marisa.swordcraftstory.gui.container.slot.WeaponSlot;
 import com.marisa.swordcraftstory.gui.container.slot.MouldSlot;
 import com.marisa.swordcraftstory.gui.container.slot.OreSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +30,7 @@ public class WeaponMakeContainer extends Container {
         WeaponMakeTileEntity weaponMakeTile = (WeaponMakeTileEntity) inv.player.world.getTileEntity(pos);
         this.addSlot(new MouldSlot(weaponMakeTile.getInventory(), 0, 36, 20));
         this.addSlot(new OreSlot(weaponMakeTile.getInventory(), 1, 36 + 47, 20));
-        this.addSlot(new CombatSlot(weaponMakeTile.getInventory(), 2, 36 + 94, 20));
+        this.addSlot(new WeaponSlot(weaponMakeTile.getInventory(), 2, 36 + 94, 20));
         layoutPlayerInventorySlots(inv, 40, 147);
     }
 
