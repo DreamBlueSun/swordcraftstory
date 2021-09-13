@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.gui.container.slot;
 
-import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.combat.Weapon;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -20,6 +20,6 @@ public class CombatSlot extends Slot {
     @Override
     public boolean isItemValid(ItemStack stack) {
         //校验物品堆栈不是空气并且属于Story武器才可放入Slot
-        return !stack.isEmpty() && stack.getItem() instanceof Combat;
+        return !stack.isEmpty() && stack.getItem() instanceof Weapon;
     }
 }

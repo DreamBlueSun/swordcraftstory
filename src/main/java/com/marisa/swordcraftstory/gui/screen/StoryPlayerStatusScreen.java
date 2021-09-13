@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.combat.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.util.DamageCountUtils;
@@ -79,7 +80,7 @@ public class StoryPlayerStatusScreen extends Screen {
         //AGL
         int AGL = 0;
         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-        if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
+        if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
             Combat item = (Combat) stack.getItem();
             AGL = item.getAgl(stack);
         }

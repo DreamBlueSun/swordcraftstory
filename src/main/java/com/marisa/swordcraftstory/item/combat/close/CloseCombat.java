@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.combat.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.StoryUUID;
 import net.minecraft.client.util.ITooltipFlag;
@@ -28,7 +29,7 @@ import java.util.List;
  * @date: 2021/9/4 0004 6:18
  */
 
-public abstract class CloseCombat extends SwordItem implements Combat {
+public abstract class CloseCombat extends SwordItem implements Weapon, Combat {
 
     /**
      * 稀有度级别

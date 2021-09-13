@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.combat.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.StoryUUID;
 import net.minecraft.client.util.ITooltipFlag;
@@ -23,11 +24,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 远程武器抽象类
- * @date: 2021/9/4 0004 6:36
+ * 远程武器抽象类
  */
 
-public abstract class RangedCombat extends BowItem implements Combat {
+public abstract class RangedCombat extends BowItem implements Weapon, Combat {
 
     /**
      * 稀有度级别

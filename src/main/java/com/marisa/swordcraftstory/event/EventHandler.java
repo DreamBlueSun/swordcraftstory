@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.event;
 
-import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.combat.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.util.*;
@@ -33,7 +33,7 @@ public class EventHandler {
         PlayerEntity player = event.getPlayer();
         if (player != null) {
             ItemStack stack = player.getHeldItem(player.getActiveHand());
-            if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
+            if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
                 CombatPropertiesUtils.useDur(stack);
             }
         }

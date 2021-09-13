@@ -4,6 +4,7 @@ import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponCollapseTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
 import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.combat.Weapon;
 import com.marisa.swordcraftstory.item.mould.Mould;
 import com.marisa.swordcraftstory.item.ore.OreItem;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
@@ -119,7 +120,7 @@ public class SendPack {
                     case "smithery.intensifyEdge.done":
                         //强刃确定
                         ItemStack inStack = ((SmithingBlockTileEntity) sender.world.getTileEntity(this.blockPos)).getInventory().getStackInSlot(0);
-                        if (inStack.isEmpty() || !(inStack.getItem() instanceof Combat) || (inStack.getItem() instanceof Mould)) {
+                        if (inStack.isEmpty() || !(inStack.getItem() instanceof Weapon) || (inStack.getItem() instanceof Mould)) {
                             return;
                         }
                         if (((Combat) inStack.getItem()).getTec(inStack) == Combat.MAX_TEC) {
@@ -173,7 +174,7 @@ public class SendPack {
                         PlayerInventory inv = sender.inventory;
                         for (int i = 0; i < inv.mainInventory.size(); i++) {
                             ItemStack stack = inv.mainInventory.get(i);
-                            if (!stack.isEmpty() && stack.getItem() instanceof Combat) {
+                            if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
                                 stack.setDamage(0);
                                 CombatPropertiesUtils.setDur(stack, CombatPropertiesUtils.getDurMax(stack));
                                 inv.setInventorySlotContents(i, stack);
