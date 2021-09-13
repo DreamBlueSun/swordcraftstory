@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.WeaponType;
+import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;

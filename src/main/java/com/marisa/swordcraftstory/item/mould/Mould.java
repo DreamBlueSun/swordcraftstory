@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.mould;
 
-import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;

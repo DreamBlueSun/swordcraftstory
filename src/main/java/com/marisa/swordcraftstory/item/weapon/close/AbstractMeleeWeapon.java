@@ -1,10 +1,10 @@
-package com.marisa.swordcraftstory.item.combat.close;
+package com.marisa.swordcraftstory.item.weapon.close;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.combat.Combat;
-import com.marisa.swordcraftstory.item.combat.Weapon;
+import com.marisa.swordcraftstory.item.weapon.Combat;
+import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.StoryUUID;
 import net.minecraft.client.util.ITooltipFlag;

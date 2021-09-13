@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.event;
 
-import com.marisa.swordcraftstory.item.combat.Weapon;
+import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.util.*;

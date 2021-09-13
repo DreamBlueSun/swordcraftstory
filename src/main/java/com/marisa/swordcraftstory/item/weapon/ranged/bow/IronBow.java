@@ -1,6 +1,6 @@
-package com.marisa.swordcraftstory.item.combat.ranged.bow;
+package com.marisa.swordcraftstory.item.weapon.ranged.bow;
 
-import com.marisa.swordcraftstory.item.ore.WingsFossilOre;
+import com.marisa.swordcraftstory.item.ore.BigOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -11,18 +11,18 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 羽弓
+ * 铁弓
  */
 
-public class FeatherBow extends AbstractBowWeapon {
+public class IronBow extends AbstractBowWeapon {
 
-    public FeatherBow() {
-        super(new WingsFossilOre());
+    public IronBow() {
+        super(new BigOre());
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        CombatPropertiesUtils.tipFeather(tooltip);
+        CombatPropertiesUtils.tipIron(tooltip);
     }
 }

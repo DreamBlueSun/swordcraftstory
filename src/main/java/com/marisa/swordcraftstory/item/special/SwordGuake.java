@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.special;
 
-import com.marisa.swordcraftstory.item.combat.close.sword.AbstractSwordWeapon;
+import com.marisa.swordcraftstory.item.weapon.close.sword.AbstractSwordWeapon;
 import com.marisa.swordcraftstory.item.ore.IronOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;

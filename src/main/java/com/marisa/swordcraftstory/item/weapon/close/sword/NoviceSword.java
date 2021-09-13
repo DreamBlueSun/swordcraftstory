@@ -1,6 +1,6 @@
-package com.marisa.swordcraftstory.item.combat.ranged.bow;
+package com.marisa.swordcraftstory.item.weapon.close.sword;
 
-import com.marisa.swordcraftstory.item.ore.SlanderOre;
+import com.marisa.swordcraftstory.item.ore.IronOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -11,18 +11,18 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 短弓
+ * 初心者匕首
  */
 
-public class ThinBow extends AbstractBowWeapon {
+public class NoviceSword extends AbstractSwordWeapon {
 
-    public ThinBow() {
-        super(new SlanderOre());
+    public NoviceSword() {
+        super(new IronOre());
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        CombatPropertiesUtils.tipThin(tooltip);
+        CombatPropertiesUtils.tipNovice(tooltip);
     }
 }

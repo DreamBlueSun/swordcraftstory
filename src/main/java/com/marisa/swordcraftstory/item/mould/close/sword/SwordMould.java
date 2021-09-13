@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.item.mould.close.sword;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.combat.WeaponType;
+import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import com.marisa.swordcraftstory.item.mould.Mould;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;

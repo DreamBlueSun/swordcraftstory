@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.gui.container.slot;
 
-import com.marisa.swordcraftstory.item.combat.Weapon;
+import com.marisa.swordcraftstory.item.weapon.Weapon;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;

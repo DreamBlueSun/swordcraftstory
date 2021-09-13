@@ -1,8 +1,8 @@
 package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
-import com.marisa.swordcraftstory.item.combat.Combat;
-import com.marisa.swordcraftstory.item.combat.Weapon;
+import com.marisa.swordcraftstory.item.weapon.Combat;
+import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.util.DamageCountUtils;

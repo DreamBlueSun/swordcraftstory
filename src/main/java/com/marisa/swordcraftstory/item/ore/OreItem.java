@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.ore;
 
-import com.marisa.swordcraftstory.item.combat.WeaponMake;
+import com.marisa.swordcraftstory.item.weapon.WeaponMake;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

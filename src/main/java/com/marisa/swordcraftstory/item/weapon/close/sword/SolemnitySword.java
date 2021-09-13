@@ -1,6 +1,6 @@
-package com.marisa.swordcraftstory.item.combat.close.sword;
+package com.marisa.swordcraftstory.item.weapon.close.sword;
 
-import com.marisa.swordcraftstory.item.ore.ElphusOre;
+import com.marisa.swordcraftstory.item.ore.ArgenirOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -11,18 +11,18 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 合成剑
+ * 庄严之刃
  */
 
-public class SynthesisSword extends AbstractSwordWeapon {
+public class SolemnitySword extends AbstractSwordWeapon {
 
-    public SynthesisSword() {
-        super(new ElphusOre());
+    public SolemnitySword() {
+        super(new ArgenirOre());
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        CombatPropertiesUtils.tipSynthesis(tooltip);
+        CombatPropertiesUtils.tipSolemnity(tooltip);
     }
 }

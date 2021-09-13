@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.item.combat.ranged.bow;
+package com.marisa.swordcraftstory.item.weapon.close.sword;
 
 import com.marisa.swordcraftstory.item.ore.PrettyOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
@@ -11,12 +11,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 缎带长弓
+ * 缎带军刀
  */
 
-public class RibbonBow extends AbstractBowWeapon {
+public class RibbonSword extends AbstractSwordWeapon {
 
-    public RibbonBow() {
+    public RibbonSword() {
         super(new PrettyOre());
     }
 

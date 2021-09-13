@@ -1,6 +1,6 @@
-package com.marisa.swordcraftstory.item.combat.ranged.bow;
+package com.marisa.swordcraftstory.item.weapon.ranged.bow;
 
-import com.marisa.swordcraftstory.item.ore.BigOre;
+import com.marisa.swordcraftstory.item.ore.UkaOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -11,18 +11,18 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 铁弓
+ * 典雅长弓
  */
 
-public class IronBow extends AbstractBowWeapon {
+public class EleganceBow extends AbstractBowWeapon {
 
-    public IronBow() {
-        super(new BigOre());
+    public EleganceBow() {
+        super(new UkaOre());
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        CombatPropertiesUtils.tipIron(tooltip);
+        CombatPropertiesUtils.tipElegance(tooltip);
     }
 }

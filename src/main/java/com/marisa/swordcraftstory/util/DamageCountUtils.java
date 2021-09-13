@@ -1,9 +1,9 @@
 package com.marisa.swordcraftstory.util;
 
 import com.google.common.collect.Multimap;
-import com.marisa.swordcraftstory.item.combat.Combat;
-import com.marisa.swordcraftstory.item.combat.Weapon;
-import com.marisa.swordcraftstory.item.combat.ranged.AbstractRangedWeapon;
+import com.marisa.swordcraftstory.item.weapon.Combat;
+import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
 import com.marisa.swordcraftstory.util.obj.Damage;
 import com.marisa.swordcraftstory.util.obj.Defense;
 import net.minecraft.entity.Entity;

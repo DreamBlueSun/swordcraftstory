@@ -1,8 +1,8 @@
-package com.marisa.swordcraftstory.item.combat.close.sword;
+package com.marisa.swordcraftstory.item.weapon.close.sword;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.WeaponType;
-import com.marisa.swordcraftstory.item.combat.close.AbstractMeleeWeapon;
+import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import com.marisa.swordcraftstory.item.weapon.close.AbstractMeleeWeapon;
 import com.marisa.swordcraftstory.item.ore.OreItem;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.IItemTier;

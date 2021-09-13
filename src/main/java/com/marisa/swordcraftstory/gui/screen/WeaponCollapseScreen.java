@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.WeaponCollapseContainer;
-import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.mould.Mould;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.SendPack;

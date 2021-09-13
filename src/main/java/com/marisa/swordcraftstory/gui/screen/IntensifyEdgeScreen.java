@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.gui.screen;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
 import com.marisa.swordcraftstory.gui.container.IntensifyEdgeContainer;
-import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.SendPack;
 import com.mojang.blaze3d.matrix.MatrixStack;

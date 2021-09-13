@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.util;
 
-import com.marisa.swordcraftstory.item.combat.Combat;
+import com.marisa.swordcraftstory.item.weapon.Combat;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.IntNBT;

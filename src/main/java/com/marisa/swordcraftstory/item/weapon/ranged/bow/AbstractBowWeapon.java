@@ -1,9 +1,9 @@
-package com.marisa.swordcraftstory.item.combat.ranged.bow;
+package com.marisa.swordcraftstory.item.weapon.ranged.bow;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.combat.Combat;
-import com.marisa.swordcraftstory.item.combat.WeaponType;
-import com.marisa.swordcraftstory.item.combat.ranged.AbstractRangedWeapon;
+import com.marisa.swordcraftstory.item.weapon.Combat;
+import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
 import com.marisa.swordcraftstory.item.ore.OreItem;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.ItemStack;
