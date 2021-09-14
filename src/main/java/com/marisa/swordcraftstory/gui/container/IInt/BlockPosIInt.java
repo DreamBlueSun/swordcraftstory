@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.gui.container.IInt;
 import net.minecraft.util.IIntArray;
 
 /**
- * @date: 2021/9/8 12:38
+ * 方块坐标int数组
  */
 
 public class BlockPosIInt implements IIntArray {

@@ -24,8 +24,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 近战武器抽象类
- * @date: 2021/9/4 0004 6:18
+ * 近战武器抽象类
  */
 
 public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {

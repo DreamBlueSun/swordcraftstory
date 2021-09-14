@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 /**
- * 解体武器锻冶台方块
+ * 解体锻冶台方块
  */
 
 public class WeaponCollapseBlock extends Block {

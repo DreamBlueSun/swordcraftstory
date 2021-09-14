@@ -14,8 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 
 /**
- * @description: 掉落工具类
- * @date: 2021/9/9 0009 20:26
+ * 掉落物品工具类
  */
 
 public class BlockDropItemUtils {

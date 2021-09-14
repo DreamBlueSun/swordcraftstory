@@ -13,8 +13,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 
 /**
- * @description:
- * @date: 2021/9/5 0005 22:56
+ * 史莱姆渲染
  */
 
 public class SlimeRender extends EntityRenderer<Slime> {
@@ -34,7 +33,6 @@ public class SlimeRender extends EntityRenderer<Slime> {
     public void render(Slime entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
-//        matrixStackIn.rotate(Vector3f.YN.rotationDegrees(45));
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(this.slimeModel.getRenderType(this.getEntityTexture(entityIn)));
         this.slimeModel.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStackIn.pop();

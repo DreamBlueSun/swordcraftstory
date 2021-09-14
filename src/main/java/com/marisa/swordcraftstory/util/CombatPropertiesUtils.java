@@ -11,8 +11,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import java.util.List;
 
 /**
- * @description: 武器属性工具类
- * @date: 2021/9/5 0005 9:37
+ * 武器属性工具类
  */
 
 public class CombatPropertiesUtils {

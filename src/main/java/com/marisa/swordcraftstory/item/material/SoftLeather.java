@@ -14,8 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 柔软的皮革
- * @date: 2021/9/6 0006 21:30
+ * 柔软的皮革
  */
 
 public class SoftLeather extends MaterialItem {

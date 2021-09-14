@@ -20,7 +20,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import javax.annotation.Nullable;
 
 /**
- * 解体武器tile
+ * 解体锻冶台tile
  */
 
 public class WeaponCollapseTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {

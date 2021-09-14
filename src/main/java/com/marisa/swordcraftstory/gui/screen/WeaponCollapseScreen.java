@@ -21,7 +21,7 @@ import net.minecraft.util.text.StringTextComponent;
 import java.util.List;
 
 /**
- * 解体武器Screen
+ * 解体Screen
  */
 
 public class WeaponCollapseScreen extends ContainerScreen<WeaponCollapseContainer> {

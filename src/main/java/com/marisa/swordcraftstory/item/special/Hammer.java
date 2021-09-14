@@ -14,8 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description:
- * @date: 2021/9/2 0002 0:24
+ * 铁锤
  */
 
 public class Hammer extends SpecialItem {

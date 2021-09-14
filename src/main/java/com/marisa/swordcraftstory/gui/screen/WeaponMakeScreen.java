@@ -21,8 +21,7 @@ import net.minecraft.util.text.StringTextComponent;
 import java.util.List;
 
 /**
- * @description: 制作武器Screen
- * @date: 2021/9/7 0007 21:08
+ * 制作Screen
  */
 
 public class WeaponMakeScreen extends ContainerScreen<WeaponMakeContainer> {
@@ -30,7 +29,7 @@ public class WeaponMakeScreen extends ContainerScreen<WeaponMakeContainer> {
     private final int textureWidth = 240;
     private final int textureHeight = 240;
     Button button;
-    private final ResourceLocation OBSIDIAN_CONTAINER_RESOURCE = new ResourceLocation(Story.MOD_ID, "textures/gui/weapon_make.png");
+    private final ResourceLocation resourceLocation = new ResourceLocation(Story.MOD_ID, "textures/gui/weapon_make.png");
 
     public WeaponMakeScreen(WeaponMakeContainer weaponMakeContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(weaponMakeContainer, inv, titleIn);
@@ -61,7 +60,7 @@ public class WeaponMakeScreen extends ContainerScreen<WeaponMakeContainer> {
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
         this.renderBackground(matrixStack);
-        this.minecraft.getTextureManager().bindTexture(OBSIDIAN_CONTAINER_RESOURCE);
+        this.minecraft.getTextureManager().bindTexture(resourceLocation);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         blit(matrixStack, i, j, 0, 0, xSize, ySize, this.textureWidth, textureHeight);

@@ -6,8 +6,7 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 /**
- * @description: 通信
- * @date: 2021/9/5 0005 12:41
+ * 数据通信
  */
 
 public class Networking {

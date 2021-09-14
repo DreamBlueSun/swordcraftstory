@@ -3,8 +3,7 @@ package com.marisa.swordcraftstory.util;
 import java.util.UUID;
 
 /**
- * @description: UUID
- * @date: 2021/9/5 0005 7:52
+ * UUID
  */
 
 public interface StoryUUID {

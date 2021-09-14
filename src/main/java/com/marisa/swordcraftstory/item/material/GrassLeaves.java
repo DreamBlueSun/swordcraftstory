@@ -14,8 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 杂草的叶片
- * @date: 2021/9/6 0006 21:28
+ * 杂草的叶片
  */
 
 public class GrassLeaves extends MaterialItem {

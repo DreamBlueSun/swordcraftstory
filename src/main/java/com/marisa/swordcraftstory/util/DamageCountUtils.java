@@ -24,8 +24,7 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
- * @description:
- * @date: 2021/9/4 0004 1:49
+ * 伤害计算工具类
  */
 
 public class DamageCountUtils {

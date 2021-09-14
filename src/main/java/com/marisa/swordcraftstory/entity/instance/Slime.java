@@ -11,8 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 /**
- * @description: 史莱姆
- * @date: 2021/9/5 0005 22:39
+ * 史莱姆
  */
 
 public class Slime extends Entity {

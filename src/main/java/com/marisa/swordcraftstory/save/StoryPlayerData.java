@@ -7,8 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import java.io.*;
 
 /**
- * @description:
- * @date: 2021/9/11 0011 11:23
+ * 玩家信息
  */
 
 public class StoryPlayerData implements Serializable {

@@ -3,10 +3,10 @@ package com.marisa.swordcraftstory.gui.container.IInt;
 import net.minecraft.util.IIntArray;
 
 /**
- * @date: 2021/9/8 12:38
+ * 强刃点数以及方块坐标int数组
  */
 
-public class IntensifyEdgePointInt implements IIntArray {
+public class WeaponEdgePointIInt implements IIntArray {
 
     int pointMax = 0;
     int posX = 0;

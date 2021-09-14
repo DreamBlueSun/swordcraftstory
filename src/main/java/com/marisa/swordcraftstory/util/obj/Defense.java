@@ -1,8 +1,7 @@
 package com.marisa.swordcraftstory.util.obj;
 
 /**
- * @description: 防御力
- * @date: 2021/9/4 0004 3:37
+ * 防御
  */
 
 public class Defense {

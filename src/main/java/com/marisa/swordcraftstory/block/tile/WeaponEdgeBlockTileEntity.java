@@ -1,8 +1,8 @@
 package com.marisa.swordcraftstory.block.tile;
 
 import com.marisa.swordcraftstory.Story;
-import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
-import com.marisa.swordcraftstory.gui.container.IntensifyEdgeContainer;
+import com.marisa.swordcraftstory.gui.container.IInt.WeaponEdgePointIInt;
+import com.marisa.swordcraftstory.gui.container.WeaponEdgeContainer;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,21 +21,20 @@ import net.minecraft.util.text.TranslationTextComponent;
 import javax.annotation.Nullable;
 
 /**
- * @description:
- * @date: 2021/9/7 0007 22:09
+ * 强刃锻冶台tile
  */
 
-public class SmithingBlockTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class WeaponEdgeBlockTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     private Inventory inventory;
 
-    private IntensifyEdgePointInt pointMax;
+    private WeaponEdgePointIInt point;
 
 
-    public SmithingBlockTileEntity() {
-        super(TileEntityTypeRegistry.SMITHING_BLOCK_TILE_ENTITY.get());
+    public WeaponEdgeBlockTileEntity() {
+        super(TileEntityTypeRegistry.WEAPON_EDGE_BLOCK_TILE_ENTITY.get());
         this.inventory = new Inventory(1);
-        this.pointMax = new IntensifyEdgePointInt();
+        this.point = new WeaponEdgePointIInt();
     }
 
     @Override
@@ -46,7 +45,7 @@ public class SmithingBlockTileEntity extends TileEntity implements ITickableTile
     @Nullable
     @Override
     public Container createMenu(int sycID, PlayerInventory inventory, PlayerEntity player) {
-        return new IntensifyEdgeContainer(sycID, inventory, this.getPos(), this.pointMax);
+        return new WeaponEdgeContainer(sycID, inventory, this.getPos(), this.point);
     }
 
     @Override
@@ -71,14 +70,14 @@ public class SmithingBlockTileEntity extends TileEntity implements ITickableTile
         //計算物品能否强刃
         if (!world.isRemote) {
             BlockPos pos = this.getPos();
-            this.pointMax.set(1, pos.getX());
-            this.pointMax.set(2, pos.getY());
-            this.pointMax.set(3, pos.getZ());
+            this.point.set(1, pos.getX());
+            this.point.set(2, pos.getY());
+            this.point.set(3, pos.getZ());
             ItemStack stack = this.inventory.getStackInSlot(0);
             if (!stack.isEmpty() && stack.getItem() instanceof Weapon && ((Weapon) stack.getItem()).getTec(stack) == Weapon.MAX_TEC) {
-                this.pointMax.set(0, 1);
+                this.point.set(0, 1);
             } else {
-                this.pointMax.set(0, 0);
+                this.point.set(0, 0);
             }
         }
     }

@@ -20,8 +20,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
 /**
- * @description: 修理武器锻冶台方块
- * @date: 2021/9/5 0005 2:25
+ * 修理锻冶台方块
  */
 
 public class RepairBlock extends Block {

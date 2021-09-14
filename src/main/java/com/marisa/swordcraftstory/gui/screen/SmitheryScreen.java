@@ -11,8 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 
 /**
- * @description: 旧版锻冶菜单GUI
- * @date: 2021/9/2 0002 1:00
+ * 旧版锻冶菜单Screen
  */
 
 public class SmitheryScreen extends Screen {
@@ -24,7 +23,7 @@ public class SmitheryScreen extends Screen {
     Button button3;
     Button button4;
     Button button5;
-    ResourceLocation SMITHERY_GUI_TEXTURE = new ResourceLocation(Story.MOD_ID, "textures/gui/smithing.png");
+    ResourceLocation resourceLocation = new ResourceLocation(Story.MOD_ID, "textures/gui/smithing.png");
 
     protected SmitheryScreen(BlockPos pos) {
         super(new StringTextComponent("smithery_gui_main"));
@@ -59,7 +58,7 @@ public class SmitheryScreen extends Screen {
         this.renderBackground(matrixStack);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         if (this.minecraft != null) {
-            this.minecraft.getTextureManager().bindTexture(SMITHERY_GUI_TEXTURE);
+            this.minecraft.getTextureManager().bindTexture(resourceLocation);
         }
         blit(matrixStack, this.width / 2 - 50, this.height / 2 - 75, 0, 0, 100, 150, 100, 150);
         this.button1.render(matrixStack, mouseX, mouseY, particleTick);

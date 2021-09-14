@@ -14,8 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 多基石
- * @date: 2021/9/6 0006 21:30
+ * 多基石
  */
 
 public class DopaticStone extends MaterialItem {

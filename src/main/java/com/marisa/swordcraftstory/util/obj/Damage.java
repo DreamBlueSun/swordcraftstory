@@ -1,8 +1,7 @@
 package com.marisa.swordcraftstory.util.obj;
 
 /**
- * @description: 伤害
- * @date: 2021/9/4 0004 2:25
+ * 伤害
  */
 
 public class Damage {

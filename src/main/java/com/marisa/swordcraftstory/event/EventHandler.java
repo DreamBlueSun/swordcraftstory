@@ -21,8 +21,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
- * @description: 非静态事件处理
- * @date: 2021/9/3 0003 20:48
+ * 监听事件处理器
  */
 
 public class EventHandler {

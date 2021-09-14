@@ -14,8 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 米加石
- * @date: 2021/9/6 0006 21:30
+ * 米加石
  */
 
 public class OmegaStone extends MaterialItem {

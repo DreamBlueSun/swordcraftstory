@@ -5,8 +5,7 @@ import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 
 /**
- * @description: 攻击冷却逻辑
- * @date: 2021/9/6 0006 1:42
+ * 攻击冷却逻辑
  */
 
 public class AttackGoal extends MeleeAttackGoal {

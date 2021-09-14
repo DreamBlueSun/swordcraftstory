@@ -14,8 +14,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import java.util.Random;
 
 /**
- * @description: Mob属性
- * @date: 2021/9/11 0011 12:41
+ * Mob属性工具类
  */
 
 public class MobAttributesUtils {

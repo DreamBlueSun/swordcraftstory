@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.gui.container;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.IInt.BlockPosIInt;
-import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
+import com.marisa.swordcraftstory.gui.container.IInt.WeaponEdgePointIInt;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.network.PacketBuffer;
@@ -12,8 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
- * @description:
- * @date: 2021/9/7 0007 21:41
+ * 容器类型注册
  */
 
 public class ContainerTypeRegistry {
@@ -26,10 +25,10 @@ public class ContainerTypeRegistry {
                     IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
                             new WeaponMakeContainer(windowId, inv, data.readBlockPos(), new BlockPosIInt())));
 
-    public static final RegistryObject<ContainerType<IntensifyEdgeContainer>> INTENSIFY_EDGE_CONTAINER =
-            CONTAINERS.register("intensify_edge_container", () ->
+    public static final RegistryObject<ContainerType<WeaponEdgeContainer>> WEAPON_EDGE_CONTAINER =
+            CONTAINERS.register("weapon_edge_container", () ->
                     IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
-                            new IntensifyEdgeContainer(windowId, inv, data.readBlockPos(), new IntensifyEdgePointInt())));
+                            new WeaponEdgeContainer(windowId, inv, data.readBlockPos(), new WeaponEdgePointIInt())));
 
     public static final RegistryObject<ContainerType<WeaponCollapseContainer>> WEAPON_COLLAPSE_CONTAINER =
             CONTAINERS.register("weapon_collapse_container", () ->

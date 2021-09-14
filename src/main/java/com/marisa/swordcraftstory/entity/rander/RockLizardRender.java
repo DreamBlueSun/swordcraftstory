@@ -13,8 +13,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 
 /**
- * @description:
- * @date: 2021/9/6 0006 2:20
+ * 岩蜥蜴渲染
  */
 
 public class RockLizardRender extends EntityRenderer<RockLizard> {
