@@ -16,7 +16,10 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 
 /**
  * 个人信息Screen
@@ -41,41 +44,47 @@ public class StoryPlayerStatusScreen extends Screen {
             this.minecraft.getTextureManager().bindTexture(resourceLocation);
         }
         blit(matrixStack, this.width / 2 - 120, this.height / 2 - 80, 0, 0, 240, 160, 240, 160);
-        int x = this.width / 2 - 148;
+        int x = this.width / 2 - 102;
         int y = this.height / 2 - 60;
         //等级
         StoryPlayerData data = StoryPlayerDataManager.get(player.getCachedUniqueIdString());
         int XP = data.getXp();
         int LV = StoryPlayerDataManager.getLv(XP);
-        String font = "Lv  " + LV;
-        drawCenteredString(matrixStack, this.font, font, x + offset(font), y, 0x8B4513);
+        IFormattableTextComponent text = new TranslationTextComponent("Lv").mergeStyle(TextFormatting.LIGHT_PURPLE)
+                .appendString(" ").appendSibling(new TranslationTextComponent(String.valueOf(LV)).mergeStyle(TextFormatting.GREEN));
+        drawString(matrixStack, this.font, text, x, y, 0x8B4513);
         //经验值
-        int xAttr = this.width / 2 - 30;
-        int nextXpPoint = StoryPlayerDataManager.getLvNextXpPoint(LV);
-        font = "Exp " + XP + " / " + nextXpPoint;
-        drawCenteredString(matrixStack, this.font, font, xAttr + offset(font), y, 0x8B4513);
+        int xAttr = this.width / 2 + 10;
+        String exp = XP + "/" + StoryPlayerDataManager.getLvNextXpPoint(LV);
+        text = new TranslationTextComponent("Exp").mergeStyle(TextFormatting.LIGHT_PURPLE)
+                .appendString(" ").appendSibling(new TranslationTextComponent(exp).mergeStyle(TextFormatting.GREEN));
+        drawString(matrixStack, this.font, text, xAttr, y, 0x8B4513);
         int yAttr = this.height / 2 - 30;
         //名字
-        font = player.getDisplayName().getString();
-        drawCenteredString(matrixStack, this.font, font, x + offset(font), yAttr, 0x8B4513);
+        text = new TranslationTextComponent(player.getDisplayName().getString()).mergeStyle(TextFormatting.BLUE);
+        drawString(matrixStack, this.font, text, x, yAttr, 0x8B4513);
         //HP
-        String HP = (int) player.getHealth() + " / " + (int) player.getMaxHealth();
-        font = "血量  " + HP;
-        drawCenteredString(matrixStack, this.font, font, xAttr + offset(font), yAttr, 0x8B4513);
+        String HP = (int) player.getHealth() + "/" + (int) player.getMaxHealth();
+        text = new TranslationTextComponent("血量").mergeStyle(TextFormatting.LIGHT_PURPLE)
+                .appendString(" ").appendSibling(new TranslationTextComponent(HP).mergeStyle(TextFormatting.GREEN));
+        drawString(matrixStack, this.font, text, xAttr, yAttr, 0x8B4513);
         //ATK
         Damage damage = new Damage();
         DamageCountUtils.playerDamage(player, damage);
         int ATK = (int) DamageCountUtils.count(damage, new Defense());
-        font = "攻击  " + ATK;
-        drawCenteredString(matrixStack, this.font, font, xAttr + offset(font), yAttr + 20, 0x8B4513);
+        text = new TranslationTextComponent("攻击").mergeStyle(TextFormatting.LIGHT_PURPLE)
+                .appendString(" ").appendSibling(new TranslationTextComponent(String.valueOf(ATK)).mergeStyle(TextFormatting.GREEN));
+        drawString(matrixStack, this.font, text, xAttr, yAttr + 20, 0x8B4513);
         //DEF
         int DEF = player.getTotalArmorValue();
-        font = "防御  " + DEF;
-        drawCenteredString(matrixStack, this.font, font, xAttr + offset(font), yAttr + 40, 0x8B4513);
+        text = new TranslationTextComponent("防御").mergeStyle(TextFormatting.LIGHT_PURPLE)
+                .appendString(" ").appendSibling(new TranslationTextComponent(String.valueOf(DEF)).mergeStyle(TextFormatting.GREEN));
+        drawString(matrixStack, this.font, text, xAttr, yAttr + 40, 0x8B4513);
         //PHY
         int PHY = (int) player.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-        font = "魔抗  " + PHY;
-        drawCenteredString(matrixStack, this.font, font, xAttr + offset(font), yAttr + 60, 0x8B4513);
+        text = new TranslationTextComponent("魔抗").mergeStyle(TextFormatting.LIGHT_PURPLE)
+                .appendString(" ").appendSibling(new TranslationTextComponent(String.valueOf(PHY)).mergeStyle(TextFormatting.GREEN));
+        drawString(matrixStack, this.font, text, xAttr, yAttr + 60, 0x8B4513);
         //AGL
         int AGL = 0;
         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
@@ -83,17 +92,14 @@ public class StoryPlayerStatusScreen extends Screen {
             Weapon weapon = (Weapon) stack.getItem();
             AGL = weapon.getAgl(stack);
         }
-        font = "敏捷  " + AGL;
-        drawCenteredString(matrixStack, this.font, font, xAttr + offset(font), yAttr + 80, 0x8B4513);
+        text = new TranslationTextComponent("敏捷").mergeStyle(TextFormatting.LIGHT_PURPLE)
+                .appendString(" ").appendSibling(new TranslationTextComponent(String.valueOf(AGL)).mergeStyle(TextFormatting.GREEN));
+        drawString(matrixStack, this.font, text, xAttr, yAttr + 80, 0x8B4513);
         super.render(matrixStack, mouseX, mouseY, particleTick);
     }
 
     public static void open(ClientPlayerEntity player) {
         Minecraft.getInstance().displayGuiScreen(new StoryPlayerStatusScreen(player));
-    }
-
-    private static int offset(String font) {
-        return (font.length() + 16) * 28 / 10;
     }
 
 }
