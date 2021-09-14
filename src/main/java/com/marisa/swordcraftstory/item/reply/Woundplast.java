@@ -15,8 +15,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 创可贴
- * @date: 2021/9/6 0006 21:26
+ * 创可贴
  */
 
 public class Woundplast extends ReplyItem {

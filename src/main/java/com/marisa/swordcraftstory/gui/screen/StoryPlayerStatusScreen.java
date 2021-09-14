@@ -20,12 +20,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 
 /**
- * @description: 个人信息Screen
- * @date: 2021/9/12 0002 1:00
+ * 个人信息Screen
  */
 
 public class StoryPlayerStatusScreen extends Screen {
-    ResourceLocation STORY_PLAYER_STATUS_GUI_TEXTURE = new ResourceLocation(Story.MOD_ID, "textures/gui/story_player_status.png");
+
+    ResourceLocation resourceLocation = new ResourceLocation(Story.MOD_ID, "textures/gui/story_player_status.png");
 
     private final ClientPlayerEntity player;
 
@@ -39,7 +39,7 @@ public class StoryPlayerStatusScreen extends Screen {
         this.renderBackground(matrixStack);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         if (this.minecraft != null) {
-            this.minecraft.getTextureManager().bindTexture(STORY_PLAYER_STATUS_GUI_TEXTURE);
+            this.minecraft.getTextureManager().bindTexture(resourceLocation);
         }
         blit(matrixStack, this.width / 2 - 120, this.height / 2 - 80, 0, 0, 240, 160, 240, 160);
         int x = this.width / 2 - 148;

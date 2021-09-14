@@ -15,8 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
 /**
- * @description: 按键绑定
- * @date: 2021/9/12 0012 1:20
+ * 按键绑定
  */
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class KeyBoardInput {

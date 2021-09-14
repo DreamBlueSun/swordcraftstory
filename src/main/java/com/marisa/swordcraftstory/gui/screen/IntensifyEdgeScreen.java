@@ -29,7 +29,7 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
     Button button3;
     Button button4;
     Button button5;
-    private final ResourceLocation OBSIDIAN_CONTAINER_RESOURCE = new ResourceLocation(Story.MOD_ID, "textures/gui/intensify_edge_container.png");
+    private final ResourceLocation resourceLocation = new ResourceLocation(Story.MOD_ID, "textures/gui/intensify_edge_container.png");
 
     private int pointUsed;
     private int atkTime;
@@ -113,7 +113,7 @@ public class IntensifyEdgeScreen extends ContainerScreen<IntensifyEdgeContainer>
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
         this.renderBackground(matrixStack);
-        this.minecraft.getTextureManager().bindTexture(OBSIDIAN_CONTAINER_RESOURCE);
+        this.minecraft.getTextureManager().bindTexture(resourceLocation);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         blit(matrixStack, i, j, 0, 0, xSize, ySize, this.textureWidth, textureHeight);

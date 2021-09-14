@@ -21,8 +21,7 @@ import java.util.function.Supplier;
 
 
 /**
- * @description:
- * @date: 2021/9/5 0005 12:42
+ * 锻冶数据包
  */
 
 public class SendPack {

@@ -25,8 +25,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
- * @description: 物品注册
- * @date: 2021/9/1 0001 1:27
+ * 物品注册
  */
 
 public class ItemRegistry {

@@ -24,8 +24,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 修理道具公共类
- * @date: 2021/9/6 0006 21:41
+ * 修理道具公共类
  */
 
 public abstract class RepairItem extends Item {

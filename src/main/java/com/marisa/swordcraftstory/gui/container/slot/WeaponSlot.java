@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Story武器Slot
- *
- * @date: 2021/9/8 12:27
  */
 
 public class WeaponSlot extends Slot {

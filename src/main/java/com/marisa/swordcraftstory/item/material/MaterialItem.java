@@ -14,8 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 素材物品
- * @date: 2021/9/9 0009 20:32
+ * 素材物品
  */
 
 public abstract class MaterialItem extends Item {

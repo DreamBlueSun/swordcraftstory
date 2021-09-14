@@ -23,8 +23,7 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 
 /**
- * @description:
- * @date: 2021/9/6 0006 1:13
+ * 岩蜥蜴
  */
 
 public class RockLizard extends AnimalEntity implements StoryMob, EntityStatus {

@@ -18,8 +18,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 回复道具公共类
- * @date: 2021/9/6 0006 21:41
+ * 回复道具公共类
  */
 
 public abstract class ReplyItem extends Item {

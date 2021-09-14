@@ -1,8 +1,7 @@
 package com.marisa.swordcraftstory.entity;
 
 /**
- * @description:
- * @date: 2021/9/6 0006 2:15
+ * Mob数据
  */
 
 public interface StoryMob {

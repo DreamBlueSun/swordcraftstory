@@ -25,8 +25,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 /**
- * @description: 强刃锻冶台方块
- * @date: 2021/9/5 0005 2:25
+ * 强刃锻冶台方块
  */
 
 public class SmithingBlock extends Block {

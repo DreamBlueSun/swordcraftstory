@@ -25,8 +25,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 /**
- * @description: 制作武器锻冶台方块
- * @date: 2021/9/5 0005 2:25
+ * 制作锻冶台方块
  */
 
 public class WeaponMakeBlock extends Block {

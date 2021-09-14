@@ -21,8 +21,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import javax.annotation.Nullable;
 
 /**
- * @description:
- * @date: 2021/9/7 0007 22:09
+ * 强刃锻冶台tile
  */
 
 public class SmithingBlockTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {

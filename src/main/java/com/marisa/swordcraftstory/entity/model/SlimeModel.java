@@ -9,6 +9,10 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
+/**
+ * 史莱姆模型
+ */
+
 public class SlimeModel extends EntityModel<Slime> {
 	private final ModelRenderer bb_main;
 

@@ -8,8 +8,7 @@ import net.minecraft.item.Items;
 import java.util.Random;
 
 /**
- * @description: 掉落品质
- * @date: 2021/9/9 0009 21:06
+ * 掉落品质
  */
 
 public class DropQuality {

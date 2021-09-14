@@ -9,8 +9,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 
 /**
- * @description: 玩家属性
- * @date: 2021/9/11 0011 12:41
+ * 玩家属性工具类
  */
 
 public class PlayerAttributesUtils {

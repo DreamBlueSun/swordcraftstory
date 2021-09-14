@@ -14,8 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 磨刀石
- * @date: 2021/9/6 0006 21:26
+ * 磨刀石
  */
 
 public class knifeStone extends RepairItem {

@@ -10,8 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 /**
- * @description:
- * @date: 2021/9/7 0007 21:40
+ *
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBusEventHandler {

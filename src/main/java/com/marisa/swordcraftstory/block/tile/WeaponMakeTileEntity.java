@@ -20,8 +20,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import javax.annotation.Nullable;
 
 /**
- * @description: 制作武器tile
- * @date: 2021/9/7 0007 22:09
+ * 制作锻冶台tile
  */
 
 public class WeaponMakeTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {

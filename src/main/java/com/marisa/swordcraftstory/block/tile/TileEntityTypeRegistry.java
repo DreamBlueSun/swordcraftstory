@@ -8,8 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
- * @description:
- * @date: 2021/9/7 0007 22:16
+ * 方块tile注册
  */
 
 public class TileEntityTypeRegistry {

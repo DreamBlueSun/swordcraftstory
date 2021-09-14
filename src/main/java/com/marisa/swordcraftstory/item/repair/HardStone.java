@@ -14,8 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * @description: 坚硬的石头
- * @date: 2021/9/6 0006 21:26
+ * 坚硬的石头
  */
 
 public class HardStone extends RepairItem {

@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Story矿石Slot
- *
- * @date: 2021/9/8 12:27
  */
 
 public class OreSlot extends Slot {

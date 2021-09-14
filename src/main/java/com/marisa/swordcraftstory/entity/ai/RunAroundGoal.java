@@ -5,8 +5,7 @@ import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.goal.PanicGoal;
 
 /**
- * @description: 是否执行游荡逻辑
- * @date: 2021/9/6 0006 1:34
+ * 是否执行游荡逻辑
  */
 
 public class RunAroundGoal extends PanicGoal {

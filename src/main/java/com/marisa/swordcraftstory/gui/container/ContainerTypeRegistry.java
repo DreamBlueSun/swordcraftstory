@@ -12,8 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
- * @description:
- * @date: 2021/9/7 0007 21:41
+ * 容器类型注册
  */
 
 public class ContainerTypeRegistry {

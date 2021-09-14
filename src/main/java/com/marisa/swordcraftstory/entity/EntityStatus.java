@@ -1,8 +1,7 @@
 package com.marisa.swordcraftstory.entity;
 
 /**
- * @description:
- * @date: 2021/9/6 0006 1:37
+ * 实体状态
  */
 
 public interface EntityStatus {

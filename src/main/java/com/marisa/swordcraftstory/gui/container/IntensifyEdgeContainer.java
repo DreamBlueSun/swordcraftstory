@@ -12,8 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
 /**
- * @description: 强刃Container
- * @date: 2021/9/7 0007 20:55
+ * 强刃Container
  */
 
 public class IntensifyEdgeContainer extends Container {
