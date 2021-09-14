@@ -19,9 +19,9 @@ public class TileEntityTypeRegistry {
             TILE_ENTITIES.register("weapon_make_tile_entity", () ->
                     TileEntityType.Builder.create(WeaponMakeTileEntity::new, BlockRegistry.WEAPON_MAKE_BLOCK.get()).build(null));
 
-    public static final RegistryObject<TileEntityType<SmithingBlockTileEntity>> SMITHING_BLOCK_TILE_ENTITY =
-            TILE_ENTITIES.register("smithing_block_tile_entity", () ->
-                    TileEntityType.Builder.create(SmithingBlockTileEntity::new, BlockRegistry.SMITHING_BLOCK.get()).build(null));
+    public static final RegistryObject<TileEntityType<WeaponEdgeBlockTileEntity>> WEAPON_EDGE_BLOCK_TILE_ENTITY =
+            TILE_ENTITIES.register("weapon_edge_block_tile_entity", () ->
+                    TileEntityType.Builder.create(WeaponEdgeBlockTileEntity::new, BlockRegistry.WEAPON_EDGE_BLOCK.get()).build(null));
 
     public static final RegistryObject<TileEntityType<WeaponCollapseTileEntity>> WEAPON_COLLAPSE_TILE_ENTITY =
             TILE_ENTITIES.register("weapon_collapse_tile_entity", () ->

@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.gui.container;
 
-import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
-import com.marisa.swordcraftstory.gui.container.IInt.IntensifyEdgePointInt;
+import com.marisa.swordcraftstory.block.tile.WeaponEdgeBlockTileEntity;
+import com.marisa.swordcraftstory.gui.container.IInt.WeaponEdgePointIInt;
 import com.marisa.swordcraftstory.gui.container.slot.WeaponSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,22 +15,22 @@ import net.minecraft.util.math.BlockPos;
  * 强刃Container
  */
 
-public class IntensifyEdgeContainer extends Container {
+public class WeaponEdgeContainer extends Container {
 
-    private IntensifyEdgePointInt pointMax;
+    private WeaponEdgePointIInt point;
 
-    public IntensifyEdgeContainer(int id, PlayerInventory inv, BlockPos pos, IntensifyEdgePointInt pointMax) {
-        super(ContainerTypeRegistry.INTENSIFY_EDGE_CONTAINER.get(), id);
-        this.pointMax = pointMax;
-        trackIntArray(this.pointMax);
+    public WeaponEdgeContainer(int id, PlayerInventory inv, BlockPos pos, WeaponEdgePointIInt point) {
+        super(ContainerTypeRegistry.WEAPON_EDGE_CONTAINER.get(), id);
+        this.point = point;
+        trackIntArray(this.point);
         //添加槽位
-        SmithingBlockTileEntity smithingBlockTileEntity = (SmithingBlockTileEntity) inv.player.world.getTileEntity(pos);
-        this.addSlot(new WeaponSlot(smithingBlockTileEntity.getInventory(), 0, 11, 20));
+        WeaponEdgeBlockTileEntity weaponEdgeBlockTileEntity = (WeaponEdgeBlockTileEntity) inv.player.world.getTileEntity(pos);
+        this.addSlot(new WeaponSlot(weaponEdgeBlockTileEntity.getInventory(), 0, 11, 20));
         layoutPlayerInventorySlots(inv, 10, 108);
     }
 
-    public IntensifyEdgePointInt getPointMax() {
-        return pointMax;
+    public WeaponEdgePointIInt getPoint() {
+        return point;
     }
 
     @Override

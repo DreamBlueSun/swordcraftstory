@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.block;
 
-import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
+import com.marisa.swordcraftstory.block.tile.WeaponEdgeBlockTileEntity;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.special.Hammer;
 import com.marisa.swordcraftstory.net.Networking;
@@ -28,9 +28,9 @@ import javax.annotation.Nullable;
  * 强刃锻冶台方块
  */
 
-public class SmithingBlock extends Block {
+public class WeaponEdgeBlock extends Block {
 
-    public SmithingBlock() {
+    public WeaponEdgeBlock() {
         super(Properties.create(Material.ROCK).hardnessAndResistance(5));
     }
 
@@ -42,14 +42,14 @@ public class SmithingBlock extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new SmithingBlockTileEntity();
+        return new WeaponEdgeBlockTileEntity();
     }
 
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!worldIn.isRemote && worldIn.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)) {
             NonNullList<ItemStack> list = NonNullList.create();
-            list.add(ItemRegistry.SMITHING_BLOCK.get().getDefaultInstance());
+            list.add(ItemRegistry.WEAPON_EDGE_BLOCK.get().getDefaultInstance());
             InventoryHelper.dropItems(worldIn, pos, list);
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);

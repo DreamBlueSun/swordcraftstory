@@ -6,7 +6,7 @@ import net.minecraft.util.IIntArray;
  * 强刃点数以及方块坐标int数组
  */
 
-public class IntensifyEdgePointInt implements IIntArray {
+public class WeaponEdgePointIInt implements IIntArray {
 
     int pointMax = 0;
     int posX = 0;
