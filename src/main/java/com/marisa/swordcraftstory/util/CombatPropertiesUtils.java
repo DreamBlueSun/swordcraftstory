@@ -3,7 +3,9 @@ package com.marisa.swordcraftstory.util;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.IntNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -239,6 +241,23 @@ public class CombatPropertiesUtils {
 
     public static void clearTec(ItemStack stack) {
         stack.setTagInfo("story_combat_tec", IntNBT.valueOf(0));
+    }
+
+    /**
+     * 复制物品的附魔
+     */
+    public static void copyEnchantmentTag(ItemStack source, ItemStack target) {
+        ListNBT listEnchant = source.getEnchantmentTagList();
+        if (listEnchant.size() > 0) {
+            CompoundNBT tag = target.getOrCreateTag();
+            for (INBT inbt : listEnchant) {
+                if (!tag.contains("Enchantments", 9)) {
+                    tag.put("Enchantments", new ListNBT());
+                }
+                ListNBT listnbt = tag.getList("Enchantments", 10);
+                listnbt.add(inbt);
+            }
+        }
     }
 
 }

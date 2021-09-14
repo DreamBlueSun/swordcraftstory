@@ -103,6 +103,7 @@ public class SendPack {
                         }
                         ItemStack make = ((AbstractOre) makeStack1.getItem()).weaponMake(makeStack0);
                         if (!make.isEmpty()) {
+                            CombatPropertiesUtils.copyEnchantmentTag(makeStack0, make);
                             inventory.removeStackFromSlot(0);
                             inventory.removeStackFromSlot(1);
                             inventory.setInventorySlotContents(2, make);

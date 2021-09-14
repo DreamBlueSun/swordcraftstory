@@ -34,6 +34,7 @@ public abstract class AbstractBowWeapon extends AbstractRangedWeapon {
         int dur = (getMaxDamage(stack) + getDurMax(stack)) / 5;
         CombatPropertiesUtils.setDurMax(instance, dur);
         CombatPropertiesUtils.setDur(instance, dur);
+        CombatPropertiesUtils.copyEnchantmentTag(stack, instance);
         return instance;
     }
 }

@@ -1,9 +1,9 @@
 package com.marisa.swordcraftstory.item.weapon.close.sword;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
+import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import com.marisa.swordcraftstory.item.weapon.close.AbstractMeleeWeapon;
-import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
@@ -66,6 +66,7 @@ public abstract class AbstractSwordWeapon extends AbstractMeleeWeapon {
         int dur = (getMaxDamage(stack) + getDurMax(stack)) / 7;
         CombatPropertiesUtils.setDurMax(instance, dur);
         CombatPropertiesUtils.setDur(instance, dur);
+        CombatPropertiesUtils.copyEnchantmentTag(stack, instance);
         return instance;
     }
 }
