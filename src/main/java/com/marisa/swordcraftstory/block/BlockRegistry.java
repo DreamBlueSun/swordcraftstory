@@ -16,7 +16,7 @@ public class BlockRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Story.MOD_ID);
 
     public static RegistryObject<Block> WEAPON_MAKE_BLOCK = BLOCKS.register("weapon_make_block", WeaponMakeBlock::new);
-    public static RegistryObject<Block> SMITHING_BLOCK = BLOCKS.register("smithing_block", SmithingBlock::new);
+    public static RegistryObject<Block> WEAPON_EDGE_BLOCK = BLOCKS.register("weapon_edge_block", WeaponEdgeBlock::new);
     public static RegistryObject<Block> WEAPON_COLLAPSE_BLOCK = BLOCKS.register("weapon_collapse_block", WeaponCollapseBlock::new);
     public static RegistryObject<Block> REPAIR_BLOCK = BLOCKS.register("repair_block", RepairBlock::new);
 }

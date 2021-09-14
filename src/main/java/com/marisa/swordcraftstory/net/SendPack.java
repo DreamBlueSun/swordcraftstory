@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.net;
 
-import com.marisa.swordcraftstory.block.tile.SmithingBlockTileEntity;
+import com.marisa.swordcraftstory.block.tile.WeaponEdgeBlockTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponCollapseTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
@@ -111,13 +111,13 @@ public class SendPack {
                         break;
                     case "smithery.intensifyEdge":
                         //打开强刃GUI
-                        SmithingBlockTileEntity smithingBlockTileEntity = (SmithingBlockTileEntity) sender.world.getTileEntity(this.blockPos);
-                        NetworkHooks.openGui(sender, smithingBlockTileEntity, (PacketBuffer packerBuffer) ->
-                                packerBuffer.writeBlockPos(smithingBlockTileEntity.getPos()));
+                        WeaponEdgeBlockTileEntity weaponEdgeBlockTileEntity = (WeaponEdgeBlockTileEntity) sender.world.getTileEntity(this.blockPos);
+                        NetworkHooks.openGui(sender, weaponEdgeBlockTileEntity, (PacketBuffer packerBuffer) ->
+                                packerBuffer.writeBlockPos(weaponEdgeBlockTileEntity.getPos()));
                         break;
                     case "smithery.intensifyEdge.done":
                         //强刃确定
-                        ItemStack inStack = ((SmithingBlockTileEntity) sender.world.getTileEntity(this.blockPos)).getInventory().getStackInSlot(0);
+                        ItemStack inStack = ((WeaponEdgeBlockTileEntity) sender.world.getTileEntity(this.blockPos)).getInventory().getStackInSlot(0);
                         if (inStack.isEmpty() || !(inStack.getItem() instanceof Weapon)) {
                             return;
                         }
