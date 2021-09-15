@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.event;
 
+import com.marisa.swordcraftstory.block.ore.OreGenerate;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
@@ -17,6 +18,7 @@ import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -25,6 +27,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  */
 
 public class EventHandler {
+
+    @SubscribeEvent
+    public void biomeLoading(BiomeLoadingEvent event) {
+        //生物群系加载时加入矿石生成
+        OreGenerate.join(event);
+    }
 
     @SubscribeEvent
     public void healEvent(BlockEvent.BreakEvent event) {
@@ -56,12 +64,6 @@ public class EventHandler {
         if (damage == 0.0F) {
             event.setCanceled(true);
         }
-    }
-
-    @SubscribeEvent
-    public void blockBreakEvent(BlockEvent.BreakEvent event) {
-        //矿石方块、非创造模式：监听方块破坏掉落素材
-        BlockDropItemUtils.dropItem(event.getPlayer(), event.getState().getBlock(), event.getPos());
     }
 
     @SubscribeEvent

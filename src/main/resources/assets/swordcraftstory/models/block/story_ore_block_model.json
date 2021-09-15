@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "swordcraftstory:block/story_ore_block"
+  }
+}

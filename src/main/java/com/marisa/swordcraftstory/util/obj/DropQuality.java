@@ -1,10 +1,11 @@
 package com.marisa.swordcraftstory.util.obj;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -13,180 +14,55 @@ import java.util.Random;
 
 public class DropQuality {
 
-    private static final int MIN = 1;
-    private static final int MAX = 5;
-    private static final int WEIGHT_DENOMINATOR = 1000;
+    private static final List<ItemStack> LIST_ORE_RANK_1;
+    private static final List<ItemStack> LIST_ORE_RANK_2;
+    private static final List<ItemStack> LIST_ORE_RANK_3;
 
-    /**
-     * 普通（1）
-     */
-    private static final int WEIGHT_ORDINARY = 24;
-
-    /**
-     * 优良（2）
-     */
-    private static final int WEIGHT_FINE = 12;
-
-    /**
-     * 卓越（3）
-     */
-    private static final int WEIGHT_OUTSTANDING = 8;
-
-    /**
-     * 杰出（4）
-     */
-    private static final int WEIGHT_EXCELLENT = 4;
-
-    /**
-     * 闪耀（5）
-     */
-    private static final int WEIGHT_BRILLIANT = 2;
-
-    public static int randomDropQuality() {
-        int r = new Random().nextInt(WEIGHT_DENOMINATOR);
-        int drop = 0;
-        if (r < (drop += WEIGHT_BRILLIANT)) {
-            return 5;
-        } else if (r < (drop += WEIGHT_EXCELLENT)) {
-            return 4;
-        } else if (r < (drop += WEIGHT_OUTSTANDING)) {
-            return 3;
-        } else if (r < (drop += WEIGHT_FINE)) {
-            return 2;
-        } else if (r < (drop + WEIGHT_ORDINARY)) {
-            return 1;
-        } else {
-            return 0;
-        }
+    static {
+        LIST_ORE_RANK_1 = new ArrayList<>();
+        LIST_ORE_RANK_1.add(ItemRegistry.IRON_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_1.add(ItemRegistry.SLANDER_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_2 = new ArrayList<>();
+        LIST_ORE_RANK_2.add(ItemRegistry.ARGENIR_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_2.add(ItemRegistry.BIG_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_2.add(ItemRegistry.ELPHUS_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_2.add(ItemRegistry.WINGS_FOSSIL_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_3 = new ArrayList<>();
+        LIST_ORE_RANK_3.add(ItemRegistry.UKA_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_3.add(ItemRegistry.PRETTY_ORE.get().getDefaultInstance());
     }
 
-    public static Item asOre(Block block, int quality) {
-        switch (block.getTranslationKey()) {
-            case "block.minecraft.iron_ore":
-                //铁：（1：铁矿石，2：斩铁矿，3：大铁矿石，4：铁刃石，5：钢牙原石）
-                switch (quality) {
-                    case 5:
-                    case 4:
-                    case 3:
-                    case 2:
-                        return Items.AIR;
-                    case 1:
-                        return ItemRegistry.IRON_ORE.get();
-                }
-            case "block.minecraft.gold_ore":
-                //金：（1：翅膀化石，2：重金矿，3：幻想矿，4：艾克赛尔矿石，5：光辉之石）
-                switch (quality) {
-                    case 5:
-                    case 4:
-                    case 3:
-                    case 2:
-                        return Items.AIR;
-                    case 1:
-                        return ItemRegistry.WINGS_FOSSIL_ORE.get();
-                }
-            case "block.minecraft.diamond_ore":
-                //钻石：（1：尤佳矿石，2：花纹原石，3：诺比尔原石，4：露萤密石，5：被诅咒的矿石）
-                switch (quality) {
-                    case 5:
-                    case 4:
-                    case 3:
-                    case 2:
-                        return Items.AIR;
-                    case 1:
-                        return ItemRegistry.UKA_ORE.get();
-                }
-            case "block.minecraft.coal_ore":
-                //煤：（1：大矿石，2：黑石矿石，3：撒修矿石，4：肉球的化石，5：优质古木的化石）
-                switch (quality) {
-                    case 5:
-                    case 4:
-                    case 3:
-                    case 2:
-                        return Items.AIR;
-                    case 1:
-                        return ItemRegistry.BIG_ORE.get();
-                }
-            case "block.minecraft.redstone_ore":
-                //红石：（1：艾尔弗伊斯原石，2：斯普林特矿石，3：优美斯矿石，4：忍邪矿，5：机械原石）
-                switch (quality) {
-                    case 5:
-                    case 4:
-                    case 3:
-                    case 2:
-                        return Items.AIR;
-                    case 1:
-                        return ItemRegistry.ELPHUS_ORE.get();
-                }
-            case "block.minecraft.lapis_ore":
-                //青金石：（1：斯兰德原石，2：加德英矿石，3：帕尼修矿，4：雷齐斯托原石，5：自然矿）
-                switch (quality) {
-                    case 5:
-                    case 4:
-                    case 3:
-                    case 2:
-                        return Items.AIR;
-                    case 1:
-                        return ItemRegistry.SLANDER_ORE.get();
-                }
-            case "block.minecraft.emerald_ore":
-                //绿宝石：（1：阿吉尼尔矿，2：雷吉亚矿，3：甲壳化石，4：双蛇矿石，5：贤刃矿）
-                switch (quality) {
-                    case 5:
-                    case 4:
-                    case 3:
-                    case 2:
-                        return Items.AIR;
-                    case 1:
-                        return ItemRegistry.ARGENIR_ORE.get();
-                }
-            case "block.minecraft.nether_quartz_ore":
-                //石英：（1：漂亮原石，2：加利亚矿，3：料理矿，4：狂乱幻舞矿，5：红莲矿）
-                switch (quality) {
-                    case 5:
-                    case 4:
-                    case 3:
-                    case 2:
-                        return Items.AIR;
-                    case 1:
-                        return ItemRegistry.PRETTY_ORE.get();
-                }
-        }
-        return Items.AIR;
-    }
+    private static final int RANK_MATERIAL_0 = 300;
+    private static final int RANK_MATERIAL_1 = 200;
+    private static final int RANK_MATERIAL_2 = 100;
+    private static final int RANK_ORE_1 = 100;
+    private static final int RANK_ORE_2 = 80;
+    private static final int RANK_ORE_3 = 70;
+    private static final int RANK_RANDOM_MAX = RANK_MATERIAL_0 + RANK_MATERIAL_2 + RANK_MATERIAL_1 +
+            RANK_ORE_1 + RANK_ORE_2 + RANK_ORE_3;
 
-    public static Item asStone(Block block, int quality) {
-        switch (block.getTranslationKey()) {
-            case "block.minecraft.stone":
-                //石头
-            case "block.minecraft.granite":
-                //花岗岩
-            case "block.minecraft.diorite":
-                //闪长岩
-            case "block.minecraft.andesite":
-                //安山岩
-            case "block.minecraft.sandstone":
-                //沙石
-            case "block.minecraft.end_stone":
-                //末地石
-            case "block.minecraft.prismarine":
-                //海晶石
-            case "block.minecraft.red_sandstone":
-                //红沙石
-            case "block.minecraft.blackstone":
-                //黑石
-                switch (quality) {
-                    case 5:
-                    case 4:
-                        return Items.AIR;
-                    case 3:
-                        return ItemRegistry.SHARP_STONE.get();
-                    case 2:
-                        return ItemRegistry.DOPATIC_STONE.get();
-                    case 1:
-                        return ItemRegistry.OMEGA_STONE.get();
-                }
+    public static ItemStack randomDropQuality(int playerLv) {
+        int drop = RANK_RANDOM_MAX;
+        int r = new Random().nextInt(RANK_RANDOM_MAX) + 1;
+        if (r > (drop - RANK_ORE_3) && playerLv >= 10) {
+            return LIST_ORE_RANK_3.get(new Random().nextInt(LIST_ORE_RANK_3.size()));
         }
-        return Items.AIR;
+        if (r > (drop -= RANK_ORE_2) && playerLv >= 5) {
+            return LIST_ORE_RANK_2.get(new Random().nextInt(LIST_ORE_RANK_2.size()));
+        }
+        if (r > (drop -= RANK_ORE_1)) {
+            return LIST_ORE_RANK_1.get(new Random().nextInt(LIST_ORE_RANK_1.size()));
+        }
+        if (r > (drop -= RANK_MATERIAL_2)) {
+            return ItemRegistry.SHARP_STONE.get().getDefaultInstance();
+        }
+        if (r > (drop -= RANK_MATERIAL_1)) {
+            return ItemRegistry.DOPATIC_STONE.get().getDefaultInstance();
+        }
+        if (r > (drop - RANK_MATERIAL_0)) {
+            return ItemRegistry.OMEGA_STONE.get().getDefaultInstance();
+        }
+        return Items.AIR.getDefaultInstance();
     }
 
 }

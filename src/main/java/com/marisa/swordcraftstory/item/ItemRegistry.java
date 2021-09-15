@@ -56,6 +56,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> ELEGANCE_BOW = ITEMS.register("elegance_bow", EleganceBow::new);
     public static RegistryObject<Item> RIBBON_BOW = ITEMS.register("ribbon_bow", RibbonBow::new);
     //方块物品
+    public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_MAKE_BLOCK = ITEMS.register("weapon_make_block", () -> new BlockItem(BlockRegistry.WEAPON_MAKE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_EDGE_BLOCK = ITEMS.register("weapon_edge_block", () -> new BlockItem(BlockRegistry.WEAPON_EDGE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_COLLAPSE_BLOCK = ITEMS.register("weapon_collapse_block", () -> new BlockItem(BlockRegistry.WEAPON_COLLAPSE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
