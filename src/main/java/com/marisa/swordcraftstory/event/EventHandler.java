@@ -67,7 +67,7 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public void blockBreakEvent(PlayerXpEvent.PickupXp event) {
+    public void playerPickupXpEvent(PlayerXpEvent.PickupXp event) {
         //玩家获取经验时，在物语等级系统也增加
         PlayerEntity player = event.getPlayer();
         StoryPlayerData storyPlayerData = StoryPlayerDataManager.get(player.getCachedUniqueIdString());

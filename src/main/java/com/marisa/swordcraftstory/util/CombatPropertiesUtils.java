@@ -200,12 +200,12 @@ public class CombatPropertiesUtils {
         if (tag == null) {
             return;
         }
-        int damage = tag.getInt("Damage");
-        if (damage == 0) {
-            return;
-        }
         int dur = tag.getInt("story_combat_dur");
         if (dur == 0) {
+            return;
+        }
+        int damage = tag.getInt("Damage");
+        if (damage == 0) {
             return;
         }
         if (dur < damage) {
