@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.util;
 
 import com.google.common.collect.Multimap;
+import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
 import com.marisa.swordcraftstory.util.obj.Damage;
@@ -10,6 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.AttributeModifierManager;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -231,7 +233,13 @@ public class DamageCountUtils {
      * @date 2021/9/4 0004 2:31
      **/
     private static void mobDamage(MobEntity e, Damage damage) {
-        damage.setP((int) e.getAttributeManager().getAttributeValue(Attributes.ATTACK_DAMAGE));
+        try {
+            damage.setP((int) e.getAttributeManager().getAttributeValue(Attributes.ATTACK_DAMAGE));
+        } catch (Exception ex) {
+            AttributeModifierManager attributeManager = e.getAttributeManager();
+            Story.LOG.error("原版怪物伤害计算-异常数据{}", attributeManager.toString());
+            damage.setP(1.0F);
+        }
     }
 
     /**
