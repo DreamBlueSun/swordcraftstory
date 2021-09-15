@@ -63,14 +63,13 @@ public class MobAttributesUtils {
     }
 
     private static void modifyMobAttr(MobEntity mobEntity, int lv) {
-        int maxHealthAdd = lv * 70;
+        int maxHealthAdd = lv * 60;
         int attackDamageAdd = lv * 5;
-        int armorAdd = lv * 3;
+        int armorAdd = lv * 2;
         //如果原mob血量大于等于50(判定为BOSS生物)，则血量额外增加、攻击额外增加、防御额外增加
-        if (mobEntity.getMaxHealth() >= 50) {
-            maxHealthAdd += mobEntity.getMaxHealth() * 10;
-            maxHealthAdd += lv * 2;
-            maxHealthAdd += lv;
+        if (mobEntity.getMaxHealth() >= 80) {
+            maxHealthAdd += mobEntity.getMaxHealth() * 8;
+            maxHealthAdd += lv * 7;
         }
         //如果生物血量已经大于等于要增加的量，则取消
         if ((int)mobEntity.getAttributeValue(Attributes.MAX_HEALTH) >= maxHealthAdd) {
@@ -84,7 +83,7 @@ public class MobAttributesUtils {
         mobEntity.getAttributeManager().reapplyModifiers(builder.build());
         //未之定义名称时，判定为新生成mob，恢复生命值到最大
         if (!mobEntity.hasCustomName()) {
-            mobEntity.heal(maxHealthAdd);
+            mobEntity.heal(mobEntity.getMaxHealth());
         }
     }
 
