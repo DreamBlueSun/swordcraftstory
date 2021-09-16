@@ -1,16 +1,16 @@
 package com.marisa.swordcraftstory.event;
 
 import com.marisa.swordcraftstory.block.ore.OreGenerate;
-import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
-import com.marisa.swordcraftstory.util.*;
+import com.marisa.swordcraftstory.util.DamageCountUtils;
+import com.marisa.swordcraftstory.util.MobAttributesUtils;
+import com.marisa.swordcraftstory.util.PlayerAttributesUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -19,7 +19,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
@@ -32,18 +31,6 @@ public class EventHandler {
     public void biomeLoading(BiomeLoadingEvent event) {
         //生物群系加载时加入矿石生成
         OreGenerate.join(event);
-    }
-
-    @SubscribeEvent
-    public void healEvent(BlockEvent.BreakEvent event) {
-        //当武器有损坏时使用武器，消耗dur回复耐久度
-        PlayerEntity player = event.getPlayer();
-        if (player != null) {
-            ItemStack stack = player.getHeldItem(player.getActiveHand());
-            if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
-                CombatPropertiesUtils.useDur(stack);
-            }
-        }
     }
 
     @SubscribeEvent

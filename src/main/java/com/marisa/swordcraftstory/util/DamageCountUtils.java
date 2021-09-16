@@ -138,13 +138,13 @@ public class DamageCountUtils {
         switch (source.getDamageType()) {
             case "player":
             case "arrow":
-                may = Weapon.CRITICAL_BASE_NUM;
                 if (source.getTrueSource() instanceof PlayerEntity) {
                     stack = ((PlayerEntity) source.getTrueSource()).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
                     if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
-                        Weapon weapon = (Weapon) stack.getItem();
-                        may = Weapon.CRITICAL_BASE_NUM + (weapon.getTec(stack) / 5);
+                        may = ((Weapon) stack.getItem()).getCri(stack);
                     }
+                } else {
+                    may = Weapon.CRITICAL_BASE_NUM;
                 }
                 break;
             case "mob":
@@ -154,7 +154,7 @@ public class DamageCountUtils {
                 break;
         }
         if (may != 0) {
-            critical = Weapon.CRITICAL_BASE_NUM > new Random().nextInt(1000);
+            critical = may > new Random().nextInt(1000);
         }
         if (critical) {
             count = count * 2;
@@ -183,7 +183,6 @@ public class DamageCountUtils {
                     damage.setP(weapon.getAtk(stack));
                 }
                 weapon.incrTec(stack);
-                CombatPropertiesUtils.useDur(stack);
             } else if (stack.getItem() instanceof TieredItem) {
                 //非story武器
                 Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
@@ -207,12 +206,11 @@ public class DamageCountUtils {
             ItemStack stack = ((PlayerEntity) e).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (stack.isEmpty()) {
                 damage.setP(1.0F);
-            } else if (stack.getItem() instanceof Weapon) {
-                //story武器
-                Weapon weapon = (Weapon) stack.getItem();
+            } else if (stack.getItem() instanceof AbstractRangedWeapon) {
+                //story远程武器
+                AbstractRangedWeapon weapon = (AbstractRangedWeapon) stack.getItem();
                 damage.setP(weapon.getAtk(stack));
                 weapon.incrTec(stack);
-                CombatPropertiesUtils.useDur(stack);
             } else if (stack.getItem() instanceof BowItem) {
                 damage.setP(4.0F);
             }
@@ -237,7 +235,7 @@ public class DamageCountUtils {
             damage.setP((int) e.getAttributeManager().getAttributeValue(Attributes.ATTACK_DAMAGE));
         } catch (Exception ex) {
             AttributeModifierManager attributeManager = e.getAttributeManager();
-            Story.LOG.error("原版怪物伤害计算-异常数据{}", attributeManager.toString());
+            Story.LOG.info("原版怪物伤害计算-异常数据{}", attributeManager.toString());
             damage.setP(1.0F);
         }
     }

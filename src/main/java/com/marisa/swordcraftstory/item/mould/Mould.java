@@ -29,7 +29,7 @@ public abstract class Mould extends Item implements Combat {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("铸模").mergeStyle(TextFormatting.LIGHT_PURPLE));
+        tooltip.add(new TranslationTextComponent("模具").mergeStyle(TextFormatting.LIGHT_PURPLE));
         tooltip.add(new TranslationTextComponent("攻击力").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(getAtk(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("防御力").mergeStyle(TextFormatting.YELLOW)
@@ -53,11 +53,6 @@ public abstract class Mould extends Item implements Combat {
     @Override
     public int getDef(ItemStack stack) {
         return CombatPropertiesUtils.getDef(stack);
-    }
-
-    @Override
-    public int getPhy(ItemStack stack) {
-        return CombatPropertiesUtils.getPhy(stack);
     }
 
     @Override

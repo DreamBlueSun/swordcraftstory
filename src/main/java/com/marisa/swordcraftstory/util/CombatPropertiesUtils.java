@@ -60,6 +60,9 @@ public class CombatPropertiesUtils {
 
     public static void addInformation(Weapon weapon, ItemStack stack, List<ITextComponent> tooltip) {
         stack.setTagInfo("HideFlags", IntNBT.valueOf(2));
+        if (weapon.isBroken(stack)) {
+            tooltip.add(new TranslationTextComponent("已损坏").mergeStyle(TextFormatting.DARK_GRAY));
+        }
         tooltip.add(new TranslationTextComponent("武器").mergeStyle(TextFormatting.LIGHT_PURPLE));
         tooltip.add(new TranslationTextComponent("稀有度").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(weapon.getRank())).mergeStyle(TextFormatting.LIGHT_PURPLE)));
@@ -69,10 +72,10 @@ public class CombatPropertiesUtils {
                 .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(weapon.getDef(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("敏捷值").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(weapon.getAgl(stack))).mergeStyle(TextFormatting.LIGHT_PURPLE)));
-        float critical = (float) (Weapon.CRITICAL_BASE_NUM + (weapon.getTec(stack) / 5)) / 10;
+        float critical = (float) weapon.getCri(stack) / 10;
         tooltip.add(new TranslationTextComponent("暴击率").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(critical + "%").mergeStyle(TextFormatting.LIGHT_PURPLE)));
-        tooltip.add(new TranslationTextComponent("磨合度").mergeStyle(TextFormatting.YELLOW)
+        tooltip.add(new TranslationTextComponent("熟练度").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(getTec(stack) + "/" + Weapon.MAX_TEC).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(weapon.getDur(stack) + "/" + weapon.getDurMax(stack)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
@@ -190,33 +193,6 @@ public class CombatPropertiesUtils {
         }
         stack.setTagInfo("story_combat_dur_max", IntNBT.valueOf(v + Weapon.INTENSIFY_EDGE_ONCE_NUM_DUR));
         clearTec(stack);
-    }
-
-    /**
-     * 消耗dur修补耐久度
-     */
-    public static void useDur(ItemStack stack) {
-        CompoundNBT tag = stack.getTag();
-        if (tag == null) {
-            return;
-        }
-        int dur = tag.getInt("story_combat_dur");
-        if (dur == 0) {
-            return;
-        }
-        int damage = tag.getInt("Damage");
-        if (damage == 0) {
-            return;
-        }
-        if (dur < damage) {
-            stack.setTagInfo("story_combat_dur", IntNBT.valueOf(0));
-            damage -= dur;
-            stack.setTagInfo("Damage", IntNBT.valueOf(damage));
-        } else {
-            stack.setTagInfo("Damage", IntNBT.valueOf(0));
-            dur -= damage;
-            stack.setTagInfo("story_combat_dur", IntNBT.valueOf(dur));
-        }
     }
 
     public static int getTec(ItemStack stack) {

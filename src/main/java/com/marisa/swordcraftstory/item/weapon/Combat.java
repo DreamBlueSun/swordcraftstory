@@ -14,8 +14,6 @@ public interface Combat {
 
     int getDef(ItemStack stack);
 
-    int getPhy(ItemStack stack);
-
     int getAgl(ItemStack stack);
 
     int getDurMax(ItemStack stack);

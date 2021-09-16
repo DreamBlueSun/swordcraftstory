@@ -172,6 +172,7 @@ public class SendPack {
                             if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
                                 stack.setDamage(0);
                                 CombatPropertiesUtils.setDur(stack, CombatPropertiesUtils.getDurMax(stack));
+                                stack.removeChildTag("story_combat_broken");
                                 inv.setInventorySlotContents(i, stack);
                             }
                         }

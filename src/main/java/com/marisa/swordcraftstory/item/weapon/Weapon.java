@@ -49,6 +49,11 @@ public interface Weapon extends Combat {
     int getRank();
 
     /**
+     * 获取武器当前的暴击值
+     */
+    int getCri(ItemStack stack);
+
+    /**
      * 获取武器当前的Dur
      */
     int getDur(ItemStack stack);
@@ -67,4 +72,14 @@ public interface Weapon extends Combat {
      * 增加当前武器的磨合度
      */
     void incrTec(ItemStack stack);
+
+    /**
+     * 设置为已损坏
+     */
+    void setBroken(ItemStack stack);
+
+    /**
+     * 判断是否已损坏
+     */
+    boolean isBroken(ItemStack stack);
 }
