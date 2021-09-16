@@ -6,11 +6,16 @@ import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.StoryUUID;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
@@ -63,24 +68,31 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
 
     @Override
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
-        int maxDamage = stack.getMaxDamage();
         //已损坏时
         if (isBroken(stack)) {
-            //取消物品消失
-            stack.setDamage(maxDamage - 1);
+            //取消损伤
             return 0;
         }
-        //要损坏时
-        if (stack.getDamage() + amount >= maxDamage) {
-            //物品标记为已损坏
-            setBroken(stack);
-            //取消物品消失
-            stack.setDamage(maxDamage - 1);
-            return 0;
-        }
-        //不发生损坏时优先消耗dur
-        CompoundNBT tag = stack.getTag();
-        if (tag != null) {
+        if (stack.isDamageable()) {
+            //计算耐久附魔
+            if (amount > 0) {
+                int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
+                int j = 0;
+                for (int k = 0; i > 0 && k < amount; ++k) {
+                    if (UnbreakingEnchantment.negateDamage(stack, i, entity.getRNG())) {
+                        ++j;
+                    }
+                }
+                amount -= j;
+                if (amount <= 0) {
+                    return 0;
+                }
+            }
+            if (amount == 0) {
+                return 0;
+            }
+            //优先消耗dur
+            CompoundNBT tag = stack.getOrCreateTag();
             int dur = tag.getInt("story_combat_dur");
             if (dur > 0) {
                 if (dur < amount) {
@@ -92,8 +104,24 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
                     amount = 0;
                 }
             }
+            //后续消耗damage
+            if (amount > 0) {
+                int l = stack.getDamage() + amount;
+                //物品要损坏时
+                if (l >= stack.getMaxDamage()) {
+                    //防止被损坏
+                    l = 0;
+                    //标记为已损坏
+                    setBroken(stack);
+                }
+                stack.setDamage(l);
+                //耐久条显示变化
+                if (entity instanceof ServerPlayerEntity) {
+                    CriteriaTriggers.ITEM_DURABILITY_CHANGED.trigger((ServerPlayerEntity) entity, stack, l);
+                }
+            }
         }
-        return super.damageItem(stack, amount, entity, onBroken);
+        return 0;
     }
 
     @Override

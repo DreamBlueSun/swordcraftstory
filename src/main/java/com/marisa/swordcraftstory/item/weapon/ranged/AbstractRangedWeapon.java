@@ -6,14 +6,17 @@ import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.StoryUUID;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
@@ -80,7 +83,7 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {
-            PlayerEntity playerentity = (PlayerEntity)entityLiving;
+            PlayerEntity playerentity = (PlayerEntity) entityLiving;
 
             ItemStack itemstack = new ItemStack(Items.ARROW);
             int i = this.getUseDuration(stack) - timeLeft;
@@ -88,9 +91,9 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
             if (i < 0) return;
 
             float f = getArrowVelocity(i);
-            if (!((double)f < 0.1D)) {
+            if (!((double) f < 0.1D)) {
                 if (!worldIn.isRemote) {
-                    ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
+                    ArrowItem arrowitem = (ArrowItem) (itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
                     AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
                     abstractarrowentity = customArrow(abstractarrowentity);
                     abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
@@ -100,7 +103,7 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
 
                     int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
                     if (j > 0) {
-                        abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double)j * 0.5D + 0.5D);
+                        abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double) j * 0.5D + 0.5D);
                     }
 
                     int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
@@ -127,24 +130,31 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
 
     @Override
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
-        int maxDamage = stack.getMaxDamage();
         //已损坏时
         if (isBroken(stack)) {
-            //取消物品消失
-            stack.setDamage(maxDamage - 1);
+            //取消损伤
             return 0;
         }
-        //要损坏时
-        if (stack.getDamage() + amount >= maxDamage) {
-            //物品标记为已损坏
-            setBroken(stack);
-            //取消物品消失
-            stack.setDamage(maxDamage - 1);
-            return 0;
-        }
-        //不发生损坏时优先消耗dur
-        CompoundNBT tag = stack.getTag();
-        if (tag != null) {
+        if (stack.isDamageable()) {
+            //计算耐久附魔
+            if (amount > 0) {
+                int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
+                int j = 0;
+                for (int k = 0; i > 0 && k < amount; ++k) {
+                    if (UnbreakingEnchantment.negateDamage(stack, i, entity.getRNG())) {
+                        ++j;
+                    }
+                }
+                amount -= j;
+                if (amount <= 0) {
+                    return 0;
+                }
+            }
+            if (amount == 0) {
+                return 0;
+            }
+            //优先消耗dur
+            CompoundNBT tag = stack.getOrCreateTag();
             int dur = tag.getInt("story_combat_dur");
             if (dur > 0) {
                 if (dur < amount) {
@@ -156,8 +166,24 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
                     amount = 0;
                 }
             }
+            //后续消耗damage
+            if (amount > 0) {
+                int l = stack.getDamage() + amount;
+                //物品要损坏时
+                if (l >= stack.getMaxDamage()) {
+                    //防止被损坏
+                    l = 0;
+                    //标记为已损坏
+                    setBroken(stack);
+                }
+                stack.setDamage(l);
+                //耐久条显示变化
+                if (entity instanceof ServerPlayerEntity) {
+                    CriteriaTriggers.ITEM_DURABILITY_CHANGED.trigger((ServerPlayerEntity) entity, stack, l);
+                }
+            }
         }
-        return super.damageItem(stack, amount, entity, onBroken);
+        return 0;
     }
 
     @Override
