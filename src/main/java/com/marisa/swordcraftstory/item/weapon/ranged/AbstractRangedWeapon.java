@@ -7,16 +7,22 @@ import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.StoryUUID;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.BowItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.IntNBT;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -58,6 +64,65 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
         this.atk = atk;
         this.def = def;
         this.agl = agl;
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack itemstack = playerIn.getHeldItem(handIn);
+
+        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, true);
+        if (ret != null) return ret;
+
+        playerIn.setActiveHand(handIn);
+        return ActionResult.resultConsume(itemstack);
+    }
+
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+        if (entityLiving instanceof PlayerEntity) {
+            PlayerEntity playerentity = (PlayerEntity)entityLiving;
+
+            ItemStack itemstack = new ItemStack(Items.ARROW);
+            int i = this.getUseDuration(stack) - timeLeft;
+            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, true);
+            if (i < 0) return;
+
+            float f = getArrowVelocity(i);
+            if (!((double)f < 0.1D)) {
+                if (!worldIn.isRemote) {
+                    ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
+                    AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
+                    abstractarrowentity = customArrow(abstractarrowentity);
+                    abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+                    if (f == 1.0F) {
+                        abstractarrowentity.setIsCritical(true);
+                    }
+
+                    int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+                    if (j > 0) {
+                        abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double)j * 0.5D + 0.5D);
+                    }
+
+                    int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
+                    if (k > 0) {
+                        abstractarrowentity.setKnockbackStrength(k);
+                    }
+
+                    if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
+                        abstractarrowentity.setFire(100);
+                    }
+
+                    stack.damageItem(1, playerentity, (player) -> {
+                        player.sendBreakAnimation(playerentity.getActiveHand());
+                    });
+                    abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
+
+                    worldIn.addEntity(abstractarrowentity);
+                }
+
+                worldIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+            }
+        }
     }
 
     @Override
