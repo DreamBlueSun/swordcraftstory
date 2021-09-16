@@ -73,6 +73,11 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
 
+        if (isBroken(itemstack)) {
+            //损坏后将不能再使用正常攻击
+            return ActionResult.resultFail(itemstack);
+        }
+
         ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, true);
         if (ret != null) return ret;
 
@@ -115,9 +120,7 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
                         abstractarrowentity.setFire(100);
                     }
 
-                    stack.damageItem(1, playerentity, (player) -> {
-                        player.sendBreakAnimation(playerentity.getActiveHand());
-                    });
+                    stack.damageItem(1, playerentity, (player) -> player.sendBreakAnimation(playerentity.getActiveHand()));
                     abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
 
                     worldIn.addEntity(abstractarrowentity);
