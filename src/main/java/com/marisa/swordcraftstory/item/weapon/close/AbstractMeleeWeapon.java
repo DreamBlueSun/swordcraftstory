@@ -23,8 +23,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.IntNBT;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -113,6 +116,12 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
                     l = 0;
                     //标记为已损坏
                     setBroken(stack);
+                    //物品损坏声音
+                    if (entity instanceof ServerPlayerEntity) {
+                        ServerPlayerEntity playerEntity = (ServerPlayerEntity) entity;
+                        ServerWorld worldIn = playerEntity.getServerWorld();
+                        worldIn.playSound(null, playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+                    }
                 }
                 stack.setDamage(l);
                 //耐久条显示变化
