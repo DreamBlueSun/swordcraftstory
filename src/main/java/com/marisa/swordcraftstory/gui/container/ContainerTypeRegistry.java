@@ -19,11 +19,15 @@ public class ContainerTypeRegistry {
 
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Story.MOD_ID);
 
-
     public static final RegistryObject<ContainerType<WeaponMakeContainer>> WEAPON_MAKE_CONTAINER =
             CONTAINERS.register("weapon_make_container", () ->
                     IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
                             new WeaponMakeContainer(windowId, inv, data.readBlockPos(), new BlockPosIInt())));
+
+    public static final RegistryObject<ContainerType<WeaponIntensifyContainer>> WEAPON_INTENSIFY_CONTAINER =
+            CONTAINERS.register("weapon_intensify_container", () ->
+                    IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                            new WeaponIntensifyContainer(windowId, inv, data.readBlockPos(), new BlockPosIInt())));
 
     public static final RegistryObject<ContainerType<WeaponEdgeContainer>> WEAPON_EDGE_CONTAINER =
             CONTAINERS.register("weapon_edge_container", () ->

@@ -58,6 +58,7 @@ public class ItemRegistry {
     //方块物品
     public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_MAKE_BLOCK = ITEMS.register("weapon_make_block", () -> new BlockItem(BlockRegistry.WEAPON_MAKE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
+    public static RegistryObject<Item> WEAPON_INTENSIFY_BLOCK = ITEMS.register("weapon_intensify_block", () -> new BlockItem(BlockRegistry.WEAPON_INTENSIFY_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_EDGE_BLOCK = ITEMS.register("weapon_edge_block", () -> new BlockItem(BlockRegistry.WEAPON_EDGE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_COLLAPSE_BLOCK = ITEMS.register("weapon_collapse_block", () -> new BlockItem(BlockRegistry.WEAPON_COLLAPSE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));

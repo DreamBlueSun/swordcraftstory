@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BCB",
+    "BBB"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:smooth_stone"
+    },
+    "B": {
+      "item": "minecraft:dirt"
+    },
+    "C": {
+      "item": "minecraft:smithing_table"
+    }
+  },
+  "result": {
+    "item": "swordcraftstory:weapon_intensify_block",
+    "count": 1
+  }
+}

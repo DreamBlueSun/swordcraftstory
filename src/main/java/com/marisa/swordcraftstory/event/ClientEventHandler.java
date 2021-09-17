@@ -3,6 +3,7 @@ package com.marisa.swordcraftstory.event;
 import com.marisa.swordcraftstory.gui.container.ContainerTypeRegistry;
 import com.marisa.swordcraftstory.gui.screen.WeaponEdgeScreen;
 import com.marisa.swordcraftstory.gui.screen.WeaponCollapseScreen;
+import com.marisa.swordcraftstory.gui.screen.WeaponIntensifyScreen;
 import com.marisa.swordcraftstory.gui.screen.WeaponMakeScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,6 +21,7 @@ public class ClientEventHandler {
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         //注册Screen
         event.enqueueWork(() -> ScreenManager.registerFactory(ContainerTypeRegistry.WEAPON_MAKE_CONTAINER.get(), WeaponMakeScreen::new));
+        event.enqueueWork(() -> ScreenManager.registerFactory(ContainerTypeRegistry.WEAPON_INTENSIFY_CONTAINER.get(), WeaponIntensifyScreen::new));
         event.enqueueWork(() -> ScreenManager.registerFactory(ContainerTypeRegistry.WEAPON_EDGE_CONTAINER.get(), WeaponEdgeScreen::new));
         event.enqueueWork(() -> ScreenManager.registerFactory(ContainerTypeRegistry.WEAPON_COLLAPSE_CONTAINER.get(), WeaponCollapseScreen::new));
     }

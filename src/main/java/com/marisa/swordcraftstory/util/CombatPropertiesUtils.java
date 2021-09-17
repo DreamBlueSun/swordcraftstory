@@ -1,5 +1,7 @@
 package com.marisa.swordcraftstory.util;
 
+import com.marisa.swordcraftstory.item.intensify.Intensifys;
+import com.marisa.swordcraftstory.item.intensify.obj.IntensifyAttr;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -10,6 +12,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -79,6 +82,61 @@ public class CombatPropertiesUtils {
                 .appendString("     ").appendSibling(new TranslationTextComponent(getTec(stack) + "/" + Weapon.MAX_TEC).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(weapon.getDur(stack) + "/" + weapon.getDurMax(stack)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+        //强化字段显示
+        List<String> list = getIntensifyName(stack);
+        if (list != null) {
+            for (String show : list) {
+                tooltip.add(new TranslationTextComponent("强化[" + show + "]").mergeStyle(TextFormatting.AQUA));
+            }
+        }
+    }
+
+    /**
+     * 判断可以进行强化武器（3次上限）
+     */
+    public static boolean canIntensifyAttr(ItemStack stack) {
+        CompoundNBT tag = stack.getOrCreateTag();
+        if (tag.contains("story_combat_intensify")) {
+            ListNBT listNBT = (ListNBT) tag.get("story_combat_intensify");
+            return listNBT.size() < 3;
+        }
+        return true;
+    }
+
+    /**
+     * 强化武器
+     */
+    public static void intensifyAttr(ItemStack stack, IntensifyAttr attr) {
+        intensifyEdgeAtk(stack, attr.getAtk());
+        intensifyEdgeDef(stack, attr.getDef());
+        intensifyEdgeAgl(stack, attr.getAgl());
+        intensifyEdgeDur(stack, attr.getDur());
+        //添加强化NBT
+        CompoundNBT tag = stack.getOrCreateTag();
+        ListNBT listNBT;
+        if (tag.contains("story_combat_intensify")) {
+            listNBT = (ListNBT) tag.get("story_combat_intensify").copy();
+        } else {
+            listNBT = new ListNBT();
+        }
+        listNBT.add(IntNBT.valueOf(attr.getId()));
+        tag.put("story_combat_intensify", listNBT);
+    }
+
+    /**
+     * 获取强化展示名称列表
+     */
+    public static List<String> getIntensifyName(ItemStack stack) {
+        CompoundNBT tag = stack.getOrCreateTag();
+        if (tag.contains("story_combat_intensify")) {
+            List<String> list = new ArrayList<>();
+            ListNBT listNBT = (ListNBT) tag.get("story_combat_intensify").copy();
+            for (int i = 0; i < listNBT.size(); i++) {
+                list.add(Intensifys.getById(listNBT.getInt(i)).getShow());
+            }
+            return list;
+        }
+        return null;
     }
 
     public static int getAtk(ItemStack stack) {
@@ -94,14 +152,10 @@ public class CombatPropertiesUtils {
         stack.setTagInfo("story_combat_atk", IntNBT.valueOf(amount));
     }
 
-    public static void intensifyEdgeAtk(ItemStack stack) {
-        int v = 0;
-        CompoundNBT tag = stack.getTag();
-        if (tag != null) {
-            v = tag.getInt("story_combat_atk");
-        }
-        stack.setTagInfo("story_combat_atk", IntNBT.valueOf(v + Weapon.INTENSIFY_EDGE_ONCE_NUM_ATK));
-        clearTec(stack);
+    public static void intensifyEdgeAtk(ItemStack stack, int amount) {
+        CompoundNBT tag = stack.getOrCreateTag();
+        int v = tag.getInt("story_combat_atk");
+        stack.setTagInfo("story_combat_atk", IntNBT.valueOf(v + amount));
     }
 
     public static int getDef(ItemStack stack) {
@@ -117,14 +171,10 @@ public class CombatPropertiesUtils {
         stack.setTagInfo("story_combat_def", IntNBT.valueOf(amount));
     }
 
-    public static void intensifyEdgeDef(ItemStack stack) {
-        int v = 0;
-        CompoundNBT tag = stack.getTag();
-        if (tag != null) {
-            v = tag.getInt("story_combat_def");
-        }
-        stack.setTagInfo("story_combat_def", IntNBT.valueOf(v + Weapon.INTENSIFY_EDGE_ONCE_NUM_DEF));
-        clearTec(stack);
+    public static void intensifyEdgeDef(ItemStack stack, int amount) {
+        CompoundNBT tag = stack.getOrCreateTag();
+        int v = tag.getInt("story_combat_def");
+        stack.setTagInfo("story_combat_def", IntNBT.valueOf(v + amount));
     }
 
     public static int getPhy(ItemStack stack) {
@@ -149,14 +199,10 @@ public class CombatPropertiesUtils {
         stack.setTagInfo("story_combat_agl", IntNBT.valueOf(amount));
     }
 
-    public static void intensifyEdgeAgl(ItemStack stack) {
-        int v = 0;
-        CompoundNBT tag = stack.getTag();
-        if (tag != null) {
-            v = tag.getInt("story_combat_agl");
-        }
-        stack.setTagInfo("story_combat_agl", IntNBT.valueOf(v + Weapon.INTENSIFY_EDGE_ONCE_NUM_AGL));
-        clearTec(stack);
+    public static void intensifyEdgeAgl(ItemStack stack, int amount) {
+        CompoundNBT tag = stack.getOrCreateTag();
+        int v = tag.getInt("story_combat_agl");
+        stack.setTagInfo("story_combat_agl", IntNBT.valueOf(v + amount));
     }
 
     public static int getDur(ItemStack stack) {
@@ -185,14 +231,10 @@ public class CombatPropertiesUtils {
         stack.setTagInfo("story_combat_dur_max", IntNBT.valueOf(amount));
     }
 
-    public static void intensifyEdgeDur(ItemStack stack) {
-        int v = 0;
-        CompoundNBT tag = stack.getTag();
-        if (tag != null) {
-            v = tag.getInt("story_combat_dur_max");
-        }
-        stack.setTagInfo("story_combat_dur_max", IntNBT.valueOf(v + Weapon.INTENSIFY_EDGE_ONCE_NUM_DUR));
-        clearTec(stack);
+    public static void intensifyEdgeDur(ItemStack stack, int amount) {
+        CompoundNBT tag = stack.getOrCreateTag();
+        int v = tag.getInt("story_combat_dur_max");
+        stack.setTagInfo("story_combat_dur_max", IntNBT.valueOf(v + amount));
     }
 
     public static int getTec(ItemStack stack) {

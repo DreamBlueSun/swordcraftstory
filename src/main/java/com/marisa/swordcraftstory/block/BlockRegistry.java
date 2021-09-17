@@ -18,6 +18,7 @@ public class BlockRegistry {
 
     public static RegistryObject<Block> STORY_ORE_BLOCK = BLOCKS.register("story_ore_block", StoryOreBlock::new);
     public static RegistryObject<Block> WEAPON_MAKE_BLOCK = BLOCKS.register("weapon_make_block", WeaponMakeBlock::new);
+    public static RegistryObject<Block> WEAPON_INTENSIFY_BLOCK = BLOCKS.register("weapon_intensify_block", WeaponIntensifyBlock::new);
     public static RegistryObject<Block> WEAPON_EDGE_BLOCK = BLOCKS.register("weapon_edge_block", WeaponEdgeBlock::new);
     public static RegistryObject<Block> WEAPON_COLLAPSE_BLOCK = BLOCKS.register("weapon_collapse_block", WeaponCollapseBlock::new);
     public static RegistryObject<Block> REPAIR_BLOCK = BLOCKS.register("repair_block", RepairBlock::new);
