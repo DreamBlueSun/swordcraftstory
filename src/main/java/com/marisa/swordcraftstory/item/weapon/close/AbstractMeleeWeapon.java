@@ -1,33 +1,22 @@
 package com.marisa.swordcraftstory.item.weapon.close;
 
-import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.item.weapon.WeaponCommonFunction;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
-import com.marisa.swordcraftstory.util.StoryUUID;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.IntNBT;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -71,66 +60,7 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
 
     @Override
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
-        //已损坏时
-        if (isBroken(stack)) {
-            //取消损伤
-            return 0;
-        }
-        if (stack.isDamageable()) {
-            //计算耐久附魔
-            if (amount > 0) {
-                int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
-                int j = 0;
-                for (int k = 0; i > 0 && k < amount; ++k) {
-                    if (UnbreakingEnchantment.negateDamage(stack, i, entity.getRNG())) {
-                        ++j;
-                    }
-                }
-                amount -= j;
-                if (amount <= 0) {
-                    return 0;
-                }
-            }
-            if (amount == 0) {
-                return 0;
-            }
-            //优先消耗dur
-            CompoundNBT tag = stack.getOrCreateTag();
-            int dur = tag.getInt("story_combat_dur");
-            if (dur > 0) {
-                if (dur < amount) {
-                    stack.setTagInfo("story_combat_dur", IntNBT.valueOf(0));
-                    amount -= dur;
-                } else {
-                    dur -= amount;
-                    stack.setTagInfo("story_combat_dur", IntNBT.valueOf(dur));
-                    amount = 0;
-                }
-            }
-            //后续消耗damage
-            if (amount > 0) {
-                int l = stack.getDamage() + amount;
-                //物品要损坏时
-                if (l >= stack.getMaxDamage()) {
-                    //防止被损坏
-                    l = 0;
-                    //标记为已损坏
-                    setBroken(stack);
-                    //物品损坏声音
-                    if (entity instanceof ServerPlayerEntity) {
-                        ServerPlayerEntity playerEntity = (ServerPlayerEntity) entity;
-                        ServerWorld worldIn = playerEntity.getServerWorld();
-                        worldIn.playSound(null, playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
-                    }
-                }
-                stack.setDamage(l);
-                //耐久条显示变化
-                if (entity instanceof ServerPlayerEntity) {
-                    CriteriaTriggers.ITEM_DURABILITY_CHANGED.trigger((ServerPlayerEntity) entity, stack, l);
-                }
-            }
-        }
-        return 0;
+        return WeaponCommonFunction.damageItem(stack, amount, entity, random);
     }
 
     @Override
@@ -142,13 +72,7 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(final EquipmentSlotType equipmentSlot, final ItemStack stack) {
         if (equipmentSlot == EquipmentSlotType.MAINHAND) {
-            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-            builder.putAll(super.getAttributeModifiers(EquipmentSlotType.MAINHAND));
-            builder.put(Attributes.ARMOR, new AttributeModifier(StoryUUID.ARMOR, "Armor armor modifier", getDef(stack), AttributeModifier.Operation.ADDITION));
-            if (getAgl(stack) != 0) {
-                builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (Weapon.AGL_SPEED_BASE_NUM * getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
-            }
-            return builder.build();
+            return WeaponCommonFunction.attributeModifierBuild(stack, super.getAttributeModifiers(EquipmentSlotType.MAINHAND));
         }
         return super.getAttributeModifiers(equipmentSlot, stack);
     }
