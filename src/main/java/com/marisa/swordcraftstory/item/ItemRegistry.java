@@ -3,21 +3,20 @@ package com.marisa.swordcraftstory.item;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.weapon.close.sword.*;
-import com.marisa.swordcraftstory.item.weapon.ranged.bow.*;
-import com.marisa.swordcraftstory.item.material.DopaticStone;
-import com.marisa.swordcraftstory.item.material.GrassLeaves;
-import com.marisa.swordcraftstory.item.material.OmegaStone;
-import com.marisa.swordcraftstory.item.material.SoftLeather;
+import com.marisa.swordcraftstory.item.material.*;
 import com.marisa.swordcraftstory.item.mould.close.sword.SwordMould;
 import com.marisa.swordcraftstory.item.mould.ranged.bow.BowMould;
 import com.marisa.swordcraftstory.item.ore.*;
 import com.marisa.swordcraftstory.item.repair.HardStone;
 import com.marisa.swordcraftstory.item.repair.SharpStone;
 import com.marisa.swordcraftstory.item.repair.knifeStone;
+import com.marisa.swordcraftstory.item.reply.JiJaMedicine;
+import com.marisa.swordcraftstory.item.reply.JuYuMedicine;
 import com.marisa.swordcraftstory.item.reply.Woundplast;
 import com.marisa.swordcraftstory.item.special.Hammer;
 import com.marisa.swordcraftstory.item.special.SwordGuake;
+import com.marisa.swordcraftstory.item.weapon.close.sword.*;
+import com.marisa.swordcraftstory.item.weapon.ranged.bow.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -78,10 +77,16 @@ public class ItemRegistry {
     public static RegistryObject<Item> HARD_STONE = ITEMS.register("hard_stone", HardStone::new);
     //回复道具
     public static RegistryObject<Item> WOUNDPLAST = ITEMS.register("woundplast", Woundplast::new);
+    public static RegistryObject<Item> JI_JA_MEDICINE = ITEMS.register("ji_ja_medicine", JiJaMedicine::new);
+    public static RegistryObject<Item> JU_YU_MEDICINE = ITEMS.register("ju_yu_medicine", JuYuMedicine::new);
     //素材道具
     public static RegistryObject<Item> OMEGA_STONE = ITEMS.register("omega_stone", OmegaStone::new);
     public static RegistryObject<Item> DOPATIC_STONE = ITEMS.register("dopatic_stone", DopaticStone::new);
+    public static RegistryObject<Item> JI_JA_FRUIT = ITEMS.register("ji_ja_fruit", JiJaFruit::new);
+    public static RegistryObject<Item> JU_YU_FRUIT = ITEMS.register("ju_yu_fruit", JuYuFruit::new);
     public static RegistryObject<Item> GRASS_LEAVES = ITEMS.register("grass_leaves", GrassLeaves::new);
+    public static RegistryObject<Item> SOFT_LEAVES = ITEMS.register("soft_leaves", SoftLeaves::new);
+    public static RegistryObject<Item> SWEET_HONEY = ITEMS.register("sweet_honey", SweetHoney::new);
     public static RegistryObject<Item> SOFT_LEATHER = ITEMS.register("soft_leather", SoftLeather::new);
     //素材矿石
     public static RegistryObject<Item> IRON_ORE = ITEMS.register("iron_ore", IronOre::new);

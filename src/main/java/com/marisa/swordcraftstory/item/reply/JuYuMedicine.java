@@ -15,14 +15,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 创可贴
+ * 鸠幽药
  */
 
-public class Woundplast extends ReplyItem {
+public class JuYuMedicine extends ReplyItem {
 
-    private static final float HEAL_NUM = 200.0F;
+    private static final float HEAL_NUM = 450.0F;
 
-    public Woundplast() {
+    public JuYuMedicine() {
         super(HEAL_NUM);
     }
 
@@ -30,11 +30,11 @@ public class Woundplast extends ReplyItem {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent("贴在伤口上可以回复少量HP").mergeStyle(TextFormatting.WHITE));
+        tooltip.add(new TranslationTextComponent("非常美味喝了以后HP回复").mergeStyle(TextFormatting.WHITE));
     }
 
     @Override
     public UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
+        return UseAction.DRINK;
     }
 }

@@ -1,9 +1,8 @@
-package com.marisa.swordcraftstory.item.reply;
+package com.marisa.swordcraftstory.item.material;
 
-
+import com.marisa.swordcraftstory.group.StoryGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -15,26 +14,18 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 创可贴
+ * 基迦的果实
  */
 
-public class Woundplast extends ReplyItem {
-
-    private static final float HEAL_NUM = 200.0F;
-
-    public Woundplast() {
-        super(HEAL_NUM);
+public class JiJaFruit extends MaterialItem {
+    public JiJaFruit() {
+        super(new Properties().group(StoryGroup.COMBAT_GROUP));
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent("贴在伤口上可以回复少量HP").mergeStyle(TextFormatting.WHITE));
-    }
-
-    @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
+        tooltip.add(new TranslationTextComponent("有点酸酸的不过散发着诱人的香气").mergeStyle(TextFormatting.WHITE));
     }
 }
