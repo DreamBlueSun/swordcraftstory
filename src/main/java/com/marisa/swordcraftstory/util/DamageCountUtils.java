@@ -127,13 +127,13 @@ public class DamageCountUtils {
         Defense defense = defense(target);
         //结果
         float count = count(damage, defense);
-        //举盾时消耗受到伤害值50%的耐久来抵挡90%的伤害
+        //举盾时消耗受到伤害值5%的耐久来抵挡90%的伤害
         if (target instanceof LivingEntity && ((LivingEntity) target).isHandActive()) {
             LivingEntity livingEntity = (LivingEntity) target;
             Hand handIn = livingEntity.getActiveHand();
             ItemStack stack = livingEntity.getHeldItem(handIn);
             if (!stack.isEmpty() && stack.getItem() instanceof ShieldItem) {
-                stack.damageItem(Math.max((int) count / 2, 1), livingEntity, (entity) -> entity.sendBreakAnimation(handIn));
+                stack.damageItem(Math.max((int) count / 20, 1), livingEntity, (entity) -> entity.sendBreakAnimation(handIn));
                 count = count / 10;
                 //举盾伤害不足1时不受伤
                 count = count > 1.0F ? count : 0.0F;
