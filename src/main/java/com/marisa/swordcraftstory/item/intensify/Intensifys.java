@@ -8,11 +8,18 @@ public enum Intensifys {
 
     UNKNOWN(0, "未知"),
     IRON_ORE(1, "铁矿石"),
-    BIG_ORE(2, "大矿石"),
-    ARGENIR_ORE(3, "阿吉尼尔矿"),
-    WINGS_FOSSIL_ORE(4, "翅膀化石"),
-    UKA_ORE(5, "尤佳矿石"),
-    PRETTY_ORE(6, "漂亮原石");
+    SLANDER_ORE(2, "斯兰德原石"),
+    HARD_ORE(3, "加德英矿石"),
+    ARGENIR_ORE(4, "阿吉尼尔矿"),
+    BIG_ORE(5, "大矿石"),
+    ELPHUS_ORE(6, "艾尔弗伊斯原石"),
+    WINGS_FOSSIL_ORE(7, "翅膀化石"),
+    CUT_IRON_ORE(8, "斩铁矿"),
+    BIG_IRON_ORE(9, "大铁矿石"),
+    HEAVY_GOLD_ORE(10, "重金矿"),
+    REGIA_ORE(11, "雷吉亚矿"),
+    UKA_ORE(12, "尤佳矿石"),
+    PRETTY_ORE(13, "漂亮原石");
 
     private int id;
     private String show;

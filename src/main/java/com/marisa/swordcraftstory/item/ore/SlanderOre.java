@@ -2,6 +2,8 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
+import com.marisa.swordcraftstory.item.intensify.Intensifys;
+import com.marisa.swordcraftstory.item.intensify.obj.IntensifyAttr;
 import com.marisa.swordcraftstory.item.mould.Mould;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import net.minecraft.client.util.ITooltipFlag;
@@ -100,5 +102,10 @@ public class SlanderOre extends AbstractOre {
             default:
                 return 0;
         }
+    }
+
+    @Override
+    public IntensifyAttr getIntensifyAttr() {
+        return new IntensifyAttr(Intensifys.SLANDER_ORE.getId(), Intensifys.SLANDER_ORE.getShow(), 0, 5, 0, 0);
     }
 }

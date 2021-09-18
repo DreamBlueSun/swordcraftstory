@@ -2,7 +2,6 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.intensify.Intensify;
 import com.marisa.swordcraftstory.item.intensify.Intensifys;
 import com.marisa.swordcraftstory.item.intensify.obj.IntensifyAttr;
 import com.marisa.swordcraftstory.item.mould.Mould;
@@ -24,7 +23,7 @@ import java.util.List;
  * 漂亮原石
  */
 
-public class PrettyOre extends AbstractOre implements Intensify {
+public class PrettyOre extends AbstractOre {
 
     public PrettyOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));
@@ -108,7 +107,6 @@ public class PrettyOre extends AbstractOre implements Intensify {
 
     @Override
     public IntensifyAttr getIntensifyAttr() {
-        //fixme 此矿石有强化技能
         return new IntensifyAttr(Intensifys.PRETTY_ORE.getId(), Intensifys.PRETTY_ORE.getShow(), 4, 4, 0, 8);
     }
 }

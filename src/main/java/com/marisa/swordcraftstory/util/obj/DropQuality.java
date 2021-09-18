@@ -21,12 +21,17 @@ public class DropQuality {
         LIST_ORE_RANK_1 = new ArrayList<>();
         LIST_ORE_RANK_1.add(ItemRegistry.IRON_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_1.add(ItemRegistry.SLANDER_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_1.add(ItemRegistry.HARD_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_2 = new ArrayList<>();
         LIST_ORE_RANK_2.add(ItemRegistry.ARGENIR_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_2.add(ItemRegistry.BIG_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_2.add(ItemRegistry.ELPHUS_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_2.add(ItemRegistry.WINGS_FOSSIL_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_3 = new ArrayList<>();
+        LIST_ORE_RANK_3.add(ItemRegistry.CUT_IRON_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_3.add(ItemRegistry.BIG_IRON_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_3.add(ItemRegistry.HEAVY_GOLD_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_3.add(ItemRegistry.REGIA_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_3.add(ItemRegistry.UKA_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_3.add(ItemRegistry.PRETTY_ORE.get().getDefaultInstance());
     }

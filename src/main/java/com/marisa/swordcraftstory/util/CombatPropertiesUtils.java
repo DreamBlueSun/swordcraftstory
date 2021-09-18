@@ -26,6 +26,11 @@ public class CombatPropertiesUtils {
         tooltip.add(new TranslationTextComponent("最适合初心者的练习用武器").mergeStyle(TextFormatting.WHITE));
     }
 
+    //硬武器Information
+    public static void tipHard(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("小小的又轻又坚固用起来很顺手").mergeStyle(TextFormatting.WHITE));
+    }
+
     //细的武器Information
     public static void tipThin(List<ITextComponent> tooltip) {
         tooltip.add(new TranslationTextComponent("虽然细但比想象的更坚固").mergeStyle(TextFormatting.WHITE));
@@ -49,6 +54,26 @@ public class CombatPropertiesUtils {
     //羽毛武器Information
     public static void tipFeather(List<ITextComponent> tooltip) {
         tooltip.add(new TranslationTextComponent("像羽毛一样轻很好用的武器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //斩铁武器Information
+    public static void tipCutIron(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("考虑到空气阻力而设计的武器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //大铁矿石武器Information
+    public static void tipBigIron(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("非常巨大沉重使用困难").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //重金矿武器Information
+    public static void tipHeavyGold(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("充满了难以使用的重量与压迫感").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //雷吉亚矿武器Information
+    public static void tipRegia(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("很好用的武器深受冒险者青睐").mergeStyle(TextFormatting.WHITE));
     }
 
     //典雅武器Information

@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
+import com.marisa.swordcraftstory.item.intensify.Intensify;
 import com.marisa.swordcraftstory.item.intensify.Intensifys;
 import com.marisa.swordcraftstory.item.intensify.obj.IntensifyAttr;
 import com.marisa.swordcraftstory.item.mould.Mould;
@@ -20,12 +21,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * 艾尔弗伊斯原石
+ * 斩铁矿
  */
 
-public class ElphusOre extends AbstractOre {
+public class CutIronOre extends AbstractOre implements Intensify {
 
-    public ElphusOre() {
+    public CutIronOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));
     }
 
@@ -33,7 +34,7 @@ public class ElphusOre extends AbstractOre {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent("敲击之后会发出好听的声音").mergeStyle(TextFormatting.WHITE));
+        tooltip.add(new TranslationTextComponent("品质上乘但较难加工的矿石").mergeStyle(TextFormatting.WHITE));
     }
 
     @Override
@@ -41,10 +42,10 @@ public class ElphusOre extends AbstractOre {
         ItemStack stack;
         switch (((Mould) mouldStack.getItem()).type()) {
             case BOW:
-                stack = ItemRegistry.SYNTHESIS_BOW.get().getDefaultInstance();
+                stack = ItemRegistry.CUT_IRON_BOW.get().getDefaultInstance();
                 break;
             case SWORD:
-                stack = ItemRegistry.SYNTHESIS_SWORD.get().getDefaultInstance();
+                stack = ItemRegistry.CUT_IRON_SWORD.get().getDefaultInstance();
                 break;
             default:
                 stack = Items.AIR.getDefaultInstance();
@@ -55,16 +56,15 @@ public class ElphusOre extends AbstractOre {
 
     @Override
     public int rank() {
-        return 2;
+        return 3;
     }
 
     @Override
     public int atk(WeaponType type) {
         switch (type) {
             case BOW:
-                return 21;
             case SWORD:
-                return 24;
+                return 28;
             default:
                 return 0;
         }
@@ -74,9 +74,9 @@ public class ElphusOre extends AbstractOre {
     public int def(WeaponType type) {
         switch (type) {
             case BOW:
-                return 6;
+                return 8;
             case SWORD:
-                return 17;
+                return 20;
             default:
                 return 0;
         }
@@ -86,7 +86,7 @@ public class ElphusOre extends AbstractOre {
     public int agl(WeaponType type) {
         switch (type) {
             case BOW:
-                return -5;
+                return -20;
             case SWORD:
             default:
                 return 0;
@@ -97,9 +97,9 @@ public class ElphusOre extends AbstractOre {
     public int dur(WeaponType type) {
         switch (type) {
             case BOW:
-                return 61;
+                return 65;
             case SWORD:
-                return 74;
+                return 75;
             default:
                 return 0;
         }
@@ -107,6 +107,6 @@ public class ElphusOre extends AbstractOre {
 
     @Override
     public IntensifyAttr getIntensifyAttr() {
-        return new IntensifyAttr(Intensifys.ELPHUS_ORE.getId(), Intensifys.ELPHUS_ORE.getShow(), 5, 5, 0, 0);
+        return new IntensifyAttr(Intensifys.CUT_IRON_ORE.getId(), Intensifys.CUT_IRON_ORE.getShow(), 7, 0, 0, 0);
     }
 }

@@ -2,7 +2,6 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.intensify.Intensify;
 import com.marisa.swordcraftstory.item.intensify.Intensifys;
 import com.marisa.swordcraftstory.item.intensify.obj.IntensifyAttr;
 import com.marisa.swordcraftstory.item.mould.Mould;
@@ -24,7 +23,7 @@ import java.util.List;
  * 尤佳矿石
  */
 
-public class UkaOre extends AbstractOre implements Intensify {
+public class UkaOre extends AbstractOre {
 
     public UkaOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));
