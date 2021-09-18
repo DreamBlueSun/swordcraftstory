@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
+import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.util.obj.Damage;
 import com.marisa.swordcraftstory.util.obj.Defense;
 import net.minecraft.entity.Entity;
@@ -55,49 +56,71 @@ public class DamageCountUtils {
                 break;
             case "inFire":
             case "onFire":
-                damage.setM(10.0F);
+                damage.setM(fixedDamageUp(target, 5.0F, 5));
             case "fireball":
-                damage.setM(20.0F);
+                damage.setM(fixedDamageUp(source.getTrueSource(), 10.0F, 6));
                 break;
             case "lightningBolt":
-                damage.setM(30.0F);
+                damage.setM(60.0F);
                 break;
             case "magic":
+                //无来源魔法
+                damage.setM(fixedDamageUp(target, amount, Math.max((int) amount, 1)));
+                break;
             case "indirectMagic":
+                //间接有来源魔法
             case "dragonBreath":
-                damage.setM(amount);
+                //龙息
+                damage.setM(fixedDamageUp(source.getTrueSource(), amount, Math.max((int) amount, 1)));
                 break;
             case "fall":
+                //摔落
             case "flyIntoWall":
+                //飞翔撞墙
+                damage.setR(fixedDamageUp(target, amount, Math.max((int) amount, 1)));
             case "generic":
+                //属性？？？
             case "anvil":
+                //铁砧
             case "fallingBlock":
+                //方块掉落
                 damage.setR(amount);
                 break;
             case "drown":
+                //溺水
             case "dryout":
+                //干涸
             case "wither":
+                //凋零
             case "explosion":
+                //特殊爆炸
             case "hotFloor":
+                //熔岩块
             case "inWall":
+                //墙内
             case "cramming":
+                //拥挤
             case "cactus":
-                damage.setR(2.0F);
+                //仙人掌
+                damage.setR(fixedDamageUp(target, 2.0F, 4));
                 break;
             case "starve":
-                damage.setR(4.0F);
+                //饥饿
+                damage.setR(fixedDamageUp(target, 4.0F, 8));
                 break;
             case "lava":
-                damage.setR(10.0F);
+                //岩浆
+                damage.setR(fixedDamageUp(target, 5.0F, 10));
                 break;
             case "explosion.player":
-                damage.setR(50.0F);
+                //爆炸
+                damage.setR(fixedDamageUp(source.getTrueSource(), 50.0F, 20));
                 break;
             case "outOfWorld":
                 damage.setR(9999.0F);
                 break;
             default:
-                damage.setR(1.0F);
+                damage.setR(fixedDamageUp(target, 1.0F, 1));
                 break;
         }
         //计算防御
@@ -232,12 +255,36 @@ public class DamageCountUtils {
      **/
     private static void mobDamage(MobEntity e, Damage damage) {
         try {
-            damage.setP((int) e.getAttributeManager().getAttributeValue(Attributes.ATTACK_DAMAGE));
+            AttributeModifierManager manager = e.getAttributeManager();
+            if (manager.hasAttributeInstance(Attributes.ATTACK_DAMAGE)) {
+                damage.setP((int) manager.getAttributeValue(Attributes.ATTACK_DAMAGE));
+            } else {
+                int lv = MobAttributesUtils.getLvByName(e.getDisplayName().getString());
+                damage.setP(lv * 9);
+            }
         } catch (Exception ex) {
             AttributeModifierManager attributeManager = e.getAttributeManager();
             Story.LOG.info("原版怪物伤害计算-异常数据{}", attributeManager.toString());
             damage.setP(1.0F);
         }
+    }
+
+    /**
+     * 固定伤害根据实体等级增幅
+     */
+    private static float fixedDamageUp(Entity entity, float amount, int offset) {
+        int lv = 0;
+        if (entity instanceof PlayerEntity) {
+            PlayerEntity playerEntity = (PlayerEntity) entity;
+            lv = StoryPlayerDataManager.getLv(StoryPlayerDataManager.get(playerEntity.getCachedUniqueIdString()).getXp());
+        } else if (entity instanceof MobEntity) {
+            MobEntity mobEntity = (MobEntity) entity;
+            lv = MobAttributesUtils.getLvByName(mobEntity.getDisplayName().getString());
+        }
+        if (lv > 0) {
+            amount += lv * offset;
+        }
+        return amount;
     }
 
     /**

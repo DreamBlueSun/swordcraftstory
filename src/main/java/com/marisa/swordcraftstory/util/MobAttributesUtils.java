@@ -20,20 +20,20 @@ import java.util.Random;
 public class MobAttributesUtils {
 
     public static void onJoinWorld(PlayerEntity closestPlayer, MobEntity mobEntity) {
-        if (closestPlayer != null) {
-            //mob实体加入世界时，根据最近玩家等级增加属性
-            int lv = mobSpanLv(closestPlayer);
-            modifyMobAttr(mobEntity, lv);
-            //生成完毕后自定义名称
-            mobEntity.setCustomName(new TranslationTextComponent("[" + mobEntity.getDisplayName().getString() + "]").mergeStyle(TextFormatting.RED)
-                    .appendSibling(new TranslationTextComponent("LV").mergeStyle(TextFormatting.WHITE))
-                    .appendSibling(new TranslationTextComponent(String.valueOf(lv)).mergeStyle(TextFormatting.GREEN)));
-        } else if (mobEntity.hasCustomName() && !mobEntity.getDisplayName().getStyle().isEmpty()) {
+        if (mobEntity.hasCustomName() && !mobEntity.getDisplayName().getStyle().isEmpty()) {
             //没有玩家(例如世界加载完毕时)时如果有自定义名称、Style不为Empty并且名称格式正确，从名称恢复等级
             int lv = getLvByName(mobEntity.getDisplayName().getString());
             if (lv > 0) {
                 modifyMobAttr(mobEntity, lv);
             }
+        } else {
+            //mob实体加入世界时，根据最近玩家等级增加属性
+            int lv = closestPlayer != null ? mobSpanLv(closestPlayer) : 0;
+            modifyMobAttr(mobEntity, lv);
+            //生成完毕后自定义名称
+            mobEntity.setCustomName(new TranslationTextComponent("[" + mobEntity.getDisplayName().getString() + "]").mergeStyle(TextFormatting.RED)
+                    .appendSibling(new TranslationTextComponent("LV").mergeStyle(TextFormatting.WHITE))
+                    .appendSibling(new TranslationTextComponent(String.valueOf(lv)).mergeStyle(TextFormatting.GREEN)));
         }
     }
 
@@ -64,17 +64,17 @@ public class MobAttributesUtils {
 
     private static void modifyMobAttr(MobEntity mobEntity, int lv) {
         int maxHealthAdd = lv * 70;
-        int attackDamageAdd = lv * 6;
+        int attackDamageAdd = lv * 9;
         int armorAdd = lv;
         //如果原mob血量大于等于80(判定为BOSS生物)，则血量额外增加、攻击额外增加、防御额外增加
-        if (mobEntity.getMaxHealth() >= 80) {
+        boolean isBoos = mobEntity.getMaxHealth() >= 80;
+        if (isBoos) {
             maxHealthAdd += mobEntity.getMaxHealth() * 7;
             attackDamageAdd += lv * 3;
             armorAdd += lv;
         }
         //如果生物血量已经大于等于要增加的量，则取消
-        maxHealthAdd -= (int) mobEntity.getAttributeValue(Attributes.MAX_HEALTH);
-        if (maxHealthAdd <= 0) {
+        if (maxHealthAdd <= (int) mobEntity.getAttributeValue(Attributes.MAX_HEALTH)) {
             return;
         }
         //设置mob属性值
@@ -83,8 +83,8 @@ public class MobAttributesUtils {
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier("attack damage modifier", attackDamageAdd, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR, new AttributeModifier("armor modifier", armorAdd, AttributeModifier.Operation.ADDITION));
         mobEntity.getAttributeManager().reapplyModifiers(builder.build());
-        //未之定义名称或自定义名称没有样式时，判定为新生成mob，恢复生命值到最大
-        if (!mobEntity.hasCustomName() || mobEntity.getDisplayName().getStyle().isEmpty()) {
+        //是boss或者   未之定义名称或自定义名称没有样式时（判定为新生成mob），恢复生命值到最大
+        if (isBoos || !mobEntity.hasCustomName() || mobEntity.getDisplayName().getStyle().isEmpty()) {
             mobEntity.heal(mobEntity.getMaxHealth());
         }
     }
