@@ -54,9 +54,10 @@ public class StoryPlayerData implements Serializable {
      * 检查升级
      */
     public void checkLvUp(PlayerEntity player) {
-        int lvOffset = StoryPlayerDataManager.getLv(this.xp) - StoryPlayerDataManager.getLv(this.xpLast);
+        int lv = StoryPlayerDataManager.getLv(this.xp);
+        int lvOffset = lv - StoryPlayerDataManager.getLv(this.xpLast);
         if (lvOffset > 0) {
-            PlayerAttributesUtils.onLevelUp(player, lvOffset, true);
+            PlayerAttributesUtils.onLevelUp(player, lv, true);
         }
     }
 

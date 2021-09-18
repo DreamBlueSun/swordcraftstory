@@ -19,10 +19,11 @@ public class PlayerAttributesUtils {
         onLevelUp(player, lv, heal);
     }
 
-    public static void onLevelUp(PlayerEntity player, int lvOffset, boolean heal) {
-        final int maxHealthAdd = lvOffset * 40;
-        //如果玩家血量已经大于等于要增加的血量，则取消
-        if ((int) player.getAttributeValue(Attributes.MAX_HEALTH) >= maxHealthAdd) {
+    public static void onLevelUp(PlayerEntity player, int lv, boolean heal) {
+        final int maxHealth = 20 + lv * 40;
+        //计算要增加的血量
+        int maxHealthAdd = maxHealth - (int) player.getAttributeValue(Attributes.MAX_HEALTH);
+        if (maxHealthAdd <= 0) {
             return;
         }
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
