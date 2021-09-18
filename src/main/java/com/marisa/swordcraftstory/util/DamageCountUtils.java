@@ -65,13 +65,23 @@ public class DamageCountUtils {
                 break;
             case "magic":
                 //无来源魔法
-                damage.setM(fixedDamageUp(target, amount, Math.max((int) amount, 1)));
+                if (amount > 12.0F) {
+                    //限制其他模组过高伤害
+                    damage.setM(fixedDamageUp(target, 8.0F, 4));
+                } else {
+                    damage.setM(fixedDamageUp(target, amount, Math.max((int) amount, 1)));
+                }
                 break;
             case "indirectMagic":
                 //间接有来源魔法
             case "dragonBreath":
                 //龙息
-                damage.setM(fixedDamageUp(source.getTrueSource(), amount, Math.max((int) amount, 1)));
+                if (amount > 12.0F) {
+                    //限制其他模组高的离谱的魔法伤害
+                    damage.setM(fixedDamageUp(source.getTrueSource(), 8.0F, 4));
+                } else {
+                    damage.setM(fixedDamageUp(source.getTrueSource(), amount, Math.max((int) amount, 1)));
+                }
                 break;
             case "fall":
                 //摔落
