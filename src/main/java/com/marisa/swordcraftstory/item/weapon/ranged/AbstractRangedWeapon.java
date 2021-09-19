@@ -5,6 +5,7 @@ import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.WeaponCommonFunction;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
+import com.marisa.swordcraftstory.util.damage.LivingHurtUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -83,12 +84,12 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {
             PlayerEntity playerentity = (PlayerEntity) entityLiving;
-
+            //声明新的箭矢
             ItemStack itemstack = new ItemStack(Items.ARROW);
+            //拉弓时长不足取消发射
             int i = this.getUseDuration(stack) - timeLeft;
-            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, true);
             if (i < 0) return;
-
+            //执行
             float f = getArrowVelocity(i);
             if (!((double) f < 0.1D)) {
                 if (!worldIn.isRemote) {
@@ -99,27 +100,37 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
                     if (f == 1.0F) {
                         abstractarrowentity.setIsCritical(true);
                     }
-
+                    //Story攻击力
+                    int atk = getAtk(stack);
+                    //是否暴击
+                    if (LivingHurtUtils.isCri(playerentity)) {
+                        atk *= 2;
+                        playerentity.world.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, playerentity.getSoundCategory(), 1.0F, 1.0F);
+                    }
+                    //设置伤害
+                    abstractarrowentity.setDamage(atk);
+                    //力量
                     int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
                     if (j > 0) {
                         abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double) j * 0.5D + 0.5D);
                     }
-
+                    //冲击
                     int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
                     if (k > 0) {
                         abstractarrowentity.setKnockbackStrength(k);
                     }
-
+                    //火矢
                     if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
                         abstractarrowentity.setFire(100);
                     }
-
+                    //损伤玩家该武器
                     stack.damageItem(1, playerentity, (player) -> player.sendBreakAnimation(playerentity.getActiveHand()));
+                    //箭矢无法被捡起
                     abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
-
+                    //箭矢实体加入世界
                     worldIn.addEntity(abstractarrowentity);
                 }
-
+                //声音
                 worldIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
             }
         }

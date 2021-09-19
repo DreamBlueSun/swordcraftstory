@@ -63,4 +63,8 @@ public class Damage {
         this.r += r;
     }
 
+    public float total() {
+        return Math.max(this.p + this.m + this.r, 1.0F);
+    }
+
 }

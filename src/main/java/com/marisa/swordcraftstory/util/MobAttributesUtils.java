@@ -64,13 +64,11 @@ public class MobAttributesUtils {
 
     private static void modifyMobAttr(MobEntity mobEntity, int lv) {
         int maxHealthAdd = lv * 70;
-        int attackDamageAdd = lv * 9;
         int armorAdd = lv;
-        //如果原mob血量大于等于80(判定为BOSS生物)，则血量额外增加、攻击额外增加、防御额外增加
-        boolean isBoos = mobEntity.getMaxHealth() >= 80;
+        //如果mob原血量大于等于100(判定为BOSS生物)，则血量额外增加、防御额外增加
+        boolean isBoos = mobEntity.getMaxHealth() >= 100;
         if (isBoos) {
             maxHealthAdd += mobEntity.getMaxHealth() * 7;
-            attackDamageAdd += lv * 3;
             armorAdd += lv;
         }
         //如果生物血量已经大于等于要增加的量，则取消
@@ -80,7 +78,6 @@ public class MobAttributesUtils {
         //设置mob属性值
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.MAX_HEALTH, new AttributeModifier("Max health modifier", maxHealthAdd, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier("attack damage modifier", attackDamageAdd, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR, new AttributeModifier("armor modifier", armorAdd, AttributeModifier.Operation.ADDITION));
         mobEntity.getAttributeManager().reapplyModifiers(builder.build());
         //是boss或者   未之定义名称或自定义名称没有样式时（判定为新生成mob），恢复生命值到最大

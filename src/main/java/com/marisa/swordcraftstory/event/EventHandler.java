@@ -3,9 +3,10 @@ package com.marisa.swordcraftstory.event;
 import com.marisa.swordcraftstory.block.ore.OreGenerate;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
-import com.marisa.swordcraftstory.util.DamageCountUtils;
 import com.marisa.swordcraftstory.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.util.PlayerAttributesUtils;
+import com.marisa.swordcraftstory.util.damage.LivingHurtUtils;
+import com.marisa.swordcraftstory.util.damage.PlayerAttackEntityUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -13,8 +14,9 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
@@ -44,13 +46,17 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public void damageEvent(LivingDamageEvent event) {
-        //修改伤害计算
-        float damage = DamageCountUtils.damageResult(event.getSource(), event.getEntity(), event.getAmount());
-        event.setAmount(damage);
-        if (damage == 0.0F) {
-            event.setCanceled(true);
-        }
+    public void playerAttackEntityEvent(AttackEntityEvent event) {
+        //修改玩家近战攻击效果
+        PlayerAttackEntityUtils.attackTargetEntity(event.getPlayer(), event.getTarget());
+        event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public void livingHurtEvent(LivingHurtEvent event) {
+        //修改伤害结算
+        LivingHurtUtils.damageEntity((LivingEntity) event.getEntity(), event.getSource(), event.getAmount());
+        event.setCanceled(true);
     }
 
     @SubscribeEvent
@@ -90,7 +96,7 @@ public class EventHandler {
         World world = event.getWorld();
         Entity entity = event.getEntity();
         if (!world.isRemote && entity instanceof MobEntity) {
-            MobAttributesUtils.onJoinWorld(world.getClosestPlayer(entity, 64), (MobEntity) entity);
+            MobAttributesUtils.onJoinWorld(world.getClosestPlayer(entity, 128), (MobEntity) entity);
         }
     }
 
