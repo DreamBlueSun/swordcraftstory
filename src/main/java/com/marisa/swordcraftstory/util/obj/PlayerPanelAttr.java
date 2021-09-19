@@ -4,14 +4,12 @@ import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
-import com.marisa.swordcraftstory.util.DamageCountUtils;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.TieredItem;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -50,21 +48,19 @@ public class PlayerPanelAttr {
         this.hp = new TranslationTextComponent("血量").mergeStyle(TextFormatting.LIGHT_PURPLE)
                 .appendString(" ").appendSibling(new TranslationTextComponent(HP).mergeStyle(TextFormatting.GREEN));
         //ATK
-        Damage damage = new Damage();
-        damage.setP(1.0F);
+        int ATK;
         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-        if (!stack.isEmpty()) {
-            if (stack.getItem() instanceof Weapon) {
-                //story武器
-                damage.setP(((Weapon) stack.getItem()).getAtk(stack));
-            } else if (stack.getItem() instanceof TieredItem) {
-                //非story武器
-                Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
-                double amount = ((AttributeModifier) attributeModifiers.get(Attributes.ATTACK_DAMAGE).toArray()[0]).getAmount();
-                damage.setP((float) amount + 1.0F);
-            }
+        if (stack.isEmpty()) {
+            ATK = 1;
+        } else if (stack.getItem() instanceof Weapon) {
+            //story武器
+            ATK = ((Weapon) stack.getItem()).getAtk(stack);
+        } else {
+            //非story武器
+            Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
+            double amount = ((AttributeModifier) attributeModifiers.get(Attributes.ATTACK_DAMAGE).toArray()[0]).getAmount();
+            ATK = (int) amount + 1;
         }
-        int ATK = (int) DamageCountUtils.count(damage, new Defense());
         this.atk = new TranslationTextComponent("攻击").mergeStyle(TextFormatting.LIGHT_PURPLE)
                 .appendString(" ").appendSibling(new TranslationTextComponent(String.valueOf(ATK)).mergeStyle(TextFormatting.GREEN));
         //DEF

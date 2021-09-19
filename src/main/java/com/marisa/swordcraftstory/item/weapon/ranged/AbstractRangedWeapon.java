@@ -105,7 +105,9 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
                     //是否暴击
                     if (LivingHurtUtils.isCri(playerentity)) {
                         atk *= 2;
-                        playerentity.world.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, playerentity.getSoundCategory(), 1.0F, 1.0F);
+                        if (!playerentity.world.isRemote) {
+                            playerentity.world.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, playerentity.getSoundCategory(), 1.0F, 1.0F);
+                        }
                     }
                     //设置伤害
                     abstractarrowentity.setDamage(atk);

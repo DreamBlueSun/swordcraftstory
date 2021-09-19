@@ -1,11 +1,14 @@
 package com.marisa.swordcraftstory.util.damage;
 
+import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -126,7 +129,7 @@ public class PlayerAttackEntityUtils {
                             targetEntity.setMotion(vector3d);
                         }
                         //暴击伤害特效
-                        if (flag2) {
+                        if (flag2 && !player.world.isRemote) {
                             player.world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, player.getSoundCategory(), 1.0F, 1.0F);
                             player.onCriticalHit(targetEntity);
                         }
@@ -209,7 +212,8 @@ public class PlayerAttackEntityUtils {
             }
         } else {
             //非story武器
-            return (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+            Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
+            return (float) ((AttributeModifier) attributeModifiers.get(Attributes.ATTACK_DAMAGE).toArray()[0]).getAmount() + 1.0F;
         }
     }
 
