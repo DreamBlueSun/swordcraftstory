@@ -39,13 +39,17 @@ public class LivingHurtUtils {
         //伤害属性分配
         Damage damage = toDamage(livingEntity, damageSrc, damageAmount);
         //计算盔甲
-        damage.setP(applyArmorCalculations(livingEntity, damageSrc, damage.getP()));
+        if (damage.getP() > 0) {
+            damage.setP(applyArmorCalculations(livingEntity, damageSrc, damage.getP()));
+        }
         //计算盔甲韧性
-        damage.setM(applyToughnessCalculations(livingEntity, damageSrc, damage.getM()));
-        //计算药水和附魔的减伤
-//        damageAmount = applyPotionDamageCalculations(livingEntity, damageSrc, damageAmount);
+        if (damage.getM() > 0) {
+            damage.setM(applyToughnessCalculations(livingEntity, damageSrc, damage.getM()));
+        }
         //伤害总量
         float total = damage.total();
+        //计算药水和附魔的减伤
+        total = applyPotionDamageCalculations(livingEntity, damageSrc, total);
         //举盾时消耗受到伤害值5%的耐久(最大20)来抵挡90%的伤害
         if (livingEntity.isHandActive()) {
             Hand handIn = livingEntity.getActiveHand();
@@ -289,11 +293,12 @@ public class LivingHurtUtils {
             if (livingEntity.isPotionActive(Effects.RESISTANCE) && source != DamageSource.OUT_OF_WORLD) {
                 EffectInstance potionEffect = livingEntity.getActivePotionEffect(Effects.RESISTANCE);
                 if (potionEffect != null) {
-                    int i = (potionEffect.getAmplifier() + 1) * 5;
-                    int j = 25 - i;
+                    //每级抗性5%(1/20)免伤
+                    int i = potionEffect.getAmplifier() + 1;
+                    int j = 20 - i;
                     float f = damage * (float) j;
                     float f1 = damage;
-                    damage = Math.max(f / 25.0F, 0.0F);
+                    damage = Math.max(f / 20.0F, 0.0F);
                     float f2 = f1 - damage;
                     if (f2 > 0.0F && f2 < 3.4028235E37F) {
                         if (livingEntity instanceof ServerPlayerEntity) {
@@ -322,7 +327,8 @@ public class LivingHurtUtils {
      */
     private static float getDamageAfterMagicAbsorb(float damage, float enchantModifiers) {
         float f = MathHelper.clamp(enchantModifiers, 0.0F, 20.0F);
-        return damage * (1.0F - f / 25.0F);
+        //每级1%免伤
+        return damage * (1.0F - f / 100.0F);
     }
 
 }
