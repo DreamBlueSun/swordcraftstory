@@ -26,6 +26,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.server.ServerWorld;
 
+import java.util.Collection;
+
 /**
  * 玩家攻击实体工具类
  */
@@ -213,7 +215,12 @@ public class PlayerAttackEntityUtils {
         } else {
             //非story武器
             Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
-            return (float) ((AttributeModifier) attributeModifiers.get(Attributes.ATTACK_DAMAGE).toArray()[0]).getAmount() + 1.0F;
+            Collection<AttributeModifier> modifiers = attributeModifiers.get(Attributes.ATTACK_DAMAGE);
+            if (modifiers != null && modifiers.size() > 0) {
+                return (float) ((AttributeModifier) modifiers.toArray()[0]).getAmount() + 1.0F;
+            } else {
+                return 1.0F;
+            }
         }
     }
 

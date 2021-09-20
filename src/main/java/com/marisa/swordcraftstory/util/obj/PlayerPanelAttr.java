@@ -14,6 +14,8 @@ import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
+import java.util.Collection;
+
 /**
  * 玩家面板属性
  */
@@ -58,8 +60,12 @@ public class PlayerPanelAttr {
         } else {
             //非story武器
             Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
-            double amount = ((AttributeModifier) attributeModifiers.get(Attributes.ATTACK_DAMAGE).toArray()[0]).getAmount();
-            ATK = (int) amount + 1;
+            Collection<AttributeModifier> modifiers = attributeModifiers.get(Attributes.ATTACK_DAMAGE);
+            if (modifiers != null && modifiers.size() > 0) {
+                ATK = (int) ((float) ((AttributeModifier) modifiers.toArray()[0]).getAmount() + 1.0F);
+            } else {
+                ATK = 1;
+            }
         }
         this.atk = new TranslationTextComponent("攻击").mergeStyle(TextFormatting.LIGHT_PURPLE)
                 .appendString(" ").appendSibling(new TranslationTextComponent(String.valueOf(ATK)).mergeStyle(TextFormatting.GREEN));
