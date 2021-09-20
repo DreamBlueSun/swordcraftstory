@@ -245,7 +245,8 @@ public class LivingHurtUtils {
         if (!source.isUnblockable()) {
             //结算盔甲损伤
             if (livingEntity instanceof PlayerEntity) {
-                ((PlayerEntity) livingEntity).inventory.func_234563_a_(source, Math.min(damage, 20.0F));
+                //最低1点,最高2(8/4)点
+                ((PlayerEntity) livingEntity).inventory.func_234563_a_(source, Math.min(damage, 8.0F));
             }
             //计算伤害
             damage = getDamageAfterArmorAbsorb(damage, (float) livingEntity.getTotalArmorValue());
@@ -267,7 +268,8 @@ public class LivingHurtUtils {
         if (!source.isUnblockable()) {
             //结算盔甲损伤
             if (livingEntity instanceof PlayerEntity) {
-                ((PlayerEntity) livingEntity).inventory.func_234563_a_(source, Math.min(damage, 20.0F));
+                //最低1点,最高2(8/4)点
+                ((PlayerEntity) livingEntity).inventory.func_234563_a_(source, Math.min(damage, 8.0F));
             }
             //计算伤害
             damage = getDamageAfterToughnessAbsorb(damage, (float) livingEntity.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
