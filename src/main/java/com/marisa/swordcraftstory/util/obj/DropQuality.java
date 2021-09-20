@@ -49,13 +49,13 @@ public class DropQuality {
         int drop = RANK_RANDOM_MAX;
         int r = new Random().nextInt(RANK_RANDOM_MAX) + 1;
         if (r > (drop -= RANK_ORE_3) && playerLv >= 10) {
-            return LIST_ORE_RANK_3.get(new Random().nextInt(LIST_ORE_RANK_3.size()));
+            return LIST_ORE_RANK_3.get(new Random().nextInt(LIST_ORE_RANK_3.size())).copy();
         }
         if (r > (drop -= RANK_ORE_2) && playerLv >= 5) {
-            return LIST_ORE_RANK_2.get(new Random().nextInt(LIST_ORE_RANK_2.size()));
+            return LIST_ORE_RANK_2.get(new Random().nextInt(LIST_ORE_RANK_2.size())).copy();
         }
         if (r > (drop -= RANK_ORE_1)) {
-            return LIST_ORE_RANK_1.get(new Random().nextInt(LIST_ORE_RANK_1.size()));
+            return LIST_ORE_RANK_1.get(new Random().nextInt(LIST_ORE_RANK_1.size())).copy();
         }
         if (r > (drop -= RANK_MATERIAL_2)) {
             return ItemRegistry.SHARP_STONE.get().getDefaultInstance();
