@@ -60,7 +60,7 @@ public class PlayerAttackEntityUtils {
                     boolean flag = f2 > 0.9F;
                     //flag1：是否击退，玩家默认击退值0
                     boolean flag1 = false;
-                    float i = (float) player.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
+                    float i = 0.0F;
                     i = i + EnchantmentHelper.getKnockbackModifier(player);
                     if (player.isSprinting() && flag) {
                         player.world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, player.getSoundCategory(), 1.0F, 1.0F);
@@ -131,7 +131,7 @@ public class PlayerAttackEntityUtils {
                             targetEntity.setMotion(vector3d);
                         }
                         //暴击伤害特效
-                        if (flag2 && !player.world.isRemote) {
+                        if (flag2) {
                             player.world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, player.getSoundCategory(), 1.0F, 1.0F);
                             player.onCriticalHit(targetEntity);
                         }

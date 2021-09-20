@@ -48,7 +48,9 @@ public class EventHandler {
     @SubscribeEvent
     public void playerAttackEntityEvent(AttackEntityEvent event) {
         //修改玩家近战攻击效果
-        PlayerAttackEntityUtils.attackTargetEntity(event.getPlayer(), event.getTarget());
+        if (!event.getPlayer().world.isRemote()) {
+            PlayerAttackEntityUtils.attackTargetEntity(event.getPlayer(), event.getTarget());
+        }
         event.setCanceled(true);
     }
 
