@@ -20,7 +20,7 @@ public class OreGenerate {
         generate(event.getGeneration(),
                 OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
                 BlockRegistry.STORY_ORE_BLOCK.get().getDefaultState(),
-                8, 8, 0, 64, 32);
+                8, 8, 0, 64, 64);
     }
 
     /**

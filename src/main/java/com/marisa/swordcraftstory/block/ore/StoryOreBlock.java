@@ -59,7 +59,7 @@ public class StoryOreBlock extends OreBlock {
 
     @Override
     protected int getExperience(Random rand) {
-        return MathHelper.nextInt(rand, 9, 15);
+        return MathHelper.nextInt(rand, 2, 6);
     }
 
 }
