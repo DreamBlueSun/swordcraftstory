@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -10,6 +11,11 @@ import net.minecraft.item.ItemStack;
 public interface WeaponMake {
 
     ItemStack weaponMake(ItemStack mouldStack);
+
+    /**
+     * 作为剑类武器
+     */
+    Item asSword();
 
     int rank();
 

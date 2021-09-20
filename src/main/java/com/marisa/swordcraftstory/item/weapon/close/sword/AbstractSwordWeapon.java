@@ -46,7 +46,7 @@ public abstract class AbstractSwordWeapon extends AbstractMeleeWeapon {
 
             @Override
             public Ingredient getRepairMaterial() {
-                return null;
+                return Ingredient.fromItems(ore.asSword());
             }
         });
     }

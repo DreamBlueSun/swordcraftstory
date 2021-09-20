@@ -7,6 +7,7 @@ import com.marisa.swordcraftstory.item.intensify.obj.IntensifyAttr;
 import com.marisa.swordcraftstory.item.mould.Mould;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.text.ITextComponent;
@@ -51,6 +52,11 @@ public class IronOre extends AbstractOre {
         }
         addMouldProperties(stack, mouldStack);
         return stack;
+    }
+
+    @Override
+    public Item asSword() {
+        return ItemRegistry.NOVICE_SWORD.get();
     }
 
     @Override

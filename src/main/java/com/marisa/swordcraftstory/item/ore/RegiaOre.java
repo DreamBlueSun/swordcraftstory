@@ -2,12 +2,12 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.intensify.Intensify;
 import com.marisa.swordcraftstory.item.intensify.Intensifys;
 import com.marisa.swordcraftstory.item.intensify.obj.IntensifyAttr;
 import com.marisa.swordcraftstory.item.mould.Mould;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.text.ITextComponent;
@@ -24,7 +24,7 @@ import java.util.List;
  * 雷吉亚矿
  */
 
-public class RegiaOre extends AbstractOre implements Intensify {
+public class RegiaOre extends AbstractOre {
 
     public RegiaOre() {
         super(new Properties().group(StoryGroup.COMBAT_GROUP));
@@ -52,6 +52,11 @@ public class RegiaOre extends AbstractOre implements Intensify {
         }
         addMouldProperties(stack, mouldStack);
         return stack;
+    }
+
+    @Override
+    public Item asSword() {
+        return ItemRegistry.RELICT_SWORD.get();
     }
 
     @Override
