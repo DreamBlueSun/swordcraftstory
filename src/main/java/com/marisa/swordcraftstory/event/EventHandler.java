@@ -92,7 +92,7 @@ public class EventHandler {
 
     @SubscribeEvent
     public void entityJoinWorld(EntityJoinWorldEvent event) {
-        //mob实体加入世界时，根据最近玩家(64范围)等级增加属性
+        //mob实体加入世界时，根据最近玩家(128范围)等级增加属性
         World world = event.getWorld();
         Entity entity = event.getEntity();
         if (!world.isRemote && entity instanceof MobEntity) {

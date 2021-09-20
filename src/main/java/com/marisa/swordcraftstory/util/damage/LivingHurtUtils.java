@@ -293,8 +293,8 @@ public class LivingHurtUtils {
             if (livingEntity.isPotionActive(Effects.RESISTANCE) && source != DamageSource.OUT_OF_WORLD) {
                 EffectInstance potionEffect = livingEntity.getActivePotionEffect(Effects.RESISTANCE);
                 if (potionEffect != null) {
-                    //每级抗性5%(1/20)免伤
-                    int i = potionEffect.getAmplifier() + 1;
+                    //每级抗性5%(1/20)免伤、最高4级
+                    int i = MathHelper.clamp(potionEffect.getAmplifier() + 1, 1, 4);
                     int j = 20 - i;
                     float f = damage * (float) j;
                     float f1 = damage;
@@ -326,6 +326,7 @@ public class LivingHurtUtils {
      * 计算被附魔吸收后的伤害
      */
     private static float getDamageAfterMagicAbsorb(float damage, float enchantModifiers) {
+        //最高20级
         float f = MathHelper.clamp(enchantModifiers, 0.0F, 20.0F);
         //每级1%免伤
         return damage * (1.0F - f / 100.0F);
