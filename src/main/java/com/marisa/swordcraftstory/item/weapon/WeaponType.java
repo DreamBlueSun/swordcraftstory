@@ -7,7 +7,8 @@ package com.marisa.swordcraftstory.item.weapon;
 public enum WeaponType {
 
     SWORD("剑", 0),
-    BOW("弓", 1);
+    BOW("弓", 1),
+    AXE("斧", 2);
 
     private String name;
 

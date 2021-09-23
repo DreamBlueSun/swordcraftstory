@@ -60,6 +60,11 @@ public class CutIronOre extends AbstractOre {
     }
 
     @Override
+    public Item asAxe() {
+        return null;
+    }
+
+    @Override
     public int rank() {
         return 3;
     }

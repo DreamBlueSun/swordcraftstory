@@ -17,6 +17,11 @@ public interface WeaponMake {
      */
     Item asSword();
 
+    /**
+     * 作为斧类武器
+     */
+    Item asAxe();
+
     int rank();
 
     int atk(WeaponType type);

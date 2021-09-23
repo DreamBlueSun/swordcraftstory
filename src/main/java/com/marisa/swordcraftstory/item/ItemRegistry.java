@@ -4,6 +4,7 @@ import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.material.*;
+import com.marisa.swordcraftstory.item.mould.close.axe.AxeMould;
 import com.marisa.swordcraftstory.item.mould.close.sword.SwordMould;
 import com.marisa.swordcraftstory.item.mould.ranged.bow.BowMould;
 import com.marisa.swordcraftstory.item.ore.*;
@@ -34,6 +35,7 @@ public class ItemRegistry {
     //模具
     public static RegistryObject<Item> SWORD_MOULD = ITEMS.register("sword_mould", SwordMould::new);
     public static RegistryObject<Item> BOW_MOULD = ITEMS.register("bow_mould", BowMould::new);
+    public static RegistryObject<Item> AXE_MOULD = ITEMS.register("axe_mould", AxeMould::new);
     //武器-特殊
     public static RegistryObject<Item> SWORD_GUAKE = ITEMS.register("sword_guake", SwordGuake::new);
     //武器-剑
