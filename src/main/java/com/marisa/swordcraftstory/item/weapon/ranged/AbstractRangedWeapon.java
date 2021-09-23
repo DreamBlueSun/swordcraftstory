@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.item.weapon.ranged;
 
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
+import com.marisa.swordcraftstory.item.intensify.helper.Effects;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.WeaponCommonFunction;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
@@ -97,14 +98,12 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
                     AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
                     abstractarrowentity = customArrow(abstractarrowentity);
                     abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
-                    if (f == 1.0F) {
-                        abstractarrowentity.setIsCritical(true);
-                    }
                     //Story攻击力
                     int atk = getAtk(stack);
                     //是否暴击
                     if (LivingHurtUtils.isCri(playerentity)) {
                         atk *= 2;
+                        abstractarrowentity.setIsCritical(true);
                         if (!playerentity.world.isRemote) {
                             playerentity.world.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, playerentity.getSoundCategory(), 1.0F, 1.0F);
                         }
@@ -124,6 +123,11 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
                     //火矢
                     if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
                         abstractarrowentity.setFire(100);
+                    }
+                    //穿透
+                    Effects effect = CombatPropertiesUtils.getEffect(stack);
+                    if (effect == Effects.LEGEND_IRON_BUNCH) {
+                        abstractarrowentity.setPierceLevel((byte) 127);
                     }
                     //损伤玩家该武器
                     stack.damageItem(1, playerentity, (player) -> player.sendBreakAnimation(playerentity.getActiveHand()));

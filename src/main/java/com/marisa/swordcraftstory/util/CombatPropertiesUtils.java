@@ -1,7 +1,8 @@
 package com.marisa.swordcraftstory.util;
 
-import com.marisa.swordcraftstory.item.intensify.Intensifys;
-import com.marisa.swordcraftstory.item.intensify.obj.IntensifyAttr;
+import com.marisa.swordcraftstory.item.intensify.helper.Effects;
+import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
+import com.marisa.swordcraftstory.item.intensify.helper.IntensifyAttr;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -107,11 +108,18 @@ public class CombatPropertiesUtils {
                 .appendString("     ").appendSibling(new TranslationTextComponent(getTec(stack) + "/" + Weapon.MAX_TEC).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(weapon.getDur(stack) + "/" + weapon.getDurMax(stack)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+        //效果字段显示
+        Effects effect = getEffect(stack);
+        if (effect != null) {
+            tooltip.add(new TranslationTextComponent("效果[" + effect.getShow() + "]").mergeStyle(TextFormatting.BLUE));
+        }
         //强化字段显示
         List<String> list = getIntensifyName(stack);
         if (list != null) {
             for (String show : list) {
-                tooltip.add(new TranslationTextComponent("强化[" + show + "]").mergeStyle(TextFormatting.AQUA));
+                tooltip.add(new TranslationTextComponent("强化").mergeStyle(TextFormatting.AQUA).appendString(" ")
+                        .appendSibling(new TranslationTextComponent(">>>").mergeStyle(TextFormatting.RED))
+                        .appendString(" ").appendSibling(new TranslationTextComponent(show).mergeStyle(TextFormatting.AQUA)));
             }
         }
     }
@@ -129,7 +137,7 @@ public class CombatPropertiesUtils {
     }
 
     /**
-     * 强化武器
+     * 强化武器属性
      */
     public static void intensifyAttr(ItemStack stack, IntensifyAttr attr) {
         intensifyEdgeAtk(stack, attr.getAtk());
@@ -149,6 +157,22 @@ public class CombatPropertiesUtils {
     }
 
     /**
+     * 获取强化ID列表
+     */
+    public static List<Integer> getIntensifyIds(ItemStack stack) {
+        CompoundNBT tag = stack.getOrCreateTag();
+        if (tag.contains("story_combat_intensify")) {
+            List<Integer> list = new ArrayList<>();
+            ListNBT listNBT = (ListNBT) tag.get("story_combat_intensify").copy();
+            for (int i = 0; i < listNBT.size(); i++) {
+                list.add(Intensifys.getById(listNBT.getInt(i)).getId());
+            }
+            return list;
+        }
+        return null;
+    }
+
+    /**
      * 获取强化展示名称列表
      */
     public static List<String> getIntensifyName(ItemStack stack) {
@@ -160,6 +184,25 @@ public class CombatPropertiesUtils {
                 list.add(Intensifys.getById(listNBT.getInt(i)).getShow());
             }
             return list;
+        }
+        return null;
+    }
+
+    /**
+     * 强化武器效果
+     */
+    public static void intensifyEffect(ItemStack stack, Effects effects) {
+        //添加强化效果NBT
+        stack.setTagInfo("story_combat_effect", IntNBT.valueOf(effects.getId()));
+    }
+
+    /**
+     * 获取武器效果
+     */
+    public static Effects getEffect(ItemStack stack) {
+        CompoundNBT tag = stack.getOrCreateTag();
+        if (tag.contains("story_combat_effect")) {
+            return Effects.getById(tag.getInt("story_combat_effect"));
         }
         return null;
     }

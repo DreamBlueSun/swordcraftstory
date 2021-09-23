@@ -3,6 +3,7 @@ package com.marisa.swordcraftstory.item;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
+import com.marisa.swordcraftstory.item.intensify.LegendIronBunch;
 import com.marisa.swordcraftstory.item.material.*;
 import com.marisa.swordcraftstory.item.mould.close.sword.SwordMould;
 import com.marisa.swordcraftstory.item.mould.ranged.bow.BowMould;
@@ -102,5 +103,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> REGIA_ORE = ITEMS.register("regia_ore", RegiaOre::new);
     public static RegistryObject<Item> UKA_ORE = ITEMS.register("uka_ore", UkaOre::new);
     public static RegistryObject<Item> PRETTY_ORE = ITEMS.register("pretty_ore", PrettyOre::new);
+    //强化道具
+    public static RegistryObject<Item> LEGEND_IRON_BUNCH = ITEMS.register("legend_iron_bunch", LegendIronBunch::new);
 
 }

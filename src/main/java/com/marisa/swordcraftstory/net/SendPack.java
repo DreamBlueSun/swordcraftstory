@@ -1,10 +1,11 @@
 package com.marisa.swordcraftstory.net;
 
-import com.marisa.swordcraftstory.block.tile.WeaponEdgeBlockTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponCollapseTileEntity;
+import com.marisa.swordcraftstory.block.tile.WeaponEdgeBlockTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponIntensifyTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
-import com.marisa.swordcraftstory.item.intensify.Intensify;
+import com.marisa.swordcraftstory.item.intensify.helper.Effects;
+import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
@@ -136,6 +137,10 @@ public class SendPack {
                         }
                         if (CombatPropertiesUtils.canIntensifyAttr(intensifyStack0)) {
                             CombatPropertiesUtils.intensifyAttr(intensifyStack0, ((Intensify) intensifyStack1.getItem()).getIntensifyAttr());
+                            Effects effects = Effects.checkReach(intensifyStack0);
+                            if (effects != null) {
+                                CombatPropertiesUtils.intensifyEffect(intensifyStack0, effects);
+                            }
                             inventoryIntensify.removeStackFromSlot(0);
                             intensifyStack1.shrink(1);
                             if (intensifyStack1.isEmpty()) {

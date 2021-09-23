@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.gui.container.slot;
 
-import com.marisa.swordcraftstory.item.intensify.Intensify;
+import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;

@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.item.intensify.obj;
+package com.marisa.swordcraftstory.item.intensify.helper;
 
 /**
  * 强化属性
