@@ -86,6 +86,7 @@ public abstract class RepairItem extends Item {
                     } else {
                         itemStack.setDamage(damage - cost);
                     }
+                    stack.removeChildTag("story_combat_broken");
                     break;
                 }
             }
