@@ -4,7 +4,7 @@ import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -43,11 +43,41 @@ public class PlayerAttackEntityUtils {
                 //基础攻击伤害
                 float f = damageByStory(player);
                 //计算额外附魔攻击伤害
-                float f1;
-                if (targetEntity instanceof LivingEntity) {
-                    f1 = EnchantmentHelper.getModifierForCreature(player.getHeldItemMainhand(), ((LivingEntity) targetEntity).getCreatureAttribute());
-                } else {
-                    f1 = EnchantmentHelper.getModifierForCreature(player.getHeldItemMainhand(), CreatureAttribute.UNDEFINED);
+                int lvl;
+                float f1 = 0.0F, fOffset = 1.0F;
+                if ((lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, player.getHeldItemMainhand())) > 0) {
+                    //锋利
+                    if (lvl > 4) {
+                        fOffset = 1.1F;
+                    }
+                } else if ((lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.SMITE, player.getHeldItemMainhand())) > 0) {
+                    //亡灵
+                    if (lvl > 4) {
+                        fOffset = 2.5F;
+                    }
+                } else if ((lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, player.getHeldItemMainhand())) > 0) {
+                    //节肢
+                    if (lvl > 4) {
+                        fOffset = 2.5F;
+                    }
+                } else if ((lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.IMPALING, player.getHeldItemMainhand())) > 0) {
+                    //穿刺
+                    if (lvl > 4) {
+                        fOffset = 2.5F;
+                    }
+                }
+                switch (lvl) {
+                    case 5:
+                    case 4:
+                        f1 += 4;
+                    case 3:
+                        f1 += 3;
+                    case 2:
+                        f1 += 2;
+                    case 1:
+                        f1 += 1;
+                    default:
+                        break;
                 }
                 //攻击速度伤害偏移
                 float f2 = player.getCooledAttackStrength(0.5F);
@@ -73,7 +103,7 @@ public class PlayerAttackEntityUtils {
                         f *= 2.0F;
                     }
                     //f：伤害总量
-                    f = f + f1;
+                    f = (f + f1) * fOffset;
                     //flag3：是否横扫攻击
                     boolean flag3 = false;
                     double d0 = player.distanceWalkedModified - player.prevDistanceWalkedModified;
