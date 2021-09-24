@@ -51,7 +51,7 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
     private final int agl;
 
     public AbstractMeleeWeapon(final int rank, final int atk, final int def, final int agl, final IItemTier tier) {
-        super(tier, atk, 0.0F, new Item.Properties().group(StoryGroup.COMBAT_GROUP));
+        super(tier, atk, -2.4F, new Item.Properties().group(StoryGroup.COMBAT_GROUP));
         this.rank = rank;
         this.atk = atk;
         this.def = def;
