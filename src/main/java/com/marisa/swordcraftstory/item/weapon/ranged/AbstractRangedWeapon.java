@@ -113,22 +113,12 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
                     //力量
                     int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
                     if (j > 0) {
-                        float f1 = 0.0F, fOffset = 1.0F;
-                        switch (j) {
-                            case 5:
-                                fOffset = 1.1F;
-                            case 4:
-                                f1 += 4;
-                            case 3:
-                                f1 += 3;
-                            case 2:
-                                f1 += 2;
-                            case 1:
-                                f1 += 1;
-                            default:
-                                break;
+                        float fOffset = j > 4 ? 1.1F : 1.0F;
+                        int f1 = 0;
+                        for (int k = 0; k < j + 1; k++) {
+                            f1 += k;
                         }
-                        abstractarrowentity.setDamage((abstractarrowentity.getDamage() + (double) (f1)) * fOffset);
+                        abstractarrowentity.setDamage((abstractarrowentity.getDamage() + f1) * fOffset);
                     }
                     //冲击
                     int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);

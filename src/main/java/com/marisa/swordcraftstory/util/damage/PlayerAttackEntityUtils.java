@@ -5,6 +5,7 @@ import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -52,32 +53,32 @@ public class PlayerAttackEntityUtils {
                     }
                 } else if ((lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.SMITE, player.getHeldItemMainhand())) > 0) {
                     //亡灵
+                    if (((LivingEntity) targetEntity).getCreatureAttribute() != CreatureAttribute.UNDEAD) {
+                        lvl = 0;
+                    }
                     if (lvl > 4) {
-                        fOffset = 2.5F;
+                        fOffset = 1.2F;
                     }
                 } else if ((lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, player.getHeldItemMainhand())) > 0) {
                     //节肢
+                    if (((LivingEntity) targetEntity).getCreatureAttribute() != CreatureAttribute.ARTHROPOD) {
+                        lvl = 0;
+                    }
                     if (lvl > 4) {
-                        fOffset = 2.5F;
+                        fOffset = 1.2F;
                     }
                 } else if ((lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.IMPALING, player.getHeldItemMainhand())) > 0) {
                     //穿刺
+                    if (((LivingEntity) targetEntity).getCreatureAttribute() != CreatureAttribute.WATER) {
+                        lvl = 0;
+                    }
                     if (lvl > 4) {
-                        fOffset = 2.5F;
+                        fOffset = 1.2F;
                     }
                 }
-                switch (lvl) {
-                    case 5:
-                    case 4:
-                        f1 += 4;
-                    case 3:
-                        f1 += 3;
-                    case 2:
-                        f1 += 2;
-                    case 1:
-                        f1 += 1;
-                    default:
-                        break;
+                for (int i = 0; i < lvl + 1; i++) {
+                    f1 += i;
+
                 }
                 //攻击速度伤害偏移
                 float f2 = player.getCooledAttackStrength(0.5F);
