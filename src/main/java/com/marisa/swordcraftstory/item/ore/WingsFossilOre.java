@@ -47,6 +47,9 @@ public class WingsFossilOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.FEATHER_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.FEATHER_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class WingsFossilOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.FEATHER_AXE.get();
     }
 
     @Override
@@ -76,6 +79,8 @@ public class WingsFossilOre extends AbstractOre {
                 return 25;
             case SWORD:
                 return 22;
+            case AXE:
+                return 31;
             default:
                 return 0;
         }
@@ -88,6 +93,8 @@ public class WingsFossilOre extends AbstractOre {
                 return 7;
             case SWORD:
                 return 16;
+            case AXE:
+                return 22;
             default:
                 return 0;
         }
@@ -98,6 +105,8 @@ public class WingsFossilOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -5;
+            case AXE:
+                return -25;
             case SWORD:
             default:
                 return 0;
@@ -111,6 +120,8 @@ public class WingsFossilOre extends AbstractOre {
                 return 62;
             case SWORD:
                 return 72;
+            case AXE:
+                return 87;
             default:
                 return 0;
         }

@@ -47,6 +47,9 @@ public class IronOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.NOVICE_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.NOVICE_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class IronOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.NOVICE_AXE.get();
     }
 
     @Override
@@ -76,6 +79,8 @@ public class IronOre extends AbstractOre {
                 return 4;
             case SWORD:
                 return 7;
+            case AXE:
+                return 8;
             default:
                 return 0;
         }
@@ -88,6 +93,8 @@ public class IronOre extends AbstractOre {
                 return 1;
             case SWORD:
                 return 3;
+            case AXE:
+                return 4;
             default:
                 return 0;
         }
@@ -98,6 +105,8 @@ public class IronOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -5;
+            case AXE:
+                return -25;
             case SWORD:
             default:
                 return 0;
@@ -111,6 +120,8 @@ public class IronOre extends AbstractOre {
                 return 50;
             case SWORD:
                 return 64;
+            case AXE:
+                return 75;
             default:
                 return 0;
         }

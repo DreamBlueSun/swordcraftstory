@@ -47,6 +47,9 @@ public class ElphusOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.SYNTHESIS_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.SYNTHESIS_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class ElphusOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.SYNTHESIS_AXE.get();
     }
 
     @Override
@@ -76,6 +79,8 @@ public class ElphusOre extends AbstractOre {
                 return 21;
             case SWORD:
                 return 24;
+            case AXE:
+                return 27;
             default:
                 return 0;
         }
@@ -88,6 +93,8 @@ public class ElphusOre extends AbstractOre {
                 return 6;
             case SWORD:
                 return 17;
+            case AXE:
+                return 20;
             default:
                 return 0;
         }
@@ -98,6 +105,8 @@ public class ElphusOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -5;
+            case AXE:
+                return -25;
             case SWORD:
             default:
                 return 0;
@@ -111,6 +120,8 @@ public class ElphusOre extends AbstractOre {
                 return 61;
             case SWORD:
                 return 74;
+            case AXE:
+                return 86;
             default:
                 return 0;
         }

@@ -47,6 +47,9 @@ public class ArgenirOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.SOLEMNITY_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.SOLEMNITY_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class ArgenirOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.SOLEMNITY_AXE.get();
     }
 
     @Override
@@ -75,6 +78,8 @@ public class ArgenirOre extends AbstractOre {
             case BOW:
             case SWORD:
                 return 16;
+            case AXE:
+                return 20;
             default:
                 return 0;
         }
@@ -87,6 +92,8 @@ public class ArgenirOre extends AbstractOre {
                 return 5;
             case SWORD:
                 return 12;
+            case AXE:
+                return 14;
             default:
                 return 0;
         }
@@ -97,6 +104,8 @@ public class ArgenirOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -5;
+            case AXE:
+                return -25;
             case SWORD:
             default:
                 return 0;
@@ -110,6 +119,8 @@ public class ArgenirOre extends AbstractOre {
                 return 56;
             case SWORD:
                 return 67;
+            case AXE:
+                return 81;
             default:
                 return 0;
         }

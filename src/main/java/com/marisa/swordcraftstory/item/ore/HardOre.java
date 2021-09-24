@@ -47,6 +47,9 @@ public class HardOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.HARD_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.HARD_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class HardOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.HARD_AXE.get();
     }
 
     @Override
@@ -75,6 +78,8 @@ public class HardOre extends AbstractOre {
             case BOW:
             case SWORD:
                 return 14;
+            case AXE:
+                return 18;
             default:
                 return 0;
         }
@@ -87,6 +92,8 @@ public class HardOre extends AbstractOre {
                 return 4;
             case SWORD:
                 return 10;
+            case AXE:
+                return 12;
             default:
                 return 0;
         }
@@ -97,6 +104,8 @@ public class HardOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -5;
+            case AXE:
+                return -25;
             case SWORD:
             default:
                 return 0;
@@ -110,6 +119,8 @@ public class HardOre extends AbstractOre {
                 return 55;
             case SWORD:
                 return 65;
+            case AXE:
+                return 80;
             default:
                 return 0;
         }

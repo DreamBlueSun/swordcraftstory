@@ -47,6 +47,9 @@ public class PrettyOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.RIBBON_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.RIBBON_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class PrettyOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.RIBBON_AXE.get();
     }
 
     @Override
@@ -76,6 +79,8 @@ public class PrettyOre extends AbstractOre {
                 return 37;
             case SWORD:
                 return 39;
+            case AXE:
+                return 49;
             default:
                 return 0;
         }
@@ -88,6 +93,8 @@ public class PrettyOre extends AbstractOre {
                 return 11;
             case SWORD:
                 return 26;
+            case AXE:
+                return 34;
             default:
                 return 0;
         }
@@ -98,6 +105,8 @@ public class PrettyOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -5;
+            case AXE:
+                return -25;
             case SWORD:
             default:
                 return 0;
@@ -111,6 +120,8 @@ public class PrettyOre extends AbstractOre {
                 return 72;
             case SWORD:
                 return 84;
+            case AXE:
+                return 97;
             default:
                 return 0;
         }

@@ -47,6 +47,9 @@ public class BigIronOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.WIDE_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.WIDE_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class BigIronOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.WIDE_AXE.get();
     }
 
     @Override
@@ -75,6 +78,8 @@ public class BigIronOre extends AbstractOre {
             case BOW:
             case SWORD:
                 return 32;
+            case AXE:
+                return 38;
             default:
                 return 0;
         }
@@ -87,6 +92,8 @@ public class BigIronOre extends AbstractOre {
                 return 8;
             case SWORD:
                 return 23;
+            case AXE:
+                return 26;
             default:
                 return 0;
         }
@@ -97,6 +104,8 @@ public class BigIronOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -20;
+            case AXE:
+                return -30;
             case SWORD:
             default:
                 return -10;
@@ -110,6 +119,8 @@ public class BigIronOre extends AbstractOre {
                 return 66;
             case SWORD:
                 return 77;
+            case AXE:
+                return 91;
             default:
                 return 0;
         }

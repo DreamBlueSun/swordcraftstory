@@ -47,6 +47,9 @@ public class CutIronOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.CUT_IRON_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.CUT_IRON_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class CutIronOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.CUT_IRON_AXE.get();
     }
 
     @Override
@@ -75,6 +78,8 @@ public class CutIronOre extends AbstractOre {
             case BOW:
             case SWORD:
                 return 28;
+            case AXE:
+                return 36;
             default:
                 return 0;
         }
@@ -87,6 +92,8 @@ public class CutIronOre extends AbstractOre {
                 return 8;
             case SWORD:
                 return 20;
+            case AXE:
+                return 24;
             default:
                 return 0;
         }
@@ -97,6 +104,8 @@ public class CutIronOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -20;
+            case AXE:
+                return -30;
             case SWORD:
             default:
                 return 0;
@@ -110,6 +119,8 @@ public class CutIronOre extends AbstractOre {
                 return 65;
             case SWORD:
                 return 75;
+            case AXE:
+                return 90;
             default:
                 return 0;
         }

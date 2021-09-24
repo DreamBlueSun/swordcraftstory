@@ -47,6 +47,9 @@ public class RegiaOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.RELICT_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.RELICT_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class RegiaOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.RELICT_AXE.get();
     }
 
     @Override
@@ -75,6 +78,8 @@ public class RegiaOre extends AbstractOre {
             case BOW:
             case SWORD:
                 return 35;
+            case AXE:
+                return 45;
             default:
                 return 0;
         }
@@ -87,6 +92,8 @@ public class RegiaOre extends AbstractOre {
                 return 10;
             case SWORD:
                 return 25;
+            case AXE:
+                return 30;
             default:
                 return 0;
         }
@@ -97,6 +104,8 @@ public class RegiaOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -5;
+            case AXE:
+                return -25;
             case SWORD:
             default:
                 return 0;
@@ -110,6 +119,8 @@ public class RegiaOre extends AbstractOre {
                 return 70;
             case SWORD:
                 return 80;
+            case AXE:
+                return 95;
             default:
                 return 0;
         }

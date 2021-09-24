@@ -47,6 +47,9 @@ public class HeavyGoldOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.SEVERE_PENALTY_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.SEVERE_PENALTY_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -56,12 +59,12 @@ public class HeavyGoldOre extends AbstractOre {
 
     @Override
     public Item asSword() {
-        return null;
+        return ItemRegistry.SEVERE_PENALTY_SWORD.get();
     }
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.SEVERE_PENALTY_AXE.get();
     }
 
     @Override
@@ -75,6 +78,8 @@ public class HeavyGoldOre extends AbstractOre {
             case BOW:
             case SWORD:
                 return 30;
+            case AXE:
+                return 40;
             default:
                 return 0;
         }
@@ -87,6 +92,8 @@ public class HeavyGoldOre extends AbstractOre {
                 return 9;
             case SWORD:
                 return 21;
+            case AXE:
+                return 28;
             default:
                 return 0;
         }
@@ -97,6 +104,8 @@ public class HeavyGoldOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -5;
+            case AXE:
+                return -25;
             case SWORD:
             default:
                 return 0;
@@ -110,6 +119,8 @@ public class HeavyGoldOre extends AbstractOre {
                 return 67;
             case SWORD:
                 return 76;
+            case AXE:
+                return 92;
             default:
                 return 0;
         }

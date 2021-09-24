@@ -17,6 +17,7 @@ import com.marisa.swordcraftstory.item.reply.JuYuMedicine;
 import com.marisa.swordcraftstory.item.reply.Woundplast;
 import com.marisa.swordcraftstory.item.special.Hammer;
 import com.marisa.swordcraftstory.item.special.SwordGuake;
+import com.marisa.swordcraftstory.item.weapon.close.axe.*;
 import com.marisa.swordcraftstory.item.weapon.close.sword.*;
 import com.marisa.swordcraftstory.item.weapon.ranged.bow.*;
 import net.minecraft.item.BlockItem;
@@ -67,6 +68,20 @@ public class ItemRegistry {
     public static RegistryObject<Item> RELICT_BOW = ITEMS.register("relict_bow", RelictBow::new);
     public static RegistryObject<Item> ELEGANCE_BOW = ITEMS.register("elegance_bow", EleganceBow::new);
     public static RegistryObject<Item> RIBBON_BOW = ITEMS.register("ribbon_bow", RibbonBow::new);
+    //武器-斧
+    public static RegistryObject<Item> NOVICE_AXE = ITEMS.register("novice_axe", NoviceAxe::new);
+    public static RegistryObject<Item> THIN_AXE = ITEMS.register("thin_axe", ThinAxe::new);
+    public static RegistryObject<Item> HARD_AXE = ITEMS.register("hard_axe", HardAxe::new);
+    public static RegistryObject<Item> SOLEMNITY_AXE = ITEMS.register("solemnity_axe", SolemnityAxe::new);
+    public static RegistryObject<Item> IRON_AXE = ITEMS.register("iron_axe", IronAxe::new);
+    public static RegistryObject<Item> SYNTHESIS_AXE = ITEMS.register("synthesis_axe", SynthesisAxe::new);
+    public static RegistryObject<Item> FEATHER_AXE = ITEMS.register("feather_axe", FeatherAxe::new);
+    public static RegistryObject<Item> CUT_IRON_AXE = ITEMS.register("cut_iron_axe", CutIronAxe::new);
+    public static RegistryObject<Item> WIDE_AXE = ITEMS.register("wide_axe", WideAxe::new);
+    public static RegistryObject<Item> SEVERE_PENALTY_AXE = ITEMS.register("severe_penalty_axe", SeverePenaltyAxe::new);
+    public static RegistryObject<Item> RELICT_AXE = ITEMS.register("relict_axe", RelictAxe::new);
+    public static RegistryObject<Item> ELEGANCE_AXE = ITEMS.register("elegance_axe", EleganceAxe::new);
+    public static RegistryObject<Item> RIBBON_AXE = ITEMS.register("ribbon_axe", RibbonAxe::new);
     //方块物品
     public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_MAKE_BLOCK = ITEMS.register("weapon_make_block", () -> new BlockItem(BlockRegistry.WEAPON_MAKE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));

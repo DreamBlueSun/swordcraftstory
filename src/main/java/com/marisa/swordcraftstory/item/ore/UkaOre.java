@@ -47,6 +47,9 @@ public class UkaOre extends AbstractOre {
             case SWORD:
                 stack = ItemRegistry.ELEGANCE_SWORD.get().getDefaultInstance();
                 break;
+            case AXE:
+                stack = ItemRegistry.ELEGANCE_AXE.get().getDefaultInstance();
+                break;
             default:
                 stack = Items.AIR.getDefaultInstance();
         }
@@ -61,7 +64,7 @@ public class UkaOre extends AbstractOre {
 
     @Override
     public Item asAxe() {
-        return null;
+        return ItemRegistry.ELEGANCE_AXE.get();
     }
 
     @Override
@@ -76,6 +79,8 @@ public class UkaOre extends AbstractOre {
                 return 39;
             case SWORD:
                 return 37;
+            case AXE:
+                return 47;
             default:
                 return 0;
         }
@@ -88,6 +93,8 @@ public class UkaOre extends AbstractOre {
                 return 10;
             case SWORD:
                 return 28;
+            case AXE:
+                return 32;
             default:
                 return 0;
         }
@@ -98,6 +105,8 @@ public class UkaOre extends AbstractOre {
         switch (type) {
             case BOW:
                 return -20;
+            case AXE:
+                return -30;
             case SWORD:
             default:
                 return 0;
@@ -111,6 +120,8 @@ public class UkaOre extends AbstractOre {
                 return 71;
             case SWORD:
                 return 82;
+            case AXE:
+                return 96;
             default:
                 return 0;
         }
