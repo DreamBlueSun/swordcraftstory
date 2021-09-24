@@ -1,9 +1,11 @@
 package com.marisa.swordcraftstory.util;
 
 import com.marisa.swordcraftstory.item.intensify.helper.Effects;
-import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyAttr;
+import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -106,8 +108,15 @@ public class CombatPropertiesUtils {
                 .appendString("     ").appendSibling(new TranslationTextComponent(critical + "%").mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("熟练度").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(getTec(stack) + "/" + Weapon.MAX_TEC).mergeStyle(TextFormatting.LIGHT_PURPLE)));
-        tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
-                .appendString("     ").appendSibling(new TranslationTextComponent(weapon.getDur(stack) + "/" + weapon.getDurMax(stack)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+        int lvlNnBreaking = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
+        if (lvlNnBreaking > 0) {
+            tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
+                    .appendString("     ").appendSibling(new TranslationTextComponent(weapon.getDur(stack) + "/" + weapon.getDurMax(stack)).mergeStyle(TextFormatting.LIGHT_PURPLE))
+                    .appendSibling(new TranslationTextComponent("(+" + (lvlNnBreaking * 15) + ")").mergeStyle(TextFormatting.DARK_PURPLE)));
+        } else {
+            tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
+                    .appendString("     ").appendSibling(new TranslationTextComponent(weapon.getDur(stack) + "/" + weapon.getDurMax(stack)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+        }
         //效果字段显示
         Effects effect = getEffect(stack);
         if (effect != null) {

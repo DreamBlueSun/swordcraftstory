@@ -9,6 +9,8 @@ import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -212,7 +214,13 @@ public class SendPack {
                             ItemStack stack = inv.mainInventory.get(i);
                             if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
                                 stack.setDamage(0);
-                                CombatPropertiesUtils.setDur(stack, CombatPropertiesUtils.getDurMax(stack));
+                                int durMax = ((Weapon) stack.getItem()).getDurMax(stack);
+                                int lvlNnBreaking = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
+                                if (lvlNnBreaking > 0) {
+                                    CombatPropertiesUtils.setDur(stack, durMax + (lvlNnBreaking * 15));
+                                } else {
+                                    CombatPropertiesUtils.setDur(stack, durMax);
+                                }
                                 stack.removeChildTag("story_combat_broken");
                                 inv.setInventorySlotContents(i, stack);
                             }

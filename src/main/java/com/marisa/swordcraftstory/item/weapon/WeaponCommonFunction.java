@@ -4,9 +4,6 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.util.StoryUUID;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -52,23 +49,6 @@ public class WeaponCommonFunction {
             return 0;
         }
         if (stack.isDamageable()) {
-            //计算耐久附魔
-            if (amount > 0) {
-                int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
-                int j = 0;
-                for (int k = 0; i > 0 && k < amount; ++k) {
-                    if (UnbreakingEnchantment.negateDamage(stack, i, entity.getRNG())) {
-                        ++j;
-                    }
-                }
-                amount -= j;
-                if (amount <= 0) {
-                    return 0;
-                }
-            }
-            if (amount == 0) {
-                return 0;
-            }
             //优先消耗dur
             CompoundNBT tag = stack.getOrCreateTag();
             int dur = tag.getInt("story_combat_dur");
