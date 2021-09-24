@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "AA ",
-    "AA ",
-    "AA "
+    "AAA",
+    "AAA",
+    " A "
   ],
   "key": {
     "A": {
@@ -11,7 +11,7 @@
     }
   },
   "result": {
-    "item": "swordcraftstory:sword_mould",
+    "item": "swordcraftstory:axe_mould",
     "count": 1
   }
 }
