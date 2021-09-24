@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.item.intensify;
+package com.marisa.swordcraftstory.item.intensify.helper;
 
 /**
  * 强化列表枚举
@@ -7,6 +7,8 @@ package com.marisa.swordcraftstory.item.intensify;
 public enum Intensifys {
 
     UNKNOWN(0, "未知"),
+
+    //矿石
     IRON_ORE(1, "铁矿石"),
     SLANDER_ORE(2, "斯兰德原石"),
     HARD_ORE(3, "加德英矿石"),
@@ -19,7 +21,10 @@ public enum Intensifys {
     HEAVY_GOLD_ORE(10, "重金矿"),
     REGIA_ORE(11, "雷吉亚矿"),
     UKA_ORE(12, "尤佳矿石"),
-    PRETTY_ORE(13, "漂亮原石");
+    PRETTY_ORE(13, "漂亮原石"),
+
+    //强化素材
+    LEGEND_IRON_BUNCH(1001, "传说级的铁串");
 
     private int id;
     private String show;

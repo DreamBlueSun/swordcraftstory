@@ -1,6 +1,4 @@
-package com.marisa.swordcraftstory.item.intensify;
-
-import com.marisa.swordcraftstory.item.intensify.obj.IntensifyAttr;
+package com.marisa.swordcraftstory.item.intensify.helper;
 
 /**
  * 强化能力接口
