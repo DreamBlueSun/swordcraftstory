@@ -7,13 +7,13 @@
   ],
   "key": {
     "A": {
-      "item": "minecraft:slander_ore"
+      "item": "swordcraftstory:slander_ore"
     },
     "B": {
-      "item": "minecraft:hard_ore"
+      "item": "swordcraftstory:hard_ore"
     },
     "C": {
-      "item": "minecraft:cut_iron_ore"
+      "item": "swordcraftstory:cut_iron_ore"
     }
   },
   "result": {
