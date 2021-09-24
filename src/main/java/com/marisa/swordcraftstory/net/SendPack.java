@@ -11,16 +11,22 @@ import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 
@@ -209,6 +215,15 @@ public class SendPack {
                         break;
                     case "smithery.repairAll":
                         //修理
+                        if (!sender.isCreative()) {
+                            Vector3d vector3d = Vector3d.copyCenteredHorizontally(this.blockPos);
+                            List<MonsterEntity> list = sender.world.getEntitiesWithinAABB(MonsterEntity.class, new AxisAlignedBB(vector3d.getX() - 8.0D, vector3d.getY() - 5.0D, vector3d.getZ() - 8.0D, vector3d.getX() + 8.0D, vector3d.getY() + 5.0D, vector3d.getZ() + 8.0D), (p_241146_1_) -> p_241146_1_.func_230292_f_(sender));
+                            if (!list.isEmpty()) {
+                                sender.sendStatusMessage(new TranslationTextComponent("msg.swordcraftstory.smithery.repairAll.no_safe").mergeStyle(TextFormatting.RED), true);
+                                return;
+                            }
+                        }
+                        //执行逻辑
                         PlayerInventory inv = sender.inventory;
                         for (int i = 0; i < inv.mainInventory.size(); i++) {
                             ItemStack stack = inv.mainInventory.get(i);
@@ -225,6 +240,7 @@ public class SendPack {
                                 inv.setInventorySlotContents(i, stack);
                             }
                         }
+                        sender.sendStatusMessage(new TranslationTextComponent("msg.swordcraftstory.smithery.repairAll.ok").mergeStyle(TextFormatting.GREEN), true);
                         break;
                     default:
                         break;

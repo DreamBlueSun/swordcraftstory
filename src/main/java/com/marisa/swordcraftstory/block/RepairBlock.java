@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.block.tile;
+package com.marisa.swordcraftstory.block;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.special.Hammer;
@@ -46,7 +46,7 @@ public class RepairBlock extends Block {
         } else {
             ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (!stack.isEmpty() && stack.getItem() instanceof Hammer) {
-                Networking.INSTANCE.sendToServer(new SendPack("smithery.repairAll"));
+                Networking.INSTANCE.sendToServer(new SendPack("smithery.repairAll", pos));
             }
         }
         return ActionResultType.SUCCESS;

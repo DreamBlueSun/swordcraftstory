@@ -2,7 +2,6 @@ package com.marisa.swordcraftstory.block;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.ore.StoryOreBlock;
-import com.marisa.swordcraftstory.block.tile.RepairBlock;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

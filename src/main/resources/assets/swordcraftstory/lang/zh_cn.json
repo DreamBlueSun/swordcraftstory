@@ -63,5 +63,7 @@
   "item.swordcraftstory.regia_ore": "雷吉亚矿",
   "item.swordcraftstory.uka_ore": "尤佳矿石",
   "item.swordcraftstory.pretty_ore": "漂亮原石",
-  "item.swordcraftstory.legend_iron_bunch": "传说级的铁串"
+  "item.swordcraftstory.legend_iron_bunch": "传说级的铁串",
+  "msg.swordcraftstory.smithery.repairAll.no_safe": "附近有怪物在游荡",
+  "msg.swordcraftstory.smithery.repairAll.ok": "武器修理完毕"
 }
