@@ -4,6 +4,8 @@ import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
@@ -69,6 +71,10 @@ public abstract class RepairItem extends Item {
                     int damage = itemStack.getDamage();
                     int dur = ((Weapon) item).getDur(itemStack);
                     int durMax = ((Weapon) item).getDurMax(itemStack);
+                    int lvlNnBreaking = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
+                    if (lvlNnBreaking > 0) {
+                        durMax += lvlNnBreaking * 15;
+                    }
                     if (damage == 0 && dur == durMax) {
                         continue;
                     }
