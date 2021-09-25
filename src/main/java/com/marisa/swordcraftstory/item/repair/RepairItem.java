@@ -71,7 +71,7 @@ public abstract class RepairItem extends Item {
                     int damage = itemStack.getDamage();
                     int dur = ((Weapon) item).getDur(itemStack);
                     int durMax = ((Weapon) item).getDurMax(itemStack);
-                    int lvlNnBreaking = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
+                    int lvlNnBreaking = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, itemStack);
                     if (lvlNnBreaking > 0) {
                         durMax += lvlNnBreaking * 15;
                     }
