@@ -72,5 +72,27 @@
         0.8
       ]
     }
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/hard_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/hard_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/hard_bow_pull_2"
+    }
+  ]
 }
