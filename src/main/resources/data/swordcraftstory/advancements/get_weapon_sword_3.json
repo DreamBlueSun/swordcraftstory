@@ -1,0 +1,30 @@
+{
+  "parent": "swordcraftstory:get_weapon_sword_2",
+  "display": {
+    "icon": {
+      "item": "swordcraftstory:cut_iron_sword"
+    },
+    "title": {
+      "translate": "advancements.swordcraftstory.get_weapon_sword_3.title"
+    },
+    "description": {
+      "translate": "advancements.swordcraftstory.get_weapon_sword_3.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "one": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "swordcraftstory:sword/rank3"
+          }
+        ]
+      }
+    }
+  }
+}

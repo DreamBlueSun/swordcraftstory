@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "swordcraftstory:solemnity_sword",
+    "swordcraftstory:iron_sword",
+    "swordcraftstory:synthesis_sword",
+    "swordcraftstory:feather_sword"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "swordcraftstory:cut_iron_sword",
+    "swordcraftstory:wide_sword",
+    "swordcraftstory:severe_penalty_sword",
+    "swordcraftstory:relict_sword",
+    "swordcraftstory:elegance_sword",
+    "swordcraftstory:ribbon_sword"
+  ]
+}

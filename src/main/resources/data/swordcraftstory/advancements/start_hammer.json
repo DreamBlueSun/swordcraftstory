@@ -1,0 +1,42 @@
+{
+  "parent": "swordcraftstory:get_mould_item",
+  "display": {
+    "icon": {
+      "item": "swordcraftstory:weapon_make_block"
+    },
+    "title": {
+      "translate": "advancements.swordcraftstory.start_hammer.title"
+    },
+    "description": {
+      "translate": "advancements.swordcraftstory.start_hammer.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "hammer_use": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "blocks": [
+              "swordcraftstory:weapon_make_block",
+              "swordcraftstory:weapon_intensify_block",
+              "swordcraftstory:weapon_edge_block",
+              "swordcraftstory:weapon_collapse_block",
+              "swordcraftstory:repair_block"
+            ]
+          }
+        },
+        "item": {
+          "count": 1,
+          "items": [
+            "swordcraftstory:hammer"
+          ]
+        }
+      }
+    }
+  }
+}

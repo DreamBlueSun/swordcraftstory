@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "swordcraftstory:sword_guake",
+    "swordcraftstory:novice_sword",
+    "swordcraftstory:thin_sword",
+    "swordcraftstory:hard_sword"
+  ]
+}
