@@ -308,6 +308,15 @@ public class CombatPropertiesUtils {
         stack.setTagInfo("story_combat_dur_max", IntNBT.valueOf(amount));
     }
 
+    public static int getDurMaxAfterEffect(ItemStack stack) {
+        int v = getDurMax(stack);
+        int lvlUnBreaking = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
+        if (lvlUnBreaking > 0) {
+            v += lvlUnBreaking * 15;
+        }
+        return v;
+    }
+
     public static void intensifyEdgeDur(ItemStack stack, int amount) {
         CompoundNBT tag = stack.getOrCreateTag();
         int v = tag.getInt("story_combat_dur_max");

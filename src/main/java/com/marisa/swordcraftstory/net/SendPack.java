@@ -9,8 +9,6 @@ import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -228,16 +226,10 @@ public class SendPack {
                         for (int i = 0; i < inv.mainInventory.size(); i++) {
                             ItemStack stack = inv.mainInventory.get(i);
                             if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
-                                stack.setDamage(0);
-                                int durMax = ((Weapon) stack.getItem()).getDurMax(stack);
-                                int lvlNnBreaking = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack);
-                                if (lvlNnBreaking > 0) {
-                                    CombatPropertiesUtils.setDur(stack, durMax + (lvlNnBreaking * 15));
-                                } else {
-                                    CombatPropertiesUtils.setDur(stack, durMax);
-                                }
                                 stack.removeChildTag("story_combat_broken");
-                                inv.setInventorySlotContents(i, stack);
+                                stack.setDamage(0);
+                                CombatPropertiesUtils.setDur(stack, ((Weapon) stack.getItem()).getDurMaxAfterEffect(stack));
+//                                inv.setInventorySlotContents(i, stack);
                             }
                         }
                         sender.sendStatusMessage(new TranslationTextComponent("msg.swordcraftstory.smithery.repairAll.ok").mergeStyle(TextFormatting.GREEN), true);

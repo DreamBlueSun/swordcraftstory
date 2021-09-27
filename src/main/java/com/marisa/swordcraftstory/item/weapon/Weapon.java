@@ -59,6 +59,11 @@ public interface Weapon extends Combat {
     int getDur(ItemStack stack);
 
     /**
+     * 获取武器计算各种效果后的的Dur最大值
+     */
+    int getDurMaxAfterEffect(ItemStack stack);
+
+    /**
      * 武器解体获取模具方法
      */
     ItemStack collapse(ItemStack stack);

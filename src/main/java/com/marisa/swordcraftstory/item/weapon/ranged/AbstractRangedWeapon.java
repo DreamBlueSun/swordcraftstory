@@ -215,6 +215,11 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
     }
 
     @Override
+    public int getDurMaxAfterEffect(ItemStack stack) {
+        return CombatPropertiesUtils.getDurMaxAfterEffect(stack);
+    }
+
+    @Override
     public int getTec(ItemStack stack) {
         return CombatPropertiesUtils.getTec(stack);
     }

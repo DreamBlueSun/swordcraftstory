@@ -16,6 +16,9 @@ public interface Combat {
 
     int getAgl(ItemStack stack);
 
+    /**
+     * 获取不计入解体的Dur最大值
+     */
     int getDurMax(ItemStack stack);
 
 }

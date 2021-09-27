@@ -4,8 +4,6 @@ import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
@@ -62,41 +60,38 @@ public abstract class RepairItem extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+    public ItemStack onItemUseFinish(ItemStack itemStack, World worldIn, LivingEntity entityLiving) {
         if (entityLiving instanceof PlayerEntity) {
             NonNullList<ItemStack> stacks = ((PlayerEntity) entityLiving).inventory.mainInventory;
-            for (ItemStack itemStack : stacks) {
-                Item item = itemStack.getItem();
-                if (item instanceof Weapon) {
-                    int damage = itemStack.getDamage();
-                    int dur = ((Weapon) item).getDur(itemStack);
-                    int durMax = ((Weapon) item).getDurMax(itemStack);
-                    int lvlNnBreaking = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, itemStack);
-                    if (lvlNnBreaking > 0) {
-                        durMax += lvlNnBreaking * 15;
-                    }
-                    if (damage == 0 && dur == durMax) {
-                        continue;
-                    }
+            for (ItemStack stack : stacks) {
+                if (stack.getItem() instanceof Weapon) {
                     int cost = this.amount;
-                    if (cost > damage) {
-                        cost -= damage;
-                        itemStack.setDamage(0);
-                        dur += cost;
-                        if (dur > durMax) {
-                            dur = durMax;
+                    Weapon weapon = (Weapon) stack.getItem();
+                    if (weapon.isBroken(stack)) {
+                        stack.removeChildTag("story_combat_broken");
+                        if (cost > stack.getMaxDamage()) {
+                            stack.setDamage(0);
+                            CombatPropertiesUtils.setDur(stack, Math.min(cost - stack.getMaxDamage(), weapon.getDurMaxAfterEffect(stack)));
+                        } else {
+                            stack.setDamage(stack.getMaxDamage() - cost);
                         }
-                        CombatPropertiesUtils.setDur(itemStack, dur);
-                    } else if (cost == damage) {
-                        itemStack.setDamage(0);
                     } else {
-                        itemStack.setDamage(damage - cost);
+                        int stackDamage = stack.getDamage();
+                        int durMaxAfterEffect = weapon.getDurMaxAfterEffect(stack);
+                        if (stackDamage == 0 && weapon.getDur(stack) == durMaxAfterEffect) {
+                            continue;
+                        }
+                        if (cost > stackDamage) {
+                            stack.setDamage(0);
+                            CombatPropertiesUtils.setDur(stack, Math.min(cost - stackDamage, durMaxAfterEffect));
+                        } else {
+                            stack.setDamage(stackDamage - cost);
+                        }
                     }
-                    stack.removeChildTag("story_combat_broken");
                     break;
                 }
             }
         }
-        return super.onItemUseFinish(stack, worldIn, entityLiving);
+        return super.onItemUseFinish(itemStack, worldIn, entityLiving);
     }
 }
