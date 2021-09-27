@@ -1,8 +1,8 @@
-package com.marisa.swordcraftstory.entity.rander;
+package com.marisa.swordcraftstory.entity.mob.rander;
 
 import com.marisa.swordcraftstory.Story;
-import com.marisa.swordcraftstory.entity.instance.Slime;
-import com.marisa.swordcraftstory.entity.model.SlimeModel;
+import com.marisa.swordcraftstory.entity.mob.instance.Slime;
+import com.marisa.swordcraftstory.entity.mob.model.SlimeModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

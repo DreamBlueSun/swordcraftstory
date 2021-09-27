@@ -1,6 +1,6 @@
-package com.marisa.swordcraftstory.entity.model;
+package com.marisa.swordcraftstory.entity.mob.model;
 
-import com.marisa.swordcraftstory.entity.instance.mob.RockLizard;
+import com.marisa.swordcraftstory.entity.mob.instance.mob.RockLizard;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;

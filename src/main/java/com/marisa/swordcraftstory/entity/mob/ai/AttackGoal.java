@@ -1,6 +1,6 @@
-package com.marisa.swordcraftstory.entity.ai;
+package com.marisa.swordcraftstory.entity.mob.ai;
 
-import com.marisa.swordcraftstory.entity.EntityStatus;
+import com.marisa.swordcraftstory.entity.mob.EntityStatus;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 

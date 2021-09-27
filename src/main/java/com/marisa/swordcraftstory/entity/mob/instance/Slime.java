@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.entity.instance;
+package com.marisa.swordcraftstory.entity.mob.instance;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
