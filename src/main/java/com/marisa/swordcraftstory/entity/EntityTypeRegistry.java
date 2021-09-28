@@ -23,6 +23,6 @@ public class EntityTypeRegistry {
 //            EntityType.Builder.create(RockLizard::new, EntityClassification.MONSTER).size(1.0F, 1.0F).build("rock_lizard")
 //    );
     public static RegistryObject<EntityType<AirCutterProjectileEntity>> AIR_CUTTER = ENTITIES.register("air_cutter", () ->
-            EntityType.Builder.create(AirCutterProjectileEntity::new, EntityClassification.MISC).size(1.0F, 1.0F).build("air_cutter")
+            EntityType.Builder.create(AirCutterProjectileEntity::new, EntityClassification.MISC).size(1.0F, 2.0F).build("air_cutter")
     );
 }

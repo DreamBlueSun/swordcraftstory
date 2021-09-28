@@ -21,19 +21,19 @@ public class AirCutterModel extends EntityModel<AirCutterProjectileEntity> {
         textureHeight = 32;
 
         bb_main = new ModelRenderer(this);
-        bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
+        bb_main.setRotationPoint(0.0F, 8.0F, 0.0F);
 
 
         cube_r1 = new ModelRenderer(this);
         cube_r1.setRotationPoint(0.0F, -8.0F, 0.0F);
         bb_main.addChild(cube_r1);
-        setRotationAngle(cube_r1, 0.0F, 0.0F, -0.7854F);
+        setRotationAngle(cube_r1, 1.5708F, -1.1781F, 1.5708F);
         cube_r1.setTextureOffset(5, 4).addBox(0.0F, -8.0F, -4.0F, 0.0F, 16.0F, 8.0F, 0.0F, false);
 
         cube_r2 = new ModelRenderer(this);
         cube_r2.setRotationPoint(0.0F, -8.0F, 0.0F);
         bb_main.addChild(cube_r2);
-        setRotationAngle(cube_r2, 0.0F, 0.0F, 0.7854F);
+        setRotationAngle(cube_r2, -1.5708F, -1.1781F, -1.5708F);
         cube_r2.setTextureOffset(5, 4).addBox(0.0F, -8.0F, -4.0F, 0.0F, 16.0F, 8.0F, 0.0F, false);
     }
 
