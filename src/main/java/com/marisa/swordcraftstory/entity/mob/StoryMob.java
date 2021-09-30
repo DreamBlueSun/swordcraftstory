@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.entity;
+package com.marisa.swordcraftstory.entity.mob;
 
 /**
  * Mob数据

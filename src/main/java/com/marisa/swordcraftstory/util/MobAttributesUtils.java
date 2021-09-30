@@ -80,10 +80,8 @@ public class MobAttributesUtils {
         builder.put(Attributes.MAX_HEALTH, new AttributeModifier("Max health modifier", maxHealthAdd, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR, new AttributeModifier("armor modifier", armorAdd, AttributeModifier.Operation.ADDITION));
         mobEntity.getAttributeManager().reapplyModifiers(builder.build());
-        //是boss或者   未之定义名称或自定义名称没有样式时（判定为新生成mob），恢复生命值到最大
-        if (isBoos || !mobEntity.hasCustomName() || mobEntity.getDisplayName().getStyle().isEmpty()) {
-            mobEntity.heal(mobEntity.getMaxHealth());
-        }
+        //重新载入时回复生命值
+        mobEntity.heal(mobEntity.getMaxHealth());
     }
 
 }

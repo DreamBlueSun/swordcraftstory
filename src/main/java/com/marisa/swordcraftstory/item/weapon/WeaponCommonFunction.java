@@ -75,7 +75,7 @@ public class WeaponCommonFunction {
                     if (entity instanceof ServerPlayerEntity) {
                         ServerPlayerEntity playerEntity = (ServerPlayerEntity) entity;
                         ServerWorld worldIn = playerEntity.getServerWorld();
-                        worldIn.playSound(null, playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
+                        worldIn.playSound(null, playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 3.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + 0.5F);
                     }
                 }
                 stack.setDamage(l);

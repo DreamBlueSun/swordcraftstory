@@ -1,13 +1,16 @@
 package com.marisa.swordcraftstory.event;
 
+import com.marisa.swordcraftstory.entity.EntityTypeRegistry;
+import com.marisa.swordcraftstory.entity.projectile.rander.AirCutterRender;
 import com.marisa.swordcraftstory.gui.container.ContainerTypeRegistry;
-import com.marisa.swordcraftstory.gui.screen.WeaponEdgeScreen;
 import com.marisa.swordcraftstory.gui.screen.WeaponCollapseScreen;
+import com.marisa.swordcraftstory.gui.screen.WeaponEdgeScreen;
 import com.marisa.swordcraftstory.gui.screen.WeaponIntensifyScreen;
 import com.marisa.swordcraftstory.gui.screen.WeaponMakeScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -26,10 +29,10 @@ public class ClientEventHandler {
         event.enqueueWork(() -> ScreenManager.registerFactory(ContainerTypeRegistry.WEAPON_COLLAPSE_CONTAINER.get(), WeaponCollapseScreen::new));
     }
 
-//    @SubscribeEvent
-//    public static void onClientSetUpEvent(FMLClientSetupEvent event) {
-//        //注册实体的渲染
+    @SubscribeEvent
+    public static void onClientSetUpEvent(FMLClientSetupEvent event) {
+        //注册实体的渲染
 //        RenderingRegistry.registerEntityRenderingHandler(EntityTypeRegistry.SLIME.get(), SlimeRender::new);
-//        RenderingRegistry.registerEntityRenderingHandler(EntityTypeRegistry.ROCK_LIZARD.get(), RockLizardRender::new);
-//    }
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeRegistry.AIR_CUTTER.get(), AirCutterRender::new);
+    }
 }

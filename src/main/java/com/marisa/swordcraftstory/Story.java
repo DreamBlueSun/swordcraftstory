@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory;
 
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.block.tile.TileEntityTypeRegistry;
+import com.marisa.swordcraftstory.entity.EntityTypeRegistry;
 import com.marisa.swordcraftstory.event.EventHandler;
 import com.marisa.swordcraftstory.gui.container.ContainerTypeRegistry;
 import com.marisa.swordcraftstory.item.ItemRegistry;
@@ -40,6 +41,7 @@ public class Story {
         TileEntityTypeRegistry.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ContainerTypeRegistry.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         AttributesRegistry.ATTRIBUTES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        EntityTypeRegistry.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.register(new EventHandler());
 
         // Register the setup method for modloading

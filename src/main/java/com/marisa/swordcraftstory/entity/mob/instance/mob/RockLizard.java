@@ -1,9 +1,9 @@
-package com.marisa.swordcraftstory.entity.instance.mob;
+package com.marisa.swordcraftstory.entity.mob.instance.mob;
 
-import com.marisa.swordcraftstory.entity.EntityStatus;
-import com.marisa.swordcraftstory.entity.StoryMob;
-import com.marisa.swordcraftstory.entity.ai.AttackGoal;
-import com.marisa.swordcraftstory.entity.ai.RunAroundGoal;
+import com.marisa.swordcraftstory.entity.mob.EntityStatus;
+import com.marisa.swordcraftstory.entity.mob.StoryMob;
+import com.marisa.swordcraftstory.entity.mob.ai.AttackGoal;
+import com.marisa.swordcraftstory.entity.mob.ai.RunAroundGoal;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;

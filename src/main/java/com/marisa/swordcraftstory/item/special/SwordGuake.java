@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.item.special;
 
-import com.marisa.swordcraftstory.item.weapon.close.sword.AbstractSwordWeapon;
 import com.marisa.swordcraftstory.item.ore.IronOre;
+import com.marisa.swordcraftstory.item.weapon.close.sword.AbstractSwordWeapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -32,5 +32,4 @@ public class SwordGuake extends AbstractSwordWeapon {
         CombatPropertiesUtils.tipNovice(tooltip);
         tooltip.add(new TranslationTextComponent("挂科仙客没有抽到的心愿武器").mergeStyle(TextFormatting.DARK_PURPLE));
     }
-
 }

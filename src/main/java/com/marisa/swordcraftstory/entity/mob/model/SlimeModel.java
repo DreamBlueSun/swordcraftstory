@@ -1,9 +1,9 @@
-package com.marisa.swordcraftstory.entity.model;// Made with Blockbench 3.9.3
+package com.marisa.swordcraftstory.entity.mob.model;// Made with Blockbench 3.9.3
 // Exported for Minecraft version 1.15 - 1.16 with MCP mappings
 // Paste this class into your mod and generate all required imports
 
 
-import com.marisa.swordcraftstory.entity.instance.Slime;
+import com.marisa.swordcraftstory.entity.mob.instance.Slime;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;

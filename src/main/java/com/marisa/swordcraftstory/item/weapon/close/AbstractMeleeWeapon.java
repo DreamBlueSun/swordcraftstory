@@ -116,6 +116,11 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
     }
 
     @Override
+    public int getDurAndDamage(ItemStack stack) {
+        return getDur(stack) + getMaxDamage(stack) - getDamage(stack);
+    }
+
+    @Override
     public int getDur(ItemStack stack) {
         return CombatPropertiesUtils.getDur(stack);
     }

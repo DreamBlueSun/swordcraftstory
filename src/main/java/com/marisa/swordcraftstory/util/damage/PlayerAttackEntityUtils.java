@@ -130,6 +130,11 @@ public class PlayerAttackEntityUtils {
                     boolean flag5 = targetEntity.attackEntityFrom(DamageSource.causePlayerDamage(player), f);
                     //执行特效
                     if (flag5) {
+                        //增加tec
+                        ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+                        if (!(stack.getItem() instanceof AbstractRangedWeapon)) {
+                            ((Weapon) stack.getItem()).incrTec(stack);
+                        }
                         //击退伤害特效
                         if (i > 0) {
                             if (targetEntity instanceof LivingEntity) {
@@ -240,7 +245,6 @@ public class PlayerAttackEntityUtils {
                 //远程武器平A伤害为攻击力的一半
                 return (float) (weapon.getAtk(stack) / 2);
             } else {
-                weapon.incrTec(stack);
                 return weapon.getAtk(stack);
             }
         } else {
