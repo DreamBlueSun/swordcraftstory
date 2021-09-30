@@ -54,6 +54,11 @@ public interface Weapon extends Combat {
     int getCri(ItemStack stack);
 
     /**
+     * 获取武器当前的剩余耐久(dur和damage)
+     */
+    int getDurAndDamage(ItemStack stack);
+
+    /**
      * 获取武器当前的Dur
      */
     int getDur(ItemStack stack);
