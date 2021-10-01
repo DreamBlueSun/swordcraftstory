@@ -1,5 +1,6 @@
 {
-  "itemGroup.combat_group": "铸剑物语",
+  "itemGroup.combat_group": "铸剑物语：基础",
+  "itemGroup.model_change_group": "铸剑物语：幻化武器",
   "item.swordcraftstory.hammer": "铁锤",
   "item.swordcraftstory.sword_mould": "剑模具",
   "item.swordcraftstory.bow_mould": "弓模具",
@@ -79,6 +80,10 @@
   "item.swordcraftstory.uka_ore": "尤佳矿石",
   "item.swordcraftstory.pretty_ore": "漂亮原石",
   "item.swordcraftstory.legend_iron_bunch": "传说级的铁串",
+  "item.swordcraftstory.dragon_slave_sword": "龙破斩",
+  "item.swordcraftstory.unlimited_earth_sword": "无限大地",
+  "item.swordcraftstory.elements_mana_sword": "元素圣剑",
+  "item.swordcraftstory.time_umbrella_sword": "光阴流时伞",
   "msg.swordcraftstory.smithery.repairAll.no_safe": "附近有怪物在游荡",
   "msg.swordcraftstory.smithery.repairAll.ok": "武器修理完毕",
   "advancements.swordcraftstory.root.title": "铸剑物语",

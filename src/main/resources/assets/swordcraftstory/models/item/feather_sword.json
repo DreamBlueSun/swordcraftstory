@@ -151,6 +151,30 @@
         "model_change": 13
       },
       "model": "swordcraftstory:item/change/sword/ribbon_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 1001
+      },
+      "model": "swordcraftstory:item/dragon_slave_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 1002
+      },
+      "model": "swordcraftstory:item/unlimited_earth_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 1003
+      },
+      "model": "swordcraftstory:item/elements_mana_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 1004
+      },
+      "model": "swordcraftstory:item/time_umbrella_sword"
     }
   ]
 }

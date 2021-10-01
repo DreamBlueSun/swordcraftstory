@@ -140,7 +140,8 @@ public class BigOre extends AbstractOre {
     }
 
     @Override
-    public void build(ItemStack stack) {
+    public boolean build(ItemStack stack) {
         stack.setTagInfo("story_combat_model_change", IntNBT.valueOf(WeaponModels.BIG_ORE.getId()));
+        return super.build(stack);
     }
 }

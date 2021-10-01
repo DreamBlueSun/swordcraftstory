@@ -3,6 +3,7 @@ package com.marisa.swordcraftstory.item.ore;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.model.WeaponModel;
 import com.marisa.swordcraftstory.item.mould.Mould;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -46,6 +47,25 @@ public abstract class AbstractOre extends Item implements WeaponMake, Intensify,
             CombatPropertiesUtils.setAgl(stack, mould.getAgl(mouldStack));
             CombatPropertiesUtils.setDur(stack, mould.getDurMax(mouldStack));
             CombatPropertiesUtils.setDurMax(stack, mould.getDurMax(mouldStack));
+        }
+    }
+
+    @Override
+    public boolean build(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public String getModelName(ItemStack stack) {
+        switch (((Weapon)stack.getItem()).type()) {
+            case SWORD:
+                return asSword().getName().getString();
+            case BOW:
+                return asBow().getName().getString();
+            case AXE:
+                return asAxe().getName().getString();
+            default:
+                return "未幻化";
         }
     }
 }

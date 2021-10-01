@@ -17,6 +17,10 @@ import com.marisa.swordcraftstory.item.reply.JuYuMedicine;
 import com.marisa.swordcraftstory.item.reply.Woundplast;
 import com.marisa.swordcraftstory.item.special.Hammer;
 import com.marisa.swordcraftstory.item.special.SwordGuake;
+import com.marisa.swordcraftstory.item.weapon.base.taila.DragonSlaveSword;
+import com.marisa.swordcraftstory.item.weapon.base.taila.ElementsManaSword;
+import com.marisa.swordcraftstory.item.weapon.base.taila.TimeUmbrellaSword;
+import com.marisa.swordcraftstory.item.weapon.base.taila.UnlimitedEarthSword;
 import com.marisa.swordcraftstory.item.weapon.close.axe.*;
 import com.marisa.swordcraftstory.item.weapon.close.sword.*;
 import com.marisa.swordcraftstory.item.weapon.ranged.bow.*;
@@ -123,5 +127,9 @@ public class ItemRegistry {
     public static RegistryObject<Item> PRETTY_ORE = ITEMS.register("pretty_ore", PrettyOre::new);
     //强化道具
     public static RegistryObject<Item> LEGEND_IRON_BUNCH = ITEMS.register("legend_iron_bunch", LegendIronBunch::new);
-
+    //幻化武器
+    public static RegistryObject<Item> DRAGON_SLAVE_SWORD = ITEMS.register("dragon_slave_sword", DragonSlaveSword::new);
+    public static RegistryObject<Item> UNLIMITED_EARTH_SWORD = ITEMS.register("unlimited_earth_sword", UnlimitedEarthSword::new);
+    public static RegistryObject<Item> ELEMENTS_MANA_SWORD = ITEMS.register("elements_mana_sword", ElementsManaSword::new);
+    public static RegistryObject<Item> TIME_UMBRELLA_SWORD = ITEMS.register("time_umbrella_sword", TimeUmbrellaSword::new);
 }

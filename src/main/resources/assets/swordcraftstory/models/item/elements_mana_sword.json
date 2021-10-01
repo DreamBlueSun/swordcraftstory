@@ -1,0 +1,28 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "swordcraftstory:item/elements_mana_sword"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [-90, 90, 135],
+      "translation": [0, 11, 2],
+      "scale": [1.6, 1.6, 0.8]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [-90, -90, -135],
+      "translation": [0, 11, 2],
+      "scale": [1.6, 1.6, 0.8]
+    },
+    "firstperson_righthand": {
+      "rotation": [45, 90, 0],
+      "translation": [0, 6, -6],
+      "scale": [1.6, 1.6, 0.8]
+    },
+    "firstperson_lefthand": {
+      "rotation": [45, -90, 0],
+      "translation": [0, 6, -6],
+      "scale": [1.6, 1.6, 0.8]
+    }
+  }
+}

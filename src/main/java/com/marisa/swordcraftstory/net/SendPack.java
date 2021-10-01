@@ -260,14 +260,15 @@ public class SendPack {
                             return;
                         }
                         //执行幻化
-                        ((WeaponModel) modelChangeStack1.getItem()).build(modelChangeStack0);
-                        //结果
-                        inventoryModelChange.removeStackFromSlot(0);
-                        modelChangeStack1.shrink(1);
-                        if (modelChangeStack1.isEmpty()) {
-                            inventoryModelChange.removeStackFromSlot(1);
+                        if (((WeaponModel) modelChangeStack1.getItem()).build(modelChangeStack0)) {
+                            //结果
+                            inventoryModelChange.removeStackFromSlot(0);
+                            modelChangeStack1.shrink(1);
+                            if (modelChangeStack1.isEmpty()) {
+                                inventoryModelChange.removeStackFromSlot(1);
+                            }
+                            inventoryModelChange.setInventorySlotContents(2, modelChangeStack0);
                         }
-                        inventoryModelChange.setInventorySlotContents(2, modelChangeStack0);
                         break;
                     default:
                         break;
