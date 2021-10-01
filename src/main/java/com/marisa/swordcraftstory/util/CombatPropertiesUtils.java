@@ -4,6 +4,8 @@ import com.marisa.swordcraftstory.item.intensify.helper.Effects;
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyAttr;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
@@ -116,6 +118,11 @@ public class CombatPropertiesUtils {
         } else {
             tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
                     .appendString("     ").appendSibling(new TranslationTextComponent(weapon.getDur(stack) + "/" + weapon.getDurMax(stack)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
+        }
+        //特殊攻击字段显示
+        SpecialAttacks specialAttack = SpecialAttackHelper.get(stack);
+        if (specialAttack != null) {
+            tooltip.add(new TranslationTextComponent("特殊攻击[" + specialAttack.getShow() + "]").mergeStyle(TextFormatting.BLUE));
         }
         //效果字段显示
         Effects effect = getEffect(stack);

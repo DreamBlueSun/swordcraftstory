@@ -8,6 +8,8 @@ import com.marisa.swordcraftstory.item.intensify.helper.Effects;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -143,6 +145,12 @@ public class SendPack {
                         }
                         if (CombatPropertiesUtils.canIntensifyAttr(intensifyStack0)) {
                             CombatPropertiesUtils.intensifyAttr(intensifyStack0, ((Intensify) intensifyStack1.getItem()).getIntensifyAttr());
+                            //强化特殊攻击
+                            SpecialAttacks specialAttack = SpecialAttacks.checkReach(intensifyStack0);
+                            if (specialAttack != null) {
+                                SpecialAttackHelper.set(intensifyStack0, specialAttack);
+                            }
+                            //强化效果
                             Effects effects = Effects.checkReach(intensifyStack0);
                             if (effects != null) {
                                 CombatPropertiesUtils.intensifyEffect(intensifyStack0, effects);

@@ -1,16 +1,14 @@
 package com.marisa.swordcraftstory.item.weapon.close.sword;
 
-import com.marisa.swordcraftstory.entity.EntityTypeRegistry;
-import com.marisa.swordcraftstory.entity.projectile.instance.AirCutterProjectileEntity;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import com.marisa.swordcraftstory.item.weapon.close.AbstractMeleeWeapon;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
@@ -82,38 +80,37 @@ public abstract class AbstractSwordWeapon extends AbstractMeleeWeapon {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (isBroken(itemstack) || getDurAndDamage(itemstack) < 13) {
-            //损坏后或耐久不足将不能再使用特殊攻击
-            return ActionResult.resultFail(itemstack);
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            return specialAttacks.getSpecialAttack().onItemRightClick(worldIn, playerIn, handIn);
         }
-        playerIn.setActiveHand(handIn);
-        return ActionResult.resultConsume(itemstack);
+        return ActionResult.resultFail(stack);
     }
 
     @Override
     public UseAction getUseAction(ItemStack stack) {
-        return UseAction.SPEAR;
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            return specialAttacks.getSpecialAttack().getUseAction();
+        }
+        return UseAction.NONE;
     }
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return 72000;
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            return specialAttacks.getSpecialAttack().getUseDuration();
+        }
+        return 0;
     }
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
-        if ((entityLiving instanceof PlayerEntity)) {
-            PlayerEntity playerIn = (PlayerEntity) entityLiving;
-            AirCutterProjectileEntity airCutter = new AirCutterProjectileEntity(EntityTypeRegistry.AIR_CUTTER.get(), worldIn);
-            airCutter.setDamage(getAtk(stack) * 1.6D);
-            airCutter.setShooter(playerIn);
-            airCutter.setNoGravity(true);
-            airCutter.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
-            airCutter.setPosition(playerIn.getPosX(), playerIn.getPosYEye() - (double) 0.1F, playerIn.getPosZ());
-            airCutter.setDirectionAndMovement(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.6F, 0.0F);
-            worldIn.addEntity(airCutter);
-            stack.damageItem(13, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            specialAttacks.getSpecialAttack().onPlayerStoppedUsing(stack, worldIn, entityLiving, timeLeft);
         }
     }
 }
