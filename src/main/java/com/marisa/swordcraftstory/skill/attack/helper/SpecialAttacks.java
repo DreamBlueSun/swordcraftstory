@@ -1,10 +1,10 @@
 package com.marisa.swordcraftstory.skill.attack.helper;
 
+import com.marisa.swordcraftstory.item.intensify.helper.IntensifyHelper;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
 import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import com.marisa.swordcraftstory.skill.attack.sword.AirCutter;
-import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -82,7 +82,7 @@ public enum SpecialAttacks {
         List<SpecialAttacks> collect = new ArrayList<>();
         for (SpecialAttacks value : SpecialAttacks.values()) {
             if (value.getWeaponType() == ((Combat) stack.getItem()).type()) {
-                List<Integer> ids = CombatPropertiesUtils.getIntensifyIds(stack);
+                List<Integer> ids = IntensifyHelper.getIntensifyIds(stack);
                 List<Integer> idsNeed = value.getIntensifyIds();
                 boolean reach = false;
                 out:

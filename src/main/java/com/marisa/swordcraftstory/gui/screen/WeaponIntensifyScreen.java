@@ -2,14 +2,14 @@ package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.WeaponIntensifyContainer;
-import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
-import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyAttr;
+import com.marisa.swordcraftstory.item.intensify.helper.IntensifyHelper;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.SendPack;
-import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
+import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -84,7 +84,7 @@ public class WeaponIntensifyScreen extends ContainerScreen<WeaponIntensifyContai
         if (!slots.get(2).getStack().isEmpty()) {
             return;
         }
-        if (!CombatPropertiesUtils.canIntensifyAttr(stack0)) {
+        if (!IntensifyHelper.canIntensifyAttr(stack0)) {
             return;
         }
         //显示偏移
@@ -121,16 +121,16 @@ public class WeaponIntensifyScreen extends ContainerScreen<WeaponIntensifyContai
         drawCenteredString(matrixStack, this.font, String.valueOf(attrDur), xs + 36, ys + 32, 0x1E90FF);
         //强化技能
         ItemStack copy = stack0.copy();
-        if (CombatPropertiesUtils.canIntensifyAttr(copy)) {
-            CombatPropertiesUtils.intensifyAttr(copy, attr);
+        if (IntensifyHelper.canIntensifyAttr(copy)) {
+            IntensifyHelper.intensifyAttr(copy, attr);
             SpecialAttacks specialAttacks = SpecialAttacks.checkReach(copy);
             if (specialAttacks != null) {
                 drawCenteredString(matrixStack, this.font, specialAttacks.getShow(), xs + 36, ys + 60, 0x1E90FF);
             }
         }
         //强化效果
-        if (CombatPropertiesUtils.canIntensifyAttr(copy)) {
-            CombatPropertiesUtils.intensifyAttr(copy, attr);
+        if (IntensifyHelper.canIntensifyAttr(copy)) {
+            IntensifyHelper.intensifyAttr(copy, attr);
             Effects effects = Effects.checkReach(copy);
             if (effects != null) {
                 drawCenteredString(matrixStack, this.font, effects.getShow(), xs + 36, ys + 84, 0x4169E1);

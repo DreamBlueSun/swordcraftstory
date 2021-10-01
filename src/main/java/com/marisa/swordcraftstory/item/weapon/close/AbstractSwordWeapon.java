@@ -10,6 +10,7 @@ import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
+import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -123,7 +124,7 @@ public abstract class AbstractSwordWeapon extends SwordItem implements Weapon {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        CombatPropertiesUtils.addInformation(this, stack, tooltip);
+        WeaponInformationUtils.addInformation(this, stack, tooltip);
     }
 
     @Override

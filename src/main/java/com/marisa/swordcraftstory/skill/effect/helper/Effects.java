@@ -1,10 +1,10 @@
 package com.marisa.swordcraftstory.skill.effect.helper;
 
+import com.marisa.swordcraftstory.item.intensify.helper.IntensifyHelper;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
 import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
 import com.marisa.swordcraftstory.skill.effect.bow.Through;
-import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -83,7 +83,7 @@ public enum Effects {
         List<Effects> collect = new ArrayList<>();
         for (Effects value : Effects.values()) {
             if (value.getWeaponType() == ((Combat) stack.getItem()).type()) {
-                List<Integer> ids = CombatPropertiesUtils.getIntensifyIds(stack);
+                List<Integer> ids = IntensifyHelper.getIntensifyIds(stack);
                 List<Integer> idsNeed = value.getIntensifyIds();
                 boolean reach = false;
                 out:

@@ -4,13 +4,14 @@ import com.marisa.swordcraftstory.block.tile.WeaponCollapseTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponEdgeBlockTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponIntensifyTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
-import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
+import com.marisa.swordcraftstory.item.intensify.helper.IntensifyHelper;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
+import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -144,8 +145,8 @@ public class SendPack {
                         if (!intensifyStack2.isEmpty()) {
                             return;
                         }
-                        if (CombatPropertiesUtils.canIntensifyAttr(intensifyStack0)) {
-                            CombatPropertiesUtils.intensifyAttr(intensifyStack0, ((Intensify) intensifyStack1.getItem()).getIntensifyAttr());
+                        if (IntensifyHelper.canIntensifyAttr(intensifyStack0)) {
+                            IntensifyHelper.intensifyAttr(intensifyStack0, ((Intensify) intensifyStack1.getItem()).getIntensifyAttr());
                             //强化特殊攻击
                             SpecialAttacks specialAttack = SpecialAttacks.checkReach(intensifyStack0);
                             if (specialAttack != null) {
@@ -181,16 +182,16 @@ public class SendPack {
                             if (this.atkTime + this.defTime + this.aglTime + this.durTime == 1) {
                                 //执行强刃
                                 if (this.atkTime > 0) {
-                                    CombatPropertiesUtils.intensifyEdgeAtk(inStack, Weapon.INTENSIFY_EDGE_ONCE_NUM_ATK);
+                                    IntensifyHelper.intensifyEdgeAtk(inStack, Weapon.INTENSIFY_EDGE_ONCE_NUM_ATK);
                                 }
                                 if (this.defTime > 0) {
-                                    CombatPropertiesUtils.intensifyEdgeDef(inStack, Weapon.INTENSIFY_EDGE_ONCE_NUM_DEF);
+                                    IntensifyHelper.intensifyEdgeDef(inStack, Weapon.INTENSIFY_EDGE_ONCE_NUM_DEF);
                                 }
                                 if (this.aglTime > 0) {
-                                    CombatPropertiesUtils.intensifyEdgeAgl(inStack, Weapon.INTENSIFY_EDGE_ONCE_NUM_AGL);
+                                    IntensifyHelper.intensifyEdgeAgl(inStack, Weapon.INTENSIFY_EDGE_ONCE_NUM_AGL);
                                 }
                                 if (this.durTime > 0) {
-                                    CombatPropertiesUtils.intensifyEdgeDur(inStack, Weapon.INTENSIFY_EDGE_ONCE_NUM_DUR);
+                                    IntensifyHelper.intensifyEdgeDur(inStack, Weapon.INTENSIFY_EDGE_ONCE_NUM_DUR);
                                 }
                                 CombatPropertiesUtils.clearTec(inStack);
                             }

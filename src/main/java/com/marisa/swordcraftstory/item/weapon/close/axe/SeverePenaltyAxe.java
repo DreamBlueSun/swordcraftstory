@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item.weapon.close.axe;
 
 import com.marisa.swordcraftstory.item.ore.HeavyGoldOre;
 import com.marisa.swordcraftstory.item.weapon.close.AbstractAxeWeapon;
-import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
+import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -24,6 +24,6 @@ public class SeverePenaltyAxe extends AbstractAxeWeapon {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        CombatPropertiesUtils.tipHeavyGold(tooltip);
+        WeaponInformationUtils.tipHeavyGold(tooltip);
     }
 }
