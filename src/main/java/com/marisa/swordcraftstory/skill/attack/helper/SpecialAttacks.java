@@ -21,6 +21,7 @@ public enum SpecialAttacks {
 
     UNKNOWN(0, 9, null, "未知", null, Intensifys.UNKNOWN.getId()),
 
+    //剑
     AIR_CUTTER(1, 1, WeaponType.SWORD, "真空刃", new AirCutter(13), Intensifys.CUT_IRON_ORE.getId());
 
     private int id;

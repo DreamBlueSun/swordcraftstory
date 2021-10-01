@@ -1,11 +1,12 @@
 package com.marisa.swordcraftstory.util;
 
-import com.marisa.swordcraftstory.item.intensify.helper.Effects;
+import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyAttr;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
+import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
@@ -125,7 +126,7 @@ public class CombatPropertiesUtils {
             tooltip.add(new TranslationTextComponent("特殊攻击[" + specialAttack.getShow() + "]").mergeStyle(TextFormatting.BLUE));
         }
         //效果字段显示
-        Effects effect = getEffect(stack);
+        Effects effect = EffectHelper.get(stack);
         if (effect != null) {
             tooltip.add(new TranslationTextComponent("效果[" + effect.getShow() + "]").mergeStyle(TextFormatting.BLUE));
         }
@@ -200,25 +201,6 @@ public class CombatPropertiesUtils {
                 list.add(Intensifys.getById(listNBT.getInt(i)).getShow());
             }
             return list;
-        }
-        return null;
-    }
-
-    /**
-     * 强化武器效果
-     */
-    public static void intensifyEffect(ItemStack stack, Effects effects) {
-        //添加强化效果NBT
-        stack.setTagInfo("story_combat_effect", IntNBT.valueOf(effects.getId()));
-    }
-
-    /**
-     * 获取武器效果
-     */
-    public static Effects getEffect(ItemStack stack) {
-        CompoundNBT tag = stack.getOrCreateTag();
-        if (tag.contains("story_combat_effect")) {
-            return Effects.getById(tag.getInt("story_combat_effect"));
         }
         return null;
     }

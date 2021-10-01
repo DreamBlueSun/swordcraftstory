@@ -2,7 +2,8 @@ package com.marisa.swordcraftstory.gui.screen;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.WeaponIntensifyContainer;
-import com.marisa.swordcraftstory.item.intensify.helper.Effects;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
+import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyAttr;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
@@ -119,9 +120,15 @@ public class WeaponIntensifyScreen extends ContainerScreen<WeaponIntensifyContai
         int attrDur = attr.getDur();
         drawCenteredString(matrixStack, this.font, String.valueOf(attrDur), xs + 36, ys + 32, 0x1E90FF);
         //强化技能
-//                drawCenteredString(matrixStack, this.font, effects.getShow(), xs + 36, ys + 60, 0x1E90FF);
-        //强化效果
         ItemStack copy = stack0.copy();
+        if (CombatPropertiesUtils.canIntensifyAttr(copy)) {
+            CombatPropertiesUtils.intensifyAttr(copy, attr);
+            SpecialAttacks specialAttacks = SpecialAttacks.checkReach(copy);
+            if (specialAttacks != null) {
+                drawCenteredString(matrixStack, this.font, specialAttacks.getShow(), xs + 36, ys + 60, 0x1E90FF);
+            }
+        }
+        //强化效果
         if (CombatPropertiesUtils.canIntensifyAttr(copy)) {
             CombatPropertiesUtils.intensifyAttr(copy, attr);
             Effects effects = Effects.checkReach(copy);

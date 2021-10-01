@@ -1,7 +1,9 @@
-package com.marisa.swordcraftstory.item.intensify.helper;
+package com.marisa.swordcraftstory.skill.effect.helper;
 
+import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
 import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import com.marisa.swordcraftstory.skill.effect.bow.Through;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.item.ItemStack;
 
@@ -17,26 +19,27 @@ import java.util.stream.Collectors;
 
 public enum Effects {
 
-    UNKNOWN(0, 9, null, "未知", Intensifys.UNKNOWN.getId()),
+    UNKNOWN(0, 9, null, "未知", null, Intensifys.UNKNOWN.getId()),
 
     //弓
-    LEGEND_IRON_BUNCH(1, 1, WeaponType.BOW, "贯穿", Intensifys.LEGEND_IRON_BUNCH.getId());
+    LEGEND_IRON_BUNCH(1, 1, WeaponType.BOW, "贯穿", new Through(), Intensifys.LEGEND_IRON_BUNCH.getId());
 
     private int id;
-
     /**
      * 优先级1-9
      */
     private int priority;
     private WeaponType weaponType;
     private String show;
+    private Effect effect;
     private List<Integer> intensifyIds;
 
-    Effects(int id, int priority, WeaponType weaponType, String show, Integer... intensifyId) {
+    Effects(int id, int priority, WeaponType weaponType, String show, Effect effect, Integer... intensifyId) {
         this.id = id;
         this.priority = priority;
         this.weaponType = weaponType;
         this.show = show;
+        this.effect = effect;
         this.intensifyIds = Arrays.asList(intensifyId);
     }
 
@@ -54,6 +57,10 @@ public enum Effects {
 
     public String getShow() {
         return show;
+    }
+
+    public Effect getEffect() {
+        return effect;
     }
 
     public List<Integer> getIntensifyIds() {

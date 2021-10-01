@@ -4,12 +4,13 @@ import com.marisa.swordcraftstory.block.tile.WeaponCollapseTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponEdgeBlockTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponIntensifyTileEntity;
 import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
-import com.marisa.swordcraftstory.item.intensify.helper.Effects;
+import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
+import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -153,7 +154,7 @@ public class SendPack {
                             //强化效果
                             Effects effects = Effects.checkReach(intensifyStack0);
                             if (effects != null) {
-                                CombatPropertiesUtils.intensifyEffect(intensifyStack0, effects);
+                                EffectHelper.set(intensifyStack0, effects);
                             }
                             inventoryIntensify.removeStackFromSlot(0);
                             intensifyStack1.shrink(1);

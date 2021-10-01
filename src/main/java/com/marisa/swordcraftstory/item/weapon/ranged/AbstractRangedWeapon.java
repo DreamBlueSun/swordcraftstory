@@ -2,9 +2,10 @@ package com.marisa.swordcraftstory.item.weapon.ranged;
 
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.intensify.helper.Effects;
+import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.WeaponCommonFunction;
+import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.damage.LivingHurtUtils;
 import net.minecraft.client.util.ITooltipFlag;
@@ -129,10 +130,10 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
                     if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
                         abstractarrowentity.setFire(100);
                     }
-                    //穿透
-                    Effects effect = CombatPropertiesUtils.getEffect(stack);
-                    if (effect == Effects.LEGEND_IRON_BUNCH) {
-                        abstractarrowentity.setPierceLevel((byte) 127);
+                    //效果
+                    Effects effect = EffectHelper.get(stack);
+                    if (effect != null) {
+                        effect.getEffect().arrowEntityAdd(abstractarrowentity);
                     }
                     //损伤玩家该武器
                     stack.damageItem(1, playerentity, (player) -> player.sendBreakAnimation(playerentity.getActiveHand()));
