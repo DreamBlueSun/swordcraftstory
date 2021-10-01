@@ -132,7 +132,7 @@ public class PlayerAttackEntityUtils {
                     if (flag5) {
                         //增加tec
                         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-                        if (!(stack.getItem() instanceof AbstractRangedWeapon)) {
+                        if (stack.getItem() instanceof Weapon && !(stack.getItem() instanceof AbstractRangedWeapon)) {
                             ((Weapon) stack.getItem()).incrTec(stack);
                         }
                         //击退伤害特效
