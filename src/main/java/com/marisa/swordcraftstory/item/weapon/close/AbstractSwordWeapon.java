@@ -2,19 +2,25 @@ package com.marisa.swordcraftstory.item.weapon.close;
 
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
+import com.marisa.swordcraftstory.item.ItemRegistry;
+import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.WeaponCommonFunction;
+import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.*;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.IntNBT;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,10 +31,12 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * 近战武器抽象类
+ * 抽象剑类武器
  */
 
-public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
+public abstract class AbstractSwordWeapon extends SwordItem implements Weapon {
+
+    public static final WeaponType TYPE = WeaponType.SWORD;
 
     /**
      * 稀有度级别
@@ -50,12 +58,61 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
      */
     private final int agl;
 
-    public AbstractMeleeWeapon(final int rank, final int atk, final int def, final int agl, final IItemTier tier) {
-        super(tier, atk, -2.4F, new Item.Properties().group(StoryGroup.COMBAT_GROUP));
-        this.rank = rank;
-        this.atk = atk;
-        this.def = def;
-        this.agl = agl;
+    public AbstractSwordWeapon(final AbstractOre ore) {
+        super(new IItemTier() {
+            @Override
+            public int getMaxUses() {
+                return ore.dur(TYPE);
+            }
+
+            @Override
+            public float getEfficiency() {
+                return 10.0F;
+            }
+
+            @Override
+            public float getAttackDamage() {
+                return -1.0F;
+            }
+
+            @Override
+            public int getHarvestLevel() {
+                return 3;
+            }
+
+            @Override
+            public int getEnchantability() {
+                return 26;
+            }
+
+            @Override
+            public Ingredient getRepairMaterial() {
+                return Ingredient.fromItems(ore.asSword());
+            }
+        }, ore.atk(TYPE), -2.4F, new Item.Properties().group(StoryGroup.COMBAT_GROUP));
+        this.rank = ore.rank();
+        this.atk = ore.atk(TYPE);
+        this.def = ore.def(TYPE);
+        this.agl = ore.agl(TYPE);
+    }
+
+    @Override
+    public WeaponType type() {
+        return TYPE;
+    }
+
+    @Override
+    public ItemStack collapse(ItemStack stack) {
+        ItemStack instance = ItemRegistry.SWORD_MOULD.get().getDefaultInstance();
+        CombatPropertiesUtils.setAtk(instance, getAtk(stack) / 7);
+        CombatPropertiesUtils.setDef(instance, getDef(stack) / 7);
+        int agl = getAgl(stack);
+        CombatPropertiesUtils.setAgl(instance, agl > 6 ? agl / 7 : 0);
+        int dur = (getMaxDamage(stack) + getDurMax(stack)) / 7;
+        CombatPropertiesUtils.setDurMax(instance, dur);
+        CombatPropertiesUtils.setDur(instance, dur);
+        CombatPropertiesUtils.copyEnchantmentTag(stack, instance);
+        return instance;
     }
 
     @Override
@@ -155,5 +212,41 @@ public abstract class AbstractMeleeWeapon extends SwordItem implements Weapon {
     @Override
     public boolean isBroken(ItemStack stack) {
         return stack.getTag() != null && stack.getTag().getBoolean("story_combat_broken");
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            return specialAttacks.getSpecialAttack().onItemRightClick(worldIn, playerIn, handIn);
+        }
+        return ActionResult.resultFail(stack);
+    }
+
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            return specialAttacks.getSpecialAttack().getUseAction();
+        }
+        return UseAction.NONE;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack) {
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            return specialAttacks.getSpecialAttack().getUseDuration();
+        }
+        return 0;
+    }
+
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            specialAttacks.getSpecialAttack().onPlayerStoppedUsing(stack, worldIn, entityLiving, timeLeft);
+        }
     }
 }

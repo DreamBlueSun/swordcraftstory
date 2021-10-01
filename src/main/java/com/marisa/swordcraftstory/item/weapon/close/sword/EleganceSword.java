@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.item.weapon.close.sword;
 
 import com.marisa.swordcraftstory.item.ore.UkaOre;
+import com.marisa.swordcraftstory.item.weapon.close.AbstractSwordWeapon;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
