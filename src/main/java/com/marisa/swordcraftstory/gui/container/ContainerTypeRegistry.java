@@ -38,4 +38,10 @@ public class ContainerTypeRegistry {
             CONTAINERS.register("weapon_collapse_container", () ->
                     IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
                             new WeaponCollapseContainer(windowId, inv, data.readBlockPos(), new BlockPosIInt())));
+
+    public static final RegistryObject<ContainerType<WeaponModelChangeContainer>> WEAPON_MODEL_CHANGE_CONTAINER =
+            CONTAINERS.register("weapon_model_change_container", () ->
+                    IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                            new WeaponModelChangeContainer(windowId, inv, data.readBlockPos(), new BlockPosIInt())));
+
 }

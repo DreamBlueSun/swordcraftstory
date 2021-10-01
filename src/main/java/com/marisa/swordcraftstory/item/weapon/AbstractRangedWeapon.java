@@ -1,11 +1,11 @@
-package com.marisa.swordcraftstory.item.weapon.ranged;
+package com.marisa.swordcraftstory.item.weapon;
 
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.skill.effect.helper.Effects;
-import com.marisa.swordcraftstory.item.weapon.Weapon;
-import com.marisa.swordcraftstory.item.weapon.WeaponCommonFunction;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
+import com.marisa.swordcraftstory.item.weapon.helper.WeaponCommonFunction;
 import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
+import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import com.marisa.swordcraftstory.util.damage.LivingHurtUtils;

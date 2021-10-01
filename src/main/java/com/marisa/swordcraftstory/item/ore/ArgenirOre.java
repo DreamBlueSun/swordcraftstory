@@ -4,12 +4,14 @@ import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyAttr;
+import com.marisa.swordcraftstory.item.model.WeaponModels;
 import com.marisa.swordcraftstory.item.mould.Mould;
-import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import com.marisa.swordcraftstory.item.weapon.helper.WeaponType;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.IntNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -60,6 +62,11 @@ public class ArgenirOre extends AbstractOre {
     @Override
     public Item asSword() {
         return ItemRegistry.SOLEMNITY_SWORD.get();
+    }
+
+    @Override
+    public Item asBow() {
+        return ItemRegistry.SOLEMNITY_BOW.get();
     }
 
     @Override
@@ -129,5 +136,10 @@ public class ArgenirOre extends AbstractOre {
     @Override
     public IntensifyAttr getIntensifyAttr() {
         return new IntensifyAttr(Intensifys.ARGENIR_ORE.getId(), Intensifys.ARGENIR_ORE.getShow(), 1, 1, 1, 3);
+    }
+
+    @Override
+    public void build(ItemStack stack) {
+        stack.setTagInfo("story_combat_model_change", IntNBT.valueOf(WeaponModels.ARGENIR_ORE.getId()));
     }
 }

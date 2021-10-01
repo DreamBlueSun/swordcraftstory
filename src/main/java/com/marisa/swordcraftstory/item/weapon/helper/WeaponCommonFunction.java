@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.item.weapon;
+package com.marisa.swordcraftstory.item.weapon.helper;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;

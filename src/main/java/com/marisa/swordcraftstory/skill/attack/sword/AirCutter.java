@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.skill.attack.sword;
 
 import com.marisa.swordcraftstory.entity.EntityTypeRegistry;
 import com.marisa.swordcraftstory.entity.projectile.instance.AirCutterProjectileEntity;
-import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.skill.attack.helper.AbstractAttack;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import net.minecraft.entity.LivingEntity;

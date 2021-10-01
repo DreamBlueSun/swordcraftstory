@@ -1,13 +1,11 @@
 package com.marisa.swordcraftstory.net;
 
-import com.marisa.swordcraftstory.block.tile.WeaponCollapseTileEntity;
-import com.marisa.swordcraftstory.block.tile.WeaponEdgeBlockTileEntity;
-import com.marisa.swordcraftstory.block.tile.WeaponIntensifyTileEntity;
-import com.marisa.swordcraftstory.block.tile.WeaponMakeTileEntity;
+import com.marisa.swordcraftstory.block.tile.*;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyHelper;
+import com.marisa.swordcraftstory.item.model.WeaponModel;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
-import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
@@ -239,10 +237,37 @@ public class SendPack {
                                 stack.removeChildTag("story_combat_broken");
                                 stack.setDamage(0);
                                 CombatPropertiesUtils.setDur(stack, ((Weapon) stack.getItem()).getDurMaxAfterEffect(stack));
-//                                inv.setInventorySlotContents(i, stack);
                             }
                         }
                         sender.sendStatusMessage(new TranslationTextComponent("msg.swordcraftstory.smithery.repairAll.ok").mergeStyle(TextFormatting.GREEN), true);
+                        break;
+                    case "smithery.weaponModelChange":
+                        //打开幻化GUI
+                        WeaponModelChangeTileEntity weaponModelChangeTile = (WeaponModelChangeTileEntity) sender.world.getTileEntity(this.blockPos);
+                        NetworkHooks.openGui(sender, weaponModelChangeTile, (PacketBuffer packerBuffer) ->
+                                packerBuffer.writeBlockPos(weaponModelChangeTile.getPos()));
+                        break;
+                    case "smithery.weaponModelChange.done":
+                        //幻化确定
+                        Inventory inventoryModelChange = ((WeaponModelChangeTileEntity) sender.world.getTileEntity(this.blockPos)).getInventory();
+                        ItemStack modelChangeStack0 = inventoryModelChange.getStackInSlot(0);
+                        ItemStack modelChangeStack1 = inventoryModelChange.getStackInSlot(1);
+                        if (modelChangeStack0.isEmpty() || modelChangeStack1.isEmpty()) {
+                            return;
+                        }
+                        ItemStack modelChangeStack2 = inventoryModelChange.getStackInSlot(2);
+                        if (!modelChangeStack2.isEmpty()) {
+                            return;
+                        }
+                        //执行幻化
+                        ((WeaponModel) modelChangeStack1.getItem()).build(modelChangeStack0);
+                        //结果
+                        inventoryModelChange.removeStackFromSlot(0);
+                        modelChangeStack1.shrink(1);
+                        if (modelChangeStack1.isEmpty()) {
+                            inventoryModelChange.removeStackFromSlot(1);
+                        }
+                        inventoryModelChange.setInventorySlotContents(2, modelChangeStack0);
                         break;
                     default:
                         break;

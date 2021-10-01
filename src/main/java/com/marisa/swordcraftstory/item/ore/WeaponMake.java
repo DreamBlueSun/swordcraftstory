@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.ore;
 
-import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import com.marisa.swordcraftstory.item.weapon.helper.WeaponType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -16,6 +16,11 @@ public interface WeaponMake {
      * 作为剑类武器
      */
     Item asSword();
+
+    /**
+     * 作为弓类武器
+     */
+    Item asBow();
 
     /**
      * 作为斧类武器

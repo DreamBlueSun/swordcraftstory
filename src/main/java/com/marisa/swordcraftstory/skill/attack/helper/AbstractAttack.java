@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.skill.attack.helper;
 
-import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;

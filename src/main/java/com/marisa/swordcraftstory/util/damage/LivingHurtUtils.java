@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.util.damage;
 
-import com.marisa.swordcraftstory.item.weapon.Weapon;
-import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
+import com.marisa.swordcraftstory.item.weapon.AbstractRangedWeapon;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;

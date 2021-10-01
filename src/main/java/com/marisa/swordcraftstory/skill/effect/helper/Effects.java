@@ -2,8 +2,8 @@ package com.marisa.swordcraftstory.skill.effect.helper;
 
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyHelper;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
-import com.marisa.swordcraftstory.item.weapon.Combat;
-import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import com.marisa.swordcraftstory.item.weapon.helper.Combat;
+import com.marisa.swordcraftstory.item.weapon.helper.WeaponType;
 import com.marisa.swordcraftstory.skill.effect.bow.Through;
 import net.minecraft.item.ItemStack;
 

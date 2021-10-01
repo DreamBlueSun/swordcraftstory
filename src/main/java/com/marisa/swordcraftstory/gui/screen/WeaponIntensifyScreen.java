@@ -5,7 +5,7 @@ import com.marisa.swordcraftstory.gui.container.WeaponIntensifyContainer;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyAttr;
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyHelper;
-import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.SendPack;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;

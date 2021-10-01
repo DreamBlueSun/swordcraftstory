@@ -31,4 +31,8 @@ public class TileEntityTypeRegistry {
             TILE_ENTITIES.register("weapon_collapse_tile_entity", () ->
                     TileEntityType.Builder.create(WeaponCollapseTileEntity::new, BlockRegistry.WEAPON_COLLAPSE_BLOCK.get()).build(null));
 
+    public static final RegistryObject<TileEntityType<WeaponModelChangeTileEntity>> WEAPON_MODEL_CHANGE_TILE_ENTITY =
+            TILE_ENTITIES.register("weapon_model_change_tile_entity", () ->
+                    TileEntityType.Builder.create(WeaponModelChangeTileEntity::new, BlockRegistry.WEAPON_MODEL_CHANGE_BLOCK.get()).build(null));
+
 }

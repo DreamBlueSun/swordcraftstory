@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.util.obj;
 
 import com.google.common.collect.Multimap;
-import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import net.minecraft.client.entity.player.ClientPlayerEntity;

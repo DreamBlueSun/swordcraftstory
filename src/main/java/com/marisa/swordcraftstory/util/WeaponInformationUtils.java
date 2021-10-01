@@ -1,7 +1,8 @@
 package com.marisa.swordcraftstory.util;
 
 import com.marisa.swordcraftstory.item.intensify.helper.IntensifyHelper;
-import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.item.model.ModelChangeHelper;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
@@ -93,6 +94,9 @@ public class WeaponInformationUtils {
             tooltip.add(new TranslationTextComponent("已损坏").mergeStyle(TextFormatting.DARK_GRAY));
         }
         tooltip.add(new TranslationTextComponent("武器").mergeStyle(TextFormatting.LIGHT_PURPLE));
+        //幻化名称
+        tooltip.add(new TranslationTextComponent("幻化[" + ModelChangeHelper.getModelName(stack) + "]").mergeStyle(TextFormatting.GREEN));
+        //属性
         tooltip.add(new TranslationTextComponent("稀有度").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(weapon.getRank())).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         tooltip.add(new TranslationTextComponent("攻击力").mergeStyle(TextFormatting.YELLOW)

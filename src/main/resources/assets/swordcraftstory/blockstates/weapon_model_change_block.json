@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "swordcraftstory:block/weapon_model_change_block_model" }
+  }
+}

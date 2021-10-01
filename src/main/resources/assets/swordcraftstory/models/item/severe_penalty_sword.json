@@ -72,5 +72,85 @@
         0.8
       ]
     }
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "model_change": 1
+      },
+      "model": "swordcraftstory:item/change/sword/novice_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 2
+      },
+      "model": "swordcraftstory:item/change/sword/thin_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 3
+      },
+      "model": "swordcraftstory:item/change/sword/hard_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 4
+      },
+      "model": "swordcraftstory:item/change/sword/solemnity_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 5
+      },
+      "model": "swordcraftstory:item/change/sword/iron_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 6
+      },
+      "model": "swordcraftstory:item/change/sword/synthesis_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 7
+      },
+      "model": "swordcraftstory:item/change/sword/feather_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 8
+      },
+      "model": "swordcraftstory:item/change/sword/cut_iron_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 9
+      },
+      "model": "swordcraftstory:item/change/sword/wide_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 10
+      },
+      "model": "swordcraftstory:item/change/sword/severe_penalty_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 11
+      },
+      "model": "swordcraftstory:item/change/sword/relict_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 12
+      },
+      "model": "swordcraftstory:item/change/sword/elegance_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 13
+      },
+      "model": "swordcraftstory:item/change/sword/ribbon_sword"
+    }
+  ]
 }

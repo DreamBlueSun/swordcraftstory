@@ -89,6 +89,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> WEAPON_EDGE_BLOCK = ITEMS.register("weapon_edge_block", () -> new BlockItem(BlockRegistry.WEAPON_EDGE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_COLLAPSE_BLOCK = ITEMS.register("weapon_collapse_block", () -> new BlockItem(BlockRegistry.WEAPON_COLLAPSE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
+    public static RegistryObject<Item> WEAPON_MODEL_CHANGE_BLOCK = ITEMS.register("weapon_model_change_block", () -> new BlockItem(BlockRegistry.WEAPON_MODEL_CHANGE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     //修理道具
     public static RegistryObject<Item> SHARP_STONE = ITEMS.register("sharp_stone", SharpStone::new);
     public static RegistryObject<Item> KNIFE_STONE = ITEMS.register("knife_stone", knifeStone::new);

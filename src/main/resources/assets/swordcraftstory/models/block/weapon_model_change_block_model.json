@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "north": "swordcraftstory:block/smithing_block_around_6",
+    "south": "swordcraftstory:block/smithing_block_around_6",
+    "east": "swordcraftstory:block/smithing_block_around_6",
+    "west": "swordcraftstory:block/smithing_block_around_6",
+    "up": "swordcraftstory:block/smithing_block_top",
+    "down": "swordcraftstory:block/smithing_block_around_6"
+  }
+}

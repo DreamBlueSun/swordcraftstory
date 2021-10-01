@@ -31,6 +31,49 @@ public class PropertyRegistry {
             registerBowProperties(ItemRegistry.ELEGANCE_BOW.get());
             registerBowProperties(ItemRegistry.RIBBON_BOW.get());
         });
+
+        //注册幻化属性
+        event.enqueueWork(() -> {
+            registerModelChangeProperties(ItemRegistry.NOVICE_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.THIN_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.HARD_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.SOLEMNITY_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.IRON_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.SYNTHESIS_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.FEATHER_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.CUT_IRON_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.WIDE_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.SEVERE_PENALTY_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.RELICT_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.ELEGANCE_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.RIBBON_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.NOVICE_BOW.get());
+            registerModelChangeProperties(ItemRegistry.THIN_BOW.get());
+            registerModelChangeProperties(ItemRegistry.HARD_BOW.get());
+            registerModelChangeProperties(ItemRegistry.SOLEMNITY_BOW.get());
+            registerModelChangeProperties(ItemRegistry.IRON_BOW.get());
+            registerModelChangeProperties(ItemRegistry.SYNTHESIS_BOW.get());
+            registerModelChangeProperties(ItemRegistry.FEATHER_BOW.get());
+            registerModelChangeProperties(ItemRegistry.CUT_IRON_BOW.get());
+            registerModelChangeProperties(ItemRegistry.HUGER_BOW.get());
+            registerModelChangeProperties(ItemRegistry.SEVERE_PENALTY_BOW.get());
+            registerModelChangeProperties(ItemRegistry.RELICT_BOW.get());
+            registerModelChangeProperties(ItemRegistry.ELEGANCE_BOW.get());
+            registerModelChangeProperties(ItemRegistry.RIBBON_BOW.get());
+            registerModelChangeProperties(ItemRegistry.NOVICE_AXE.get());
+            registerModelChangeProperties(ItemRegistry.THIN_AXE.get());
+            registerModelChangeProperties(ItemRegistry.HARD_AXE.get());
+            registerModelChangeProperties(ItemRegistry.SOLEMNITY_AXE.get());
+            registerModelChangeProperties(ItemRegistry.IRON_AXE.get());
+            registerModelChangeProperties(ItemRegistry.SYNTHESIS_AXE.get());
+            registerModelChangeProperties(ItemRegistry.FEATHER_AXE.get());
+            registerModelChangeProperties(ItemRegistry.CUT_IRON_AXE.get());
+            registerModelChangeProperties(ItemRegistry.WIDE_AXE.get());
+            registerModelChangeProperties(ItemRegistry.SEVERE_PENALTY_AXE.get());
+            registerModelChangeProperties(ItemRegistry.RELICT_AXE.get());
+            registerModelChangeProperties(ItemRegistry.ELEGANCE_AXE.get());
+            registerModelChangeProperties(ItemRegistry.RIBBON_AXE.get());
+        });
     }
 
     private static void registerBowProperties(final Item bow) {
@@ -42,5 +85,10 @@ public class PropertyRegistry {
                 });
         ItemModelsProperties.registerProperty(bow, new ResourceLocation("pulling"),
                 (item, world, entity) -> (entity != null && entity.isHandActive() && entity.getActiveItemStack() == item) ? 1.0F : 0.0F);
+    }
+
+    private static void registerModelChangeProperties(final Item weapon) {
+        ItemModelsProperties.registerProperty(weapon, new ResourceLocation("model_change"),
+                (stack, world, entity) -> stack.getOrCreateTag().getInt("story_combat_model_change"));
     }
 }

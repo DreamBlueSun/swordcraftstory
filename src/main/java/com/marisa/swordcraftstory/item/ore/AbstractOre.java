@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.item.intensify.helper.Intensify;
+import com.marisa.swordcraftstory.item.model.WeaponModel;
 import com.marisa.swordcraftstory.item.mould.Mould;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import net.minecraft.client.util.ITooltipFlag;
@@ -20,7 +21,7 @@ import java.util.List;
  * 抽象矿石类
  */
 
-public abstract class AbstractOre extends Item implements WeaponMake, Intensify {
+public abstract class AbstractOre extends Item implements WeaponMake, Intensify, WeaponModel {
 
     public AbstractOre(Properties properties) {
         super(properties);

@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.item.weapon;
+package com.marisa.swordcraftstory.item.weapon.helper;
 
 import net.minecraft.item.ItemStack;
 

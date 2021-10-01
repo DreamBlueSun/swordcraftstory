@@ -3,10 +3,7 @@ package com.marisa.swordcraftstory.event;
 import com.marisa.swordcraftstory.entity.EntityTypeRegistry;
 import com.marisa.swordcraftstory.entity.projectile.rander.AirCutterRender;
 import com.marisa.swordcraftstory.gui.container.ContainerTypeRegistry;
-import com.marisa.swordcraftstory.gui.screen.WeaponCollapseScreen;
-import com.marisa.swordcraftstory.gui.screen.WeaponEdgeScreen;
-import com.marisa.swordcraftstory.gui.screen.WeaponIntensifyScreen;
-import com.marisa.swordcraftstory.gui.screen.WeaponMakeScreen;
+import com.marisa.swordcraftstory.gui.screen.*;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,6 +24,7 @@ public class ClientEventHandler {
         event.enqueueWork(() -> ScreenManager.registerFactory(ContainerTypeRegistry.WEAPON_INTENSIFY_CONTAINER.get(), WeaponIntensifyScreen::new));
         event.enqueueWork(() -> ScreenManager.registerFactory(ContainerTypeRegistry.WEAPON_EDGE_CONTAINER.get(), WeaponEdgeScreen::new));
         event.enqueueWork(() -> ScreenManager.registerFactory(ContainerTypeRegistry.WEAPON_COLLAPSE_CONTAINER.get(), WeaponCollapseScreen::new));
+        event.enqueueWork(() -> ScreenManager.registerFactory(ContainerTypeRegistry.WEAPON_MODEL_CHANGE_CONTAINER.get(), WeaponModelChangeScreen::new));
     }
 
     @SubscribeEvent

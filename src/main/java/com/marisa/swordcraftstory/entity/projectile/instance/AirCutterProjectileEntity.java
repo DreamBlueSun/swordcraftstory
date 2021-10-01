@@ -1,8 +1,8 @@
 package com.marisa.swordcraftstory.entity.projectile.instance;
 
 
-import com.marisa.swordcraftstory.item.weapon.Weapon;
-import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
+import com.marisa.swordcraftstory.item.weapon.AbstractRangedWeapon;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.block.tile;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.gui.container.IInt.WeaponEdgePointIInt;
 import com.marisa.swordcraftstory.gui.container.WeaponEdgeContainer;
-import com.marisa.swordcraftstory.item.weapon.Weapon;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

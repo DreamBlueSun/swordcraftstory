@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.item.weapon;
+package com.marisa.swordcraftstory.item.weapon.helper;
 
 /**
  * 武器类型枚举
