@@ -30,6 +30,7 @@ public abstract class AbstractAttack implements SpecialAttack {
             //损坏后或耐久不足将不能再使用特殊攻击
             return ActionResult.resultFail(stack);
         }
+        weapon.onSpecialAttack(stack);
         playerIn.setActiveHand(handIn);
         return ActionResult.resultConsume(stack);
     }

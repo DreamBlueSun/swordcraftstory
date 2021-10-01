@@ -22,7 +22,7 @@ public enum Effects {
     UNKNOWN(0, 9, null, "未知", null, Intensifys.UNKNOWN.getId()),
 
     //弓
-    LEGEND_IRON_BUNCH(1, 1, WeaponType.BOW, "贯穿", new Through(), Intensifys.LEGEND_IRON_BUNCH.getId());
+    LEGEND_IRON_BUNCH(2001, 1, WeaponType.BOW, "贯穿", new Through(), Intensifys.LEGEND_IRON_BUNCH.getId());
 
     private int id;
     /**

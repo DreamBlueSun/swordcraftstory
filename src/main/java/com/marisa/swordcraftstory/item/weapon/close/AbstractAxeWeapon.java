@@ -7,19 +7,21 @@ import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.WeaponCommonFunction;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
 import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.IntNBT;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -62,6 +64,11 @@ public abstract class AbstractAxeWeapon extends AxeItem implements Weapon {
      */
     private final int agl;
 
+    /**
+     * 正在进行特殊攻击
+     */
+    private boolean inSpecialAttack;
+
     public AbstractAxeWeapon(final AbstractOre ore) {
         super(new IItemTier() {
             @Override
@@ -98,6 +105,7 @@ public abstract class AbstractAxeWeapon extends AxeItem implements Weapon {
         this.atk = ore.atk(TYPE);
         this.def = ore.def(TYPE);
         this.agl = ore.agl(TYPE);
+        this.inSpecialAttack = false;
     }
 
     @Override
@@ -216,5 +224,52 @@ public abstract class AbstractAxeWeapon extends AxeItem implements Weapon {
     @Override
     public boolean isBroken(ItemStack stack) {
         return stack.getTag() != null && stack.getTag().getBoolean("story_combat_broken");
+    }
+
+    @Override
+    public boolean inSpecialAttackAndDoStop(ItemStack stack) {
+        return this.inSpecialAttack;
+    }
+
+    @Override
+    public void onSpecialAttack(ItemStack stack) {
+        this.inSpecialAttack = true;
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            return specialAttacks.getSpecialAttack().onItemRightClick(worldIn, playerIn, handIn);
+        }
+        return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
+
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            return specialAttacks.getSpecialAttack().getUseAction();
+        }
+        return UseAction.NONE;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack) {
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            return specialAttacks.getSpecialAttack().getUseDuration();
+        }
+        return 0;
+    }
+
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+        SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+        if (specialAttacks != null) {
+            specialAttacks.getSpecialAttack().onPlayerStoppedUsing(stack, worldIn, entityLiving, timeLeft);
+        }
+
     }
 }

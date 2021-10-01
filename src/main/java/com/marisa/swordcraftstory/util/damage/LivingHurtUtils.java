@@ -3,6 +3,8 @@ package com.marisa.swordcraftstory.util.damage;
 import com.marisa.swordcraftstory.item.weapon.Weapon;
 import com.marisa.swordcraftstory.item.weapon.ranged.AbstractRangedWeapon;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
+import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.util.obj.Damage;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -184,7 +186,16 @@ public class LivingHurtUtils {
         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
         int cri;
         if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
-            cri = ((Weapon) stack.getItem()).getCri(stack);
+            Weapon weapon = (Weapon) stack.getItem();
+            //平A暴击率
+            cri = weapon.getCri(stack);
+            //技能攻击暴击率
+            if (weapon.inSpecialAttackAndDoStop(stack)) {
+                SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
+                if (specialAttacks != null) {
+                    cri = specialAttacks.getSpecialAttack().skillCri(cri);
+                }
+            }
         } else {
             cri = Weapon.CRITICAL_BASE_NUM;
         }

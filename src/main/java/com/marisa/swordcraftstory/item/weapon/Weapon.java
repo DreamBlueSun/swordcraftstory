@@ -92,4 +92,14 @@ public interface Weapon extends Combat {
      * 判断是否已损坏
      */
     boolean isBroken(ItemStack stack);
+
+    /**
+     * 判断当前武器正在进行特殊攻击，并停止特殊攻击
+     */
+    boolean inSpecialAttackAndDoStop(ItemStack stack);
+
+    /**
+     * 使当前武器进入特殊攻击状态
+     */
+    void onSpecialAttack(ItemStack stack);
 }

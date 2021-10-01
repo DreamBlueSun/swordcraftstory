@@ -33,4 +33,10 @@ public interface SpecialAttack {
      * 使用结束动作
      */
     void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft);
+
+    /**
+     * 计算技能暴击率
+     */
+    int skillCri(int weaponCri);
+
 }

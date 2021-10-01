@@ -64,12 +64,18 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
      */
     private final int agl;
 
+    /**
+     * 正在进行特殊攻击
+     */
+    private boolean inSpecialAttack;
+
     public AbstractRangedWeapon(final int rank, final int atk, final int def, final int agl, final int dur) {
         super(new Item.Properties().maxDamage(dur).group(StoryGroup.COMBAT_GROUP));
         this.rank = rank;
         this.atk = atk;
         this.def = def;
         this.agl = agl;
+        this.inSpecialAttack = false;
     }
 
     @Override
@@ -251,5 +257,15 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
     @Override
     public boolean isBroken(ItemStack stack) {
         return stack.getTag() != null && stack.getTag().getBoolean("story_combat_broken");
+    }
+
+    @Override
+    public boolean inSpecialAttackAndDoStop(ItemStack stack) {
+        return this.inSpecialAttack;
+    }
+
+    @Override
+    public void onSpecialAttack(ItemStack stack) {
+        this.inSpecialAttack = true;
     }
 }

@@ -64,6 +64,11 @@ public abstract class AbstractSwordWeapon extends SwordItem implements Weapon {
      */
     private final int agl;
 
+    /**
+     * 正在进行特殊攻击
+     */
+    private boolean inSpecialAttack;
+
     public AbstractSwordWeapon(final AbstractOre ore) {
         super(new IItemTier() {
             @Override
@@ -100,6 +105,7 @@ public abstract class AbstractSwordWeapon extends SwordItem implements Weapon {
         this.atk = ore.atk(TYPE);
         this.def = ore.def(TYPE);
         this.agl = ore.agl(TYPE);
+        this.inSpecialAttack = false;
     }
 
     @Override
@@ -221,13 +227,25 @@ public abstract class AbstractSwordWeapon extends SwordItem implements Weapon {
     }
 
     @Override
+    public boolean inSpecialAttackAndDoStop(ItemStack stack) {
+        boolean in = this.inSpecialAttack;
+        this.inSpecialAttack = false;
+        return in;
+    }
+
+    @Override
+    public void onSpecialAttack(ItemStack stack) {
+        this.inSpecialAttack = true;
+    }
+
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
         SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
         if (specialAttacks != null) {
             return specialAttacks.getSpecialAttack().onItemRightClick(worldIn, playerIn, handIn);
         }
-        return ActionResult.resultFail(stack);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     @Override

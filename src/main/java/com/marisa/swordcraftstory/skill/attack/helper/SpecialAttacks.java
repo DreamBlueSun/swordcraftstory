@@ -4,6 +4,7 @@ import com.marisa.swordcraftstory.item.intensify.helper.IntensifyHelper;
 import com.marisa.swordcraftstory.item.intensify.helper.Intensifys;
 import com.marisa.swordcraftstory.item.weapon.Combat;
 import com.marisa.swordcraftstory.item.weapon.WeaponType;
+import com.marisa.swordcraftstory.skill.attack.axe.FullAttack;
 import com.marisa.swordcraftstory.skill.attack.sword.AirCutter;
 import net.minecraft.item.ItemStack;
 
@@ -22,7 +23,10 @@ public enum SpecialAttacks {
     UNKNOWN(0, 9, null, "未知", null, Intensifys.UNKNOWN.getId()),
 
     //剑
-    AIR_CUTTER(1, 1, WeaponType.SWORD, "真空刃", new AirCutter(13), Intensifys.CUT_IRON_ORE.getId());
+    AIR_CUTTER(1001, 1, WeaponType.SWORD, "真空刃", new AirCutter(13), Intensifys.CUT_IRON_ORE.getId()),
+
+    //斧
+    FULL_ATTACK(3001, 1, WeaponType.AXE, "全力一击", new FullAttack(10), Intensifys.HEAVY_GOLD_ORE.getId());
 
     private int id;
     /**

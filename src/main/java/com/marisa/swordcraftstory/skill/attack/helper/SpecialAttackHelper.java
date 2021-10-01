@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.skill.attack.helper;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.IntNBT;
@@ -27,4 +28,12 @@ public class SpecialAttackHelper {
         }
         return null;
     }
+
+    /**
+     * 右键蓄力比重
+     */
+    public static float useSp(ItemStack stack, PlayerEntity entity) {
+        return (stack.getUseDuration() - entity.getItemInUseCount()) / 20.0F;
+    }
+
 }
