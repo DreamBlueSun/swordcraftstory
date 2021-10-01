@@ -14,7 +14,7 @@ public interface Weapon extends Combat {
     int MAX_TEC = 255;
 
     /**
-     * 武器基础暴击率
+     * 基础暴击率
      */
     int CRITICAL_BASE_NUM = 50;
 

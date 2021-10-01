@@ -40,6 +40,11 @@ import java.util.function.Consumer;
 public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
 
     /**
+     * 武器基础暴击率
+     */
+    public static final int CRITICAL_NUM = 50;
+
+    /**
      * 稀有度级别
      */
     private final int rank;
@@ -192,9 +197,9 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
     @Override
     public int getCri(ItemStack stack) {
         if (isBroken(stack)) {
-            return Weapon.CRITICAL_BASE_NUM;
+            return 0;
         }
-        return Weapon.CRITICAL_BASE_NUM + (CombatPropertiesUtils.getTec(stack) / 5);
+        return CRITICAL_NUM + ((Math.min(CombatPropertiesUtils.getTec(stack), 250)) / 5);
     }
 
     @Override
