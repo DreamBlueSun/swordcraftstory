@@ -41,23 +41,23 @@ public class ManualLotteryMachineSaveData extends WorldSavedData {
     }
 
     public ItemStack getRANK_1() {
-        return RANK_1;
+        return RANK_1.copy();
     }
 
     public ItemStack getRANK_2() {
-        return RANK_2;
+        return RANK_2.copy();
     }
 
     public ItemStack getRANK_3() {
-        return RANK_3;
+        return RANK_3.copy();
     }
 
     public ItemStack getRANK_4() {
-        return RANK_4;
+        return RANK_4.copy();
     }
 
     public ItemStack getRANK_5() {
-        return RANK_5;
+        return RANK_5.copy();
     }
 
     public void mark() {

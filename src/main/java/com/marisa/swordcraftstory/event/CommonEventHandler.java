@@ -18,6 +18,7 @@ public class CommonEventHandler {
     public static void onCommonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(Networking::register1);
         event.enqueueWork(Networking::register2);
+        event.enqueueWork(Networking::register3);
     }
 
     /**

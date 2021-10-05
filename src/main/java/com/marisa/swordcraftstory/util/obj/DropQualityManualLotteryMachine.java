@@ -66,23 +66,23 @@ public class DropQualityManualLotteryMachine {
     private static final int RANK_RANDOM_MAX = DROP_RANK_1 + DROP_RANK_2 + DROP_RANK_3 + DROP_RANK_4 + DROP_RANK_5;
 
     public static ItemStack getRank1() {
-        return RANK_1;
+        return RANK_1.copy();
     }
 
     public static ItemStack getRank2() {
-        return RANK_2;
+        return RANK_2.copy();
     }
 
     public static ItemStack getRank3() {
-        return RANK_3;
+        return RANK_3.copy();
     }
 
     public static ItemStack getRank4() {
-        return RANK_4;
+        return RANK_4.copy();
     }
 
     public static ItemStack getRank5() {
-        return RANK_5;
+        return RANK_5.copy();
     }
 
     public static void load(ManualLotteryMachineSaveData saveData) {

@@ -13,6 +13,7 @@ public class Networking {
 
     public static SimpleChannel INSTANCE;
     public static SimpleChannel STORY_PLAYER_STATUS;
+    public static SimpleChannel MANUAL_LOTTERY_ITEM_INFO;
     private static int ID = 0;
 
     public static int nextID() {
@@ -31,6 +32,13 @@ public class Networking {
                 new ResourceLocation(Story.MOD_ID + ":networking2"),
                 () -> "1.0", (s) -> true, (s) -> true);
         STORY_PLAYER_STATUS.registerMessage(nextID(), StoryPlayerPack.class, StoryPlayerPack::toBytes, StoryPlayerPack::new, StoryPlayerPack::handler);
+    }
+
+    public static void register3() {
+        MANUAL_LOTTERY_ITEM_INFO = NetworkRegistry.newSimpleChannel(
+                new ResourceLocation(Story.MOD_ID + ":networking3"),
+                () -> "1.0", (s) -> true, (s) -> true);
+        MANUAL_LOTTERY_ITEM_INFO.registerMessage(nextID(), ManualLotteryItemInfoPack.class, ManualLotteryItemInfoPack::toBytes, ManualLotteryItemInfoPack::new, ManualLotteryItemInfoPack::handler);
     }
 
 }

@@ -2,6 +2,8 @@ package com.marisa.swordcraftstory.block;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.special.LuckTicket;
+import com.marisa.swordcraftstory.net.ManualLotteryItemInfoPack;
+import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.util.obj.DropQualityManualLotteryMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -50,6 +52,8 @@ public class ManualLotteryMachineBlock extends Block {
                 InventoryHelper.dropItems(worldIn, pos, list);
                 //道具数量--
                 stack.shrink(1);
+            } else {
+                Networking.MANUAL_LOTTERY_ITEM_INFO.sendToServer(new ManualLotteryItemInfoPack());
             }
         }
         return ActionResultType.SUCCESS;
