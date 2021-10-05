@@ -22,4 +22,5 @@ public class BlockRegistry {
     public static RegistryObject<Block> WEAPON_COLLAPSE_BLOCK = BLOCKS.register("weapon_collapse_block", WeaponCollapseBlock::new);
     public static RegistryObject<Block> REPAIR_BLOCK = BLOCKS.register("repair_block", RepairBlock::new);
     public static RegistryObject<Block> WEAPON_MODEL_CHANGE_BLOCK = BLOCKS.register("weapon_model_change_block", WeaponModelChangeBlock::new);
+    public static RegistryObject<Block> MANUAL_LOTTERY_MACHINE_BLOCK = BLOCKS.register("manual_lottery_machine_block", ManualLotteryMachineBlock::new);
 }

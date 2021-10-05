@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "swordcraftstory:iron_ore",
+    "swordcraftstory:slander_ore",
+    "swordcraftstory:hard_ore",
+    "swordcraftstory:argenir_ore",
+    "swordcraftstory:big_ore",
+    "swordcraftstory:elphus_ore",
+    "swordcraftstory:wings_fossil_ore",
+    "swordcraftstory:cut_iron_ore",
+    "swordcraftstory:big_iron_ore",
+    "swordcraftstory:heavy_gold_ore",
+    "swordcraftstory:regia_ore",
+    "swordcraftstory:uka_ore",
+    "swordcraftstory:pretty_ore"
+  ]
+}

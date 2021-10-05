@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "swordcraftstory:block/manual_lottery_machine_block_model" }
+  }
+}

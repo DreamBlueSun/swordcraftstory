@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "north": "swordcraftstory:block/manual_lottery_machine_block_around",
+    "south": "swordcraftstory:block/manual_lottery_machine_block_around",
+    "east": "swordcraftstory:block/manual_lottery_machine_block_around",
+    "west": "swordcraftstory:block/manual_lottery_machine_block_around",
+    "up": "swordcraftstory:block/manual_lottery_machine_block_top",
+    "down": "swordcraftstory:block/manual_lottery_machine_block_around"
+  }
+}

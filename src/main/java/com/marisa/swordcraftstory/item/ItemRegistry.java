@@ -16,6 +16,7 @@ import com.marisa.swordcraftstory.item.reply.JiJaMedicine;
 import com.marisa.swordcraftstory.item.reply.JuYuMedicine;
 import com.marisa.swordcraftstory.item.reply.Woundplast;
 import com.marisa.swordcraftstory.item.special.Hammer;
+import com.marisa.swordcraftstory.item.special.LuckTicket;
 import com.marisa.swordcraftstory.item.special.SwordGuake;
 import com.marisa.swordcraftstory.item.weapon.base.taila.DragonSlaveSword;
 import com.marisa.swordcraftstory.item.weapon.base.taila.ElementsManaSword;
@@ -94,6 +95,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> WEAPON_COLLAPSE_BLOCK = ITEMS.register("weapon_collapse_block", () -> new BlockItem(BlockRegistry.WEAPON_COLLAPSE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_MODEL_CHANGE_BLOCK = ITEMS.register("weapon_model_change_block", () -> new BlockItem(BlockRegistry.WEAPON_MODEL_CHANGE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
+    public static RegistryObject<Item> MANUAL_LOTTERY_MACHINE_BLOCK = ITEMS.register("manual_lottery_machine_block", () -> new BlockItem(BlockRegistry.MANUAL_LOTTERY_MACHINE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     //修理道具
     public static RegistryObject<Item> SHARP_STONE = ITEMS.register("sharp_stone", SharpStone::new);
     public static RegistryObject<Item> KNIFE_STONE = ITEMS.register("knife_stone", knifeStone::new);
@@ -127,6 +129,8 @@ public class ItemRegistry {
     public static RegistryObject<Item> PRETTY_ORE = ITEMS.register("pretty_ore", PrettyOre::new);
     //强化道具
     public static RegistryObject<Item> LEGEND_IRON_BUNCH = ITEMS.register("legend_iron_bunch", LegendIronBunch::new);
+    //特殊道具
+    public static RegistryObject<Item> LUCK_TICKET = ITEMS.register("luck_ticket", LuckTicket::new);
     //幻化武器
     public static RegistryObject<Item> DRAGON_SLAVE_SWORD = ITEMS.register("dragon_slave_sword", DragonSlaveSword::new);
     public static RegistryObject<Item> UNLIMITED_EARTH_SWORD = ITEMS.register("unlimited_earth_sword", UnlimitedEarthSword::new);

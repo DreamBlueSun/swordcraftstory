@@ -1,18 +1,25 @@
 package com.marisa.swordcraftstory.event;
 
 import com.marisa.swordcraftstory.block.ore.OreGenerate;
+import com.marisa.swordcraftstory.save.DayTimeManager;
+import com.marisa.swordcraftstory.save.ManualLotteryMachineSaveData;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.util.PlayerAttributesUtils;
 import com.marisa.swordcraftstory.util.damage.LivingHurtUtils;
 import com.marisa.swordcraftstory.util.damage.PlayerAttackEntityUtils;
+import com.marisa.swordcraftstory.util.obj.DropQualityManualLotteryMachine;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerChunkProvider;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -21,6 +28,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
@@ -111,6 +119,28 @@ public class EventHandler {
             if (lv > 0) {
                 event.setDroppedExperience(event.getDroppedExperience() + lv);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void worldTick(TickEvent.WorldTickEvent event) {
+        //每天刷新手摇抽奖机奖品
+        if (!event.world.isRemote() && event.world.getDimensionType().getEffects() == DimensionType.OVERWORLD_ID) {
+            if (DayTimeManager.isNextDayAndToNext(event.world.getWorldInfo().getDayTime())) {
+                DropQualityManualLotteryMachine.shuffle();
+                //保存OVERWORLD时保存手摇抽奖机数据
+                ManualLotteryMachineSaveData.get((ServerWorld) event.world).mark();
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void worldLoad(WorldEvent.Load event) {
+        //加载OVERWORLD时加载手摇抽奖机数据
+        if (!event.getWorld().isRemote() && event.getWorld().getDimensionType().getEffects() == DimensionType.OVERWORLD_ID) {
+            ManualLotteryMachineSaveData saveData = ManualLotteryMachineSaveData.get((ServerChunkProvider) event.getWorld().getChunkProvider());
+            DayTimeManager.load(saveData);
+            DropQualityManualLotteryMachine.load(saveData);
         }
     }
 
