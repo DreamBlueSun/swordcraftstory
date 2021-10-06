@@ -1,26 +1,23 @@
 package com.marisa.swordcraftstory.event;
 
 import com.marisa.swordcraftstory.block.ore.OreGenerate;
-import com.marisa.swordcraftstory.save.DayTimeManager;
-import com.marisa.swordcraftstory.save.ManualLotteryMachineSaveData;
-import com.marisa.swordcraftstory.save.StoryPlayerData;
-import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
+import com.marisa.swordcraftstory.save.*;
 import com.marisa.swordcraftstory.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.util.PlayerAttributesUtils;
 import com.marisa.swordcraftstory.util.damage.LivingHurtUtils;
 import com.marisa.swordcraftstory.util.damage.PlayerAttackEntityUtils;
 import com.marisa.swordcraftstory.util.obj.DropQualityManualLotteryMachine;
+import com.marisa.swordcraftstory.util.obj.MobAttr;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityLeaveWorldEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -28,7 +25,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
@@ -47,7 +43,7 @@ public class EventHandler {
     public void wakeUpFromBedEvent(PlayerWakeUpEvent event) {
         //睡觉醒来时回满血
         Entity entity = event.getEntity();
-        if (entity instanceof LivingEntity) {
+        if (!entity.world.isRemote() && entity instanceof LivingEntity) {
             LivingEntity e = (LivingEntity) entity;
             e.heal((float) e.getAttributeValue(Attributes.MAX_HEALTH));
         }
@@ -65,7 +61,9 @@ public class EventHandler {
     @SubscribeEvent
     public void livingHurtEvent(LivingHurtEvent event) {
         //修改伤害结算
-        LivingHurtUtils.damageEntity((LivingEntity) event.getEntity(), event.getSource(), event.getAmount());
+        if (!event.getEntity().world.isRemote()) {
+            LivingHurtUtils.damageEntity((LivingEntity) event.getEntity(), event.getSource(), event.getAmount());
+        }
         event.setCanceled(true);
     }
 
@@ -102,11 +100,31 @@ public class EventHandler {
 
     @SubscribeEvent
     public void entityJoinWorld(EntityJoinWorldEvent event) {
-        //mob实体加入世界时，根据最近玩家(128范围)等级增加属性
         World world = event.getWorld();
         Entity entity = event.getEntity();
-        if (!world.isRemote && entity instanceof MobEntity) {
-            MobAttributesUtils.onJoinWorld(world.getClosestPlayer(entity, 128), (MobEntity) entity);
+        if (!world.isRemote() && entity instanceof MobEntity) {
+            //mob实体加入世界时，读取保存的属性
+            MobAttrSaveData saveData = MobAttrSaveData.getInstance((ServerWorld) world);
+            MobAttr mobAttr = saveData.get(entity.getUniqueID().toString());
+            if (mobAttr != null) {
+                MobAttributesUtils.loadAttr((MobEntity) entity, mobAttr);
+            } else {
+                //未读取到属性，则根据最近玩家(128范围)等级新增属性
+                mobAttr = MobAttributesUtils.newAttr((MobEntity) entity, world.getClosestPlayer(entity, 128));
+                //保存Mob属性
+                saveData.mark(mobAttr);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void entityLeaveWorld(EntityLeaveWorldEvent event) {
+        if (!event.getWorld().isRemote() && event.getEntity() instanceof MobEntity) {
+            //mob实体死亡时，移除保存的属性
+            if (((MobEntity) event.getEntity()).getShouldBeDead()) {
+                MobAttrSaveData saveData = MobAttrSaveData.getInstance((ServerWorld) event.getWorld());
+                saveData.rem(event.getEntity().getUniqueID().toString());
+            }
         }
     }
 
@@ -114,10 +132,10 @@ public class EventHandler {
     public void dropExperience(LivingExperienceDropEvent event) {
         //掉落经验值时，如果是mob，则根据等级增加经验值
         Entity entity = event.getEntity();
-        if (entity instanceof MobEntity) {
-            int lv = MobAttributesUtils.getLvByName(entity.getDisplayName().getString());
-            if (lv > 0) {
-                event.setDroppedExperience(event.getDroppedExperience() + lv);
+        if (!entity.world.isRemote() && entity instanceof MobEntity) {
+            int mobLv = MobAttributesUtils.getMobLv((ServerWorld) entity.world, entity.getUniqueID().toString());
+            if (mobLv > 0) {
+                event.setDroppedExperience(event.getDroppedExperience() + mobLv);
             }
         }
     }
@@ -125,22 +143,25 @@ public class EventHandler {
     @SubscribeEvent
     public void worldTick(TickEvent.WorldTickEvent event) {
         //每天刷新手摇抽奖机奖品
-        if (!event.world.isRemote() && event.world.getDimensionType().getEffects() == DimensionType.OVERWORLD_ID) {
+        if (!event.world.isRemote() && event.phase.ordinal() == 0 && event.world.getDimensionKey().compareTo(World.OVERWORLD) == 0) {
             if (DayTimeManager.isNextDayAndToNext(event.world.getWorldInfo().getDayTime())) {
+                //天数变更时更新数据
                 DropQualityManualLotteryMachine.shuffle();
-                //保存OVERWORLD时保存手摇抽奖机数据
+                //标记保存手摇抽奖机数据
                 ManualLotteryMachineSaveData.get((ServerWorld) event.world).mark();
+            } else if (DayTimeManager.getWorldDay() == -1) {
+                ManualLotteryMachineSaveData saveData = ManualLotteryMachineSaveData.get((ServerWorld) event.world);
+                if (saveData.getWorldDay() == -1) {
+                    //没有保存的数据时更新数据
+                    DropQualityManualLotteryMachine.shuffle();
+                    //标记保存手摇抽奖机数据
+                    ManualLotteryMachineSaveData.get((ServerWorld) event.world).mark();
+                } else {
+                    //加载保存的手摇抽奖机数据
+                    DayTimeManager.load(saveData);
+                    DropQualityManualLotteryMachine.load(saveData);
+                }
             }
-        }
-    }
-
-    @SubscribeEvent
-    public void worldLoad(WorldEvent.Load event) {
-        //加载OVERWORLD时加载手摇抽奖机数据
-        if (!event.getWorld().isRemote() && event.getWorld().getDimensionType().getEffects() == DimensionType.OVERWORLD_ID) {
-            ManualLotteryMachineSaveData saveData = ManualLotteryMachineSaveData.get((ServerChunkProvider) event.getWorld().getChunkProvider());
-            DayTimeManager.load(saveData);
-            DropQualityManualLotteryMachine.load(saveData);
         }
     }
 

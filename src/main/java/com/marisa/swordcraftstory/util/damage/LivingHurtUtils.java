@@ -1,7 +1,8 @@
 package com.marisa.swordcraftstory.util.damage;
 
-import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.item.weapon.AbstractRangedWeapon;
+import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
+import com.marisa.swordcraftstory.save.MobAttrSaveData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
@@ -24,6 +25,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.Objects;
 import java.util.Random;
@@ -75,6 +77,11 @@ public class LivingHurtUtils {
             livingEntity.getCombatTracker().trackDamage(damageSrc, hp, v);
             livingEntity.setHealth(hp - v);
             livingEntity.setAbsorptionAmount(livingEntity.getAbsorptionAmount() - v);
+            //保存Mob属性
+            if (!livingEntity.world.isRemote() && livingEntity instanceof MobEntity) {
+                MobAttrSaveData saveData = MobAttrSaveData.getInstance((ServerWorld) livingEntity.world);
+                saveData.mark(livingEntity.getUniqueID().toString(), hp - v);
+            }
         }
     }
 
@@ -207,8 +214,11 @@ public class LivingHurtUtils {
      */
     private static void mobDamage(MobEntity mob, float amount, Damage damage) {
         float v = MathHelper.clamp(amount, 2.0F, 20.0F);
-        int lv = MobAttributesUtils.getLvByName(mob.getDisplayName().getString());
-        damage.setP(v * 1.5F * (1 + lv));
+        int mobLv = 0;
+        if (!mob.world.isRemote()) {
+            mobLv = MobAttributesUtils.getMobLv((ServerWorld) mob.world, mob.getUniqueID().toString());
+        }
+        damage.setP(v * 1.5F * (1 + mobLv));
     }
 
     /**
@@ -223,9 +233,7 @@ public class LivingHurtUtils {
                 ((AbstractRangedWeapon) stack.getItem()).incrTec(stack);
             }
         } else if (source instanceof MobEntity) {
-            float v = MathHelper.clamp(amount, 2.0F, 20.0F);
-            int lv = MobAttributesUtils.getLvByName(source.getDisplayName().getString());
-            damage.setP(v * 1.5F * (1 + lv));
+            mobDamage((MobEntity) source, amount, damage);
         } else {
             damage.setP(1.0F);
         }
@@ -240,8 +248,9 @@ public class LivingHurtUtils {
             PlayerEntity playerEntity = (PlayerEntity) entity;
             lv = StoryPlayerDataManager.getLv(StoryPlayerDataManager.get(playerEntity.getCachedUniqueIdString()).getXp());
         } else if (entity instanceof MobEntity) {
-            MobEntity mobEntity = (MobEntity) entity;
-            lv = MobAttributesUtils.getLvByName(mobEntity.getDisplayName().getString());
+            if (!entity.world.isRemote()) {
+                lv = MobAttributesUtils.getMobLv((ServerWorld) entity.world, entity.getUniqueID().toString());
+            }
         }
         if (lv > 0) {
             amount += lv * offset;
