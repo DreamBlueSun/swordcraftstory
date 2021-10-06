@@ -1,14 +1,14 @@
 {
-  "parent": "swordcraftstory:get_weapon_make_block",
+  "parent": "swordcraftstory:get_mould_item",
   "display": {
     "icon": {
-      "item": "swordcraftstory:novice_axe"
+      "item": "swordcraftstory:weapon_make_block"
     },
     "title": {
-      "translate": "advancements.swordcraftstory.get_weapon_axe_1.title"
+      "translate": "advancements.swordcraftstory.get_weapon_make_block.title"
     },
     "description": {
-      "translate": "advancements.swordcraftstory.get_weapon_axe_1.description"
+      "translate": "advancements.swordcraftstory.get_weapon_make_block.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "swordcraftstory:axe/rank1"
+            "item": "swordcraftstory:weapon_make_block"
           }
         ]
       }

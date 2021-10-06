@@ -1,5 +1,5 @@
 {
-  "parent": "swordcraftstory:start_hammer",
+  "parent": "swordcraftstory:get_weapon_make_block",
   "display": {
     "icon": {
       "item": "swordcraftstory:novice_bow"
