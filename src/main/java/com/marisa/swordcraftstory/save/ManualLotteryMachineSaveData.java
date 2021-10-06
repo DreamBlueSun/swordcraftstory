@@ -19,7 +19,7 @@ public class ManualLotteryMachineSaveData extends WorldSavedData {
 
     private static final String NAME = Story.MOD_ID + ".manual_lottery_machine";
 
-    public int worldDay;
+    private int worldDay;
     private ItemStack RANK_1;
     private ItemStack RANK_2;
     private ItemStack RANK_3;

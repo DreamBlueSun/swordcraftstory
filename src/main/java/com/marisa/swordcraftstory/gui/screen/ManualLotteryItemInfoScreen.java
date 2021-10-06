@@ -42,23 +42,23 @@ public class ManualLotteryItemInfoScreen extends Screen {
         int xAttr = this.width / 2 + 10;
         int yAttr = this.height / 2 - 30;
         IFormattableTextComponent component = new StringTextComponent("一等").mergeStyle(TextFormatting.GOLD)
-                .appendString("     ").appendSibling(new StringTextComponent(data.getItemName1()).mergeStyle(TextFormatting.BLUE));
+                .appendString("     ").appendSibling(new StringTextComponent(data.getItemStack1().getItem().getName().getString()).mergeStyle(TextFormatting.BLUE));
         drawString(matrixStack, this.font, component, xAttr, yAttr, 0x8B4513);
 
         component = new StringTextComponent("二等").mergeStyle(TextFormatting.DARK_PURPLE)
-                .appendString("     ").appendSibling(new StringTextComponent(data.getItemName2()).mergeStyle(TextFormatting.BLUE));
+                .appendString("     ").appendSibling(new StringTextComponent(data.getItemStack2().getItem().getName().getString()).mergeStyle(TextFormatting.BLUE));
         drawString(matrixStack, this.font, component, xAttr, yAttr + 20, 0x8B4513);
 
         component = new StringTextComponent("三等").mergeStyle(TextFormatting.AQUA)
-                .appendString("     ").appendSibling(new StringTextComponent(data.getItemName3()).mergeStyle(TextFormatting.BLUE));
+                .appendString("     ").appendSibling(new StringTextComponent(data.getItemStack3().getItem().getName().getString()).mergeStyle(TextFormatting.BLUE));
         drawString(matrixStack, this.font, component, xAttr, yAttr + 40, 0x8B4513);
 
         component = new StringTextComponent("四等").mergeStyle(TextFormatting.GREEN)
-                .appendString("     ").appendSibling(new StringTextComponent(data.getItemName4()).mergeStyle(TextFormatting.BLUE));
+                .appendString("     ").appendSibling(new StringTextComponent(data.getItemStack4().getItem().getName().getString()).mergeStyle(TextFormatting.BLUE));
         drawString(matrixStack, this.font, component, xAttr, yAttr + 60, 0x8B4513);
 
         component = new StringTextComponent("五等").mergeStyle(TextFormatting.GRAY)
-                .appendString("     ").appendSibling(new StringTextComponent(data.getItemName5()).mergeStyle(TextFormatting.BLUE));
+                .appendString("     ").appendSibling(new StringTextComponent(data.getItemStack5().getItem().getName().getString()).mergeStyle(TextFormatting.BLUE));
         drawString(matrixStack, this.font, component, xAttr, yAttr + 80, 0x8B4513);
 
         super.render(matrixStack, mouseX, mouseY, particleTick);

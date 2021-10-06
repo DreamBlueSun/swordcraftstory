@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 /**
  * 手摇抽奖机方块
@@ -42,9 +44,7 @@ public class ManualLotteryMachineBlock extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isRemote || handIn != Hand.MAIN_HAND) {
-            return ActionResultType.SUCCESS;
-        } else {
+        if (!worldIn.isRemote() && handIn == Hand.MAIN_HAND) {
             ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (!stack.isEmpty() && stack.getItem() instanceof LuckTicket) {
                 NonNullList<ItemStack> list = NonNullList.create();
@@ -53,7 +53,8 @@ public class ManualLotteryMachineBlock extends Block {
                 //道具数量--
                 stack.shrink(1);
             } else {
-                Networking.MANUAL_LOTTERY_ITEM_INFO.sendToServer(new ManualLotteryItemInfoPack());
+                PacketDistributor.PacketTarget target = PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player);
+                Networking.MANUAL_LOTTERY_ITEM_INFO.send(target, new ManualLotteryItemInfoPack());
             }
         }
         return ActionResultType.SUCCESS;

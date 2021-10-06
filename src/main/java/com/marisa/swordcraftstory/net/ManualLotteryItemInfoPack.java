@@ -5,9 +5,9 @@ import com.marisa.swordcraftstory.gui.screen.ManualLotteryItemInfoScreenData;
 import com.marisa.swordcraftstory.util.obj.DropQualityManualLotteryMachine;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.function.Supplier;
 
@@ -18,34 +18,34 @@ import java.util.function.Supplier;
 
 public class ManualLotteryItemInfoPack {
 
-    private String itemName1;
-    private String itemName2;
-    private String itemName3;
-    private String itemName4;
-    private String itemName5;
+    private ItemStack itemStack1;
+    private ItemStack itemStack2;
+    private ItemStack itemStack3;
+    private ItemStack itemStack4;
+    private ItemStack itemStack5;
 
     public ManualLotteryItemInfoPack() {
-        this.itemName1 = DropQualityManualLotteryMachine.getRank1().getItem().getName().getString();
-        this.itemName2 = DropQualityManualLotteryMachine.getRank2().getItem().getName().getString();
-        this.itemName3 = DropQualityManualLotteryMachine.getRank3().getItem().getName().getString();
-        this.itemName4 = DropQualityManualLotteryMachine.getRank4().getItem().getName().getString();
-        this.itemName5 = DropQualityManualLotteryMachine.getRank5().getItem().getName().getString();
+        this.itemStack1 = DropQualityManualLotteryMachine.getRank1();
+        this.itemStack2 = DropQualityManualLotteryMachine.getRank2();
+        this.itemStack3 = DropQualityManualLotteryMachine.getRank3();
+        this.itemStack4 = DropQualityManualLotteryMachine.getRank4();
+        this.itemStack5 = DropQualityManualLotteryMachine.getRank5();
     }
 
     public ManualLotteryItemInfoPack(PacketBuffer buffer) {
-        this.itemName1 = buffer.readString(Short.MAX_VALUE);
-        this.itemName2 = buffer.readString(Short.MAX_VALUE);
-        this.itemName3 = buffer.readString(Short.MAX_VALUE);
-        this.itemName4 = buffer.readString(Short.MAX_VALUE);
-        this.itemName5 = buffer.readString(Short.MAX_VALUE);
+        this.itemStack1 = buffer.readItemStack();
+        this.itemStack2 = buffer.readItemStack();
+        this.itemStack3 = buffer.readItemStack();
+        this.itemStack4 = buffer.readItemStack();
+        this.itemStack5 = buffer.readItemStack();
     }
 
     public void toBytes(PacketBuffer buffer) {
-        buffer.writeString(this.itemName1);
-        buffer.writeString(this.itemName2);
-        buffer.writeString(this.itemName3);
-        buffer.writeString(this.itemName4);
-        buffer.writeString(this.itemName5);
+        buffer.writeItemStack(this.itemStack1);
+        buffer.writeItemStack(this.itemStack2);
+        buffer.writeItemStack(this.itemStack3);
+        buffer.writeItemStack(this.itemStack4);
+        buffer.writeItemStack(this.itemStack5);
     }
 
     public void handler(Supplier<NetworkEvent.Context> ctx) {
@@ -53,12 +53,8 @@ public class ManualLotteryItemInfoPack {
         ctx.get().enqueueWork(() -> {
             if (sender == null) {
                 //打开GUI
-                ManualLotteryItemInfoScreenData data = new ManualLotteryItemInfoScreenData(this.itemName1, this.itemName2, this.itemName3, this.itemName4, this.itemName5);
+                ManualLotteryItemInfoScreenData data = new ManualLotteryItemInfoScreenData(this.itemStack1, this.itemStack2, this.itemStack3, this.itemStack4, this.itemStack5);
                 ManualLotteryItemInfoScreen.open(Minecraft.getInstance().player, data);
-            } else {
-                //同步数据到客户端
-                PacketDistributor.PacketTarget target = PacketDistributor.PLAYER.with(() -> sender);
-                Networking.MANUAL_LOTTERY_ITEM_INFO.send(target, new ManualLotteryItemInfoPack());
             }
         });
         ctx.get().setPacketHandled(true);
