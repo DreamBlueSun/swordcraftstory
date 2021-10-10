@@ -16,6 +16,7 @@ public class PropertyRegistry {
 
     @SubscribeEvent
     public static void propertyOverrideRegistry(FMLClientSetupEvent event) {
+        //注册拉弓重载模型
         event.enqueueWork(() -> {
             registerBowProperties(ItemRegistry.NOVICE_BOW.get());
             registerBowProperties(ItemRegistry.THIN_BOW.get());
@@ -30,6 +31,7 @@ public class PropertyRegistry {
             registerBowProperties(ItemRegistry.RELICT_BOW.get());
             registerBowProperties(ItemRegistry.ELEGANCE_BOW.get());
             registerBowProperties(ItemRegistry.RIBBON_BOW.get());
+            registerBowProperties(ItemRegistry.CARAPACE_FOSSIL_BOW.get());
 
             //幻化弓
             registerBowProperties(ItemRegistry.CONSTANT_BLOWERS_SNOW_BOW.get());
@@ -37,6 +39,7 @@ public class PropertyRegistry {
 
         //注册幻化属性
         event.enqueueWork(() -> {
+            //剑
             registerModelChangeProperties(ItemRegistry.NOVICE_SWORD.get());
             registerModelChangeProperties(ItemRegistry.THIN_SWORD.get());
             registerModelChangeProperties(ItemRegistry.HARD_SWORD.get());
@@ -50,6 +53,9 @@ public class PropertyRegistry {
             registerModelChangeProperties(ItemRegistry.RELICT_SWORD.get());
             registerModelChangeProperties(ItemRegistry.ELEGANCE_SWORD.get());
             registerModelChangeProperties(ItemRegistry.RIBBON_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.CARAPACE_FOSSIL_SWORD.get());
+
+            //弓
             registerModelChangeProperties(ItemRegistry.NOVICE_BOW.get());
             registerModelChangeProperties(ItemRegistry.THIN_BOW.get());
             registerModelChangeProperties(ItemRegistry.HARD_BOW.get());
@@ -63,6 +69,9 @@ public class PropertyRegistry {
             registerModelChangeProperties(ItemRegistry.RELICT_BOW.get());
             registerModelChangeProperties(ItemRegistry.ELEGANCE_BOW.get());
             registerModelChangeProperties(ItemRegistry.RIBBON_BOW.get());
+            registerModelChangeProperties(ItemRegistry.CARAPACE_FOSSIL_BOW.get());
+
+            //斧
             registerModelChangeProperties(ItemRegistry.NOVICE_AXE.get());
             registerModelChangeProperties(ItemRegistry.THIN_AXE.get());
             registerModelChangeProperties(ItemRegistry.HARD_AXE.get());
@@ -76,6 +85,7 @@ public class PropertyRegistry {
             registerModelChangeProperties(ItemRegistry.RELICT_AXE.get());
             registerModelChangeProperties(ItemRegistry.ELEGANCE_AXE.get());
             registerModelChangeProperties(ItemRegistry.RIBBON_AXE.get());
+            registerModelChangeProperties(ItemRegistry.CARAPACE_FOSSIL_AXE.get());
         });
     }
 

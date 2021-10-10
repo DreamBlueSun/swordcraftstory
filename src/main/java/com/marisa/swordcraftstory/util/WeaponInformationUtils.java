@@ -88,6 +88,11 @@ public class WeaponInformationUtils {
         tooltip.add(new TranslationTextComponent("附有缎带使武器性能飞跃性地提高").mergeStyle(TextFormatting.WHITE));
     }
 
+    //甲壳武器Information
+    public static void tipCarapaceFossil(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("复杂的工艺中可感受到其锋芒存在").mergeStyle(TextFormatting.WHITE));
+    }
+
     public static void addInformation(Weapon weapon, ItemStack stack, List<ITextComponent> tooltip) {
         stack.setTagInfo("HideFlags", IntNBT.valueOf(2));
         if (weapon.isBroken(stack)) {

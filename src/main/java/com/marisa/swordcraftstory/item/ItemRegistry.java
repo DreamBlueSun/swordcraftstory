@@ -60,6 +60,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> RELICT_SWORD = ITEMS.register("relict_sword", RelictSword::new);
     public static RegistryObject<Item> ELEGANCE_SWORD = ITEMS.register("elegance_sword", EleganceSword::new);
     public static RegistryObject<Item> RIBBON_SWORD = ITEMS.register("ribbon_sword", RibbonSword::new);
+    public static RegistryObject<Item> CARAPACE_FOSSIL_SWORD = ITEMS.register("carapace_fossil_sword", CarapaceFossilSword::new);
     //武器-弓
     public static RegistryObject<Item> NOVICE_BOW = ITEMS.register("novice_bow", NoviceBow::new);
     public static RegistryObject<Item> THIN_BOW = ITEMS.register("thin_bow", ThinBow::new);
@@ -74,6 +75,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> RELICT_BOW = ITEMS.register("relict_bow", RelictBow::new);
     public static RegistryObject<Item> ELEGANCE_BOW = ITEMS.register("elegance_bow", EleganceBow::new);
     public static RegistryObject<Item> RIBBON_BOW = ITEMS.register("ribbon_bow", RibbonBow::new);
+    public static RegistryObject<Item> CARAPACE_FOSSIL_BOW = ITEMS.register("carapace_fossil_bow", CarapaceFossilBow::new);
     //武器-斧
     public static RegistryObject<Item> NOVICE_AXE = ITEMS.register("novice_axe", NoviceAxe::new);
     public static RegistryObject<Item> THIN_AXE = ITEMS.register("thin_axe", ThinAxe::new);
@@ -88,6 +90,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> RELICT_AXE = ITEMS.register("relict_axe", RelictAxe::new);
     public static RegistryObject<Item> ELEGANCE_AXE = ITEMS.register("elegance_axe", EleganceAxe::new);
     public static RegistryObject<Item> RIBBON_AXE = ITEMS.register("ribbon_axe", RibbonAxe::new);
+    public static RegistryObject<Item> CARAPACE_FOSSIL_AXE = ITEMS.register("carapace_fossil_axe", CarapaceFossilAxe::new);
     //方块物品
     public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_MAKE_BLOCK = ITEMS.register("weapon_make_block", () -> new BlockItem(BlockRegistry.WEAPON_MAKE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
@@ -128,6 +131,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> REGIA_ORE = ITEMS.register("regia_ore", RegiaOre::new);
     public static RegistryObject<Item> UKA_ORE = ITEMS.register("uka_ore", UkaOre::new);
     public static RegistryObject<Item> PRETTY_ORE = ITEMS.register("pretty_ore", PrettyOre::new);
+    public static RegistryObject<Item> CARAPACE_FOSSIL_ORE = ITEMS.register("carapace_fossil_ore", CarapaceFossilOre::new);
     //强化道具
     public static RegistryObject<Item> LEGEND_IRON_BUNCH = ITEMS.register("legend_iron_bunch", LegendIronBunch::new);
     //特殊道具

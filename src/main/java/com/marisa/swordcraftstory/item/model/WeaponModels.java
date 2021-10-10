@@ -24,6 +24,7 @@ public enum WeaponModels {
     REGIA_ORE(11, (WeaponModel) ItemRegistry.REGIA_ORE.get()),
     UKA_ORE(12, (WeaponModel) ItemRegistry.UKA_ORE.get()),
     PRETTY_ORE(13, (WeaponModel) ItemRegistry.PRETTY_ORE.get()),
+    CARAPACE_FOSSIL_ORE(14, (WeaponModel) ItemRegistry.CARAPACE_FOSSIL_ORE.get()),
 
 
     //泰拉模型-剑

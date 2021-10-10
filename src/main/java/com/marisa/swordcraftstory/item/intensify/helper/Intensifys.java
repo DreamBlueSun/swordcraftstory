@@ -22,6 +22,7 @@ public enum Intensifys {
     REGIA_ORE(11, "雷吉亚矿"),
     UKA_ORE(12, "尤佳矿石"),
     PRETTY_ORE(13, "漂亮原石"),
+    CARAPACE_FOSSIL_ORE(14, "甲壳化石"),
 
     //强化素材
     LEGEND_IRON_BUNCH(1001, "传说级的铁串");
