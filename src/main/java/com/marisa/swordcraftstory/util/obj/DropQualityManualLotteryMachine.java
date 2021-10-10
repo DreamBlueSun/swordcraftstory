@@ -28,15 +28,21 @@ public class DropQualityManualLotteryMachine {
     private static ItemStack RANK_5;
 
     static {
+        //强化
         LIST_RANK_1 = new ArrayList<>();
         LIST_RANK_1.add(ItemRegistry.LEGEND_IRON_BUNCH.get().getDefaultInstance());
 
+        //幻化
         LIST_RANK_2 = new ArrayList<>();
+        //--剑
         LIST_RANK_2.add(ItemRegistry.DRAGON_SLAVE_SWORD.get().getDefaultInstance());
         LIST_RANK_2.add(ItemRegistry.UNLIMITED_EARTH_SWORD.get().getDefaultInstance());
         LIST_RANK_2.add(ItemRegistry.ELEMENTS_MANA_SWORD.get().getDefaultInstance());
         LIST_RANK_2.add(ItemRegistry.TIME_UMBRELLA_SWORD.get().getDefaultInstance());
+        //--弓
+        LIST_RANK_2.add(ItemRegistry.CONSTANT_BLOWERS_SNOW_BOW.get().getDefaultInstance());
 
+        //头
         LIST_RANK_3 = new ArrayList<>();
         LIST_RANK_3.add(Items.SKELETON_SKULL.getDefaultInstance());
         LIST_RANK_3.add(Items.WITHER_SKELETON_SKULL.getDefaultInstance());
@@ -44,12 +50,14 @@ public class DropQualityManualLotteryMachine {
         LIST_RANK_3.add(Items.CREEPER_HEAD.getDefaultInstance());
         LIST_RANK_3.add(Items.DRAGON_HEAD.getDefaultInstance());
 
+        //修理道具
         LIST_RANK_4 = new ArrayList<>();
         LIST_RANK_4.add(ItemRegistry.SHARP_STONE.get().getDefaultInstance());
         LIST_RANK_4.add(ItemRegistry.KNIFE_STONE.get().getDefaultInstance());
         LIST_RANK_4.add(ItemRegistry.HARD_STONE.get().getDefaultInstance());
         LIST_RANK_3.add(ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
 
+        //回复道具
         LIST_RANK_5 = new ArrayList<>();
         ItemStack stack_5_1 = ItemRegistry.WOUNDPLAST.get().getDefaultInstance();
         stack_5_1.setCount(16);

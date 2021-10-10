@@ -30,6 +30,9 @@ public class PropertyRegistry {
             registerBowProperties(ItemRegistry.RELICT_BOW.get());
             registerBowProperties(ItemRegistry.ELEGANCE_BOW.get());
             registerBowProperties(ItemRegistry.RIBBON_BOW.get());
+
+            //幻化弓
+            registerBowProperties(ItemRegistry.CONSTANT_BLOWERS_SNOW_BOW.get());
         });
 
         //注册幻化属性
