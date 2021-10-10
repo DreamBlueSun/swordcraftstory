@@ -151,6 +151,12 @@
         "model_change": 13
       },
       "model": "swordcraftstory:item/change/axe/ribbon_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 14
+      },
+      "model": "swordcraftstory:item/change/axe/carapace_fossil_axe"
     }
   ]
 }

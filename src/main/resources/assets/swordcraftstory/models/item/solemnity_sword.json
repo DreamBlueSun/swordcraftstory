@@ -154,6 +154,12 @@
     },
     {
       "predicate": {
+        "model_change": 14
+      },
+      "model": "swordcraftstory:item/change/sword/carapace_fossil_sword"
+    },
+    {
+      "predicate": {
         "model_change": 1001
       },
       "model": "swordcraftstory:item/dragon_slave_sword"

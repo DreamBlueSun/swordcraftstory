@@ -450,6 +450,12 @@
     },
     {
       "predicate": {
+        "model_change": 13
+      },
+      "model": "swordcraftstory:item/change/bow/ribbon_bow"
+    },
+    {
+      "predicate": {
         "model_change": 13,
         "pulling": 1
       },
@@ -470,6 +476,35 @@
         "pull": 0.9
       },
       "model": "swordcraftstory:item/ribbon_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 14
+      },
+      "model": "swordcraftstory:item/change/bow/carapace_fossil_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 14,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/carapace_fossil_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 14,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/carapace_fossil_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 14,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/carapace_fossil_bow_pull_2"
     },
     {
       "predicate": {
@@ -499,6 +534,35 @@
         "pull": 0.9
       },
       "model": "swordcraftstory:item/constant_blowers_snow_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 14
+      },
+      "model": "swordcraftstory:item/change/bow/carapace_fossil_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 14,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/carapace_fossil_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 14,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/carapace_fossil_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 14,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/carapace_fossil_bow_pull_2"
     }
   ]
 }

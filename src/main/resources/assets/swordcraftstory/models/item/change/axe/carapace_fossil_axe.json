@@ -1,0 +1,76 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "swordcraftstory:item/carapace_fossil_axe"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        -90,
+        -90,
+        180
+      ],
+      "translation": [
+        0,
+        10.5,
+        2
+      ],
+      "scale": [
+        3.0,
+        2.0,
+        0.8
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -90,
+        90,
+        180
+      ],
+      "translation": [
+        0,
+        10.5,
+        2
+      ],
+      "scale": [
+        3.0,
+        2.0,
+        0.8
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        45,
+        -90,
+        25
+      ],
+      "translation": [
+        0,
+        4,
+        -6
+      ],
+      "scale": [
+        3.0,
+        2.0,
+        0.8
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        45,
+        90,
+        -25
+      ],
+      "translation": [
+        0,
+        4,
+        -6
+      ],
+      "scale": [
+        3.0,
+        2.0,
+        0.8
+      ]
+    }
+  }
+}
