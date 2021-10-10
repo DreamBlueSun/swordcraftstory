@@ -38,7 +38,6 @@ public class DropQualityManualLotteryMachine {
         LIST_RANK_2.add(ItemRegistry.TIME_UMBRELLA_SWORD.get().getDefaultInstance());
 
         LIST_RANK_3 = new ArrayList<>();
-        LIST_RANK_3.add(ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
         LIST_RANK_3.add(Items.SKELETON_SKULL.getDefaultInstance());
         LIST_RANK_3.add(Items.WITHER_SKELETON_SKULL.getDefaultInstance());
         LIST_RANK_3.add(Items.ZOMBIE_HEAD.getDefaultInstance());
@@ -49,11 +48,18 @@ public class DropQualityManualLotteryMachine {
         LIST_RANK_4.add(ItemRegistry.SHARP_STONE.get().getDefaultInstance());
         LIST_RANK_4.add(ItemRegistry.KNIFE_STONE.get().getDefaultInstance());
         LIST_RANK_4.add(ItemRegistry.HARD_STONE.get().getDefaultInstance());
+        LIST_RANK_3.add(ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
 
         LIST_RANK_5 = new ArrayList<>();
-        LIST_RANK_5.add(ItemRegistry.WOUNDPLAST.get().getDefaultInstance());
-        LIST_RANK_5.add(ItemRegistry.JI_JA_MEDICINE.get().getDefaultInstance());
-        LIST_RANK_5.add(ItemRegistry.JU_YU_MEDICINE.get().getDefaultInstance());
+        ItemStack stack_5_1 = ItemRegistry.WOUNDPLAST.get().getDefaultInstance();
+        stack_5_1.setCount(16);
+        LIST_RANK_5.add(stack_5_1);
+        ItemStack stack_5_2 = ItemRegistry.JI_JA_MEDICINE.get().getDefaultInstance();
+        stack_5_2.setCount(8);
+        LIST_RANK_5.add(stack_5_2);
+        ItemStack stack_5_3 = ItemRegistry.JU_YU_MEDICINE.get().getDefaultInstance();
+        stack_5_3.setCount(4);
+        LIST_RANK_5.add(stack_5_3);
 
         shuffle();
     }
