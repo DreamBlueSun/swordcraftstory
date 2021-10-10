@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.item;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.intensify.LegendIronBunch;
+import com.marisa.swordcraftstory.item.intensify.*;
 import com.marisa.swordcraftstory.item.material.*;
 import com.marisa.swordcraftstory.item.mould.close.axe.AxeMould;
 import com.marisa.swordcraftstory.item.mould.close.sword.SwordMould;
@@ -134,6 +134,10 @@ public class ItemRegistry {
     public static RegistryObject<Item> CARAPACE_FOSSIL_ORE = ITEMS.register("carapace_fossil_ore", CarapaceFossilOre::new);
     //强化道具
     public static RegistryObject<Item> LEGEND_IRON_BUNCH = ITEMS.register("legend_iron_bunch", LegendIronBunch::new);
+    public static RegistryObject<Item> HEART_GLASSES = ITEMS.register("heart_glasses", HeartGlasses::new);
+    public static RegistryObject<Item> MOMENTUM_HEAD_BAND = ITEMS.register("momentum_head_band", MomentumHeadband::new);
+    public static RegistryObject<Item> POWER_CERTIFICATE = ITEMS.register("power_certificate", PowerCertificate::new);
+    public static RegistryObject<Item> TALENT_CERTIFICATE = ITEMS.register("talent_certificate", TalentCertificate::new);
     //特殊道具
     public static RegistryObject<Item> LUCK_TICKET = ITEMS.register("luck_ticket", LuckTicket::new);
     //幻化武器-泰拉-剑

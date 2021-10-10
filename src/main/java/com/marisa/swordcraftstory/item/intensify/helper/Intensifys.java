@@ -25,7 +25,11 @@ public enum Intensifys {
     CARAPACE_FOSSIL_ORE(14, "甲壳化石"),
 
     //强化素材
-    LEGEND_IRON_BUNCH(1001, "传说级的铁串");
+    LEGEND_IRON_BUNCH(1001, "传说级的铁串"),
+    HEART_GLASSES(1002, "心眼眼镜"),
+    MOMENTUM_HEAD_BAND(1003, "气势头巾"),
+    POWER_CERTIFICATE(1004, "怪力之证"),
+    TALENT_CERTIFICATE(1005, "达人之证");
 
     private int id;
     private String show;

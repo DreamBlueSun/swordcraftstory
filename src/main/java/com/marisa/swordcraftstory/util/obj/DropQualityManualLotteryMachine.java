@@ -31,6 +31,10 @@ public class DropQualityManualLotteryMachine {
         //强化
         LIST_RANK_1 = new ArrayList<>();
         LIST_RANK_1.add(ItemRegistry.LEGEND_IRON_BUNCH.get().getDefaultInstance());
+        LIST_RANK_1.add(ItemRegistry.HEART_GLASSES.get().getDefaultInstance());
+        LIST_RANK_1.add(ItemRegistry.MOMENTUM_HEAD_BAND.get().getDefaultInstance());
+        LIST_RANK_1.add(ItemRegistry.POWER_CERTIFICATE.get().getDefaultInstance());
+        LIST_RANK_1.add(ItemRegistry.TALENT_CERTIFICATE.get().getDefaultInstance());
 
         //幻化
         LIST_RANK_2 = new ArrayList<>();

@@ -23,10 +23,10 @@ public enum SpecialAttacks {
     UNKNOWN(0, 9, null, "未知", null, Intensifys.UNKNOWN.getId()),
 
     //剑
-    AIR_CUTTER(1001, 1, WeaponType.SWORD, "真空刃", new AirCutter(13), Intensifys.CUT_IRON_ORE.getId()),
+    AIR_CUTTER(1001, 1, WeaponType.SWORD, "真空刃", new AirCutter(13), Intensifys.MOMENTUM_HEAD_BAND.getId(), Intensifys.TALENT_CERTIFICATE.getId()),
 
     //斧
-    FULL_ATTACK(3001, 1, WeaponType.AXE, "全力一击", new FullAttack(10), Intensifys.HEAVY_GOLD_ORE.getId());
+    FULL_ATTACK(3001, 1, WeaponType.AXE, "乾坤一击", new FullAttack(7), Intensifys.POWER_CERTIFICATE.getId(), Intensifys.POWER_CERTIFICATE.getId(), Intensifys.HEART_GLASSES.getId());
 
     private int id;
     /**
