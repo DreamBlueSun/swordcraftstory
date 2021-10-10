@@ -55,7 +55,6 @@ public class DropQualityManualLotteryMachine {
         LIST_RANK_4.add(ItemRegistry.SHARP_STONE.get().getDefaultInstance());
         LIST_RANK_4.add(ItemRegistry.KNIFE_STONE.get().getDefaultInstance());
         LIST_RANK_4.add(ItemRegistry.HARD_STONE.get().getDefaultInstance());
-        LIST_RANK_3.add(ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
 
         //回复道具
         LIST_RANK_5 = new ArrayList<>();

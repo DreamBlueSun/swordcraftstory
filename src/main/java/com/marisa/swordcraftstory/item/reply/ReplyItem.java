@@ -35,6 +35,7 @@ public abstract class ReplyItem extends Item {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent("回复").mergeStyle(TextFormatting.LIGHT_PURPLE));
+        tooltip.add(new TranslationTextComponent("回复量：" + this.amount).mergeStyle(TextFormatting.BLUE));
     }
 
     @Override

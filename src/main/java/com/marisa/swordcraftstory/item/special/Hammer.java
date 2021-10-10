@@ -32,5 +32,7 @@ public class Hammer extends SpecialItem {
         tooltip.add(new TranslationTextComponent("铁锤，即吾友！").mergeStyle(TextFormatting.DARK_PURPLE));
         tooltip.add(new TranslationTextComponent("铁锤，即吾力！").mergeStyle(TextFormatting.DARK_PURPLE));
         tooltip.add(new TranslationTextComponent("铁锤，即吾命！").mergeStyle(TextFormatting.DARK_PURPLE));
+
+        tooltip.add(new TranslationTextComponent("对锻冶台右键使用").mergeStyle(TextFormatting.GREEN));
     }
 }

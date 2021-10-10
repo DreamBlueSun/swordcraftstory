@@ -31,5 +31,7 @@ public class SwordGuake extends AbstractSwordWeapon {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         WeaponInformationUtils.tipNovice(tooltip);
         tooltip.add(new TranslationTextComponent("挂科仙客没有抽到的心愿武器").mergeStyle(TextFormatting.DARK_PURPLE));
+
+        tooltip.add(new TranslationTextComponent("大概率会在以后的版本移除").mergeStyle(TextFormatting.GREEN));
     }
 }

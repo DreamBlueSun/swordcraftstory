@@ -42,6 +42,7 @@ public abstract class RepairItem extends Item {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent("修理").mergeStyle(TextFormatting.LIGHT_PURPLE));
+        tooltip.add(new TranslationTextComponent("修理量：" + this.amount).mergeStyle(TextFormatting.BLUE));
     }
 
     @Override

@@ -28,5 +28,7 @@ public class LuckTicket extends SpecialItem {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(new TranslationTextComponent("上面写着收集多了可以提升运气").mergeStyle(TextFormatting.WHITE));
+
+        tooltip.add(new TranslationTextComponent("对手摇抽奖机右键使用").mergeStyle(TextFormatting.GREEN));
     }
 }

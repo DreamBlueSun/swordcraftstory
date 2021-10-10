@@ -31,7 +31,7 @@ public abstract class AbstractOre extends Item implements WeaponMake, Intensify,
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("合成").mergeStyle(TextFormatting.LIGHT_PURPLE));
+        tooltip.add(new TranslationTextComponent("制作、强化、幻化[全]").mergeStyle(TextFormatting.LIGHT_PURPLE));
         tooltip.add(new TranslationTextComponent("稀有度").mergeStyle(TextFormatting.YELLOW)
                 .appendString("     ").appendSibling(new TranslationTextComponent(String.valueOf(rank())).mergeStyle(TextFormatting.LIGHT_PURPLE)));
     }
