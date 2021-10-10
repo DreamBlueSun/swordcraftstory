@@ -41,11 +41,11 @@ public class PlayerPanelAttr {
                 .appendString(" ").appendSibling(new TranslationTextComponent(String.valueOf(LV)).mergeStyle(TextFormatting.GREEN));
         //经验
         String exp;
-        //目前限制最高为14级
-        if (LV <= 14) {
+        //目前限制最高为19级
+        if (LV < 19) {
             exp = XP + "/" + StoryPlayerDataManager.getLvNextXpPoint(LV);
         } else {
-            exp = XP + "/0";
+            exp = XP + "/∞";
         }
         this.exp = new TranslationTextComponent("Exp").mergeStyle(TextFormatting.LIGHT_PURPLE)
                 .appendString(" ").appendSibling(new TranslationTextComponent(exp).mergeStyle(TextFormatting.GREEN));

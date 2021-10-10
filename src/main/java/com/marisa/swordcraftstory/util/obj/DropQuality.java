@@ -16,6 +16,7 @@ public class DropQuality {
     private static final List<ItemStack> LIST_ORE_RANK_1;
     private static final List<ItemStack> LIST_ORE_RANK_2;
     private static final List<ItemStack> LIST_ORE_RANK_3;
+    private static final List<ItemStack> LIST_ORE_RANK_4;
 
     static {
         LIST_ORE_RANK_1 = new ArrayList<>();
@@ -34,20 +35,26 @@ public class DropQuality {
         LIST_ORE_RANK_3.add(ItemRegistry.REGIA_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_3.add(ItemRegistry.UKA_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_3.add(ItemRegistry.PRETTY_ORE.get().getDefaultInstance());
+        LIST_ORE_RANK_4 = new ArrayList<>();
+        LIST_ORE_RANK_4.add(ItemRegistry.CARAPACE_FOSSIL_ORE.get().getDefaultInstance());
     }
 
-    private static final int RANK_MATERIAL_0 = 300;
-    private static final int RANK_MATERIAL_1 = 200;
-    private static final int RANK_MATERIAL_2 = 100;
-    private static final int RANK_ORE_1 = 100;
-    private static final int RANK_ORE_2 = 80;
-    private static final int RANK_ORE_3 = 70;
+    private static final int RANK_MATERIAL_0 = 30;
+    private static final int RANK_MATERIAL_1 = 20;
+    private static final int RANK_MATERIAL_2 = 10;
+    private static final int RANK_ORE_1 = 10;
+    private static final int RANK_ORE_2 = 8;
+    private static final int RANK_ORE_3 = 7;
+    private static final int RANK_ORE_4 = 6;
     private static final int RANK_RANDOM_MAX = RANK_MATERIAL_0 + RANK_MATERIAL_1 + RANK_MATERIAL_2 +
-            RANK_ORE_1 + RANK_ORE_2 + RANK_ORE_3;
+            RANK_ORE_1 + RANK_ORE_2 + RANK_ORE_3 + RANK_ORE_4;
 
     public static ItemStack randomDropQuality(int playerLv) {
         int drop = RANK_RANDOM_MAX;
         int r = new Random().nextInt(RANK_RANDOM_MAX) + 1;
+        if (r > (drop -= RANK_ORE_4) && playerLv >= 15) {
+            return LIST_ORE_RANK_4.get(new Random().nextInt(LIST_ORE_RANK_4.size())).copy();
+        }
         if (r > (drop -= RANK_ORE_3) && playerLv >= 10) {
             return LIST_ORE_RANK_3.get(new Random().nextInt(LIST_ORE_RANK_3.size())).copy();
         }
