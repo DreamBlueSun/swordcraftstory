@@ -30,7 +30,6 @@ public abstract class AbstractAttack implements SpecialAttack {
             //损坏后或耐久不足将不能再使用特殊攻击
             return ActionResult.resultFail(stack);
         }
-        weapon.onSpecialAttack(stack);
         playerIn.setActiveHand(handIn);
         return ActionResult.resultConsume(stack);
     }
@@ -47,8 +46,6 @@ public abstract class AbstractAttack implements SpecialAttack {
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
-        if ((entityLiving instanceof PlayerEntity)) {
-            stack.damageItem(13, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
-        }
+        stack.damageItem(this.cost, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
     }
 }

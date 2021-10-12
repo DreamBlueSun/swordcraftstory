@@ -23,10 +23,9 @@ public class AirCutter extends AbstractAttack {
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
-        super.onPlayerStoppedUsing(stack, worldIn, entityLiving, timeLeft);
         if ((entityLiving instanceof PlayerEntity)) {
             PlayerEntity playerIn = (PlayerEntity) entityLiving;
-            if (SpecialAttackHelper.useSp(stack, playerIn) >= 0.5) {
+            if (SpecialAttackHelper.useSp(stack, playerIn) >= 0.2) {
                 AirCutterProjectileEntity airCutter = new AirCutterProjectileEntity(EntityTypeRegistry.AIR_CUTTER.get(), worldIn);
                 airCutter.setDamage(((Weapon) stack.getItem()).getAtk(stack) * 1.6D);
                 airCutter.setShooter(playerIn);
@@ -35,6 +34,7 @@ public class AirCutter extends AbstractAttack {
                 airCutter.setPosition(playerIn.getPosX(), playerIn.getPosYEye() - (double) 0.1F, playerIn.getPosZ());
                 airCutter.setDirectionAndMovement(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.6F, 0.0F);
                 worldIn.addEntity(airCutter);
+                super.onPlayerStoppedUsing(stack, worldIn, entityLiving, timeLeft);
             }
         }
     }
