@@ -162,19 +162,19 @@ public class LivingHurtUtils {
                 //拥挤
             case "cactus":
                 //仙人掌
-                damage.setR(fixedDamageUp(target, 2.0F, 4));
+                damage.setR(fixedDamageUp(target, 1.0F, target instanceof MobEntity ? 1 : 2));
                 break;
             case "starve":
                 //饥饿
-                damage.setR(fixedDamageUp(target, 4.0F, 8));
+                damage.setR(fixedDamageUp(target, 2.0F, 4));
                 break;
             case "lava":
                 //岩浆
-                damage.setR(fixedDamageUp(target, 5.0F, 10));
+                damage.setR(fixedDamageUp(target, 4.0F, target instanceof MobEntity ? 1 : 4));
                 break;
             case "explosion.player":
                 //爆炸
-                damage.setR(fixedDamageUp(source.getTrueSource(), 50.0F, 20));
+                damage.setR(fixedDamageUp(source.getTrueSource(), 40.0F, target instanceof MobEntity ? 12 : 4));
                 break;
             case "outOfWorld":
                 damage.setR(9999.0F);
