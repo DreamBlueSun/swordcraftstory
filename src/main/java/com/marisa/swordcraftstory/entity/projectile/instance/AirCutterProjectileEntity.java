@@ -1,8 +1,8 @@
 package com.marisa.swordcraftstory.entity.projectile.instance;
 
 
+import com.marisa.swordcraftstory.item.weapon.close.AbstractSwordWeapon;
 import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
-import com.marisa.swordcraftstory.item.weapon.AbstractRangedWeapon;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -69,7 +69,7 @@ public class AirCutterProjectileEntity extends AbstractArrowEntity {
             //增加tec
             if (shooter instanceof PlayerEntity) {
                 ItemStack stack = ((PlayerEntity) shooter).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-                if (!(stack.getItem() instanceof AbstractRangedWeapon)) {
+                if (stack.getItem() instanceof AbstractSwordWeapon) {
                     ((Weapon) stack.getItem()).incrTec(stack);
                 }
             }
