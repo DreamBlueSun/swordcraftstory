@@ -31,6 +31,8 @@ public class Story {
 
     public static final String MOD_ID = "swordcraftstory";
 
+    public static final int LV_MAX = 19;
+
     // Directly reference a log4j logger.
     public static final Logger LOG = LogManager.getLogger();
 

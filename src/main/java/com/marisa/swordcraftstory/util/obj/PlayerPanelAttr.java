@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.util.obj;
 
 import com.google.common.collect.Multimap;
+import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
@@ -41,8 +42,8 @@ public class PlayerPanelAttr {
                 .appendString(" ").appendSibling(new TranslationTextComponent(String.valueOf(LV)).mergeStyle(TextFormatting.GREEN));
         //经验
         String exp;
-        //目前限制最高为19级
-        if (LV < 19) {
+        //限制最高等级
+        if (LV < Story.LV_MAX) {
             exp = XP + "/" + StoryPlayerDataManager.getLvNextXpPoint(LV);
         } else {
             exp = XP + "/∞";
