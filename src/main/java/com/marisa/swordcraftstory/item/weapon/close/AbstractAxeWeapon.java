@@ -228,7 +228,9 @@ public abstract class AbstractAxeWeapon extends AxeItem implements Weapon {
 
     @Override
     public boolean inSpecialAttackAndDoStop(ItemStack stack) {
-        return this.inSpecialAttack;
+        boolean in = this.inSpecialAttack;
+        this.inSpecialAttack = false;
+        return in;
     }
 
     @Override
