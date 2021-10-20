@@ -1,0 +1,252 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "swordcraftstory:item/cuisine_sword"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        -90,
+        -90,
+        180
+      ],
+      "translation": [
+        0,
+        5,
+        2
+      ],
+      "scale": [
+        2.0,
+        1.2,
+        0.8
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -90,
+        90,
+        180
+      ],
+      "translation": [
+        0,
+        5,
+        2
+      ],
+      "scale": [
+        2.0,
+        1.2,
+        0.8
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        45,
+        -90,
+        25
+      ],
+      "translation": [
+        0,
+        4,
+        0
+      ],
+      "scale": [
+        2.0,
+        1.2,
+        0.8
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        45,
+        90,
+        -25
+      ],
+      "translation": [
+        0,
+        4,
+        0
+      ],
+      "scale": [
+        2.0,
+        1.2,
+        0.8
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "model_change": 1
+      },
+      "model": "swordcraftstory:item/change/sword/novice_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 2
+      },
+      "model": "swordcraftstory:item/change/sword/thin_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 3
+      },
+      "model": "swordcraftstory:item/change/sword/hard_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 4
+      },
+      "model": "swordcraftstory:item/change/sword/solemnity_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 5
+      },
+      "model": "swordcraftstory:item/change/sword/iron_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 6
+      },
+      "model": "swordcraftstory:item/change/sword/synthesis_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 7
+      },
+      "model": "swordcraftstory:item/change/sword/feather_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 8
+      },
+      "model": "swordcraftstory:item/change/sword/cut_iron_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 9
+      },
+      "model": "swordcraftstory:item/change/sword/wide_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 10
+      },
+      "model": "swordcraftstory:item/change/sword/severe_penalty_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 11
+      },
+      "model": "swordcraftstory:item/change/sword/relict_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 12
+      },
+      "model": "swordcraftstory:item/change/sword/elegance_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 13
+      },
+      "model": "swordcraftstory:item/change/sword/ribbon_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 14
+      },
+      "model": "swordcraftstory:item/change/sword/carapace_fossil_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 16
+      },
+      "model": "swordcraftstory:item/change/sword/fantasy_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 20
+      },
+      "model": "swordcraftstory:item/change/sword/galia_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 21
+      },
+      "model": "swordcraftstory:item/change/sword/cuisine_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 24
+      },
+      "model": "swordcraftstory:item/change/sword/double_snake_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 25
+      },
+      "model": "swordcraftstory:item/change/sword/sprint_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 26
+      },
+      "model": "swordcraftstory:item/change/sword/xcel_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 28
+      },
+      "model": "swordcraftstory:item/change/sword/leiji_stowe_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 30
+      },
+      "model": "swordcraftstory:item/change/sword/dew_firefly_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 33
+      },
+      "model": "swordcraftstory:item/change/sword/steel_teeth_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 36
+      },
+      "model": "swordcraftstory:item/change/sword/cats_paw_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 40
+      },
+      "model": "swordcraftstory:item/change/sword/luminosity_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 1001
+      },
+      "model": "swordcraftstory:item/dragon_slave_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 1002
+      },
+      "model": "swordcraftstory:item/unlimited_earth_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 1003
+      },
+      "model": "swordcraftstory:item/elements_mana_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 1004
+      },
+      "model": "swordcraftstory:item/time_umbrella_sword"
+    }
+  ]
+}

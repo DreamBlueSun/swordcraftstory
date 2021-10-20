@@ -25,6 +25,17 @@ public enum WeaponModels {
     UKA_ORE(12, (WeaponModel) ItemRegistry.UKA_ORE.get()),
     PRETTY_ORE(13, (WeaponModel) ItemRegistry.PRETTY_ORE.get()),
     CARAPACE_FOSSIL_ORE(14, (WeaponModel) ItemRegistry.CARAPACE_FOSSIL_ORE.get()),
+    FANTASY_ORE(16, (WeaponModel) ItemRegistry.FANTASY_ORE.get()),
+    GALIA_ORE(20, (WeaponModel) ItemRegistry.GALIA_ORE.get()),
+    CUISINE_ORE(21, (WeaponModel) ItemRegistry.CUISINE_ORE.get()),
+    DOUBLE_SNAKE_ORE(24, (WeaponModel) ItemRegistry.DOUBLE_SNAKE_ORE.get()),
+    SPRINT_ORE(25, (WeaponModel) ItemRegistry.SPRINT_ORE.get()),
+    XCEL_ORE(26, (WeaponModel) ItemRegistry.XCEL_ORE.get()),
+    LEIJI_STOWE_ORE(28, (WeaponModel) ItemRegistry.LEIJI_STOWE_ORE.get()),
+    DEW_FIREFLY_ORE(30, (WeaponModel) ItemRegistry.DEW_FIREFLY_ORE.get()),
+    STEEL_TEETH_ORE(33, (WeaponModel) ItemRegistry.STEEL_TEETH_ORE.get()),
+    CATS_PAW_ORE(36, (WeaponModel) ItemRegistry.CATS_PAW_ORE.get()),
+    LUMINOSITY_ORE(40, (WeaponModel) ItemRegistry.LUMINOSITY_ORE.get()),
 
 
     //泰拉模型-剑

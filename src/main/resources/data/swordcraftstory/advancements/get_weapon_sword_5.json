@@ -1,0 +1,30 @@
+{
+  "parent": "swordcraftstory:get_weapon_sword_4",
+  "display": {
+    "icon": {
+      "item": "swordcraftstory:galia_sword"
+    },
+    "title": {
+      "translate": "advancements.swordcraftstory.get_weapon_sword_5.title"
+    },
+    "description": {
+      "translate": "advancements.swordcraftstory.get_weapon_sword_5.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "one": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "swordcraftstory:sword/rank5"
+          }
+        ]
+      }
+    }
+  }
+}

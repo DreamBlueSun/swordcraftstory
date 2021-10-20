@@ -93,6 +93,61 @@ public class WeaponInformationUtils {
         tooltip.add(new TranslationTextComponent("复杂的工艺中可感受到其锋芒存在").mergeStyle(TextFormatting.WHITE));
     }
 
+    //幻象武器Information
+    public static void tipFantasy(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("那不可思议的形状能让人在瞬间看见幻象").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //加利亚武器Information
+    public static void tipGalia(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("构造复杂但性能卓越").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //料理武器Information
+    public static void tipCuisine(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("用了这个就可以漂亮地还击回去了").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //双蛇武器Information
+    public static void tipDoubleSnake(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("充满制造者恶意的武器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //斯普林特武器Information
+    public static void tipSprint(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("优雅的外表使持有者也变得气度非凡").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //艾克赛尔武器Information
+    public static void tipXcel(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("无论是做武器还是装饰都很合适").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //雷齐斯托武器Information
+    public static void tipLeijiStowe(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("用惯了以后更显其琢磨之姿").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //露萤武器Information
+    public static void tipDewFirefly(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("用非凡的技法锻造出的梦幻武器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //钢牙武器Information
+    public static void tipSteelTeeth(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("如铁碎牙一般粗暴的武器").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //肉球武器Information
+    public static void tipCatsPaw(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("就是现在决定了  喵喵喵").mergeStyle(TextFormatting.WHITE));
+    }
+
+    //光辉武器Information
+    public static void tipLuminosity(List<ITextComponent> tooltip) {
+        tooltip.add(new TranslationTextComponent("那美丽的翅膀简直像···").mergeStyle(TextFormatting.WHITE));
+    }
+
     public static void addInformation(Weapon weapon, ItemStack stack, List<ITextComponent> tooltip) {
         stack.setTagInfo("HideFlags", IntNBT.valueOf(2));
         if (weapon.isBroken(stack)) {

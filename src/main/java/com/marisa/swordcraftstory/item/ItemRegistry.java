@@ -61,6 +61,17 @@ public class ItemRegistry {
     public static RegistryObject<Item> ELEGANCE_SWORD = ITEMS.register("elegance_sword", EleganceSword::new);
     public static RegistryObject<Item> RIBBON_SWORD = ITEMS.register("ribbon_sword", RibbonSword::new);
     public static RegistryObject<Item> CARAPACE_FOSSIL_SWORD = ITEMS.register("carapace_fossil_sword", CarapaceFossilSword::new);
+    public static RegistryObject<Item> FANTASY_SWORD = ITEMS.register("fantasy_sword", FantasySword::new);
+    public static RegistryObject<Item> GALIA_SWORD = ITEMS.register("galia_sword", GaliaSword::new);
+    public static RegistryObject<Item> CUISINE_SWORD = ITEMS.register("cuisine_sword", CuisineSword::new);
+    public static RegistryObject<Item> DOUBLE_SNAKE_SWORD = ITEMS.register("double_snake_sword", DoubleSnakeSword::new);
+    public static RegistryObject<Item> SPRINT_SWORD = ITEMS.register("sprint_sword", SprintSword::new);
+    public static RegistryObject<Item> XCEL_SWORD = ITEMS.register("xcel_sword", XcelSword::new);
+    public static RegistryObject<Item> LEIJI_STOWE_SWORD = ITEMS.register("leiji_stowe_sword", LeijiStoweSword::new);
+    public static RegistryObject<Item> DEW_FIREFLY_SWORD = ITEMS.register("dew_firefly_sword", DewFireflySword::new);
+    public static RegistryObject<Item> STEEL_TEETH_SWORD = ITEMS.register("steel_teeth_sword", SteelTeethSword::new);
+    public static RegistryObject<Item> CATS_PAW_SWORD = ITEMS.register("cats_paw_sword", CatsPawSword::new);
+    public static RegistryObject<Item> LUMINOSITY_SWORD = ITEMS.register("luminosity_sword", LuminositySword::new);
     //武器-弓
     public static RegistryObject<Item> NOVICE_BOW = ITEMS.register("novice_bow", NoviceBow::new);
     public static RegistryObject<Item> THIN_BOW = ITEMS.register("thin_bow", ThinBow::new);
@@ -76,6 +87,17 @@ public class ItemRegistry {
     public static RegistryObject<Item> ELEGANCE_BOW = ITEMS.register("elegance_bow", EleganceBow::new);
     public static RegistryObject<Item> RIBBON_BOW = ITEMS.register("ribbon_bow", RibbonBow::new);
     public static RegistryObject<Item> CARAPACE_FOSSIL_BOW = ITEMS.register("carapace_fossil_bow", CarapaceFossilBow::new);
+    public static RegistryObject<Item> FANTASY_BOW = ITEMS.register("fantasy_bow", FantasyBow::new);
+    public static RegistryObject<Item> GALIA_BOW = ITEMS.register("galia_bow", GaliaBow::new);
+    public static RegistryObject<Item> CUISINE_BOW = ITEMS.register("cuisine_bow", CuisineBow::new);
+    public static RegistryObject<Item> DOUBLE_SNAKE_BOW = ITEMS.register("double_snake_bow", DoubleSnakeBow::new);
+    public static RegistryObject<Item> SPRINT_BOW = ITEMS.register("sprint_bow", SprintBow::new);
+    public static RegistryObject<Item> XCEL_BOW = ITEMS.register("xcel_bow", XcelBow::new);
+    public static RegistryObject<Item> LEIJI_STOWE_BOW = ITEMS.register("leiji_stowe_bow", LeijiStoweBow::new);
+    public static RegistryObject<Item> DEW_FIREFLY_BOW = ITEMS.register("dew_firefly_bow", DewFireflyBow::new);
+    public static RegistryObject<Item> STEEL_TEETH_BOW = ITEMS.register("steel_teeth_bow", SteelTeethBow::new);
+    public static RegistryObject<Item> CATS_PAW_BOW = ITEMS.register("cats_paw_bow", CatsPawBow::new);
+    public static RegistryObject<Item> LUMINOSITY_BOW = ITEMS.register("luminosity_bow", LuminosityBow::new);
     //武器-斧
     public static RegistryObject<Item> NOVICE_AXE = ITEMS.register("novice_axe", NoviceAxe::new);
     public static RegistryObject<Item> THIN_AXE = ITEMS.register("thin_axe", ThinAxe::new);
@@ -91,6 +113,17 @@ public class ItemRegistry {
     public static RegistryObject<Item> ELEGANCE_AXE = ITEMS.register("elegance_axe", EleganceAxe::new);
     public static RegistryObject<Item> RIBBON_AXE = ITEMS.register("ribbon_axe", RibbonAxe::new);
     public static RegistryObject<Item> CARAPACE_FOSSIL_AXE = ITEMS.register("carapace_fossil_axe", CarapaceFossilAxe::new);
+    public static RegistryObject<Item> FANTASY_AXE = ITEMS.register("fantasy_axe", FantasyAxe::new);
+    public static RegistryObject<Item> GALIA_AXE = ITEMS.register("galia_axe", GaliaAxe::new);
+    public static RegistryObject<Item> CUISINE_AXE = ITEMS.register("cuisine_axe", CuisineAxe::new);
+    public static RegistryObject<Item> DOUBLE_SNAKE_AXE = ITEMS.register("double_snake_axe", DoubleSnakeAxe::new);
+    public static RegistryObject<Item> SPRINT_AXE = ITEMS.register("sprint_axe", SprintAxe::new);
+    public static RegistryObject<Item> XCEL_AXE = ITEMS.register("xcel_axe", XcelAxe::new);
+    public static RegistryObject<Item> LEIJI_STOWE_AXE = ITEMS.register("leiji_stowe_axe", LeijiStoweAxe::new);
+    public static RegistryObject<Item> DEW_FIREFLY_AXE = ITEMS.register("dew_firefly_axe", DewFireflyAxe::new);
+    public static RegistryObject<Item> STEEL_TEETH_AXE = ITEMS.register("steel_teeth_axe", SteelTeethAxe::new);
+    public static RegistryObject<Item> CATS_PAW_AXE = ITEMS.register("cats_paw_axe", CatsPawAxe::new);
+    public static RegistryObject<Item> LUMINOSITY_AXE = ITEMS.register("luminosity_axe", LuminosityAxe::new);
     //方块物品
     public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
     public static RegistryObject<Item> WEAPON_MAKE_BLOCK = ITEMS.register("weapon_make_block", () -> new BlockItem(BlockRegistry.WEAPON_MAKE_BLOCK.get(), new Item.Properties().group(StoryGroup.COMBAT_GROUP)));
@@ -132,6 +165,17 @@ public class ItemRegistry {
     public static RegistryObject<Item> UKA_ORE = ITEMS.register("uka_ore", UkaOre::new);
     public static RegistryObject<Item> PRETTY_ORE = ITEMS.register("pretty_ore", PrettyOre::new);
     public static RegistryObject<Item> CARAPACE_FOSSIL_ORE = ITEMS.register("carapace_fossil_ore", CarapaceFossilOre::new);
+    public static RegistryObject<Item> FANTASY_ORE = ITEMS.register("fantasy_ore", FantasyOre::new);
+    public static RegistryObject<Item> GALIA_ORE = ITEMS.register("galia_ore", GaliaOre::new);
+    public static RegistryObject<Item> CUISINE_ORE = ITEMS.register("cuisine_ore", CuisineOre::new);
+    public static RegistryObject<Item> DOUBLE_SNAKE_ORE = ITEMS.register("double_snake_ore", DoubleSnakeOre::new);
+    public static RegistryObject<Item> SPRINT_ORE = ITEMS.register("sprint_ore", SprintOre::new);
+    public static RegistryObject<Item> XCEL_ORE = ITEMS.register("xcel_ore", XcelOre::new);
+    public static RegistryObject<Item> LEIJI_STOWE_ORE = ITEMS.register("leiji_stowe_ore", LeijiStoweOre::new);
+    public static RegistryObject<Item> DEW_FIREFLY_ORE = ITEMS.register("dew_firefly_ore", DewFireflyOre::new);
+    public static RegistryObject<Item> STEEL_TEETH_ORE = ITEMS.register("steel_teeth_ore", SteelTeethOre::new);
+    public static RegistryObject<Item> CATS_PAW_ORE = ITEMS.register("cats_paw_ore", CatsPawOre::new);
+    public static RegistryObject<Item> LUMINOSITY_ORE = ITEMS.register("luminosity_ore", LuminosityOre::new);
     //强化道具
     public static RegistryObject<Item> LEGEND_IRON_BUNCH = ITEMS.register("legend_iron_bunch", LegendIronBunch::new);
     public static RegistryObject<Item> HEART_GLASSES = ITEMS.register("heart_glasses", HeartGlasses::new);

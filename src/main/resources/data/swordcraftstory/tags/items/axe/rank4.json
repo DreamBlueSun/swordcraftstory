@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "swordcraftstory:carapace_fossil_axe"
+    "swordcraftstory:carapace_fossil_axe",
+    "swordcraftstory:fantasy_axe"
   ]
 }

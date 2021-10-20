@@ -160,6 +160,72 @@
     },
     {
       "predicate": {
+        "model_change": 16
+      },
+      "model": "swordcraftstory:item/change/sword/fantasy_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 20
+      },
+      "model": "swordcraftstory:item/change/sword/galia_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 21
+      },
+      "model": "swordcraftstory:item/change/sword/cuisine_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 24
+      },
+      "model": "swordcraftstory:item/change/sword/double_snake_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 25
+      },
+      "model": "swordcraftstory:item/change/sword/sprint_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 26
+      },
+      "model": "swordcraftstory:item/change/sword/xcel_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 28
+      },
+      "model": "swordcraftstory:item/change/sword/leiji_stowe_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 30
+      },
+      "model": "swordcraftstory:item/change/sword/dew_firefly_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 33
+      },
+      "model": "swordcraftstory:item/change/sword/steel_teeth_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 36
+      },
+      "model": "swordcraftstory:item/change/sword/cats_paw_sword"
+    },
+    {
+      "predicate": {
+        "model_change": 40
+      },
+      "model": "swordcraftstory:item/change/sword/luminosity_sword"
+    },
+    {
+      "predicate": {
         "model_change": 1001
       },
       "model": "swordcraftstory:item/dragon_slave_sword"

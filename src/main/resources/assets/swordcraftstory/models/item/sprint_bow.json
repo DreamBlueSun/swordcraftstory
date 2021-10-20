@@ -1,0 +1,858 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "swordcraftstory:item/sprint_bow"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        -90,
+        90,
+        -90
+      ],
+      "translation": [
+        0,
+        -1,
+        -1
+      ],
+      "scale": [
+        2.0,
+        2.0,
+        0.8
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -90,
+        90,
+        90
+      ],
+      "translation": [
+        0,
+        -1,
+        -1
+      ],
+      "scale": [
+        2.0,
+        2.0,
+        0.8
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        45,
+        -90,
+        25
+      ],
+      "translation": [
+        1.13,
+        4,
+        1.13
+      ],
+      "scale": [
+        2.0,
+        2.0,
+        0.8
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        45,
+        90,
+        -25
+      ],
+      "translation": [
+        1.13,
+        4,
+        1.13
+      ],
+      "scale": [
+        2.0,
+        2.0,
+        0.8
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/sprint_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/sprint_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/sprint_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 1
+      },
+      "model": "swordcraftstory:item/change/bow/novice_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 1,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/novice_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 1,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/novice_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 1,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/novice_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 2
+      },
+      "model": "swordcraftstory:item/change/bow/thin_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 2,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/thin_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 2,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/thin_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 2,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/thin_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 3
+      },
+      "model": "swordcraftstory:item/change/bow/hard_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 3,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/hard_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 3,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/hard_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 3,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/hard_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 4
+      },
+      "model": "swordcraftstory:item/change/bow/solemnity_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 4,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/solemnity_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 4,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/solemnity_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 4,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/solemnity_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 5
+      },
+      "model": "swordcraftstory:item/change/bow/iron_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 5,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/iron_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 5,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/iron_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 5,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/iron_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 6
+      },
+      "model": "swordcraftstory:item/change/bow/synthesis_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 6,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/synthesis_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 6,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/synthesis_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 6,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/synthesis_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 7
+      },
+      "model": "swordcraftstory:item/change/bow/feather_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 7,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/feather_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 7,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/feather_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 7,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/feather_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 8
+      },
+      "model": "swordcraftstory:item/change/bow/cut_iron_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 8,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/cut_iron_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 8,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/cut_iron_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 8,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/cut_iron_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 9
+      },
+      "model": "swordcraftstory:item/change/bow/huger_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 9,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/huger_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 9,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/huger_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 9,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/huger_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 10
+      },
+      "model": "swordcraftstory:item/change/bow/severe_penalty_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 10,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/severe_penalty_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 10,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/severe_penalty_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 10,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/severe_penalty_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 11
+      },
+      "model": "swordcraftstory:item/change/bow/relict_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 11,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/relict_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 11,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/relict_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 11,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/relict_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 12
+      },
+      "model": "swordcraftstory:item/change/bow/elegance_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 12,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/elegance_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 12,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/elegance_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 12,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/elegance_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 13
+      },
+      "model": "swordcraftstory:item/change/bow/ribbon_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 13
+      },
+      "model": "swordcraftstory:item/change/bow/ribbon_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 13,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/ribbon_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 13,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/ribbon_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 13,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/ribbon_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 14
+      },
+      "model": "swordcraftstory:item/change/bow/carapace_fossil_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 14,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/carapace_fossil_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 14,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/carapace_fossil_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 14,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/carapace_fossil_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 16
+      },
+      "model": "swordcraftstory:item/change/bow/fantasy_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 16,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/fantasy_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 16,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/fantasy_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 16,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/fantasy_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 20
+      },
+      "model": "swordcraftstory:item/change/bow/galia_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 20,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/galia_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 20,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/galia_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 20,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/galia_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 21
+      },
+      "model": "swordcraftstory:item/change/bow/cuisine_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 21,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/cuisine_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 21,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/cuisine_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 21,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/cuisine_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 24
+      },
+      "model": "swordcraftstory:item/change/bow/double_snake_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 24,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/double_snake_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 24,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/double_snake_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 24,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/double_snake_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 25
+      },
+      "model": "swordcraftstory:item/change/bow/sprint_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 25,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/sprint_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 25,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/sprint_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 25,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/sprint_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 26
+      },
+      "model": "swordcraftstory:item/change/bow/xcel_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 26,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/xcel_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 26,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/xcel_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 26,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/xcel_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 28
+      },
+      "model": "swordcraftstory:item/change/bow/leiji_stowe_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 28,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/leiji_stowe_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 28,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/leiji_stowe_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 28,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/leiji_stowe_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 30
+      },
+      "model": "swordcraftstory:item/change/bow/dew_firefly_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 30,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/dew_firefly_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 30,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/dew_firefly_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 30,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/dew_firefly_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 33
+      },
+      "model": "swordcraftstory:item/change/bow/steel_teeth_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 33,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/steel_teeth_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 33,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/steel_teeth_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 33,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/steel_teeth_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 36
+      },
+      "model": "swordcraftstory:item/change/bow/cats_paw_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 36,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/cats_paw_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 36,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/cats_paw_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 36,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/cats_paw_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 40
+      },
+      "model": "swordcraftstory:item/change/bow/luminosity_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 40,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/luminosity_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 40,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/luminosity_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 40,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/luminosity_bow_pull_2"
+    },
+    {
+      "predicate": {
+        "model_change": 2001
+      },
+      "model": "swordcraftstory:item/constant_blowers_snow_bow"
+    },
+    {
+      "predicate": {
+        "model_change": 2001,
+        "pulling": 1
+      },
+      "model": "swordcraftstory:item/constant_blowers_snow_bow_pull_0"
+    },
+    {
+      "predicate": {
+        "model_change": 2001,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "swordcraftstory:item/constant_blowers_snow_bow_pull_1"
+    },
+    {
+      "predicate": {
+        "model_change": 2001,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "swordcraftstory:item/constant_blowers_snow_bow_pull_2"
+    }
+  ]
+}

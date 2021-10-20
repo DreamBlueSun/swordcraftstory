@@ -157,6 +157,72 @@
         "model_change": 14
       },
       "model": "swordcraftstory:item/change/axe/carapace_fossil_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 16
+      },
+      "model": "swordcraftstory:item/change/axe/fantasy_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 20
+      },
+      "model": "swordcraftstory:item/change/axe/galia_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 21
+      },
+      "model": "swordcraftstory:item/change/axe/cuisine_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 24
+      },
+      "model": "swordcraftstory:item/change/axe/double_snake_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 25
+      },
+      "model": "swordcraftstory:item/change/axe/sprint_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 26
+      },
+      "model": "swordcraftstory:item/change/axe/xcel_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 28
+      },
+      "model": "swordcraftstory:item/change/axe/leiji_stowe_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 30
+      },
+      "model": "swordcraftstory:item/change/axe/dew_firefly_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 33
+      },
+      "model": "swordcraftstory:item/change/axe/steel_teeth_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 36
+      },
+      "model": "swordcraftstory:item/change/axe/cats_paw_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 40
+      },
+      "model": "swordcraftstory:item/change/axe/luminosity_axe"
     }
   ]
 }

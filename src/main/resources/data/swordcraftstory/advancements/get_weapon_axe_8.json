@@ -1,0 +1,30 @@
+{
+  "parent": "swordcraftstory:get_weapon_axe_7",
+  "display": {
+    "icon": {
+      "item": "swordcraftstory:dew_firefly_axe"
+    },
+    "title": {
+      "translate": "advancements.swordcraftstory.get_weapon_axe_8.title"
+    },
+    "description": {
+      "translate": "advancements.swordcraftstory.get_weapon_axe_8.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "one": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "swordcraftstory:axe/rank8"
+          }
+        ]
+      }
+    }
+  }
+}

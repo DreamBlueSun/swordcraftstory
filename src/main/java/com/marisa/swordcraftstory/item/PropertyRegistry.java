@@ -32,8 +32,19 @@ public class PropertyRegistry {
             registerBowProperties(ItemRegistry.ELEGANCE_BOW.get());
             registerBowProperties(ItemRegistry.RIBBON_BOW.get());
             registerBowProperties(ItemRegistry.CARAPACE_FOSSIL_BOW.get());
+            registerBowProperties(ItemRegistry.FANTASY_BOW.get());
+            registerBowProperties(ItemRegistry.GALIA_BOW.get());
+            registerBowProperties(ItemRegistry.CUISINE_BOW.get());
+            registerBowProperties(ItemRegistry.DOUBLE_SNAKE_BOW.get());
+            registerBowProperties(ItemRegistry.SPRINT_BOW.get());
+            registerBowProperties(ItemRegistry.XCEL_BOW.get());
+            registerBowProperties(ItemRegistry.LEIJI_STOWE_BOW.get());
+            registerBowProperties(ItemRegistry.DEW_FIREFLY_BOW.get());
+            registerBowProperties(ItemRegistry.STEEL_TEETH_BOW.get());
+            registerBowProperties(ItemRegistry.CATS_PAW_BOW.get());
+            registerBowProperties(ItemRegistry.LUMINOSITY_BOW.get());
 
-            //幻化弓
+            //用作幻化的弓也注册
             registerBowProperties(ItemRegistry.CONSTANT_BLOWERS_SNOW_BOW.get());
         });
 
@@ -54,6 +65,17 @@ public class PropertyRegistry {
             registerModelChangeProperties(ItemRegistry.ELEGANCE_SWORD.get());
             registerModelChangeProperties(ItemRegistry.RIBBON_SWORD.get());
             registerModelChangeProperties(ItemRegistry.CARAPACE_FOSSIL_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.FANTASY_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.GALIA_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.CUISINE_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.DOUBLE_SNAKE_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.SPRINT_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.XCEL_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.LEIJI_STOWE_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.DEW_FIREFLY_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.STEEL_TEETH_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.CATS_PAW_SWORD.get());
+            registerModelChangeProperties(ItemRegistry.LUMINOSITY_SWORD.get());
 
             //弓
             registerModelChangeProperties(ItemRegistry.NOVICE_BOW.get());
@@ -70,6 +92,17 @@ public class PropertyRegistry {
             registerModelChangeProperties(ItemRegistry.ELEGANCE_BOW.get());
             registerModelChangeProperties(ItemRegistry.RIBBON_BOW.get());
             registerModelChangeProperties(ItemRegistry.CARAPACE_FOSSIL_BOW.get());
+            registerModelChangeProperties(ItemRegistry.FANTASY_BOW.get());
+            registerModelChangeProperties(ItemRegistry.GALIA_BOW.get());
+            registerModelChangeProperties(ItemRegistry.CUISINE_BOW.get());
+            registerModelChangeProperties(ItemRegistry.DOUBLE_SNAKE_BOW.get());
+            registerModelChangeProperties(ItemRegistry.SPRINT_BOW.get());
+            registerModelChangeProperties(ItemRegistry.XCEL_BOW.get());
+            registerModelChangeProperties(ItemRegistry.LEIJI_STOWE_BOW.get());
+            registerModelChangeProperties(ItemRegistry.DEW_FIREFLY_BOW.get());
+            registerModelChangeProperties(ItemRegistry.STEEL_TEETH_BOW.get());
+            registerModelChangeProperties(ItemRegistry.CATS_PAW_BOW.get());
+            registerModelChangeProperties(ItemRegistry.LUMINOSITY_BOW.get());
 
             //斧
             registerModelChangeProperties(ItemRegistry.NOVICE_AXE.get());
@@ -86,6 +119,17 @@ public class PropertyRegistry {
             registerModelChangeProperties(ItemRegistry.ELEGANCE_AXE.get());
             registerModelChangeProperties(ItemRegistry.RIBBON_AXE.get());
             registerModelChangeProperties(ItemRegistry.CARAPACE_FOSSIL_AXE.get());
+            registerModelChangeProperties(ItemRegistry.FANTASY_AXE.get());
+            registerModelChangeProperties(ItemRegistry.GALIA_AXE.get());
+            registerModelChangeProperties(ItemRegistry.CUISINE_AXE.get());
+            registerModelChangeProperties(ItemRegistry.DOUBLE_SNAKE_AXE.get());
+            registerModelChangeProperties(ItemRegistry.SPRINT_AXE.get());
+            registerModelChangeProperties(ItemRegistry.XCEL_AXE.get());
+            registerModelChangeProperties(ItemRegistry.LEIJI_STOWE_AXE.get());
+            registerModelChangeProperties(ItemRegistry.DEW_FIREFLY_AXE.get());
+            registerModelChangeProperties(ItemRegistry.STEEL_TEETH_AXE.get());
+            registerModelChangeProperties(ItemRegistry.CATS_PAW_AXE.get());
+            registerModelChangeProperties(ItemRegistry.LUMINOSITY_AXE.get());
         });
     }
 
