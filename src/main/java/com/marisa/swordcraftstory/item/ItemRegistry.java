@@ -40,6 +40,8 @@ public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Story.MOD_ID);
     //锻冶
     public static RegistryObject<Item> HAMMER = ITEMS.register("hammer", Hammer::new);
+    //特殊道具
+    public static RegistryObject<Item> LUCK_TICKET = ITEMS.register("luck_ticket", LuckTicket::new);
     //模具
     public static RegistryObject<Item> SWORD_MOULD = ITEMS.register("sword_mould", SwordMould::new);
     public static RegistryObject<Item> BOW_MOULD = ITEMS.register("bow_mould", BowMould::new);
@@ -182,8 +184,6 @@ public class ItemRegistry {
     public static RegistryObject<Item> MOMENTUM_HEAD_BAND = ITEMS.register("momentum_head_band", MomentumHeadband::new);
     public static RegistryObject<Item> POWER_CERTIFICATE = ITEMS.register("power_certificate", PowerCertificate::new);
     public static RegistryObject<Item> TALENT_CERTIFICATE = ITEMS.register("talent_certificate", TalentCertificate::new);
-    //特殊道具
-    public static RegistryObject<Item> LUCK_TICKET = ITEMS.register("luck_ticket", LuckTicket::new);
     //幻化武器-泰拉-剑
     public static RegistryObject<Item> DRAGON_SLAVE_SWORD = ITEMS.register("dragon_slave_sword", DragonSlaveSword::new);
     public static RegistryObject<Item> UNLIMITED_EARTH_SWORD = ITEMS.register("unlimited_earth_sword", UnlimitedEarthSword::new);
