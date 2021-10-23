@@ -78,28 +78,28 @@ public class DropQuality {
     public static ItemStack randomDropQuality(int playerLv) {
         int drop = RANK_RANDOM_MAX;
         int r = new Random().nextInt(RANK_RANDOM_MAX) + 1;
-        if (r > (drop -= RANK_ORE_9) && playerLv >= 32) {
+        if (r > (drop -= RANK_ORE_9) && playerLv >= 24) {
             return LIST_ORE_RANK_9.get(new Random().nextInt(LIST_ORE_RANK_9.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_8) && playerLv >= 28) {
+        if (r > (drop -= RANK_ORE_8) && playerLv >= 21) {
             return LIST_ORE_RANK_8.get(new Random().nextInt(LIST_ORE_RANK_8.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_7) && playerLv >= 24) {
+        if (r > (drop -= RANK_ORE_7) && playerLv >= 18) {
             return LIST_ORE_RANK_7.get(new Random().nextInt(LIST_ORE_RANK_7.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_6) && playerLv >= 20) {
+        if (r > (drop -= RANK_ORE_6) && playerLv >= 15) {
             return LIST_ORE_RANK_6.get(new Random().nextInt(LIST_ORE_RANK_6.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_5) && playerLv >= 16) {
+        if (r > (drop -= RANK_ORE_5) && playerLv >= 12) {
             return LIST_ORE_RANK_5.get(new Random().nextInt(LIST_ORE_RANK_5.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_4) && playerLv >= 12) {
+        if (r > (drop -= RANK_ORE_4) && playerLv >= 9) {
             return LIST_ORE_RANK_4.get(new Random().nextInt(LIST_ORE_RANK_4.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_3) && playerLv >= 8) {
+        if (r > (drop -= RANK_ORE_3) && playerLv >= 6) {
             return LIST_ORE_RANK_3.get(new Random().nextInt(LIST_ORE_RANK_3.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_2) && playerLv >= 4) {
+        if (r > (drop -= RANK_ORE_2) && playerLv >= 3) {
             return LIST_ORE_RANK_2.get(new Random().nextInt(LIST_ORE_RANK_2.size())).copy();
         }
         if (r > (drop -= RANK_ORE_1)) {
