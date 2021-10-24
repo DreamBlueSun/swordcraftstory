@@ -1,5 +1,7 @@
 package com.marisa.swordcraftstory.save;
 
+import com.marisa.swordcraftstory.Story;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +31,7 @@ public class StoryPlayerDataManager {
     static {
         LV_NEED_XP = new ArrayList<>();
         LV_NEED_XP.add(LV_NEED_XP_BASE / LV_NEED_XP_OFFSET);
-        for (int i = 1; i < 41; i++) {
+        for (int i = 1; i <= Story.LV_MAX; i++) {
             LV_NEED_XP.add(LV_NEED_XP.get(i - 1) + LV_NEED_XP_BASE * i / LV_NEED_XP_OFFSET);
         }
     }
