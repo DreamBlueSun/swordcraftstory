@@ -4,6 +4,8 @@ import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.item.weapon.helper.WeaponCommonFunction;
+import com.marisa.swordcraftstory.save.StoryPlayerData;
+import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
 import com.marisa.swordcraftstory.skill.effect.helper.Effects;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
@@ -69,13 +71,19 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
      */
     private boolean inSpecialAttack;
 
-    public AbstractRangedWeapon(final int rank, final int atk, final int def, final int agl, final int dur) {
+    /**
+     * 武技ID
+     */
+    private String weaponSkillId;
+
+    public AbstractRangedWeapon(final int rank, final int atk, final int def, final int agl, final int dur, final String weaponSkillId) {
         super(new Item.Properties().maxDamage(dur).group(StoryGroup.COMBAT_GROUP));
         this.rank = rank;
         this.atk = atk;
         this.def = def;
         this.agl = agl;
         this.inSpecialAttack = false;
+        this.weaponSkillId = weaponSkillId;
     }
 
     @Override
@@ -269,5 +277,11 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
     @Override
     public void onSpecialAttack(ItemStack stack) {
         this.inSpecialAttack = true;
+    }
+
+    @Override
+    public void incrWeaponSkill(String playerUUID) {
+        StoryPlayerData storyPlayerData = StoryPlayerDataManager.get(playerUUID);
+        storyPlayerData.toLearnWeaponSkill(this.weaponSkillId);
     }
 }

@@ -5,6 +5,10 @@ import com.marisa.swordcraftstory.util.PlayerAttributesUtils;
 import net.minecraft.entity.player.PlayerEntity;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 玩家信息
@@ -18,6 +22,9 @@ public class StoryPlayerData implements Serializable {
     private int xpLast;
     private int xp;
 
+    private List<String> listHaveWeaponSkillId;
+    private Map<String, Integer> mapLearnWeaponSkillId;
+
     public String getPlayerUUID() {
         return playerUUID;
     }
@@ -26,9 +33,19 @@ public class StoryPlayerData implements Serializable {
         return xp;
     }
 
+    public StoryPlayerData(String playerUUID) {
+        this.playerUUID = playerUUID;
+        this.xp = 0;
+        this.listHaveWeaponSkillId = new ArrayList<>();
+        ;
+        this.mapLearnWeaponSkillId = new HashMap<>(1);
+    }
+
     public StoryPlayerData(String playerUUID, int xp) {
         this.playerUUID = playerUUID;
         this.xp = xp;
+        this.listHaveWeaponSkillId = new ArrayList<>();
+        this.mapLearnWeaponSkillId = new HashMap<>(1);
     }
 
     /**
@@ -37,7 +54,7 @@ public class StoryPlayerData implements Serializable {
      * @param playerUUID 玩家UUID
      */
     private static StoryPlayerData defaultData(String playerUUID) {
-        return new StoryPlayerData(playerUUID, 0);
+        return new StoryPlayerData(playerUUID);
     }
 
     /**
@@ -64,6 +81,37 @@ public class StoryPlayerData implements Serializable {
         if (lvOffset > 0) {
             PlayerAttributesUtils.onLevelUp(player, lv, true);
         }
+    }
+
+    public void toLearnWeaponSkill(String weaponSkillId) {
+        if (hasWeaponSkill(weaponSkillId)) {
+            return;
+        }
+        if (isLearningWeaponSkill(weaponSkillId)) {
+            int nextValue = this.mapLearnWeaponSkillId.get(weaponSkillId) + 1;
+            if (nextValue < 100) {
+                this.mapLearnWeaponSkillId.put(weaponSkillId, nextValue);
+            } else {
+                this.mapLearnWeaponSkillId.remove(weaponSkillId);
+                toHaveWeaponSkill(weaponSkillId);
+            }
+        } else {
+            this.mapLearnWeaponSkillId.put(weaponSkillId, 1);
+        }
+    }
+
+    private boolean isLearningWeaponSkill(String weaponSkillId) {
+        return this.mapLearnWeaponSkillId.containsKey(weaponSkillId);
+    }
+
+    private void toHaveWeaponSkill(String weaponSkillId) {
+        if (!hasWeaponSkill(weaponSkillId)) {
+            this.listHaveWeaponSkillId.add(weaponSkillId);
+        }
+    }
+
+    private boolean hasWeaponSkill(String weaponSkillId) {
+        return this.listHaveWeaponSkillId.contains(weaponSkillId);
     }
 
     //序列化
@@ -117,12 +165,11 @@ public class StoryPlayerData implements Serializable {
     }
 
     /**
+     * 获取Story玩家数据保存目录
+     *
      * @param playerDataPath MC玩家数据保存目录
      * @param playerUUID     玩家UUID
-     * @return java.lang.String
-     * @description 获取Story玩家数据保存目录
-     * @date 2021/9/11 0011 13:11
-     **/
+     */
     private static String file(String playerDataPath, String playerUUID) {
         return playerDataPath + "\\storyplayerdata\\" + playerUUID + ".dat";
     }

@@ -15,8 +15,8 @@ public abstract class AbstractBowWeapon extends AbstractRangedWeapon {
 
     public static final WeaponType TYPE = WeaponType.BOW;
 
-    public AbstractBowWeapon(final AbstractOre ore) {
-        super(ore.rank(), ore.atk(TYPE), ore.def(TYPE), ore.agl(TYPE), ore.dur(TYPE));
+    public AbstractBowWeapon(final AbstractOre ore, final String weaponSkillId) {
+        super(ore.rank(), ore.atk(TYPE), ore.def(TYPE), ore.agl(TYPE), ore.dur(TYPE), weaponSkillId);
     }
 
     @Override

@@ -102,4 +102,9 @@ public interface Weapon extends Combat {
      * 使当前武器进入特殊攻击状态
      */
     void onSpecialAttack(ItemStack stack);
+
+    /**
+     * 为玩家增加当前武器武技的熟练度
+     */
+    void incrWeaponSkill(String playerUUID);
 }

@@ -14,18 +14,23 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class PlayerAttributesUtils {
 
+    private static final int HP_MAX_BASE = 20;
+
     public static void onClone(PlayerEntity player, StoryPlayerData data, boolean heal) {
         int lv = StoryPlayerDataManager.getLv(data.getXp());
         onLevelUp(player, lv, heal);
     }
 
     public static void onLevelUp(PlayerEntity player, int lv, boolean heal) {
-        final int maxHealth = 20 + lv * 40;
-        //计算要增加的血量
+        final int maxHealth = HP_MAX_BASE * (lv + 1);
+        //计算升级要增加的血量
         int maxHealthAdd = maxHealth - (int) player.getAttributeValue(Attributes.MAX_HEALTH);
         if (maxHealthAdd <= 0) {
             return;
         }
+        //计算武技要增加的血量
+        StoryPlayerData storyPlayerData = StoryPlayerDataManager.get(player.getCachedUniqueIdString());
+
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.MAX_HEALTH, new AttributeModifier("Max health modifier", maxHealthAdd, AttributeModifier.Operation.ADDITION));
         player.getAttributeManager().reapplyModifiers(builder.build());

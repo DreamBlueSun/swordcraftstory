@@ -7,6 +7,8 @@ import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.item.weapon.helper.WeaponCommonFunction;
 import com.marisa.swordcraftstory.item.weapon.helper.WeaponType;
+import com.marisa.swordcraftstory.save.StoryPlayerData;
+import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.util.CombatPropertiesUtils;
@@ -69,7 +71,12 @@ public abstract class AbstractSwordWeapon extends SwordItem implements Weapon {
      */
     private boolean inSpecialAttack;
 
-    public AbstractSwordWeapon(final AbstractOre ore) {
+    /**
+     * 武技ID
+     */
+    private String weaponSkillId;
+
+    public AbstractSwordWeapon(final AbstractOre ore, final String weaponSkillId) {
         super(new IItemTier() {
             @Override
             public int getMaxUses() {
@@ -106,6 +113,7 @@ public abstract class AbstractSwordWeapon extends SwordItem implements Weapon {
         this.def = ore.def(TYPE);
         this.agl = ore.agl(TYPE);
         this.inSpecialAttack = false;
+        this.weaponSkillId = weaponSkillId;
     }
 
     @Override
@@ -236,6 +244,12 @@ public abstract class AbstractSwordWeapon extends SwordItem implements Weapon {
     @Override
     public void onSpecialAttack(ItemStack stack) {
         this.inSpecialAttack = true;
+    }
+
+    @Override
+    public void incrWeaponSkill(String playerUUID) {
+        StoryPlayerData storyPlayerData = StoryPlayerDataManager.get(playerUUID);
+        storyPlayerData.toLearnWeaponSkill(this.weaponSkillId);
     }
 
     @Override
