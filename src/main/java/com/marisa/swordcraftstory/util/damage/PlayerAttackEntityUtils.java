@@ -57,7 +57,7 @@ public class PlayerAttackEntityUtils {
                         lvl = 0;
                     }
                     if (lvl > 4) {
-                        fOffset = 1.2F;
+                        fOffset = 1.25F;
                     }
                 } else if ((lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, player.getHeldItemMainhand())) > 0) {
                     //节肢
@@ -65,7 +65,7 @@ public class PlayerAttackEntityUtils {
                         lvl = 0;
                     }
                     if (lvl > 4) {
-                        fOffset = 1.2F;
+                        fOffset = 1.25F;
                     }
                 } else if ((lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.IMPALING, player.getHeldItemMainhand())) > 0) {
                     //穿刺
@@ -73,11 +73,11 @@ public class PlayerAttackEntityUtils {
                         lvl = 0;
                     }
                     if (lvl > 4) {
-                        fOffset = 1.2F;
+                        fOffset = 1.25F;
                     }
                 }
                 for (int i = 0; i < lvl + 1; i++) {
-                    f1 += i;
+                    f1 += 1.0F;
 
                 }
                 //攻击速度伤害偏移
@@ -98,13 +98,13 @@ public class PlayerAttackEntityUtils {
                         ++i;
                         flag1 = true;
                     }
+                    //f：伤害总量
+                    f = (f + f1) * fOffset;
                     //flag2：是否暴击
                     boolean flag2 = LivingHurtUtils.isCri(player);
                     if (flag2) {
                         f *= 2.0F;
                     }
-                    //f：伤害总量
-                    f = (f + f1) * fOffset;
                     //flag3：是否横扫攻击
                     boolean flag3 = false;
                     double d0 = player.distanceWalkedModified - player.prevDistanceWalkedModified;
