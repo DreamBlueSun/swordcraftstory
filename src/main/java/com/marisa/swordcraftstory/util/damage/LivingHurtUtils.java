@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.util.damage;
 
+import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.weapon.AbstractRangedWeapon;
 import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.save.MobAttrSaveData;
@@ -95,7 +96,12 @@ public class LivingHurtUtils {
                 damage.setP(amount);
                 break;
             case "mob":
-                mobDamage((MobEntity) Objects.requireNonNull(source.getTrueSource()), amount, damage);
+                try {
+                    mobDamage((MobEntity) Objects.requireNonNull(source.getTrueSource()), amount, damage);
+                } catch (Exception e) {
+                    damage.setP(1.0F);
+                    Story.LOG.info("MOB伤害" + source.toString() + "转换异常：", e);
+                }
                 break;
             case "arrow":
                 arrowDamage(source.getTrueSource(), (AbstractArrowEntity) source.getImmediateSource(), amount, damage);
