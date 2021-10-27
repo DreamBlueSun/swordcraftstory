@@ -59,7 +59,7 @@ public class StoryPlayerDataManager {
      * @param lv 当前等级
      */
     public static int getLvNextXpPoint(int lv) {
-        if (40 > lv && lv > -1) {
+        if (Story.LV_MAX > lv && lv > -1) {
             return LV_NEED_XP.get(lv + 1);
         } else {
             return 0;
