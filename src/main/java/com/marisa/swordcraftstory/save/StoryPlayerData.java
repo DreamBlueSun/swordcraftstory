@@ -66,8 +66,8 @@ public class StoryPlayerData implements Serializable {
         this.xpLast = this.xp;
         this.xp += amount;
         //限制最高等级
-        int lvPoint = StoryPlayerDataManager.getLvNextXpPoint(Story.LV_MAX);
-        if (this.xp >= lvPoint) {
+        int lvPoint = StoryPlayerDataManager.getLvNextXpPoint(Story.LV_MAX - 1);
+        if (lvPoint != 0 && this.xp >= lvPoint) {
             this.xp = lvPoint - 1;
         }
     }
