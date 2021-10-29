@@ -226,7 +226,7 @@ public class LivingHurtUtils {
         if (!mob.world.isRemote()) {
             mobLv = MobAttributesUtils.getMobLv((ServerWorld) mob.world, mob.getUniqueID().toString());
         }
-        damage.setP(v * 1.5F * (1 + mobLv));
+        damage.setP(v * (1 + mobLv));
     }
 
     /**
