@@ -101,7 +101,7 @@ public class LivingHurtUtils {
                     mobDamage((MobEntity) Objects.requireNonNull(source.getTrueSource()), amount, damage);
                 } catch (Exception e) {
                     damage.setP(1.0F);
-                    Story.LOG.error("MOB伤害" + source + "转换异常：", e);
+                    Story.LOG.error("MOB伤害异常：" + source);
                 }
                 break;
             case "arrow":
