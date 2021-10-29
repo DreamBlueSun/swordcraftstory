@@ -53,6 +53,9 @@ public class WeaponSkillLearnScreen extends Screen {
         //玩家名称
         IFormattableTextComponent componentName = new TranslationTextComponent(player.getDisplayName().getString()).mergeStyle(TextFormatting.BLUE);
         drawString(matrixStack, this.font, componentName, this.width / 2 - 156, this.height / 2 - 89, 0x8B4513);
+        //screen标题
+        IFormattableTextComponent componentTitle = new TranslationTextComponent("武技学习进度").mergeStyle(TextFormatting.RED);
+        drawString(matrixStack, this.font, componentTitle, this.width / 2 - 26, this.height / 2 - 89, 0x8B4513);
         //武技进度
         int flagX = 0;
         int flagY = 0;
