@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.item.weapon.close.sword;
 
 import com.marisa.swordcraftstory.item.ore.ArgenirOre;
 import com.marisa.swordcraftstory.item.weapon.close.AbstractSwordWeapon;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkills;
 import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ import java.util.List;
 public class SolemnitySword extends AbstractSwordWeapon {
 
     public SolemnitySword() {
-        super(new ArgenirOre());
+        super(new ArgenirOre(), WeaponSkills.SWORD_TEST_DEMO4.getId());
     }
 
     @Override

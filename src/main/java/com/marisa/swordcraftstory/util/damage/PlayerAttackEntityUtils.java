@@ -3,6 +3,7 @@ package com.marisa.swordcraftstory.util.damage;
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.item.weapon.AbstractRangedWeapon;
+import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CreatureAttribute;
@@ -76,10 +77,7 @@ public class PlayerAttackEntityUtils {
                         fOffset = 1.25F;
                     }
                 }
-                for (int i = 0; i < lvl + 1; i++) {
-                    f1 += 1.0F;
-
-                }
+                f1 += (1.0F * lvl);
                 //攻击速度伤害偏移
                 float f2 = player.getCooledAttackStrength(0.5F);
                 f = f * (0.2F + f2 * f2 * 0.8F);
@@ -130,10 +128,12 @@ public class PlayerAttackEntityUtils {
                     boolean flag5 = targetEntity.attackEntityFrom(DamageSource.causePlayerDamage(player), f);
                     //执行特效
                     if (flag5) {
-                        //增加tec
                         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
                         if (stack.getItem() instanceof Weapon && !(stack.getItem() instanceof AbstractRangedWeapon)) {
+                            //增加tec
                             ((Weapon) stack.getItem()).incrTec(stack);
+                            //增加武技学习进度
+                            ((Weapon) stack.getItem()).incrWeaponSkill(player.getCachedUniqueIdString());
                         }
                         //击退伤害特效
                         if (i > 0) {
@@ -234,29 +234,29 @@ public class PlayerAttackEntityUtils {
      * 模组玩家伤害计算方法
      */
     private static float damageByStory(PlayerEntity player) {
+        float v = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        v += StoryPlayerDataManager.get(player.getCachedUniqueIdString()).getAtkStory();
         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-        if (stack.isEmpty()) {
-            return 1.0F;
-        }
-        if (stack.getItem() instanceof Weapon) {
-            //story武器
-            Weapon weapon = (Weapon) stack.getItem();
-            if (stack.getItem() instanceof AbstractRangedWeapon) {
-                //远程武器平A伤害为攻击力的一半
-                return (float) (weapon.getAtk(stack) / 2);
+        if (!stack.isEmpty()) {
+            if (stack.getItem() instanceof Weapon) {
+                //story武器
+                Weapon weapon = (Weapon) stack.getItem();
+                if (stack.getItem() instanceof AbstractRangedWeapon) {
+                    //远程武器平A伤害为攻击力的一半
+                    v += (float) (weapon.getAtk(stack) / 2);
+                } else {
+                    v += weapon.getAtk(stack);
+                }
             } else {
-                return weapon.getAtk(stack);
-            }
-        } else {
-            //非story武器
-            Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
-            Collection<AttributeModifier> modifiers = attributeModifiers.get(Attributes.ATTACK_DAMAGE);
-            if (modifiers != null && modifiers.size() > 0) {
-                return (float) ((AttributeModifier) modifiers.toArray()[0]).getAmount() + 1.0F;
-            } else {
-                return 1.0F;
+                //非story武器
+                Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
+                Collection<AttributeModifier> modifiers = attributeModifiers.get(Attributes.ATTACK_DAMAGE);
+                if (modifiers != null && modifiers.size() > 0) {
+                    v += (float) ((AttributeModifier) modifiers.toArray()[0]).getAmount();
+                }
             }
         }
+        return v;
     }
 
 

@@ -107,4 +107,9 @@ public interface Weapon extends Combat {
      * 为玩家增加当前武器武技的熟练度
      */
     void incrWeaponSkill(String playerUUID);
+
+    /**
+     *获取武器的武技ID
+     */
+    String getWeaponSkillId();
 }

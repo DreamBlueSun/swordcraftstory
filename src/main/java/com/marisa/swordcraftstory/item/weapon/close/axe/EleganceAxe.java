@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.item.weapon.close.axe;
 
 import com.marisa.swordcraftstory.item.ore.UkaOre;
 import com.marisa.swordcraftstory.item.weapon.close.AbstractAxeWeapon;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkills;
 import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ import java.util.List;
 public class EleganceAxe extends AbstractAxeWeapon {
 
     public EleganceAxe() {
-        super(new UkaOre());
+        super(new UkaOre(), WeaponSkills.CRI_UP_MEDIUM.getId());
     }
 
     @Override

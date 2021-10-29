@@ -57,21 +57,20 @@ public class PlayerPanelAttr {
         this.hp = new TranslationTextComponent("血量").mergeStyle(TextFormatting.LIGHT_PURPLE)
                 .appendString(" ").appendSibling(new TranslationTextComponent(HP).mergeStyle(TextFormatting.GREEN));
         //ATK
-        int ATK;
+        int ATK = (int) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        ATK += StoryPlayerDataManager.get(player.getCachedUniqueIdString()).getAtkStory();
         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-        if (stack.isEmpty()) {
-            ATK = 1;
-        } else if (stack.getItem() instanceof Weapon) {
-            //story武器
-            ATK = ((Weapon) stack.getItem()).getAtk(stack);
-        } else {
-            //非story武器
-            Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
-            Collection<AttributeModifier> modifiers = attributeModifiers.get(Attributes.ATTACK_DAMAGE);
-            if (modifiers != null && modifiers.size() > 0) {
-                ATK = (int) ((float) ((AttributeModifier) modifiers.toArray()[0]).getAmount() + 1.0F);
+        if (!stack.isEmpty()) {
+            if (stack.getItem() instanceof Weapon) {
+                //story武器
+                ATK += ((Weapon) stack.getItem()).getAtk(stack);
             } else {
-                ATK = 1;
+                //非story武器
+                Multimap<Attribute, AttributeModifier> attributeModifiers = stack.getAttributeModifiers(EquipmentSlotType.MAINHAND);
+                Collection<AttributeModifier> modifiers = attributeModifiers.get(Attributes.ATTACK_DAMAGE);
+                if (modifiers != null && modifiers.size() > 0) {
+                    ATK += (float) ((AttributeModifier) modifiers.toArray()[0]).getAmount();
+                }
             }
         }
         this.atk = new TranslationTextComponent("攻击").mergeStyle(TextFormatting.LIGHT_PURPLE)

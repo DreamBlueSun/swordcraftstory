@@ -54,6 +54,15 @@ public class StoryPlayerDataManager {
     }
 
     /**
+     * 获取当前等级拥有的武技总点数
+     *
+     * @param lv 当前等级
+     */
+    public static int getWeaponSkillAmount(int lv) {
+        return 1 + lv;
+    }
+
+    /**
      * 获取升级所需要达到的经验值点
      *
      * @param lv 当前等级

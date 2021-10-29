@@ -7,6 +7,7 @@ import com.marisa.swordcraftstory.save.MobAttrSaveData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkillHelper;
 import com.marisa.swordcraftstory.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.util.obj.Damage;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -100,7 +101,7 @@ public class LivingHurtUtils {
                     mobDamage((MobEntity) Objects.requireNonNull(source.getTrueSource()), amount, damage);
                 } catch (Exception e) {
                     damage.setP(1.0F);
-                    Story.LOG.info("MOB伤害" + source.toString() + "转换异常：", e);
+                    Story.LOG.error("MOB伤害" + source + "转换异常：", e);
                 }
                 break;
             case "arrow":
@@ -196,13 +197,13 @@ public class LivingHurtUtils {
      * 计算玩家是否暴击
      */
     public static boolean isCri(PlayerEntity player) {
+        int cri = WeaponSkillHelper.fixedUp(player, WeaponSkillHelper.LIST_CRI_UP_ID);
         ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-        int cri;
         if (!stack.isEmpty() && stack.getItem() instanceof Weapon) {
             Weapon weapon = (Weapon) stack.getItem();
-            //平A暴击率
-            cri = weapon.getCri(stack);
-            //技能攻击暴击率
+            //累加武器暴击率
+            cri += weapon.getCri(stack);
+            //技能攻击固定暴击率
             if (weapon.inSpecialAttackAndDoStop(stack)) {
                 SpecialAttacks specialAttacks = SpecialAttackHelper.get(stack);
                 if (specialAttacks != null) {
@@ -210,7 +211,8 @@ public class LivingHurtUtils {
                 }
             }
         } else {
-            cri = Weapon.CRITICAL_BASE_NUM;
+            //非物语武器累加默认暴击率
+            cri += Weapon.CRITICAL_BASE_NUM;
         }
         return cri > new Random().nextInt(1000);
     }
@@ -233,10 +235,12 @@ public class LivingHurtUtils {
     private static void arrowDamage(Entity source, AbstractArrowEntity arrow, float amount, Damage damage) {
         if (source instanceof PlayerEntity) {
             damage.setP(Math.max((float) arrow.getDamage(), 4.0F));
-            //增加TEC
             ItemStack stack = ((PlayerEntity) source).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (!stack.isEmpty() && stack.getItem() instanceof AbstractRangedWeapon) {
+                //增加TEC
                 ((AbstractRangedWeapon) stack.getItem()).incrTec(stack);
+                //增加武技学习进度
+                ((Weapon) stack.getItem()).incrWeaponSkill(source.getCachedUniqueIdString());
             }
         } else if (source instanceof MobEntity) {
             mobDamage((MobEntity) source, amount, damage);

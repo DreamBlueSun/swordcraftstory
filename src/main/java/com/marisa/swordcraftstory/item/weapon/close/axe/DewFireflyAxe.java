@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.item.weapon.close.axe;
 
 import com.marisa.swordcraftstory.item.ore.DewFireflyOre;
 import com.marisa.swordcraftstory.item.weapon.close.AbstractAxeWeapon;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkills;
 import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ import java.util.List;
 public class DewFireflyAxe extends AbstractAxeWeapon {
 
     public DewFireflyAxe() {
-        super(new DewFireflyOre());
+        super(new DewFireflyOre(), WeaponSkills.AXE_TEST_DEMO22.getId());
     }
 
     @Override

@@ -66,11 +66,13 @@ public class AirCutterProjectileEntity extends AbstractArrowEntity {
             damagesource = DamageSource.DRYOUT;
         }
         if (entity.attackEntityFrom(damagesource, (float) getDamage())) {
-            //增加tec
             if (shooter instanceof PlayerEntity) {
                 ItemStack stack = ((PlayerEntity) shooter).getItemStackFromSlot(EquipmentSlotType.MAINHAND);
                 if (stack.getItem() instanceof AbstractSwordWeapon) {
+                    //增加tec
                     ((Weapon) stack.getItem()).incrTec(stack);
+                    //增加武技学习进度
+                    ((Weapon) stack.getItem()).incrWeaponSkill(shooter.getCachedUniqueIdString());
                 }
             }
             //执行伤害成功后执行特效
