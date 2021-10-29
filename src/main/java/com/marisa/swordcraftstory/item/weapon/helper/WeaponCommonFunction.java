@@ -33,7 +33,16 @@ public class WeaponCommonFunction {
         builder.putAll(superMainHandMap);
         builder.put(Attributes.ARMOR, new AttributeModifier(StoryUUID.ARMOR, "Armor armor modifier", weapon.getDef(stack), AttributeModifier.Operation.ADDITION));
         if (weapon.getAgl(stack) != 0) {
-            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", (Weapon.AGL_SPEED_BASE_NUM * weapon.getAgl(stack)), AttributeModifier.Operation.MULTIPLY_TOTAL));
+            double v;
+            int agl = weapon.getAgl(stack);
+            if (agl > 50) {
+                v = Weapon.AGL_SPEED_BASE_NUM * 50 + (Weapon.AGL_SPEED_BASE_NUM * agl - 50) / 4;
+            } else if (agl < -50) {
+                v = Weapon.AGL_SPEED_BASE_NUM * -50 + (Weapon.AGL_SPEED_BASE_NUM * agl + 50) / 4;
+            } else {
+                v = Weapon.AGL_SPEED_BASE_NUM * agl;
+            }
+            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(StoryUUID.MOVEMENT_SPEED, "Armor speed modifier", v, AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
         return builder.build();
     }
