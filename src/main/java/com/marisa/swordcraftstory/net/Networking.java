@@ -12,7 +12,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 public class Networking {
 
     public static SimpleChannel INSTANCE;
-    public static SimpleChannel STORY_PLAYER_STATUS;
+    public static SimpleChannel STORY_PLAYER_INFO;
     public static SimpleChannel MANUAL_LOTTERY_ITEM_INFO;
     private static int ID = 0;
 
@@ -28,10 +28,10 @@ public class Networking {
     }
 
     public static void register2() {
-        STORY_PLAYER_STATUS = NetworkRegistry.newSimpleChannel(
+        STORY_PLAYER_INFO = NetworkRegistry.newSimpleChannel(
                 new ResourceLocation(Story.MOD_ID + ":networking2"),
                 () -> "1.0", (s) -> true, (s) -> true);
-        STORY_PLAYER_STATUS.registerMessage(nextID(), StoryPlayerPack.class, StoryPlayerPack::toBytes, StoryPlayerPack::new, StoryPlayerPack::handler);
+        STORY_PLAYER_INFO.registerMessage(nextID(), StoryPlayerPack.class, StoryPlayerPack::toBytes, StoryPlayerPack::new, StoryPlayerPack::handler);
     }
 
     public static void register3() {

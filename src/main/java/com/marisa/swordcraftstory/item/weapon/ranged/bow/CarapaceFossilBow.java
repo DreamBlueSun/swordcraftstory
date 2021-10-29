@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.item.weapon.ranged.bow;
 
 import com.marisa.swordcraftstory.item.ore.CarapaceFossilOre;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkills;
 import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,7 @@ import java.util.List;
 public class CarapaceFossilBow extends AbstractBowWeapon {
 
     public CarapaceFossilBow() {
-        super(new CarapaceFossilOre());
+        super(new CarapaceFossilOre(), WeaponSkills.DEF_UP_BIG.getId());
     }
 
     @Override

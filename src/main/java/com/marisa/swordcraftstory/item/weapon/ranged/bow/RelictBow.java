@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.item.weapon.ranged.bow;
 
 import com.marisa.swordcraftstory.item.ore.RegiaOre;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkills;
 import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,7 @@ import java.util.List;
 public class RelictBow extends AbstractBowWeapon {
 
     public RelictBow() {
-        super(new RegiaOre());
+        super(new RegiaOre(), WeaponSkills.BOW_TEST_DEMO11.getId());
     }
 
     @Override

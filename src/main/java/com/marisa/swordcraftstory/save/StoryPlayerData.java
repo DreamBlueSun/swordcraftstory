@@ -1,14 +1,15 @@
 package com.marisa.swordcraftstory.save;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.net.StoryPlayerPack;
+import com.marisa.swordcraftstory.skill.weapon.helper.AbstractWeaponSkill;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkills;
 import com.marisa.swordcraftstory.util.PlayerAttributesUtils;
 import net.minecraft.entity.player.PlayerEntity;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 玩家信息
@@ -22,6 +23,11 @@ public class StoryPlayerData implements Serializable {
     private int xpLast;
     private int xp;
 
+    private int hpStory;
+    private int atkStory;
+    private int defStory;
+
+    private List<String> listConfigWeaponSkillId;
     private List<String> listHaveWeaponSkillId;
     private Map<String, Integer> mapLearnWeaponSkillId;
 
@@ -29,23 +35,66 @@ public class StoryPlayerData implements Serializable {
         return playerUUID;
     }
 
+    public int getXpLast() {
+        return xpLast;
+    }
+
     public int getXp() {
         return xp;
     }
 
+    public int getHpStory() {
+        return hpStory;
+    }
+
+    public int getAtkStory() {
+        return atkStory;
+    }
+
+    public int getDefStory() {
+        return defStory;
+    }
+
+    public List<String> getListConfigWeaponSkillId() {
+        return this.listConfigWeaponSkillId != null ? this.listConfigWeaponSkillId : new ArrayList<>();
+    }
+
+    public List<String> getListHaveWeaponSkillId() {
+        return this.listHaveWeaponSkillId != null ? this.listHaveWeaponSkillId : new ArrayList<>();
+    }
+
+    public Map<String, Integer> getMapLearnWeaponSkillId() {
+        return this.mapLearnWeaponSkillId != null ? this.mapLearnWeaponSkillId : new HashMap<>(1);
+    }
+
     public StoryPlayerData(String playerUUID) {
         this.playerUUID = playerUUID;
+        this.xpLast = 0;
         this.xp = 0;
+        this.hpStory = 0;
+        this.atkStory = 0;
+        this.defStory = 0;
+        this.listConfigWeaponSkillId = new ArrayList<>();
         this.listHaveWeaponSkillId = new ArrayList<>();
-        ;
         this.mapLearnWeaponSkillId = new HashMap<>(1);
     }
 
-    public StoryPlayerData(String playerUUID, int xp) {
-        this.playerUUID = playerUUID;
-        this.xp = xp;
-        this.listHaveWeaponSkillId = new ArrayList<>();
-        this.mapLearnWeaponSkillId = new HashMap<>(1);
+    public StoryPlayerData(StoryPlayerPack pack) {
+        this.playerUUID = pack.getPlayerUUID();
+        this.xpLast = pack.getXpLast();
+        this.xp = pack.getXp();
+        this.hpStory = pack.getHpStory();
+        this.atkStory = pack.getAtkStory();
+        this.defStory = pack.getDefStory();
+        this.listConfigWeaponSkillId = Arrays.stream(pack.getConfigSkillIds()).mapToObj(String::valueOf).collect(Collectors.toList());
+        this.listHaveWeaponSkillId = Arrays.stream(pack.getHaveSkillIds()).mapToObj(String::valueOf).collect(Collectors.toList());
+        List<String> learnIds = Arrays.stream(pack.getLearnSkillIds()).mapToObj(String::valueOf).collect(Collectors.toList());
+        List<String> progressIds = Arrays.stream(pack.getLearnSkillProgress()).mapToObj(String::valueOf).collect(Collectors.toList());
+        Map<String, Integer> map = new HashMap<>(1);
+        for (int i = 0; i < learnIds.size(); i++) {
+            map.put(learnIds.get(i), Integer.parseInt(progressIds.get(i)));
+        }
+        this.mapLearnWeaponSkillId = map;
     }
 
     /**
@@ -66,8 +115,8 @@ public class StoryPlayerData implements Serializable {
         this.xpLast = this.xp;
         this.xp += amount;
         //限制最高等级
-        int lvPoint = StoryPlayerDataManager.getLvNextXpPoint(Story.LV_MAX);
-        if (this.xp >= lvPoint) {
+        int lvPoint = StoryPlayerDataManager.getLvNextXpPoint(Story.LV_MAX - 1);
+        if (lvPoint != 0 && this.xp >= lvPoint) {
             this.xp = lvPoint - 1;
         }
     }
@@ -83,35 +132,67 @@ public class StoryPlayerData implements Serializable {
         }
     }
 
-    public void toLearnWeaponSkill(String weaponSkillId) {
+    public void setHpStory(int hpStory) {
+        this.hpStory = hpStory;
+    }
+
+    public void setAtkStory(int atkStory) {
+        this.atkStory = atkStory;
+    }
+
+    public void setDefStory(int defStory) {
+        this.defStory = defStory;
+    }
+
+    public StoryPlayerData toLearnWeaponSkill(String weaponSkillId) {
+        AbstractWeaponSkill skill = WeaponSkills.getById(weaponSkillId).getSkill();
+        if (skill == null) {
+            return this;
+        }
         if (hasWeaponSkill(weaponSkillId)) {
-            return;
+            return this;
         }
         if (isLearningWeaponSkill(weaponSkillId)) {
             int nextValue = this.mapLearnWeaponSkillId.get(weaponSkillId) + 1;
-            if (nextValue < 100) {
+            if (nextValue < skill.getLearnPoint()) {
                 this.mapLearnWeaponSkillId.put(weaponSkillId, nextValue);
             } else {
                 this.mapLearnWeaponSkillId.remove(weaponSkillId);
                 toHaveWeaponSkill(weaponSkillId);
             }
         } else {
+            if (this.mapLearnWeaponSkillId == null) {
+                this.mapLearnWeaponSkillId = new HashMap<>(1);
+            }
             this.mapLearnWeaponSkillId.put(weaponSkillId, 1);
         }
+        return this;
     }
 
     private boolean isLearningWeaponSkill(String weaponSkillId) {
-        return this.mapLearnWeaponSkillId.containsKey(weaponSkillId);
+        return this.mapLearnWeaponSkillId != null && this.mapLearnWeaponSkillId.containsKey(weaponSkillId);
     }
 
     private void toHaveWeaponSkill(String weaponSkillId) {
         if (!hasWeaponSkill(weaponSkillId)) {
+            if (this.listHaveWeaponSkillId == null) {
+                this.listHaveWeaponSkillId = new ArrayList<>();
+            }
             this.listHaveWeaponSkillId.add(weaponSkillId);
         }
     }
 
     private boolean hasWeaponSkill(String weaponSkillId) {
-        return this.listHaveWeaponSkillId.contains(weaponSkillId);
+        return this.listHaveWeaponSkillId != null && this.listHaveWeaponSkillId.contains(weaponSkillId);
+    }
+
+    public StoryPlayerData configWeaponSkill(List<String> listWeaponSkillId) {
+        this.listConfigWeaponSkillId = listWeaponSkillId;
+        return this;
+    }
+
+    public void save() {
+        StoryPlayerDataManager.put(this);
     }
 
     //序列化

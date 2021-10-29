@@ -7,7 +7,6 @@ import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.item.weapon.helper.WeaponCommonFunction;
 import com.marisa.swordcraftstory.item.weapon.helper.WeaponType;
-import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
@@ -248,8 +247,12 @@ public abstract class AbstractAxeWeapon extends AxeItem implements Weapon {
 
     @Override
     public void incrWeaponSkill(String playerUUID) {
-        StoryPlayerData storyPlayerData = StoryPlayerDataManager.get(playerUUID);
-        storyPlayerData.toLearnWeaponSkill(this.weaponSkillId);
+        StoryPlayerDataManager.get(playerUUID).toLearnWeaponSkill(this.weaponSkillId).save();
+    }
+
+    @Override
+    public String getWeaponSkillId() {
+        return this.weaponSkillId;
     }
 
     @Override

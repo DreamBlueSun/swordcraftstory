@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.item.weapon.close.sword;
 
 import com.marisa.swordcraftstory.item.ore.SlanderOre;
 import com.marisa.swordcraftstory.item.weapon.close.AbstractSwordWeapon;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkills;
 import com.marisa.swordcraftstory.util.WeaponInformationUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ThinSword extends AbstractSwordWeapon {
 
     public ThinSword() {
-        super(new SlanderOre());
+        super(new SlanderOre(), WeaponSkills.DEF_UP_SMALL.getId());
     }
 
     @Override

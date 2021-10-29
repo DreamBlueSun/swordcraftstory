@@ -15,5 +15,7 @@ public class KeybindingRegistry {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> ClientRegistry.registerKeyBinding(KeyBoardInput.STORY_STATUS_KEY));
+        event.enqueueWork(() -> ClientRegistry.registerKeyBinding(KeyBoardInput.WEAPON_SKILL_CONFIG_KEY));
+        event.enqueueWork(() -> ClientRegistry.registerKeyBinding(KeyBoardInput.WEAPON_SKILL_LEARN_KEY));
     }
 }

@@ -4,7 +4,6 @@ import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.weapon.helper.Weapon;
 import com.marisa.swordcraftstory.item.weapon.helper.WeaponCommonFunction;
-import com.marisa.swordcraftstory.save.StoryPlayerData;
 import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
 import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
 import com.marisa.swordcraftstory.skill.effect.helper.Effects;
@@ -281,7 +280,11 @@ public abstract class AbstractRangedWeapon extends BowItem implements Weapon {
 
     @Override
     public void incrWeaponSkill(String playerUUID) {
-        StoryPlayerData storyPlayerData = StoryPlayerDataManager.get(playerUUID);
-        storyPlayerData.toLearnWeaponSkill(this.weaponSkillId);
+        StoryPlayerDataManager.get(playerUUID).toLearnWeaponSkill(this.weaponSkillId).save();
+    }
+
+    @Override
+    public String getWeaponSkillId() {
+        return this.weaponSkillId;
     }
 }

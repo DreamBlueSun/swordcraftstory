@@ -88,6 +88,7 @@ public class EventHandler {
         PlayerEntity player = event.getPlayer();
         StoryPlayerData storyPlayerData = StoryPlayerData.deserialize(event.getPlayerDirectory().getPath(), event.getPlayerUUID());
         PlayerAttributesUtils.onClone(player, storyPlayerData, false);
+        PlayerAttributesUtils.onConfigAttr(player, true, false);
     }
 
     @SubscribeEvent
@@ -96,6 +97,7 @@ public class EventHandler {
         PlayerEntity player = event.getPlayer();
         StoryPlayerData storyPlayerData = StoryPlayerDataManager.get(player.getCachedUniqueIdString());
         PlayerAttributesUtils.onClone(player, storyPlayerData, event.isWasDeath());
+        PlayerAttributesUtils.onConfigAttr(player, true, event.isWasDeath());
     }
 
     @SubscribeEvent

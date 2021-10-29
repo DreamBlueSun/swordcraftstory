@@ -7,6 +7,7 @@ import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttackHelper;
 import com.marisa.swordcraftstory.skill.attack.helper.SpecialAttacks;
 import com.marisa.swordcraftstory.skill.effect.helper.EffectHelper;
 import com.marisa.swordcraftstory.skill.effect.helper.Effects;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkills;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
@@ -150,10 +151,10 @@ public class WeaponInformationUtils {
 
     public static void addInformation(Weapon weapon, ItemStack stack, List<ITextComponent> tooltip) {
         stack.setTagInfo("HideFlags", IntNBT.valueOf(2));
+        tooltip.add(new TranslationTextComponent("武器").mergeStyle(TextFormatting.LIGHT_PURPLE));
         if (weapon.isBroken(stack)) {
             tooltip.add(new TranslationTextComponent("已损坏").mergeStyle(TextFormatting.DARK_GRAY));
         }
-        tooltip.add(new TranslationTextComponent("武器").mergeStyle(TextFormatting.LIGHT_PURPLE));
         //幻化名称
         tooltip.add(new TranslationTextComponent("幻化[" + ModelChangeHelper.getModelName(stack) + "]").mergeStyle(TextFormatting.GREEN));
         //属性
@@ -179,6 +180,11 @@ public class WeaponInformationUtils {
             tooltip.add(new TranslationTextComponent("耐久池").mergeStyle(TextFormatting.YELLOW)
                     .appendString("     ").appendSibling(new TranslationTextComponent(weapon.getDur(stack) + "/" + weapon.getDurMax(stack)).mergeStyle(TextFormatting.LIGHT_PURPLE)));
         }
+        //武技
+        String skillName = WeaponSkills.getById(weapon.getWeaponSkillId()).getName();
+        tooltip.add(new TranslationTextComponent("武技").mergeStyle(TextFormatting.AQUA)
+                .appendString(" ").appendSibling(new TranslationTextComponent(">>>").mergeStyle(TextFormatting.RED))
+                .appendString(" ").appendSibling(new TranslationTextComponent(skillName).mergeStyle(TextFormatting.AQUA)));
         //特殊攻击字段显示
         SpecialAttacks specialAttack = SpecialAttackHelper.get(stack);
         if (specialAttack != null) {
@@ -193,8 +199,8 @@ public class WeaponInformationUtils {
         List<String> list = IntensifyHelper.getIntensifyName(stack);
         if (list != null) {
             for (String show : list) {
-                tooltip.add(new TranslationTextComponent("强化").mergeStyle(TextFormatting.AQUA).appendString(" ")
-                        .appendSibling(new TranslationTextComponent(">>>").mergeStyle(TextFormatting.RED))
+                tooltip.add(new TranslationTextComponent("强化").mergeStyle(TextFormatting.AQUA)
+                        .appendString(" ").appendSibling(new TranslationTextComponent(">>>").mergeStyle(TextFormatting.RED))
                         .appendString(" ").appendSibling(new TranslationTextComponent(show).mergeStyle(TextFormatting.AQUA)));
             }
         }
