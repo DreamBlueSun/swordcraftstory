@@ -36,9 +36,9 @@ public class WeaponCommonFunction {
             double v;
             int agl = weapon.getAgl(stack);
             if (agl > 50) {
-                v = Weapon.AGL_SPEED_BASE_NUM * 50 + (Weapon.AGL_SPEED_BASE_NUM * agl - 50) / 4;
+                v = Weapon.AGL_SPEED_BASE_NUM * 50 + (Weapon.AGL_SPEED_BASE_NUM * (agl - 50)) / 4;
             } else if (agl < -50) {
-                v = Weapon.AGL_SPEED_BASE_NUM * -50 + (Weapon.AGL_SPEED_BASE_NUM * agl + 50) / 4;
+                v = Weapon.AGL_SPEED_BASE_NUM * -50 + (Weapon.AGL_SPEED_BASE_NUM * (agl + 50)) / 4;
             } else {
                 v = Weapon.AGL_SPEED_BASE_NUM * agl;
             }
