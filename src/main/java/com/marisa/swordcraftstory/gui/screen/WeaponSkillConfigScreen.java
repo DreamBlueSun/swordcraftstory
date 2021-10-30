@@ -59,7 +59,20 @@ public class WeaponSkillConfigScreen extends Screen {
                     list.add(((WeaponSkillCheckbox) widget).getSkill().getId());
                 }
             }
-            Networking.STORY_PLAYER_INFO.sendToServer(new StoryPlayerPack("weapon.skill.config.confirm", list));
+            StoryPlayerData data = StoryPlayerDataManager.get(player.getCachedUniqueIdString());
+            List<String> collect = list.stream().map(String::valueOf).collect(Collectors.toList());
+            if (data.getListHaveWeaponSkillId().containsAll(collect)) {
+                int count = 0;
+                for (String id : collect) {
+                    count += WeaponSkills.getById(id).getSkill().getCost();
+                }
+                if (count <= StoryPlayerDataManager.getWeaponSkillAmount(StoryPlayerDataManager.getLv(data.getXp()))) {
+                    //先同步本地
+                    data.configWeaponSkill(collect).save();
+                    //再同步服务端
+                    Networking.STORY_PLAYER_INFO.sendToServer(new StoryPlayerPack("weapon.skill.config.confirm", list));
+                }
+            }
         }));
         //checkbox武技
         int flagX = 0;
