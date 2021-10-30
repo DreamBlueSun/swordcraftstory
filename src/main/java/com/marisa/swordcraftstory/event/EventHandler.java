@@ -1,7 +1,9 @@
 package com.marisa.swordcraftstory.event;
 
 import com.marisa.swordcraftstory.block.ore.OreGenerate;
+import com.marisa.swordcraftstory.item.reply.ReplyItem;
 import com.marisa.swordcraftstory.save.*;
+import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkillHelper;
 import com.marisa.swordcraftstory.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.util.PlayerAttributesUtils;
 import com.marisa.swordcraftstory.util.damage.LivingHurtUtils;
@@ -13,11 +15,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityLeaveWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -164,6 +168,16 @@ public class EventHandler {
                     DropQualityManualLotteryMachine.load(saveData);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void useItemEventStart(LivingEntityUseItemEvent.Start event) {
+        //动态设置回复道具使用时长
+        Item item = event.getItem().getItem();
+        if (item instanceof ReplyItem && event.getEntityLiving() instanceof PlayerEntity) {
+            int up = WeaponSkillHelper.fixedUp((PlayerEntity) event.getEntityLiving(), WeaponSkillHelper.LIST_HEAL_USE_FAST_ID);
+            event.setDuration(item.getUseDuration(event.getItem()) * 100 / (100 + up));
         }
     }
 
