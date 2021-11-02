@@ -2,6 +2,8 @@ package com.marisa.swordcraftstory.event;
 
 import com.marisa.swordcraftstory.block.ore.OreGenerate;
 import com.marisa.swordcraftstory.item.reply.ReplyItem;
+import com.marisa.swordcraftstory.net.Networking;
+import com.marisa.swordcraftstory.net.StoryPlayerPack;
 import com.marisa.swordcraftstory.save.*;
 import com.marisa.swordcraftstory.skill.weapon.helper.WeaponSkillHelper;
 import com.marisa.swordcraftstory.util.MobAttributesUtils;
@@ -15,6 +17,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -30,6 +33,7 @@ import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 /**
  * 监听事件处理器
@@ -120,6 +124,10 @@ public class EventHandler {
                 //保存Mob属性
                 saveData.mark(mobAttr);
             }
+        } else if (!world.isRemote() && entity instanceof ServerPlayerEntity) {
+            //同步玩家物语数据到客户端
+            StoryPlayerPack pack = new StoryPlayerPack("story.player.status.async", StoryPlayerDataManager.get(entity.getCachedUniqueIdString()));
+            Networking.STORY_PLAYER_INFO.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) entity), pack);
         }
     }
 

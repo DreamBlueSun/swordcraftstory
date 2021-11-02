@@ -112,6 +112,9 @@ public class StoryPlayerPack {
         ctx.get().enqueueWork(() -> {
             if (sender == null) {
                 switch (this.message) {
+                    case "story.player.status.async":
+                        StoryPlayerDataManager.put(new StoryPlayerData(this));
+                        break;
                     case "story.player.status.client":
                         StoryPlayerDataManager.put(new StoryPlayerData(this));
                         StoryPlayerStatusScreen.open(Minecraft.getInstance().player);
