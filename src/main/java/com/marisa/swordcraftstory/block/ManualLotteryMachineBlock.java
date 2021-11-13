@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.block;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.special.LuckTicket;
+import com.marisa.swordcraftstory.item.special.LuckTicketMax;
 import com.marisa.swordcraftstory.net.ManualLotteryItemInfoPack;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.util.obj.DropQualityManualLotteryMachine;
@@ -48,7 +49,13 @@ public class ManualLotteryMachineBlock extends Block {
             ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if (!stack.isEmpty() && stack.getItem() instanceof LuckTicket) {
                 NonNullList<ItemStack> list = NonNullList.create();
-                list.add(DropQualityManualLotteryMachine.drop());
+                if (stack.getItem() instanceof LuckTicketMax) {
+                    for (int i = 0; i < 10; i++) {
+                        list.add(DropQualityManualLotteryMachine.drop());
+                    }
+                } else {
+                    list.add(DropQualityManualLotteryMachine.drop());
+                }
                 InventoryHelper.dropItems(worldIn, pos, list);
                 //道具数量--
                 stack.shrink(1);

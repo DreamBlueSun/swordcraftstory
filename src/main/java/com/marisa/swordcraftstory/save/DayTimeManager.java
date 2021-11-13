@@ -33,4 +33,8 @@ public class DayTimeManager {
         return false;
     }
 
+    public static void newWorldDay(long dayTime) {
+        WORLD_DAY = (int) (dayTime - 1) / DAY_LONG;
+    }
+
 }

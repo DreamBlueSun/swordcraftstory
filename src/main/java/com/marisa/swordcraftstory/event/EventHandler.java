@@ -167,9 +167,10 @@ public class EventHandler {
                 ManualLotteryMachineSaveData saveData = ManualLotteryMachineSaveData.get((ServerWorld) event.world);
                 if (saveData.getWorldDay() == -1) {
                     //没有保存的数据时更新数据
+                    DayTimeManager.newWorldDay(event.world.getWorldInfo().getDayTime());
                     DropQualityManualLotteryMachine.shuffle();
                     //标记保存手摇抽奖机数据
-                    ManualLotteryMachineSaveData.get((ServerWorld) event.world).mark();
+                    saveData.mark();
                 } else {
                     //加载保存的手摇抽奖机数据
                     DayTimeManager.load(saveData);

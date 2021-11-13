@@ -17,6 +17,7 @@ import com.marisa.swordcraftstory.item.reply.JuYuMedicine;
 import com.marisa.swordcraftstory.item.reply.Woundplast;
 import com.marisa.swordcraftstory.item.special.Hammer;
 import com.marisa.swordcraftstory.item.special.LuckTicket;
+import com.marisa.swordcraftstory.item.special.LuckTicketMax;
 import com.marisa.swordcraftstory.item.special.SwordGuake;
 import com.marisa.swordcraftstory.item.weapon.axe.ElementsManaAxe;
 import com.marisa.swordcraftstory.item.weapon.base.taila.DragonSlaveSword;
@@ -43,6 +44,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> HAMMER = ITEMS.register("hammer", Hammer::new);
     //特殊道具
     public static RegistryObject<Item> LUCK_TICKET = ITEMS.register("luck_ticket", LuckTicket::new);
+    public static RegistryObject<Item> LUCK_TICKET_MAX = ITEMS.register("luck_ticket_max", LuckTicketMax::new);
     //模具
     public static RegistryObject<Item> SWORD_MOULD = ITEMS.register("sword_mould", SwordMould::new);
     public static RegistryObject<Item> BOW_MOULD = ITEMS.register("bow_mould", BowMould::new);
