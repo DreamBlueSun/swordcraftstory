@@ -45,6 +45,8 @@ public class DropQualityManualLotteryMachine {
         LIST_RANK_2.add(ItemRegistry.TIME_UMBRELLA_SWORD.get().getDefaultInstance());
         //--弓
         LIST_RANK_2.add(ItemRegistry.CONSTANT_BLOWERS_SNOW_BOW.get().getDefaultInstance());
+        //--斧
+        LIST_RANK_2.add(ItemRegistry.ELEMENTS_MANA_AXE.get().getDefaultInstance());
 
         //头
         LIST_RANK_3 = new ArrayList<>();

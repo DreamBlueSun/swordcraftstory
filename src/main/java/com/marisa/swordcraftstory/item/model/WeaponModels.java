@@ -45,7 +45,10 @@ public enum WeaponModels {
     TIME_UMBRELLA_SWORD(1004, (WeaponModel) ItemRegistry.TIME_UMBRELLA_SWORD.get()),
 
     //泰拉模型-弓
-    CONSTANT_BLOWERS_SNOW_BOW(2001, (WeaponModel) ItemRegistry.CONSTANT_BLOWERS_SNOW_BOW.get());
+    CONSTANT_BLOWERS_SNOW_BOW(2001, (WeaponModel) ItemRegistry.CONSTANT_BLOWERS_SNOW_BOW.get()),
+
+    //泰拉模型-斧
+    ELEMENTS_MANA_AXE(3001, (WeaponModel) ItemRegistry.ELEMENTS_MANA_AXE.get());
 
 
     /**

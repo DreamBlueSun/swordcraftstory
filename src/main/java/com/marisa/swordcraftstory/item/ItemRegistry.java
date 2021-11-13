@@ -18,6 +18,7 @@ import com.marisa.swordcraftstory.item.reply.Woundplast;
 import com.marisa.swordcraftstory.item.special.Hammer;
 import com.marisa.swordcraftstory.item.special.LuckTicket;
 import com.marisa.swordcraftstory.item.special.SwordGuake;
+import com.marisa.swordcraftstory.item.weapon.axe.ElementsManaAxe;
 import com.marisa.swordcraftstory.item.weapon.base.taila.DragonSlaveSword;
 import com.marisa.swordcraftstory.item.weapon.base.taila.ElementsManaSword;
 import com.marisa.swordcraftstory.item.weapon.base.taila.TimeUmbrellaSword;
@@ -191,4 +192,6 @@ public class ItemRegistry {
     public static RegistryObject<Item> TIME_UMBRELLA_SWORD = ITEMS.register("time_umbrella_sword", TimeUmbrellaSword::new);
     //幻化武器-泰拉-弓
     public static RegistryObject<Item> CONSTANT_BLOWERS_SNOW_BOW = ITEMS.register("constant_blowers_snow_bow", ConstantBlowersSnowBow::new);
+    //幻化武器-泰拉-斧
+    public static RegistryObject<Item> ELEMENTS_MANA_AXE = ITEMS.register("elements_mana_axe", ElementsManaAxe::new);
 }

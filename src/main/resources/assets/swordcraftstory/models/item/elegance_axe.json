@@ -223,6 +223,12 @@
         "model_change": 40
       },
       "model": "swordcraftstory:item/change/axe/luminosity_axe"
+    },
+    {
+      "predicate": {
+        "model_change": 3001
+      },
+      "model": "swordcraftstory:item/elements_mana_axe"
     }
   ]
 }
