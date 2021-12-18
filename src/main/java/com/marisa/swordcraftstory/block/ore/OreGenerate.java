@@ -1,45 +1,43 @@
 package com.marisa.swordcraftstory.block.ore;
 
 import com.marisa.swordcraftstory.block.BlockRegistry;
-import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.template.RuleTest;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.placement.TopSolidRangeConfig;
-import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.features.OreFeatures;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+
+import java.util.List;
 
 /**
  * 矿石生成
  */
 public class OreGenerate {
 
+    /**
+     * 单个矿脉最大矿物数
+     */
+    private static final int VEIN_SIZE = 12;
+
     public static void join(BiomeLoadingEvent event) {
-        generate(event.getGeneration(),
-                OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
-                BlockRegistry.STORY_ORE_BLOCK.get().getDefaultState(),
-                8, 8, 0, 64, 64);
+        List<OreConfiguration.TargetBlockState> blockStateList = List.of(
+                OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, BlockRegistry.STORY_ORE_BLOCK.defaultBlockState()),
+                OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, BlockRegistry.STORY_ORE_BLOCK.defaultBlockState()));
+        ConfiguredFeature<OreConfiguration, ?> configured = FeatureUtils.register("story_ore", Feature.ORE.configured(new OreConfiguration(blockStateList, VEIN_SIZE)));
+        event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, commonPlacedFeature(configured, "story_ore_upper", 90, 80, 384));
+        event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, commonPlacedFeature(configured, "story_ore_middle", 20, -56, 56));
+
     }
 
-    /**
-     * 生成方法
-     *
-     * @param settingsBuilder 生成器
-     * @param ruleTest        规则
-     * @param veinSize        矿脉最大矿物数
-     * @param bottomOffset    生成最小y值
-     * @param topOffset       不明，设为0
-     * @param maximum         生成最大y值
-     * @param countPerChunk   区块最大矿脉数
-     */
-    public static void generate(BiomeGenerationSettingsBuilder settingsBuilder, RuleTest ruleTest, BlockState state,
-                                int veinSize, int bottomOffset, int topOffset, int maximum, int countPerChunk) {
-        settingsBuilder.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                Feature.ORE.withConfiguration(new OreFeatureConfig(ruleTest, state, veinSize))
-                        .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottomOffset, topOffset, maximum)))
-                        .square().count(countPerChunk));
+    private static PlacedFeature commonPlacedFeature(ConfiguredFeature<OreConfiguration, ?> configured, String id, int count, int minHeight, int maxHeight) {
+        HeightRangePlacement placement = HeightRangePlacement.triangle(VerticalAnchor.absolute(minHeight), VerticalAnchor.absolute(maxHeight));
+        List<PlacementModifier> modifiers = List.of(CountPlacement.of(count), InSquarePlacement.spread(), placement, BiomeFilter.biome());
+        return PlacementUtils.register(id, configured.placed(modifiers));
     }
 
 }

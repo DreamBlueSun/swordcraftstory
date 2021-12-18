@@ -2,25 +2,33 @@ package com.marisa.swordcraftstory.block;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.ore.StoryOreBlock;
-import net.minecraft.block.Block;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+import java.lang.reflect.Field;
 
 /**
  * 方块注册
  */
-
+@Mod.EventBusSubscriber(modid = Story.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BlockRegistry {
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Story.MOD_ID);
+    public static final Block STORY_ORE_BLOCK = new StoryOreBlock();
 
-    public static RegistryObject<Block> STORY_ORE_BLOCK = BLOCKS.register("story_ore_block", StoryOreBlock::new);
-    public static RegistryObject<Block> WEAPON_MAKE_BLOCK = BLOCKS.register("weapon_make_block", WeaponMakeBlock::new);
-    public static RegistryObject<Block> WEAPON_INTENSIFY_BLOCK = BLOCKS.register("weapon_intensify_block", WeaponIntensifyBlock::new);
-    public static RegistryObject<Block> WEAPON_EDGE_BLOCK = BLOCKS.register("weapon_edge_block", WeaponEdgeBlock::new);
-    public static RegistryObject<Block> WEAPON_COLLAPSE_BLOCK = BLOCKS.register("weapon_collapse_block", WeaponCollapseBlock::new);
-    public static RegistryObject<Block> REPAIR_BLOCK = BLOCKS.register("repair_block", RepairBlock::new);
-    public static RegistryObject<Block> WEAPON_MODEL_CHANGE_BLOCK = BLOCKS.register("weapon_model_change_block", WeaponModelChangeBlock::new);
-    public static RegistryObject<Block> MANUAL_LOTTERY_MACHINE_BLOCK = BLOCKS.register("manual_lottery_machine_block", ManualLotteryMachineBlock::new);
+    @SubscribeEvent
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
+        try {
+            for (Field f : BlockRegistry.class.getDeclaredFields()) {
+                Object obj = f.get(null);
+                if (obj instanceof Block) {
+                    event.getRegistry().register((Block) obj);
+                }
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

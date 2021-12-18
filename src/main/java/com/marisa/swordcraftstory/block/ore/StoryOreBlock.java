@@ -1,25 +1,22 @@
 package com.marisa.swordcraftstory.block.ore;
 
+import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.save.StoryPlayerData;
-import com.marisa.swordcraftstory.save.StoryPlayerDataManager;
-import com.marisa.swordcraftstory.util.obj.DropQuality;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.OreBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.server.ServerWorld;
-
-import java.util.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.Containers;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 矿石方块
@@ -28,38 +25,28 @@ import java.util.Random;
 public class StoryOreBlock extends OreBlock {
 
     public StoryOreBlock() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(5));
+        super(BlockBehaviour.Properties.of(Material.STONE).strength(0.8F), UniformInt.of(3, 7));
+        this.setRegistryName(Story.MOD_ID + ":story_ore_block");
     }
 
     @Override
-    public void spawnAdditionalDrops(BlockState state, ServerWorld worldIn, BlockPos pos, ItemStack stack) {
-        if (!worldIn.isRemote && worldIn.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)) {
-            if (!stack.isEmpty() && stack.getItem() instanceof PickaxeItem) {
-                //判断精准采集
-                if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
-                    //掉落方块本身
-                    NonNullList<ItemStack> list = NonNullList.create();
-                    list.add(ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
-                    InventoryHelper.dropItems(worldIn, pos, list);
-                } else {
-                    //掉落素材
-                    PlayerEntity player = worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 8.0D, false);
-                    if (player != null) {
-                        StoryPlayerData storyPlayerData = StoryPlayerDataManager.get(player.getCachedUniqueIdString());
-                        int lv = StoryPlayerDataManager.getLv(storyPlayerData.getXp());
-                        NonNullList<ItemStack> list = NonNullList.create();
-                        list.add(DropQuality.randomDropQuality(lv));
-                        InventoryHelper.dropItems(worldIn, pos, list);
-                    }
-                }
-            }
+    public void spawnAfterBreak(@NotNull BlockState blockState, ServerLevel server, @NotNull BlockPos pos, @NotNull ItemStack stack) {
+        if (!server.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
+            return;
         }
-        super.spawnAdditionalDrops(state, worldIn, pos, stack);
+        if (stack.isEmpty() || !(stack.getItem() instanceof PickaxeItem)) {
+            return;
+        }
+        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
+            //精准采集掉落方块本身
+            Containers.dropItemStack(server, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
+        } else {
+            //掉落素材
+            Player player = server.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 8.0D, false);
+            if (player == null || player.isCreative()) {
+                return;
+            }
+            Containers.dropItemStack(server, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
+        }
     }
-
-    @Override
-    protected int getExperience(Random rand) {
-        return MathHelper.nextInt(rand, 2, 6);
-    }
-
 }

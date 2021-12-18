@@ -1,8 +1,9 @@
 package com.marisa.swordcraftstory.group;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 创建创造物品栏分组
@@ -10,12 +11,10 @@ import net.minecraft.item.ItemStack;
 
 public class StoryGroup {
 
-    public static ItemGroup COMBAT_GROUP = new GroupCombat();
-    
-    public static ItemGroup MODEL_CHANGE_GROUP = new ItemGroup("model_change_group") {
+    public static CreativeModeTab MAIN = new CreativeModeTab("tab_main") {
         @Override
-        public ItemStack createIcon() {
-            return new ItemStack(ItemRegistry.DRAGON_SLAVE_SWORD.get());
+        public @NotNull ItemStack makeIcon() {
+            return new ItemStack(ItemRegistry.STORY_ORE_BLOCK.get());
         }
     };
 
