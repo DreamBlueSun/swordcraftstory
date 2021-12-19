@@ -1,6 +1,8 @@
 package com.marisa.swordcraftstory;
 
-import com.marisa.swordcraftstory.event.EventHandler;
+import com.marisa.swordcraftstory.bar.BarEventHandler;
+import com.marisa.swordcraftstory.block.ore.OreGenEventHandler;
+import com.marisa.swordcraftstory.event.CommonEventHandler;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
@@ -25,7 +27,9 @@ public class Story {
 
         ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        MinecraftForge.EVENT_BUS.register(new EventHandler());
+        MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
+        MinecraftForge.EVENT_BUS.register(new OreGenEventHandler());
+        MinecraftForge.EVENT_BUS.register(new BarEventHandler());
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::attributeFix);
 
@@ -43,6 +47,5 @@ public class Story {
             }
         }
     }
-
 
 }
