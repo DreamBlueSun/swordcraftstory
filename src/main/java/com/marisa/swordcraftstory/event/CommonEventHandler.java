@@ -1,12 +1,18 @@
 package com.marisa.swordcraftstory.event;
 
+import com.marisa.swordcraftstory.event.util.LivingHurtUtils;
 import com.marisa.swordcraftstory.event.util.PlayerAttackEntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.StringUtil;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -21,6 +27,49 @@ import java.util.List;
  */
 
 public class CommonEventHandler {
+    @SubscribeEvent
+    public void livingHurt(LivingHurtEvent event) {
+        //拦截伤害计算
+        event.setCanceled(true);
+        DamageSource source = event.getSource();
+        float amount = event.getAmount();
+        LivingEntity livingEntity = event.getEntityLiving();
+        if (livingEntity instanceof ServerPlayer serverPlayer) {
+            amount = LivingHurtUtils.getDamageAfterArmorAbsorb(serverPlayer, source, amount);
+            amount = LivingHurtUtils.getDamageAfterMagicAbsorb(serverPlayer, source, amount);
+            float f2 = Math.max(amount - serverPlayer.getAbsorptionAmount(), 0.0F);
+            serverPlayer.setAbsorptionAmount(serverPlayer.getAbsorptionAmount() - (amount - f2));
+            float f = amount - f2;
+            if (f > 0.0F && f < 3.4028235E37F) {
+                serverPlayer.awardStat(Stats.DAMAGE_ABSORBED, Math.round(f * 10.0F));
+            }
+            if (f2 != 0.0F) {
+                serverPlayer.causeFoodExhaustion(source.getFoodExhaustion());
+                float f1 = serverPlayer.getHealth();
+                serverPlayer.getCombatTracker().recordDamage(source, f1, f2);
+                serverPlayer.setHealth(f1 - f2); // Forge: moved to fix MC-121048
+                if (f2 < 3.4028235E37F) {
+                    serverPlayer.awardStat(Stats.DAMAGE_TAKEN, Math.round(f2 * 10.0F));
+                }
+            }
+        } else {
+            amount = LivingHurtUtils.getDamageAfterArmorAbsorb(livingEntity, source, amount);
+            amount = LivingHurtUtils.getDamageAfterMagicAbsorb(livingEntity, source, amount);
+            float f2 = Math.max(amount - livingEntity.getAbsorptionAmount(), 0.0F);
+            livingEntity.setAbsorptionAmount(livingEntity.getAbsorptionAmount() - (amount - f2));
+            float f = amount - f2;
+            if (f > 0.0F && f < 3.4028235E37F && source.getEntity() instanceof ServerPlayer) {
+                ((ServerPlayer) source.getEntity()).awardStat(Stats.CUSTOM.get(Stats.DAMAGE_DEALT_ABSORBED), Math.round(f * 10.0F));
+            }
+            if (f2 != 0.0F) {
+                float f1 = livingEntity.getHealth();
+                livingEntity.getCombatTracker().recordDamage(source, f1, f2);
+                livingEntity.setHealth(f1 - f2); // Forge: moved to fix MC-121048
+                livingEntity.setAbsorptionAmount(livingEntity.getAbsorptionAmount() - f2);
+                livingEntity.gameEvent(GameEvent.ENTITY_DAMAGED, source.getEntity());
+            }
+        }
+    }
 
     @SubscribeEvent
     public void playerAttackEntity(AttackEntityEvent event) {
@@ -29,13 +78,6 @@ public class CommonEventHandler {
         if (!event.getPlayer().level.isClientSide()) {
             PlayerAttackEntityUtils.attack(event.getPlayer(), event.getTarget());
         }
-    }
-
-    @SubscribeEvent
-    public void livingHurt(LivingHurtEvent event) {
-        //拦截伤害计算
-//        int armorValue = event.getEntityLiving().getArmorValue();
-//        event.setCanceled(true);
     }
 
     @SubscribeEvent
