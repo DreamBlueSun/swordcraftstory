@@ -57,24 +57,22 @@ public class PlayerDataPack {
         ctx.get().enqueueWork(() -> {
             if (sender == null) {
                 switch (this.message) {
-                    case "story.player.status.async":
-                        PlayerDataManager.put(new PlayerData(this));
-                        break;
-                    case "story.player.status.client":
+                    case "story.player.status.async" -> PlayerDataManager.put(new PlayerData(this));
+                    case "story.player.status.client" -> {
                         PlayerDataManager.put(new PlayerData(this));
                         PlayerStatusScreen.open(Minecraft.getInstance().player);
-                        break;
-                    default:
-                        break;
+                    }
+                    default -> {
+                    }
                 }
             } else {
                 switch (this.message) {
-                    case "story.player.status.open":
+                    case "story.player.status.open" -> {
                         PlayerDataPack pack1 = new PlayerDataPack("story.player.status.client", PlayerDataManager.get(sender.getStringUUID()));
                         Networking.PLAYER_DATA.send(PacketDistributor.PLAYER.with(() -> sender), pack1);
-                        break;
-                    default:
-                        break;
+                    }
+                    default -> {
+                    }
                 }
             }
         });

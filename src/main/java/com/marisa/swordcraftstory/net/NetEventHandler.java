@@ -16,5 +16,6 @@ public class NetEventHandler {
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(Networking::registerPlayerData);
+        event.enqueueWork(Networking::registerQualityIdentification);
     }
 }
