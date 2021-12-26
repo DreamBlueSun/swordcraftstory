@@ -21,10 +21,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -88,47 +92,59 @@ public class CommonEventHandler {
 
     @SubscribeEvent
     public void playerAttackEntity(AttackEntityEvent event) {
-        event.setCanceled(true);
         //修改玩家近战攻击效果
         if (!event.getPlayer().level.isClientSide()) {
+            event.setCanceled(true);
             PlayerAttackEntityUtils.attack(event.getPlayer(), event.getTarget());
+        }
+    }
+
+    @SubscribeEvent
+    public void arrowShoot(EntityJoinWorldEvent event) {
+        //修改弓箭实体生成属性
+        if (!event.getWorld().isClientSide() && event.getEntity() instanceof AbstractArrow arrow) {
+            if (arrow.getOwner() instanceof ServerPlayer player && player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
+                arrow.setBaseDamage(SmithNbtUtils.getAtk(player.getMainHandItem()));
+            }
         }
     }
 
     @SubscribeEvent
     public void itemTooltip(ItemTooltipEvent event) {
         ItemStack itemStack = event.getItemStack();
-        if (itemStack.getItem() instanceof SwordItem) {
+        if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem || itemStack.getItem() instanceof ProjectileWeaponItem) {
             List<Component> toolTip = event.getToolTip();
-            List<Component> remTip = new ArrayList<>();
             int atk = 0;
             String atk_s = "1.0";
-            for (Component i : toolTip) {
-                if (i instanceof TextComponent t && t.getSiblings().size() == 0 && StringUtil.isNullOrEmpty(t.getText())) {
-                    remTip.add(i);
-                    continue;
-                }
-                if (i instanceof TranslatableComponent c) {
-                    if (c.getKey().equals("item.modifiers.mainhand")) {
+            if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
+                List<Component> remTip = new ArrayList<>();
+                for (Component i : toolTip) {
+                    if (i instanceof TextComponent t && t.getSiblings().size() == 0 && StringUtil.isNullOrEmpty(t.getText())) {
                         remTip.add(i);
+                        continue;
                     }
-                } else if (i instanceof TextComponent && i.getSiblings().size() > 0) {
-                    for (Component j : i.getSiblings()) {
-                        if (j instanceof TranslatableComponent c && c.getKey().equals("attribute.modifier.equals.0")) {
+                    if (i instanceof TranslatableComponent c) {
+                        if (c.getKey().equals("item.modifiers.mainhand")) {
                             remTip.add(i);
-                            if (c.getArgs().length > 1) {
-                                String key = ((TranslatableComponent) c.getArgs()[1]).getKey();
-                                if ("attribute.name.generic.attack_damage".equals(key)) {
-                                    atk = Integer.parseInt(String.valueOf(c.getArgs()[0]));
-                                } else if ("attribute.name.generic.attack_speed".equals(key)) {
-                                    atk_s = String.valueOf(c.getArgs()[0]);
+                        }
+                    } else if (i instanceof TextComponent && i.getSiblings().size() > 0) {
+                        for (Component j : i.getSiblings()) {
+                            if (j instanceof TranslatableComponent c && c.getKey().equals("attribute.modifier.equals.0")) {
+                                remTip.add(i);
+                                if (c.getArgs().length > 1) {
+                                    String key = ((TranslatableComponent) c.getArgs()[1]).getKey();
+                                    if ("attribute.name.generic.attack_damage".equals(key)) {
+                                        atk = Integer.parseInt(String.valueOf(c.getArgs()[0]));
+                                    } else if ("attribute.name.generic.attack_speed".equals(key)) {
+                                        atk_s = String.valueOf(c.getArgs()[0]);
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                toolTip.removeAll(remTip);
             }
-            toolTip.removeAll(remTip);
             //品质
             Quality quality = SmithNbtUtils.getQuality(itemStack);
             if (quality == Quality.UNKNOWN && event.getPlayer() != null) {
@@ -153,24 +169,30 @@ public class CommonEventHandler {
                     .append(new TranslatableComponent("1").withStyle(ChatFormatting.LIGHT_PURPLE)));
             toolTip.add(++index, new TranslatableComponent("攻击").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(String.valueOf(atk + SmithNbtUtils.getAtk(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
-            toolTip.add(++index, new TranslatableComponent("攻速").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent(atk_s).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
+                toolTip.add(++index, new TranslatableComponent("攻速").withStyle(ChatFormatting.YELLOW).append("     ")
+                        .append(new TranslatableComponent(atk_s).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            }
             toolTip.add(++index, new TranslatableComponent("敏捷").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getAgl(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
-            toolTip.add(++index, new TranslatableComponent("暴击").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent("5.0%").withStyle(ChatFormatting.LIGHT_PURPLE)));
-            toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent("0/255").withStyle(ChatFormatting.GREEN)));
-            toolTip.add(++index, new TextComponent(""));
+//            toolTip.add(++index, new TranslatableComponent("暴击").withStyle(ChatFormatting.YELLOW).append("     ")
+//                    .append(new TranslatableComponent("5.0%").withStyle(ChatFormatting.LIGHT_PURPLE)));
+//            toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
+//                    .append(new TranslatableComponent("0/255").withStyle(ChatFormatting.GREEN)));
+//            toolTip.add(++index, new TextComponent(""));
         }
     }
 
     @SubscribeEvent
     public void itemAttributeModifier(ItemAttributeModifierEvent event) {
-        if (event.getItemStack().getItem() instanceof SwordItem && event.getSlotType() == EquipmentSlot.MAINHAND) {
+        if (event.getSlotType() != EquipmentSlot.MAINHAND) {
+            return;
+        }
+        ItemStack itemStack = event.getItemStack();
+        if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem || itemStack.getItem() instanceof ProjectileWeaponItem) {
             //攻击速度、移动速度
             double v = 0;
-            int agl = SmithNbtUtils.getAgl(event.getItemStack());
+            int agl = SmithNbtUtils.getAgl(itemStack);
             if (agl != 0) {
                 final double baseSpeed = 0.01D;
                 final double offset = 50.0D;
@@ -183,9 +205,11 @@ public class CommonEventHandler {
                 }
                 event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.randomUUID(), "main hand modifier", v, AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
-            double atkS = v + SmithNbtUtils.getAtkS(event.getItemStack());
-            if (atkS != 0) {
-                event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "main hand modifier", atkS, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
+                double atkS = v + SmithNbtUtils.getAtkS(itemStack);
+                if (atkS != 0) {
+                    event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "main hand modifier", atkS, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                }
             }
         }
     }
