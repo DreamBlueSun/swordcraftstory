@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.event.util;
 
+import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.Vec3;
 
@@ -41,6 +43,12 @@ public class PlayerAttackEntityUtils {
         }
         //基础伤害
         float f = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        //锻造伤害
+        if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
+            f = SmithNbtUtils.getAtk(player.getMainHandItem()) * 0.5F;
+        } else {
+            f += SmithNbtUtils.getAtk(player.getMainHandItem());
+        }
         //附魔伤害
         float f1;
         if (target instanceof LivingEntity) {

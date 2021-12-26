@@ -12,21 +12,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.StringUtil;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -50,43 +45,8 @@ public class CommonEventHandler {
     public void livingHurt(LivingHurtEvent event) {
         //拦截伤害计算
         event.setCanceled(true);
-        DamageSource source = event.getSource();
-        float amount = event.getAmount();
-        LivingEntity livingEntity = event.getEntityLiving();
-        if (livingEntity instanceof Player player) {
-            amount = LivingHurtUtils.getDamageAfterArmorAbsorb(player, source, amount);
-            amount = LivingHurtUtils.getDamageAfterMagicAbsorb(player, source, amount);
-            float f2 = Math.max(amount - player.getAbsorptionAmount(), 0.0F);
-            player.setAbsorptionAmount(player.getAbsorptionAmount() - (amount - f2));
-            float f = amount - f2;
-            if (f > 0.0F && f < 3.4028235E37F) {
-                player.awardStat(Stats.DAMAGE_ABSORBED, Math.round(f * 10.0F));
-            }
-            if (f2 != 0.0F) {
-                player.causeFoodExhaustion(source.getFoodExhaustion());
-                float f1 = player.getHealth();
-                player.getCombatTracker().recordDamage(source, f1, f2);
-                player.setHealth(f1 - f2);
-                if (f2 < 3.4028235E37F) {
-                    player.awardStat(Stats.DAMAGE_TAKEN, Math.round(f2 * 10.0F));
-                }
-            }
-        } else {
-            amount = LivingHurtUtils.getDamageAfterArmorAbsorb(livingEntity, source, amount);
-            amount = LivingHurtUtils.getDamageAfterMagicAbsorb(livingEntity, source, amount);
-            float f2 = Math.max(amount - livingEntity.getAbsorptionAmount(), 0.0F);
-            livingEntity.setAbsorptionAmount(livingEntity.getAbsorptionAmount() - (amount - f2));
-            float f = amount - f2;
-            if (f > 0.0F && f < 3.4028235E37F && source.getEntity() instanceof ServerPlayer) {
-                ((ServerPlayer) source.getEntity()).awardStat(Stats.CUSTOM.get(Stats.DAMAGE_DEALT_ABSORBED), Math.round(f * 10.0F));
-            }
-            if (f2 != 0.0F) {
-                float f1 = livingEntity.getHealth();
-                livingEntity.getCombatTracker().recordDamage(source, f1, f2);
-                livingEntity.setHealth(f1 - f2);
-                livingEntity.setAbsorptionAmount(livingEntity.getAbsorptionAmount() - f2);
-                livingEntity.gameEvent(GameEvent.ENTITY_DAMAGED, source.getEntity());
-            }
+        if (!event.getEntityLiving().level.isClientSide()) {
+            LivingHurtUtils.hurt(event);
         }
     }
 
