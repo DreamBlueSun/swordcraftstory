@@ -2,10 +2,13 @@ package com.marisa.swordcraftstory.event.util;
 
 import com.marisa.swordcraftstory.event.pojo.Absorb;
 import com.marisa.swordcraftstory.event.pojo.Damage;
+import com.marisa.swordcraftstory.save.MobAttrSaveData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -66,6 +69,11 @@ public class LivingHurtUtils {
                 target.setHealth(f1 - f2);
                 target.setAbsorptionAmount(target.getAbsorptionAmount() - f2);
                 target.gameEvent(GameEvent.ENTITY_DAMAGED, source.getEntity());
+                //保存Mob属性
+                if (!target.level.isClientSide() && target instanceof Mob) {
+                    MobAttrSaveData saveData = MobAttrSaveData.getInstance((ServerLevel) target.level);
+                    saveData.mark(target.getStringUUID(), f1 - f2);
+                }
             }
         }
     }

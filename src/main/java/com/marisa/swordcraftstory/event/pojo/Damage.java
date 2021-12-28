@@ -1,7 +1,9 @@
 package com.marisa.swordcraftstory.event.pojo;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.save.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,8 +42,7 @@ public class Damage {
         if (target instanceof Player player) {
             this.lvWeight = PlayerDataManager.getLv(PlayerDataManager.get(player.getStringUUID()).getXp());
         } else if (target instanceof Mob) {
-//            lv = MobAttributesUtils.getMobLv((ServerLevel) this.target.level, this.target.getStringUUID());
-            this.lvWeight = 0.5F;
+            this.lvWeight = MobAttributesUtils.getMobLv((ServerLevel) target.level, target.getStringUUID()) * 0.5F;
         } else {
             this.lvWeight = 0.0F;
         }
@@ -69,9 +70,8 @@ public class Damage {
                 break;
             case "mob":
                 try {
-                    int lv = 0;
                     if (this.source.getEntity() != null && this.source.getEntity() instanceof Mob mob) {
-//                        lv = MobAttributesUtils.getMobLv((ServerWorld) mob.world, mob.getUniqueID().toString());
+                        int lv = MobAttributesUtils.getMobLv((ServerLevel) mob.level, mob.getStringUUID());
                         this.p = Mth.clamp(this.amount, 2.0F, 20.0F) * (1 + lv * 0.6F);
                     } else {
                         this.p = this.amount;
