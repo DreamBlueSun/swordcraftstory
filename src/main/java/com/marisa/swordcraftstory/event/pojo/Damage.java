@@ -63,7 +63,6 @@ public class Damage {
                 try {
                     AbstractArrow arrow = (AbstractArrow) this.source.getDirectEntity();
                     this.p = arrow != null ? (float) arrow.getBaseDamage() : 5.0F;
-                    //TODO 计算附魔
                 } catch (Exception e) {
                     Story.LOG.error("ARROW伤害异常：" + this.source, e);
                 }

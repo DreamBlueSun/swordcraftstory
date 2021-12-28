@@ -75,6 +75,12 @@ public class PlayerAttackEntityUtils {
             ++i;
             flag1 = true;
         }
+        //伤害总量
+        f += f1;
+        //额外计算近战伤害附魔：额外再+(4%*lv)，最高20%
+        if (f1 > 0) {
+            f *= (1.0F + (Math.min((int) f1, 5) * 0.04F));
+        }
         //暴击
         boolean flag2 = flag && player.fallDistance > 0.0F && !player.isOnGround() && !player.onClimbable() && !player.isInWater() && !player.hasEffect(MobEffects.BLINDNESS) && !player.isPassenger() && target instanceof LivingEntity;
         flag2 = flag2 && !player.isSprinting();
@@ -83,8 +89,6 @@ public class PlayerAttackEntityUtils {
         if (flag2) {
             f *= hitResult.getDamageModifier();
         }
-        //伤害总量
-        f += f1;
         //横扫攻击
         boolean flag3 = false;
         double d0 = (double) (player.walkDist - player.walkDistO);

@@ -22,6 +22,8 @@ import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -64,7 +66,14 @@ public class CommonEventHandler {
         //修改弓箭实体生成属性
         if (!event.getWorld().isClientSide() && event.getEntity() instanceof AbstractArrow arrow) {
             if (arrow.getOwner() instanceof ServerPlayer player && player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
-                arrow.setBaseDamage(SmithNbtUtils.getAtk(player.getMainHandItem()));
+                float atk = (float) SmithNbtUtils.getAtk(player.getMainHandItem());
+                //重新计算力量附魔：基础物理伤害+(0.5+0.5*lv)，再+(4%*lv)
+                int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, player.getMainHandItem());
+                if (j > 0) {
+                    atk += (0.5F * j + 0.5F);
+                    atk = atk * (1.0F + j * 0.04F);
+                }
+                arrow.setBaseDamage(atk);
             }
         }
     }
