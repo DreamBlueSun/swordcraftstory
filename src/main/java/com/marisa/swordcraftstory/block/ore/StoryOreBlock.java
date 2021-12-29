@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.block.ore;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.block.ore.helper.OreDropQuality;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.core.BlockPos;
@@ -8,7 +9,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.OreBlock;
@@ -50,9 +50,10 @@ public class StoryOreBlock extends OreBlock {
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
         } else {
             //根据工具等阶掉落素材
-            int rank = SmithNbtUtils.getRank(stack);
-            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Items.IRON_INGOT.getDefaultInstance());
-            //TODO 根据掉落物品掉落经验
+            ItemStack random = OreDropQuality.random(SmithNbtUtils.getRank(stack));
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), random);
+            //根据掉落物品掉落经验
+            int rank = random.getItem() instanceof AbstractOre ore ? ore.rank() : 1;
             if (0 < rank && rank <= this.xpDropList.size()) {
                 state.getBlock().popExperience(level, pos, this.xpDropList.get(rank - 1).sample(RANDOM));
             }

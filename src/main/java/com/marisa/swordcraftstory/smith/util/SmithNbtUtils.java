@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.smith.util;
 
 import net.minecraft.nbt.*;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -121,7 +122,7 @@ public class SmithNbtUtils {
         if (stack.getTag() == null) {
             return 1;
         }
-        return stack.getTag().getInt(NBT.RANK);
+        return Mth.clamp(stack.getTag().getInt(NBT.RANK), 1, 9);
     }
 
     /**

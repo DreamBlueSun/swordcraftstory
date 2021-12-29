@@ -2,7 +2,6 @@ package com.marisa.swordcraftstory.item.weapon;
 
 import com.google.common.collect.Multimap;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.ItemRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -53,7 +52,8 @@ public class TestSword extends SwordItem {
 
             @Override
             public @NotNull Ingredient getRepairIngredient() {
-                return Ingredient.of(ItemRegistry.TEST_SWORD.get());
+//                return Ingredient.of(ItemRegistry.TEST_SWORD.get());
+                return null;
             }
         }, 6, -2.4F, new Item.Properties().tab(StoryGroup.MAIN));
     }
