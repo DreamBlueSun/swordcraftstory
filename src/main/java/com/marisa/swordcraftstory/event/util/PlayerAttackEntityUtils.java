@@ -10,7 +10,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
@@ -21,6 +20,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.Random;
 
 /**
  *
@@ -82,12 +83,9 @@ public class PlayerAttackEntityUtils {
             f *= (1.0F + (Math.min((int) f1, 5) * 0.04F));
         }
         //暴击
-        boolean flag2 = flag && player.fallDistance > 0.0F && !player.isOnGround() && !player.onClimbable() && !player.isInWater() && !player.hasEffect(MobEffects.BLINDNESS) && !player.isPassenger() && target instanceof LivingEntity;
-        flag2 = flag2 && !player.isSprinting();
-        net.minecraftforge.event.entity.player.CriticalHitEvent hitResult = net.minecraftforge.common.ForgeHooks.getCriticalHit(player, target, flag2, flag2 ? 1.5F : 1.0F);
-        flag2 = hitResult != null;
+        boolean flag2 = 50 > new Random().nextInt(1000);
         if (flag2) {
-            f *= hitResult.getDamageModifier();
+            f *= 1.25F;
         }
         //横扫攻击
         boolean flag3 = false;
