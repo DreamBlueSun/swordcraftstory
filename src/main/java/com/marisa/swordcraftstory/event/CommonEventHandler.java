@@ -4,6 +4,7 @@ import com.marisa.swordcraftstory.event.util.LivingHurtUtils;
 import com.marisa.swordcraftstory.event.util.PlayerAttackEntityUtils;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.pack.QualityIdentificationPack;
+import com.marisa.swordcraftstory.save.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.smith.util.Quality;
 import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.ChatFormatting;
@@ -11,15 +12,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringUtil;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.SpectralArrow;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
@@ -68,23 +74,39 @@ public class CommonEventHandler {
     public void arrowShoot(EntityJoinWorldEvent event) {
         //修改弓箭实体生成属性
         if (!event.getWorld().isClientSide() && event.getEntity() instanceof AbstractArrow arrow) {
-            if (arrow.getOwner() instanceof ServerPlayer player && player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
+            if (arrow instanceof SpectralArrow || arrow instanceof ThrownTrident) {
+                //光灵箭、药水箭：基础伤害固定值0
+                arrow.setBaseDamage(0);
+                return;
+            }
+            Entity owner = arrow.getOwner();
+            if (owner == null) {
+                //发射器、投掷器、找不到发射者的箭矢：伤害为基础固定值
+                arrow.setBaseDamage(5.0D);
+                return;
+            }
+            if (owner instanceof ServerPlayer player && player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
                 float atk = (float) SmithNbtUtils.getAtk(player.getMainHandItem());
-                //重新计算力量附魔：基础物理伤害+(0.5+0.5*lv)，再+(4%*lv)
+                //重新计算力量附魔：基础物理伤害+(0.5+0.5*lv)，再+(4%*lv)，最高20%
                 int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, player.getMainHandItem());
                 if (j > 0) {
-                    atk += (0.5F * j + 0.5F);
-                    atk = atk * (1.0F + j * 0.04F);
+                    atk += (0.5D * j + 0.5D);
+                    atk *= 1.0D + (Math.min(j, 5) * 0.04D);
                 }
                 //暴击
                 if (50 > new Random().nextInt(1000)) {
-                    atk *= 1.25F;
+                    atk *= 1.25D;
                     arrow.setCritArrow(true);
                     player.level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
                 }
                 arrow.setBaseDamage(atk);
+            } else if (owner instanceof Mob mob) {
+                //mob射箭
+                int lv = MobAttributesUtils.getMobLv((ServerLevel) mob.level, mob.getStringUUID());
+                arrow.setBaseDamage(5.0D + (lv * 3.0D));
+            } else {
+                arrow.setBaseDamage(5.0D);
             }
-            //TODO mob射箭、药水箭、发射器
         }
     }
 
