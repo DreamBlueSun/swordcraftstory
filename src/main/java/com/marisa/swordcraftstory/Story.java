@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory;
 
 import com.marisa.swordcraftstory.bar.BarEventHandler;
+import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import com.marisa.swordcraftstory.block.ore.OreGenEventHandler;
 import com.marisa.swordcraftstory.event.CommonEventHandler;
 import com.marisa.swordcraftstory.item.ItemRegistry;
@@ -27,6 +28,7 @@ public class Story {
     public Story() {
 
         ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        MenuTypeRegistry.MENU_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
         MinecraftForge.EVENT_BUS.register(new SaveEventHandler());

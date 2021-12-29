@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.block;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.block.craft.RankUpBlock;
 import com.marisa.swordcraftstory.block.ore.StoryOreBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.RegistryEvent;
@@ -16,6 +17,7 @@ import java.lang.reflect.Field;
 public class BlockRegistry {
 
     public static final Block STORY_ORE_BLOCK = new StoryOreBlock();
+    public static final Block RANK_UP_BLOCK = new RankUpBlock();
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {

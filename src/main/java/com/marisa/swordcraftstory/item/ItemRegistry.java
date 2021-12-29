@@ -20,6 +20,7 @@ public class ItemRegistry {
 
     //方块物品
     public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    public static RegistryObject<Item> RANK_UP_BLOCK = ITEMS.register("rank_up_block", () -> new BlockItem(BlockRegistry.RANK_UP_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     //素材矿石
     public static RegistryObject<Item> IRON_ORE = ITEMS.register("iron_ore", IronOre::new);
     public static RegistryObject<Item> SLANDER_ORE = ITEMS.register("slander_ore", SlanderOre::new);
