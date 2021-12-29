@@ -19,6 +19,7 @@ public class SmithNbtUtils {
         public final static String DUR = "story_combat_dur";
         public final static String DUR_MAX = "story_combat_dur_max";
         public final static String TEC = "story_combat_tec";
+        public final static String RANK = "story_combat_rank";
     }
 
     public static Quality getQuality(ItemStack stack) {
@@ -114,6 +115,13 @@ public class SmithNbtUtils {
 
     public static void clearTec(ItemStack stack) {
         stack.getOrCreateTag().put(NBT.TEC, IntTag.valueOf(0));
+    }
+
+    public static int getRank(ItemStack stack) {
+        if (stack.getTag() == null) {
+            return 1;
+        }
+        return stack.getTag().getInt(NBT.RANK);
     }
 
     /**

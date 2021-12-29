@@ -135,7 +135,7 @@ public class CommonEventHandler {
                                 if (c.getArgs().length > 1) {
                                     String key = ((TranslatableComponent) c.getArgs()[1]).getKey();
                                     if ("attribute.name.generic.attack_damage".equals(key)) {
-                                        atk = Integer.parseInt(String.valueOf(c.getArgs()[0]));
+                                        atk = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
                                     } else if ("attribute.name.generic.attack_speed".equals(key)) {
                                         atk_s = String.valueOf(c.getArgs()[0]);
                                     }
@@ -167,7 +167,7 @@ public class CommonEventHandler {
             toolTip.add(++index, new TextComponent(""));
             //属性
             toolTip.add(++index, new TranslatableComponent("等阶").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent("1").withStyle(ChatFormatting.LIGHT_PURPLE)));
+                    .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getRank(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
             toolTip.add(++index, new TranslatableComponent("攻击").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(String.valueOf(atk + SmithNbtUtils.getAtk(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
             if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
@@ -176,11 +176,11 @@ public class CommonEventHandler {
             }
             toolTip.add(++index, new TranslatableComponent("敏捷").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getAgl(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
-//            toolTip.add(++index, new TranslatableComponent("暴击").withStyle(ChatFormatting.YELLOW).append("     ")
-//                    .append(new TranslatableComponent("5.0%").withStyle(ChatFormatting.LIGHT_PURPLE)));
+            toolTip.add(++index, new TranslatableComponent("暴击").withStyle(ChatFormatting.YELLOW).append("     ")
+                    .append(new TranslatableComponent("5.0%").withStyle(ChatFormatting.LIGHT_PURPLE)));
 //            toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
 //                    .append(new TranslatableComponent("0/255").withStyle(ChatFormatting.GREEN)));
-//            toolTip.add(++index, new TextComponent(""));
+            toolTip.add(++index, new TextComponent(""));
         }
     }
 
