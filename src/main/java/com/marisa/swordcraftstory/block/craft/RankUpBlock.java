@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 
 
 /**
- * 武器升阶锻冶台
+ * 升阶锻冶台
  */
 
 public class RankUpBlock extends Block {
@@ -34,7 +34,7 @@ public class RankUpBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -46,10 +46,10 @@ public class RankUpBlock extends Block {
 
     @Nullable
     @Override
-    public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+    public MenuProvider getMenuProvider(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
         return new SimpleMenuProvider((openContainerId, inventory, player) ->
                 new RankUpMenu(openContainerId, inventory, ContainerLevelAccess.create(level, pos)),
-                new TranslatableComponent(Story.MOD_ID + ".rank_up_block"));
+                new TranslatableComponent("升阶锻冶台"));
     }
 
     @Override

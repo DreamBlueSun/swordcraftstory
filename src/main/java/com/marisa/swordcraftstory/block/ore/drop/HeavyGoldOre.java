@@ -5,8 +5,7 @@ import com.marisa.swordcraftstory.group.StoryGroup;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -35,5 +34,18 @@ public class HeavyGoldOre extends AbstractOre {
     @Override
     public int rank() {
         return 3;
+    }
+
+    @Override
+    protected int[] rankAttr(Item item) {
+        if (item instanceof SwordItem || item instanceof PickaxeItem) {
+            return new int[]{30, 0};
+        } else if (item instanceof AxeItem || item instanceof HoeItem || item instanceof ShovelItem) {
+            return new int[]{40, -25};
+        } else if (item instanceof ProjectileWeaponItem) {
+            return new int[]{30, -5};
+        } else {
+            return null;
+        }
     }
 }

@@ -21,6 +21,7 @@ public class SmithNbtUtils {
         public final static String DUR_MAX = "story_combat_dur_max";
         public final static String TEC = "story_combat_tec";
         public final static String RANK = "story_combat_rank";
+        public final static String RANK_ATTR = "story_combat_rank_attr";
     }
 
     public static Quality getQuality(ItemStack stack) {
@@ -38,6 +39,10 @@ public class SmithNbtUtils {
     public static int getAtk(ItemStack stack) {
         if (stack.getTag() == null) {
             return 0;
+        }
+        int[] rankAttr = getRankAttr(stack);
+        if (rankAttr != null) {
+            return stack.getTag().getInt(NBT.ATK) + rankAttr[0];
         }
         return stack.getTag().getInt(NBT.ATK);
     }
@@ -60,6 +65,10 @@ public class SmithNbtUtils {
     public static int getAgl(ItemStack stack) {
         if (stack.getTag() == null) {
             return 0;
+        }
+        int[] rankAttr = getRankAttr(stack);
+        if (rankAttr != null) {
+            return stack.getTag().getInt(NBT.AGL) + rankAttr[1];
         }
         return stack.getTag().getInt(NBT.AGL);
     }
@@ -118,11 +127,27 @@ public class SmithNbtUtils {
         stack.getOrCreateTag().put(NBT.TEC, IntTag.valueOf(0));
     }
 
+    public static void setRank(ItemStack stack, int rank) {
+        stack.getOrCreateTag().put(NBT.RANK, IntTag.valueOf(rank));
+    }
+
     public static int getRank(ItemStack stack) {
         if (stack.getTag() == null) {
-            return 1;
+            return 0;
         }
-        return Mth.clamp(stack.getTag().getInt(NBT.RANK), 1, 9);
+        return Mth.clamp(stack.getTag().getInt(NBT.RANK), 0, 9);
+    }
+
+    public static void setRankAttr(ItemStack stack, int[] attr) {
+        stack.getOrCreateTag().put(NBT.RANK_ATTR, new IntArrayTag(attr));
+    }
+
+    public static int[] getRankAttr(ItemStack stack) {
+        if (stack.getTag() == null) {
+            return null;
+        }
+        int[] attr = stack.getTag().getIntArray(NBT.RANK_ATTR);
+        return attr.length > 0 ? attr : null;
     }
 
     /**

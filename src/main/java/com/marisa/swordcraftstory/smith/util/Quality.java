@@ -45,7 +45,7 @@ public enum Quality implements QualityAttr {
             if (item instanceof SwordItem || item instanceof DiggerItem) {
                 return new SwordQualityAttr(0, 0, 0);
             } else if (item instanceof ProjectileWeaponItem) {
-                return new ShootQualityAttr(5, 0);
+                return new ShootQualityAttr(4, 0);
             }
             return null;
         }
@@ -56,7 +56,7 @@ public enum Quality implements QualityAttr {
             if (item instanceof SwordItem || item instanceof DiggerItem) {
                 return new SwordQualityAttr(1, 0.05D, 0);
             } else if (item instanceof ProjectileWeaponItem) {
-                return new ShootQualityAttr(6, 0);
+                return new ShootQualityAttr(5, 0);
             }
             return null;
         }
@@ -67,7 +67,7 @@ public enum Quality implements QualityAttr {
             if (item instanceof SwordItem || item instanceof DiggerItem) {
                 return new SwordQualityAttr(2, 0.1D, 0);
             } else if (item instanceof ProjectileWeaponItem) {
-                return new ShootQualityAttr(7, 5);
+                return new ShootQualityAttr(6, 5);
             }
             return null;
         }
@@ -78,7 +78,7 @@ public enum Quality implements QualityAttr {
             if (item instanceof SwordItem || item instanceof DiggerItem) {
                 return new SwordQualityAttr(3, 0.15D, 5);
             } else if (item instanceof ProjectileWeaponItem) {
-                return new ShootQualityAttr(8, 5);
+                return new ShootQualityAttr(7, 5);
             }
             return null;
         }
@@ -89,7 +89,7 @@ public enum Quality implements QualityAttr {
             if (item instanceof SwordItem || item instanceof DiggerItem) {
                 return new SwordQualityAttr(4, 0.25D, 5);
             } else if (item instanceof ProjectileWeaponItem) {
-                return new ShootQualityAttr(8, 10);
+                return new ShootQualityAttr(7, 10);
             }
             return null;
         }

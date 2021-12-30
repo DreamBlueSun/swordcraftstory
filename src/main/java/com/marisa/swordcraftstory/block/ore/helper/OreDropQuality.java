@@ -61,9 +61,9 @@ public class OreDropQuality {
         LIST_ORE_RANK_9.add(ItemRegistry.LUMINOSITY_ORE.get().getDefaultInstance());
     }
 
-    private static final int RANK_MATERIAL_0 = 30;
-    private static final int RANK_MATERIAL_1 = 20;
-    private static final int RANK_MATERIAL_2 = 5;
+    private static final int RANK_MATERIAL_0 = 85;
+    private static final int RANK_MATERIAL_1 = 35;
+    private static final int RANK_MATERIAL_2 = 35;
     private static final int RANK_ORE_1 = 9;
     private static final int RANK_ORE_2 = 8;
     private static final int RANK_ORE_3 = 7;
@@ -79,28 +79,32 @@ public class OreDropQuality {
     public static ItemStack random(int rank) {
         int drop = RANK_RANDOM_MAX;
         int r = new Random().nextInt(RANK_RANDOM_MAX) + 1;
-        if (r > (drop -= RANK_ORE_9) && rank >= 9) {
+        if (rank >= 9) {
+            //9阶工具随机数+1
+            r += 1;
+        }
+        if (r > (drop -= RANK_ORE_9) && rank >= 8) {
             return LIST_ORE_RANK_9.get(new Random().nextInt(LIST_ORE_RANK_9.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_8) && rank >= 8) {
+        if (r > (drop -= RANK_ORE_8) && rank >= 7) {
             return LIST_ORE_RANK_8.get(new Random().nextInt(LIST_ORE_RANK_8.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_7) && rank >= 7) {
+        if (r > (drop -= RANK_ORE_7) && rank >= 6) {
             return LIST_ORE_RANK_7.get(new Random().nextInt(LIST_ORE_RANK_7.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_6) && rank >= 6) {
+        if (r > (drop -= RANK_ORE_6) && rank >= 5) {
             return LIST_ORE_RANK_6.get(new Random().nextInt(LIST_ORE_RANK_6.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_5) && rank >= 5) {
+        if (r > (drop -= RANK_ORE_5) && rank >= 4) {
             return LIST_ORE_RANK_5.get(new Random().nextInt(LIST_ORE_RANK_5.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_4) && rank >= 4) {
+        if (r > (drop -= RANK_ORE_4) && rank >= 3) {
             return LIST_ORE_RANK_4.get(new Random().nextInt(LIST_ORE_RANK_4.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_3) && rank >= 3) {
+        if (r > (drop -= RANK_ORE_3) && rank >= 2) {
             return LIST_ORE_RANK_3.get(new Random().nextInt(LIST_ORE_RANK_3.size())).copy();
         }
-        if (r > (drop -= RANK_ORE_2) && rank >= 2) {
+        if (r > (drop -= RANK_ORE_2) && rank >= 1) {
             return LIST_ORE_RANK_2.get(new Random().nextInt(LIST_ORE_RANK_2.size())).copy();
         }
         if (r > (drop -= RANK_ORE_1)) {

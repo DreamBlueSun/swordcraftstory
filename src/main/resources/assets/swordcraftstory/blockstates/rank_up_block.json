@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "swordcraftstory:block/rank_up_block_model" }
+  }
+}

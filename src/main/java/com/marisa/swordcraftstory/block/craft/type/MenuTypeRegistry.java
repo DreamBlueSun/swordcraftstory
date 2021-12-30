@@ -16,7 +16,5 @@ public class MenuTypeRegistry {
 
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, Story.MOD_ID);
 
-//    public static final MenuType<RankUpMenu> TYPE_RANK_UP = Registry.register(Registry.MENU, "rank_up_block", new MenuType<>(RankUpMenu::new));
-
     public static final RegistryObject<MenuType<RankUpMenu>> TYPE_RANK_UP = MENU_TYPES.register("rank_up_menu_type", () -> IForgeMenuType.create(RankUpMenu::new));
 }
