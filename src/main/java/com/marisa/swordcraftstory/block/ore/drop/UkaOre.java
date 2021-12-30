@@ -48,4 +48,13 @@ public class UkaOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{2, 2};
+        } else {
+            return null;
+        }
+    }
 }

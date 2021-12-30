@@ -48,4 +48,13 @@ public class WingsFossilOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{0, 2};
+        } else {
+            return null;
+        }
+    }
 }

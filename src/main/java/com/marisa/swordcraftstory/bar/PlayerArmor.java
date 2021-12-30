@@ -1,11 +1,13 @@
 package com.marisa.swordcraftstory.bar;
 
+import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public class PlayerArmor extends AbstractBarOverlay {
 
@@ -18,8 +20,12 @@ public class PlayerArmor extends AbstractBarOverlay {
         Minecraft minecraft = Minecraft.getInstance();
         int xStart = minecraft.getWindow().getGuiScaledWidth() / 2 - 91;
         int yStart = minecraft.getWindow().getGuiScaledHeight() - 39;
-        String armor = String.valueOf(player.getArmorValue());
-        GuiComponent.drawString(poseStack, Minecraft.getInstance().font, armor, xStart + 39, yStart - 9, 0xC0C0C0);
+        int def = 0;
+        for (ItemStack stack : player.getArmorSlots()) {
+            def += SmithNbtUtils.getDef(stack);
+        }
+        int armor = player.getArmorValue() + def;
+        GuiComponent.drawString(poseStack, Minecraft.getInstance().font, String.valueOf(armor), xStart + 39, yStart - 9, 0xC0C0C0);
     }
 
     @Override

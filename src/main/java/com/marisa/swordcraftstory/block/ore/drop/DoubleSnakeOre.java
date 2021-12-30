@@ -48,4 +48,13 @@ public class DoubleSnakeOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{5, 5};
+        } else {
+            return null;
+        }
+    }
 }

@@ -48,4 +48,13 @@ public class DewFireflyOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{7, 7};
+        } else {
+            return null;
+        }
+    }
 }

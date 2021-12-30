@@ -48,4 +48,13 @@ public class LeijiStoweOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{10, 4};
+        } else {
+            return null;
+        }
+    }
 }

@@ -48,4 +48,13 @@ public class CuisineOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{4, 4};
+        } else {
+            return null;
+        }
+    }
 }

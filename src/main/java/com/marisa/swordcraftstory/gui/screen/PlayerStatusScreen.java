@@ -50,12 +50,12 @@ public class PlayerStatusScreen extends Screen {
         drawString(matrixStack, this.font, panelAttr.getHp(), xAttr, yAttr, 0x8B4513);
         //ATK
         drawString(matrixStack, this.font, panelAttr.getAtk(), xAttr, yAttr + 20, 0x8B4513);
-        //AGL
-        drawString(matrixStack, this.font, panelAttr.getAgl(), xAttr, yAttr + 40, 0x8B4513);
         //DEF
-        drawString(matrixStack, this.font, panelAttr.getDef(), xAttr, yAttr + 60, 0x8B4513);
+        drawString(matrixStack, this.font, panelAttr.getDef(), xAttr, yAttr + 40, 0x8B4513);
         //PHY
-        drawString(matrixStack, this.font, panelAttr.getPhy(), xAttr, yAttr + 80, 0x8B4513);
+        drawString(matrixStack, this.font, panelAttr.getPhy(), xAttr, yAttr + 60, 0x8B4513);
+        //AGL
+        drawString(matrixStack, this.font, panelAttr.getAgl(), xAttr, yAttr + 80, 0x8B4513);
         minecraft.getProfiler().pop();
         RenderSystem.disableBlend();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

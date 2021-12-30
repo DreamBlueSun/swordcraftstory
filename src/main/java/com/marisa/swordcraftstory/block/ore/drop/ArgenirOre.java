@@ -48,4 +48,13 @@ public class ArgenirOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{1, 1};
+        } else {
+            return null;
+        }
+    }
 }

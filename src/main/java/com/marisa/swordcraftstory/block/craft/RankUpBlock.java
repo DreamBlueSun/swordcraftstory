@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 public class RankUpBlock extends Block {
 
     public RankUpBlock() {
-        super(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(5.0F, 5.0F));
+        super(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F));
         this.setRegistryName(Story.MOD_ID + ":rank_up_block");
     }
 

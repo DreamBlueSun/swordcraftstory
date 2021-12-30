@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 
 /**
@@ -61,18 +62,26 @@ public class PlayerPanelAttr {
         }
         this.atk = new TranslatableComponent("攻击").withStyle(ChatFormatting.LIGHT_PURPLE)
                 .append(" ").append(new TranslatableComponent(String.valueOf(ATK)).withStyle(ChatFormatting.GREEN));
+        //DEF
+        int DEF = 0;
+        for (ItemStack stack : player.getArmorSlots()) {
+            DEF += SmithNbtUtils.getDef(stack);
+        }
+        DEF += player.getArmorValue();
+        this.def = new TranslatableComponent("护甲").withStyle(ChatFormatting.LIGHT_PURPLE)
+                .append(" ").append(new TranslatableComponent(String.valueOf(DEF)).withStyle(ChatFormatting.GREEN));
+        //PHY
+        int PHY = 0;
+        for (ItemStack stack : player.getArmorSlots()) {
+            PHY += SmithNbtUtils.getPhy(stack);
+        }
+        PHY += (int) player.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+        this.phy = new TranslatableComponent("韧性").withStyle(ChatFormatting.LIGHT_PURPLE)
+                .append(" ").append(new TranslatableComponent(String.valueOf(PHY)).withStyle(ChatFormatting.GREEN));
         //AGL
         int AGL = SmithNbtUtils.getAgl(player.getMainHandItem());
         this.agl = new TranslatableComponent("敏捷").withStyle(ChatFormatting.LIGHT_PURPLE)
                 .append(" ").append(new TranslatableComponent(String.valueOf(AGL)).withStyle(ChatFormatting.GREEN));
-        //DEF
-        int DEF = player.getArmorValue();
-        this.def = new TranslatableComponent("护甲").withStyle(ChatFormatting.LIGHT_PURPLE)
-                .append(" ").append(new TranslatableComponent(String.valueOf(DEF)).withStyle(ChatFormatting.GREEN));
-        //PHY
-        int PHY = (int) player.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-        this.phy = new TranslatableComponent("韧性").withStyle(ChatFormatting.LIGHT_PURPLE)
-                .append(" ").append(new TranslatableComponent(String.valueOf(PHY)).withStyle(ChatFormatting.GREEN));
     }
 
     public Component getLv() {

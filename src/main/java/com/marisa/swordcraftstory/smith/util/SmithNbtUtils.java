@@ -16,12 +16,15 @@ public class SmithNbtUtils {
         public final static String QUALITY = "story_combat_quality";
         public final static String ATK = "story_combat_atk";
         public final static String ATK_S = "story_combat_atk_s";
+        public final static String DEF = "story_combat_def";
+        public final static String PHY = "story_combat_phy";
         public final static String AGL = "story_combat_agl";
         public final static String DUR = "story_combat_dur";
         public final static String DUR_MAX = "story_combat_dur_max";
         public final static String TEC = "story_combat_tec";
         public final static String RANK = "story_combat_rank";
         public final static String RANK_ATTR = "story_combat_rank_attr";
+        public final static String RANK_ATTR_ARMOR = "story_combat_rank_attr_armor";
     }
 
     public static Quality getQuality(ItemStack stack) {
@@ -49,6 +52,36 @@ public class SmithNbtUtils {
 
     public static void setAtk(ItemStack stack, int amount) {
         stack.getOrCreateTag().put(NBT.ATK, IntTag.valueOf(amount));
+    }
+
+    public static int getDef(ItemStack stack) {
+        if (stack.getTag() == null) {
+            return 0;
+        }
+        int[] rankAttr = getRankAttrArmor(stack);
+        if (rankAttr != null) {
+            return stack.getTag().getInt(NBT.DEF) + rankAttr[0];
+        }
+        return stack.getTag().getInt(NBT.DEF);
+    }
+
+    public static void setDef(ItemStack stack, int amount) {
+        stack.getOrCreateTag().put(NBT.DEF, IntTag.valueOf(amount));
+    }
+
+    public static int getPhy(ItemStack stack) {
+        if (stack.getTag() == null) {
+            return 0;
+        }
+        int[] rankAttr = getRankAttrArmor(stack);
+        if (rankAttr != null) {
+            return stack.getTag().getInt(NBT.PHY) + rankAttr[1];
+        }
+        return stack.getTag().getInt(NBT.PHY);
+    }
+
+    public static void setPhy(ItemStack stack, int amount) {
+        stack.getOrCreateTag().put(NBT.PHY, IntTag.valueOf(amount));
     }
 
     public static double getAtkS(ItemStack stack) {
@@ -147,6 +180,18 @@ public class SmithNbtUtils {
             return null;
         }
         int[] attr = stack.getTag().getIntArray(NBT.RANK_ATTR);
+        return attr.length > 0 ? attr : null;
+    }
+
+    public static void setRankAttrArmor(ItemStack stack, int[] attr) {
+        stack.getOrCreateTag().put(NBT.RANK_ATTR_ARMOR, new IntArrayTag(attr));
+    }
+
+    public static int[] getRankAttrArmor(ItemStack stack) {
+        if (stack.getTag() == null) {
+            return null;
+        }
+        int[] attr = stack.getTag().getIntArray(NBT.RANK_ATTR_ARMOR);
         return attr.length > 0 ? attr : null;
     }
 

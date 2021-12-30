@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.bar;
 
+import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -7,6 +8,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public class PlayerToughness extends AbstractBarOverlay {
 
@@ -20,7 +22,11 @@ public class PlayerToughness extends AbstractBarOverlay {
         Minecraft minecraft = Minecraft.getInstance();
         int xStart = minecraft.getWindow().getGuiScaledWidth() / 2 - 91;
         int yStart = minecraft.getWindow().getGuiScaledHeight() - 39;
-        int toughness = (int) player.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+        int phy = 0;
+        for (ItemStack stack : player.getArmorSlots()) {
+            phy += SmithNbtUtils.getPhy(stack);
+        }
+        int toughness = (int) player.getAttributeValue(Attributes.ARMOR_TOUGHNESS) + phy;
         GuiComponent.drawString(poseStack, Minecraft.getInstance().font, String.valueOf(toughness), xStart + 69, yStart - 9, 0x87CEFA);
     }
 

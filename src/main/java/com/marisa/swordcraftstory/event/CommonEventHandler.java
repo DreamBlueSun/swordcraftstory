@@ -26,10 +26,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
@@ -125,7 +122,7 @@ public class CommonEventHandler {
                         continue;
                     }
                     if (i instanceof TranslatableComponent c) {
-                        if (c.getKey().equals("item.modifiers.mainhand")) {
+                        if (c.getKey().contains("item.modifiers.")) {
                             remTip.add(i);
                         }
                     } else if (i instanceof TextComponent && i.getSiblings().size() > 0) {
@@ -146,28 +143,14 @@ public class CommonEventHandler {
                 }
                 toolTip.removeAll(remTip);
             }
-            //品质
-            Quality quality = SmithNbtUtils.getQuality(itemStack);
-            if (quality == Quality.UNKNOWN && event.getPlayer() != null) {
-                //鉴定品质
-                Inventory inventory = event.getPlayer().getInventory();
-                int slot = -1;
-                for (int i = 0; i < inventory.items.size(); ++i) {
-                    if (!inventory.items.get(i).isEmpty() && inventory.items.get(i) == itemStack) {
-                        slot = i;
-                        break;
-                    }
-                }
-                if (slot >= 0 && Minecraft.getInstance().player != null) {
-                    Networking.QUALITY_IDENTIFICATION.sendToServer(new QualityIdentificationPack(itemStack));
-                }
-            }
+            //鉴定品质
+            Quality quality = quality(event);
             int index = 0;
             toolTip.add(++index, new TranslatableComponent(quality.getName()).withStyle(quality.getChatFormatting()));
-            toolTip.add(++index, new TextComponent(""));
             //属性
             toolTip.add(++index, new TranslatableComponent("等阶").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getRank(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            toolTip.add(++index, new TextComponent(""));
             toolTip.add(++index, new TranslatableComponent("攻击").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(String.valueOf(atk + SmithNbtUtils.getAtk(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
             if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
@@ -181,7 +164,76 @@ public class CommonEventHandler {
 //            toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
 //                    .append(new TranslatableComponent("0/255").withStyle(ChatFormatting.GREEN)));
             toolTip.add(++index, new TextComponent(""));
+        } else if (itemStack.getItem() instanceof ArmorItem) {
+            List<Component> toolTip = event.getToolTip();
+            int armor = 0;
+            int toughness = 0;
+            String resistance = "0";
+            List<Component> remTip = new ArrayList<>();
+            for (Component i : toolTip) {
+                if (i instanceof TextComponent t && t.getSiblings().size() == 0 && StringUtil.isNullOrEmpty(t.getText())) {
+                    remTip.add(i);
+                    continue;
+                }
+                if (i instanceof TranslatableComponent c) {
+                    if (c.getKey().contains("item.modifiers.")) {
+                        remTip.add(i);
+                    } else if (c.getKey().equals("attribute.modifier.plus.0")) {
+                        remTip.add(i);
+                        if (c.getArgs().length > 1) {
+                            String key = ((TranslatableComponent) c.getArgs()[1]).getKey();
+                            if ("attribute.name.generic.armor".equals(key)) {
+                                armor = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
+                            } else if ("attribute.name.generic.armor_toughness".equals(key)) {
+                                toughness = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
+                            } else if ("attribute.name.generic.knockback_resistance".equals(key)) {
+                                resistance = String.valueOf(c.getArgs()[0]);
+                            }
+                        }
+                    }
+                }
+            }
+            toolTip.removeAll(remTip);
+            //鉴定品质
+            Quality quality = quality(event);
+            int index = 0;
+            toolTip.add(++index, new TranslatableComponent(quality.getName()).withStyle(quality.getChatFormatting()));
+            //属性
+            toolTip.add(++index, new TranslatableComponent("等阶").withStyle(ChatFormatting.YELLOW).append("     ")
+                    .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getRank(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            toolTip.add(++index, new TextComponent(""));
+            toolTip.add(++index, new TranslatableComponent("护甲").withStyle(ChatFormatting.YELLOW).append("     ")
+                    .append(new TranslatableComponent(String.valueOf(armor + SmithNbtUtils.getDef(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            toolTip.add(++index, new TranslatableComponent("韧性").withStyle(ChatFormatting.YELLOW).append("     ")
+                    .append(new TranslatableComponent(String.valueOf(toughness + SmithNbtUtils.getPhy(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            toolTip.add(++index, new TranslatableComponent("抵抗").withStyle(ChatFormatting.YELLOW).append("     ")
+                    .append(new TranslatableComponent(resistance).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            toolTip.add(++index, new TextComponent(""));
         }
+    }
+
+    /**
+     * 鉴定品质
+     */
+    private Quality quality(ItemTooltipEvent event) {
+        ItemStack itemStack = event.getItemStack();
+        //品质
+        Quality quality = SmithNbtUtils.getQuality(itemStack);
+        if (quality == Quality.UNKNOWN && event.getPlayer() != null) {
+            //鉴定品质
+            Inventory inventory = event.getPlayer().getInventory();
+            int slot = -1;
+            for (int i = 0; i < inventory.items.size(); ++i) {
+                if (!inventory.items.get(i).isEmpty() && inventory.items.get(i) == itemStack) {
+                    slot = i;
+                    break;
+                }
+            }
+            if (slot >= 0 && Minecraft.getInstance().player != null) {
+                Networking.QUALITY_IDENTIFICATION.sendToServer(new QualityIdentificationPack(itemStack));
+            }
+        }
+        return quality;
     }
 
     @SubscribeEvent

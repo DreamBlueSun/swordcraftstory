@@ -4,10 +4,7 @@ import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -41,15 +38,29 @@ public abstract class AbstractOre extends Item {
      */
     protected abstract int[] rankAttr(Item item);
 
+    /**
+     * 不同矿石返回其等阶对应的属性数组{DEF,PHY}
+     */
+    protected abstract int[] rankAttrArmor(Item item);
+
     public ItemStack itemRankUp(ItemStack stack) {
         ItemStack copy = stack.copy();
         int rank = SmithNbtUtils.getRank(copy);
         if (rank + 1 == rank()) {
-            int[] attr = rankAttr(copy.getItem());
-            if (attr != null) {
-                SmithNbtUtils.setRank(copy, rank());
-                SmithNbtUtils.setRankAttr(copy, attr);
-                return copy;
+            if (copy.getItem() instanceof ArmorItem) {
+                int[] attr = rankAttrArmor(copy.getItem());
+                if (attr != null) {
+                    SmithNbtUtils.setRank(copy, rank());
+                    SmithNbtUtils.setRankAttrArmor(copy, attr);
+                    return copy;
+                }
+            } else {
+                int[] attr = rankAttr(copy.getItem());
+                if (attr != null) {
+                    SmithNbtUtils.setRank(copy, rank());
+                    SmithNbtUtils.setRankAttr(copy, attr);
+                    return copy;
+                }
             }
         }
         return Items.AIR.getDefaultInstance();

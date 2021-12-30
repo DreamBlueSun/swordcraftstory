@@ -48,4 +48,13 @@ public class HeavyGoldOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{6, 0};
+        } else {
+            return null;
+        }
+    }
 }

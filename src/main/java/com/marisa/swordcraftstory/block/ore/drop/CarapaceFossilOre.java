@@ -48,4 +48,13 @@ public class CarapaceFossilOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{5, 2};
+        } else {
+            return null;
+        }
+    }
 }

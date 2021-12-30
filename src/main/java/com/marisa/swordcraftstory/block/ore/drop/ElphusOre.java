@@ -48,4 +48,13 @@ public class ElphusOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{2, 1};
+        } else {
+            return null;
+        }
+    }
 }

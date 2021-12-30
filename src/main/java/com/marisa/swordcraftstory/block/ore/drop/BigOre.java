@@ -48,4 +48,13 @@ public class BigOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{3, 0};
+        } else {
+            return null;
+        }
+    }
 }

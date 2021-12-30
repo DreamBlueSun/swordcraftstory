@@ -48,4 +48,13 @@ public class GaliaOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{8, 2};
+        } else {
+            return null;
+        }
+    }
 }

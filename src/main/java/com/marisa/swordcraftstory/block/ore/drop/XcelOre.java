@@ -48,4 +48,13 @@ public class XcelOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{6, 6};
+        } else {
+            return null;
+        }
+    }
 }

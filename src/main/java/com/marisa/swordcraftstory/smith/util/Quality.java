@@ -1,13 +1,11 @@
 package com.marisa.swordcraftstory.smith.util;
 
 import com.marisa.swordcraftstory.smith.util.pojo.AbstractQualityAttr;
+import com.marisa.swordcraftstory.smith.util.pojo.ArmorQualityAttr;
 import com.marisa.swordcraftstory.smith.util.pojo.ShootQualityAttr;
 import com.marisa.swordcraftstory.smith.util.pojo.SwordQualityAttr;
 import net.minecraft.ChatFormatting;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.*;
 
 import java.util.Random;
 
@@ -24,6 +22,8 @@ public enum Quality implements QualityAttr {
                 return new SwordQualityAttr(0, 0, 0);
             } else if (item instanceof ProjectileWeaponItem) {
                 return new ShootQualityAttr(0, 0);
+            } else if (item instanceof ArmorItem) {
+                return new ArmorQualityAttr(0, 0);
             }
             return null;
         }
@@ -35,6 +35,8 @@ public enum Quality implements QualityAttr {
                 return new SwordQualityAttr(0, -0.1D, 0);
             } else if (item instanceof ProjectileWeaponItem) {
                 return new ShootQualityAttr(4, -5);
+            } else if (item instanceof ArmorItem) {
+                return new ArmorQualityAttr(-1, 0);
             }
             return null;
         }
@@ -46,6 +48,8 @@ public enum Quality implements QualityAttr {
                 return new SwordQualityAttr(0, 0, 0);
             } else if (item instanceof ProjectileWeaponItem) {
                 return new ShootQualityAttr(4, 0);
+            } else if (item instanceof ArmorItem) {
+                return new ArmorQualityAttr(0, 0);
             }
             return null;
         }
@@ -57,6 +61,8 @@ public enum Quality implements QualityAttr {
                 return new SwordQualityAttr(1, 0.05D, 0);
             } else if (item instanceof ProjectileWeaponItem) {
                 return new ShootQualityAttr(5, 0);
+            } else if (item instanceof ArmorItem) {
+                return new ArmorQualityAttr(1, 0);
             }
             return null;
         }
@@ -68,6 +74,8 @@ public enum Quality implements QualityAttr {
                 return new SwordQualityAttr(2, 0.1D, 0);
             } else if (item instanceof ProjectileWeaponItem) {
                 return new ShootQualityAttr(6, 5);
+            } else if (item instanceof ArmorItem) {
+                return new ArmorQualityAttr(2, 1);
             }
             return null;
         }
@@ -79,6 +87,8 @@ public enum Quality implements QualityAttr {
                 return new SwordQualityAttr(3, 0.15D, 5);
             } else if (item instanceof ProjectileWeaponItem) {
                 return new ShootQualityAttr(7, 5);
+            } else if (item instanceof ArmorItem) {
+                return new ArmorQualityAttr(3, 2);
             }
             return null;
         }
@@ -90,6 +100,8 @@ public enum Quality implements QualityAttr {
                 return new SwordQualityAttr(4, 0.25D, 5);
             } else if (item instanceof ProjectileWeaponItem) {
                 return new ShootQualityAttr(7, 10);
+            } else if (item instanceof ArmorItem) {
+                return new ArmorQualityAttr(4, 3);
             }
             return null;
         }

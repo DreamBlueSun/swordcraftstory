@@ -48,4 +48,13 @@ public class CatsPawOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{12, 5};
+        } else {
+            return null;
+        }
+    }
 }

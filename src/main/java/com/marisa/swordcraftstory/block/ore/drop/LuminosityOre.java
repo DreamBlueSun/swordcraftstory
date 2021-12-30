@@ -48,4 +48,13 @@ public class LuminosityOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    protected int[] rankAttrArmor(Item item) {
+        if (item instanceof ArmorItem) {
+            return new int[]{8, 8};
+        } else {
+            return null;
+        }
+    }
 }
