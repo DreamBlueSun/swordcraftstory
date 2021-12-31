@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "swordcraftstory:story_ore_block",
-    "swordcraftstory:rank_up_block"
+    "swordcraftstory:rank_up_block",
+    "swordcraftstory:repair_block"
   ]
 }

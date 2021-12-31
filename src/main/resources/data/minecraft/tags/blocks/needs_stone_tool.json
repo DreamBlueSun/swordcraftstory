@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "swordcraftstory:story_ore_block"
+    "swordcraftstory:story_ore_block",
+    "swordcraftstory:repair_block"
   ]
 }
