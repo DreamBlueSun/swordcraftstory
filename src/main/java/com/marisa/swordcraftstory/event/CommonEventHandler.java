@@ -233,6 +233,9 @@ public class CommonEventHandler {
         return quality;
     }
 
+    private static final UUID UUID_MOVEMENT_SPEED = UUID.randomUUID();
+    private static final UUID UUID_ATTACK_SPEED = UUID.randomUUID();
+
     @SubscribeEvent
     public void itemAttributeModifier(ItemAttributeModifierEvent event) {
         if (event.getSlotType() != EquipmentSlot.MAINHAND) {
@@ -253,12 +256,12 @@ public class CommonEventHandler {
                 } else {
                     v = baseSpeed * agl;
                 }
-                event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.randomUUID(), "main hand modifier", v, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID_MOVEMENT_SPEED, "main hand modifier", v, AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
             if (SmithNbtUtils.isMeleeWeapon(itemStack.getItem())) {
                 double atkS = v + SmithNbtUtils.getAtkS(itemStack);
                 if (atkS != 0) {
-                    event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "main hand modifier", atkS, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(UUID_ATTACK_SPEED, "main hand modifier", atkS, AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
             }
         }
