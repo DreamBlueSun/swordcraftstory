@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
-import com.marisa.swordcraftstory.block.ore.drop.*;
+import com.marisa.swordcraftstory.item.ore.drop.*;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

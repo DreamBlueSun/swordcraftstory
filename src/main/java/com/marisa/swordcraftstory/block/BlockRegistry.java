@@ -2,7 +2,6 @@ package com.marisa.swordcraftstory.block;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.craft.RankUpBlock;
-import com.marisa.swordcraftstory.block.ore.StoryOreBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.block.craft.menu;
 
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
-import com.marisa.swordcraftstory.block.ore.AbstractOre;
+import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.network.FriendlyByteBuf;
