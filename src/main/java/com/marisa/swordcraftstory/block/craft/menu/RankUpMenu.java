@@ -12,8 +12,6 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.ItemCombinerMenu;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
@@ -71,7 +69,7 @@ public class RankUpMenu extends ItemCombinerMenu {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
-        if (!(stack0.getItem() instanceof TieredItem || stack0.getItem() instanceof ProjectileWeaponItem || stack0.getItem() instanceof ArmorItem)) {
+        if (!(SmithNbtUtils.isWeapon(stack0.getItem()) || stack0.getItem() instanceof ArmorItem)) {
             return;
         }
         ItemStack stack1 = this.inputSlots.getItem(1);

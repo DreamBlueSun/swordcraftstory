@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BCB",
+    "BBB"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:stone"
+    },
+    "B": {
+      "tag": "minecraft:dirt"
+    },
+    "C": {
+      "item": "minecraft:grindstone"
+    }
+  },
+  "result": {
+    "item": "swordcraftstory:repair_block",
+    "count": 1
+  }
+}

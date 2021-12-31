@@ -5,7 +5,8 @@ import com.marisa.swordcraftstory.smith.util.pojo.ArmorQualityAttr;
 import com.marisa.swordcraftstory.smith.util.pojo.ShootQualityAttr;
 import com.marisa.swordcraftstory.smith.util.pojo.SwordQualityAttr;
 import net.minecraft.ChatFormatting;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
 
 import java.util.Random;
 
@@ -18,9 +19,9 @@ public enum Quality implements QualityAttr {
     UNKNOWN(0, 0, "未鉴定", ChatFormatting.RED) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
-            if (item instanceof SwordItem || item instanceof DiggerItem) {
+            if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(0, 0, 0);
-            } else if (item instanceof ProjectileWeaponItem) {
+            } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr(0, 0);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(0, 0);
@@ -31,9 +32,9 @@ public enum Quality implements QualityAttr {
     INFERIOR(1, 10, "劣质", ChatFormatting.DARK_GRAY) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
-            if (item instanceof SwordItem || item instanceof DiggerItem) {
+            if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(0, -0.1D, 0);
-            } else if (item instanceof ProjectileWeaponItem) {
+            } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr(4, -5);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(-1, 0);
@@ -44,9 +45,9 @@ public enum Quality implements QualityAttr {
     ORDINARY(2, 64, "普通", ChatFormatting.WHITE) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
-            if (item instanceof SwordItem || item instanceof DiggerItem) {
+            if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(0, 0, 0);
-            } else if (item instanceof ProjectileWeaponItem) {
+            } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr(4, 0);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(0, 0);
@@ -57,9 +58,9 @@ public enum Quality implements QualityAttr {
     GRADE(3, 15, "优良", ChatFormatting.GREEN) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
-            if (item instanceof SwordItem || item instanceof DiggerItem) {
+            if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(1, 0.05D, 0);
-            } else if (item instanceof ProjectileWeaponItem) {
+            } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr(5, 0);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(1, 0);
@@ -70,9 +71,9 @@ public enum Quality implements QualityAttr {
     RARE(4, 7, "稀有", ChatFormatting.BLUE) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
-            if (item instanceof SwordItem || item instanceof DiggerItem) {
+            if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(2, 0.1D, 0);
-            } else if (item instanceof ProjectileWeaponItem) {
+            } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr(6, 5);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(2, 1);
@@ -83,9 +84,9 @@ public enum Quality implements QualityAttr {
     EPIC(5, 3, "史诗", ChatFormatting.DARK_PURPLE) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
-            if (item instanceof SwordItem || item instanceof DiggerItem) {
+            if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(3, 0.15D, 5);
-            } else if (item instanceof ProjectileWeaponItem) {
+            } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr(7, 5);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(3, 2);
@@ -96,9 +97,9 @@ public enum Quality implements QualityAttr {
     FABULOUS(6, 1, "传说", ChatFormatting.GOLD) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
-            if (item instanceof SwordItem || item instanceof DiggerItem) {
+            if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(4, 0.25D, 5);
-            } else if (item instanceof ProjectileWeaponItem) {
+            } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr(7, 10);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(4, 3);

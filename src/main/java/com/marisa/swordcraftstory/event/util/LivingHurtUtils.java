@@ -28,7 +28,7 @@ public class LivingHurtUtils {
         if (source != DamageSource.OUT_OF_WORLD) {
             Absorb absorb = new Absorb(target, source);
             float f1 = amount = damage.addP(-absorb.getP()).addM(-absorb.getM()).addR(-absorb.getR()).totalAll();
-            amount *= Math.max(1.0F - absorb.getEnchantAbsorb() - absorb.getBuffAbsorb(), 0);
+            amount = Math.max(amount * Math.max(1.0F - absorb.getEnchantAbsorb() - absorb.getBuffAbsorb(), 0), 1.0F);
             //抗性生效时效果
             float f2 = f1 * absorb.getBuffAbsorb();
             if (f2 > 0.0F && f2 < 3.4028235E37F) {

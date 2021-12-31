@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.smith.util;
 
 import net.minecraft.nbt.*;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 
@@ -25,6 +25,18 @@ public class SmithNbtUtils {
         public final static String RANK = "story_combat_rank";
         public final static String RANK_ATTR = "story_combat_rank_attr";
         public final static String RANK_ATTR_ARMOR = "story_combat_rank_attr_armor";
+    }
+
+    public static boolean isMeleeWeapon(Item item) {
+        return item instanceof SwordItem || item instanceof AxeItem || item instanceof PickaxeItem;
+    }
+
+    public static boolean isRangedWeapon(Item item) {
+        return item instanceof BowItem || item instanceof CrossbowItem;
+    }
+
+    public static boolean isWeapon(Item item) {
+        return isMeleeWeapon(item) || isRangedWeapon(item);
     }
 
     public static Quality getQuality(ItemStack stack) {

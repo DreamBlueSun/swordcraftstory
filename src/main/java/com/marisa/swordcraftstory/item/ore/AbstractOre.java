@@ -26,7 +26,7 @@ public abstract class AbstractOre extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, @NotNull TooltipFlag flagIn) {
-        tooltip.add(new TranslatableComponent("用途：升阶").withStyle(ChatFormatting.LIGHT_PURPLE));
+        tooltip.add(new TranslatableComponent("矿石").withStyle(ChatFormatting.LIGHT_PURPLE));
         tooltip.add(new TranslatableComponent("稀有度").withStyle(ChatFormatting.YELLOW)
                 .append("     ").append(new TranslatableComponent(String.valueOf(rank())).withStyle(ChatFormatting.LIGHT_PURPLE)));
     }

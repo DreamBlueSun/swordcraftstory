@@ -25,7 +25,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
@@ -81,7 +82,7 @@ public class CommonEventHandler {
                 arrow.setBaseDamage(5.0D);
                 return;
             }
-            if (owner instanceof ServerPlayer player && player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
+            if (owner instanceof ServerPlayer player && SmithNbtUtils.isRangedWeapon(player.getMainHandItem().getItem())) {
                 float atk = (float) SmithNbtUtils.getAtk(player.getMainHandItem());
                 //重新计算力量附魔：基础物理伤害+(0.5+0.5*lv)，再+(4%*lv)，最高20%
                 int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, player.getMainHandItem());
@@ -109,22 +110,22 @@ public class CommonEventHandler {
     @SubscribeEvent
     public void itemTooltip(ItemTooltipEvent event) {
         ItemStack itemStack = event.getItemStack();
-        if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem || itemStack.getItem() instanceof ProjectileWeaponItem) {
+        if (SmithNbtUtils.isWeapon(itemStack.getItem())) {
             List<Component> toolTip = event.getToolTip();
             int atk = 0;
             String atk_s = "1.0";
-            if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
-                List<Component> remTip = new ArrayList<>();
-                for (Component i : toolTip) {
-                    if (i instanceof TextComponent t && t.getSiblings().size() == 0 && StringUtil.isNullOrEmpty(t.getText())) {
-                        remTip.add(i);
-                        continue;
-                    }
-                    if (i instanceof TranslatableComponent c) {
-                        if (c.getKey().contains("item.modifiers.")) {
-                            remTip.add(i);
-                        }
-                    } else if (i instanceof TextComponent && i.getSiblings().size() > 0) {
+            List<Component> remTip = new ArrayList<>();
+            for (Component i : toolTip) {
+                if (i instanceof TextComponent t && t.getSiblings().size() == 0 && StringUtil.isNullOrEmpty(t.getText())) {
+                    remTip.add(i);
+                    continue;
+                }
+                if (i instanceof TranslatableComponent c && c.getKey().contains("item.modifiers.")) {
+                    remTip.add(i);
+                    continue;
+                }
+                if (SmithNbtUtils.isMeleeWeapon(itemStack.getItem())) {
+                    if (i instanceof TextComponent && i.getSiblings().size() > 0) {
                         for (Component j : i.getSiblings()) {
                             if (j instanceof TranslatableComponent c && c.getKey().equals("attribute.modifier.equals.0")) {
                                 remTip.add(i);
@@ -139,8 +140,8 @@ public class CommonEventHandler {
                         }
                     }
                 }
-                toolTip.removeAll(remTip);
             }
+            toolTip.removeAll(remTip);
             //鉴定品质
             Quality quality = quality(event);
             int index = 0;
@@ -151,7 +152,7 @@ public class CommonEventHandler {
             toolTip.add(++index, new TextComponent(""));
             toolTip.add(++index, new TranslatableComponent("攻击").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(String.valueOf(atk + SmithNbtUtils.getAtk(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
-            if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
+            if (SmithNbtUtils.isMeleeWeapon(itemStack.getItem())) {
                 toolTip.add(++index, new TranslatableComponent("攻速").withStyle(ChatFormatting.YELLOW).append("     ")
                         .append(new TranslatableComponent(atk_s).withStyle(ChatFormatting.LIGHT_PURPLE)));
             }
@@ -238,7 +239,7 @@ public class CommonEventHandler {
             return;
         }
         ItemStack itemStack = event.getItemStack();
-        if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem || itemStack.getItem() instanceof ProjectileWeaponItem) {
+        if (SmithNbtUtils.isWeapon(itemStack.getItem())) {
             //攻击速度、移动速度
             double v = 0;
             int agl = SmithNbtUtils.getAgl(itemStack);
@@ -254,7 +255,7 @@ public class CommonEventHandler {
                 }
                 event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.randomUUID(), "main hand modifier", v, AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
-            if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem) {
+            if (SmithNbtUtils.isMeleeWeapon(itemStack.getItem())) {
                 double atkS = v + SmithNbtUtils.getAtkS(itemStack);
                 if (atkS != 0) {
                     event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "main hand modifier", atkS, AttributeModifier.Operation.MULTIPLY_TOTAL));

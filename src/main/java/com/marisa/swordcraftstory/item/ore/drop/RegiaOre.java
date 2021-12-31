@@ -1,7 +1,8 @@
 package com.marisa.swordcraftstory.item.ore.drop;
 
-import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.group.StoryGroup;
+import com.marisa.swordcraftstory.item.ore.AbstractOre;
+import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -38,11 +39,11 @@ public class RegiaOre extends AbstractOre {
 
     @Override
     protected int[] rankAttr(Item item) {
-        if (item instanceof SwordItem || item instanceof PickaxeItem) {
+        if (item instanceof SwordItem) {
             return new int[]{35, 0};
-        } else if (item instanceof AxeItem || item instanceof HoeItem || item instanceof ShovelItem) {
+        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
             return new int[]{45, -25};
-        } else if (item instanceof ProjectileWeaponItem) {
+        } else if (SmithNbtUtils.isRangedWeapon(item)) {
             return new int[]{35, -5};
         } else {
             return null;

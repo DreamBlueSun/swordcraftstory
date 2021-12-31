@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.block;
+package com.marisa.swordcraftstory.block.ore;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
@@ -40,7 +40,7 @@ public class StoryOreBlock extends OreBlock {
 
 
     public StoryOreBlock() {
-        super(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F));
+        super(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F).lightLevel((state) -> 7));
         this.setRegistryName(Story.MOD_ID + ":story_ore_block");
     }
 

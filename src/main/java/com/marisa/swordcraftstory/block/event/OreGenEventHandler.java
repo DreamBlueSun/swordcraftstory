@@ -1,5 +1,6 @@
-package com.marisa.swordcraftstory.block;
+package com.marisa.swordcraftstory.block.event;
 
+import com.marisa.swordcraftstory.block.BlockRegistry;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;

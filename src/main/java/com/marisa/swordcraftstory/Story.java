@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory;
 
 import com.marisa.swordcraftstory.bar.BarEventHandler;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
-import com.marisa.swordcraftstory.block.OreGenEventHandler;
+import com.marisa.swordcraftstory.block.event.OreGenEventHandler;
 import com.marisa.swordcraftstory.event.CommonEventHandler;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.save.SaveEventHandler;

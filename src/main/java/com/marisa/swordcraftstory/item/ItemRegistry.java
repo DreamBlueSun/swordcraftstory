@@ -2,8 +2,12 @@ package com.marisa.swordcraftstory.item;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
-import com.marisa.swordcraftstory.item.ore.drop.*;
 import com.marisa.swordcraftstory.group.StoryGroup;
+import com.marisa.swordcraftstory.item.material.*;
+import com.marisa.swordcraftstory.item.ore.drop.*;
+import com.marisa.swordcraftstory.item.reply.JiJaMedicine;
+import com.marisa.swordcraftstory.item.reply.JuYuMedicine;
+import com.marisa.swordcraftstory.item.reply.Woundplast;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +25,18 @@ public class ItemRegistry {
     //方块物品
     public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> RANK_UP_BLOCK = ITEMS.register("rank_up_block", () -> new BlockItem(BlockRegistry.RANK_UP_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    //回复道具
+    public static RegistryObject<Item> WOUNDPLAST = ITEMS.register("woundplast", Woundplast::new);
+    public static RegistryObject<Item> JI_JA_MEDICINE = ITEMS.register("ji_ja_medicine", JiJaMedicine::new);
+    public static RegistryObject<Item> JU_YU_MEDICINE = ITEMS.register("ju_yu_medicine", JuYuMedicine::new);
+    //素材道具
+    public static RegistryObject<Item> JI_JA_FRUIT = ITEMS.register("ji_ja_fruit", JiJaFruit::new);
+    public static RegistryObject<Item> JU_YU_FRUIT = ITEMS.register("ju_yu_fruit", JuYuFruit::new);
+    public static RegistryObject<Item> GRASS_LEAVES = ITEMS.register("grass_leaves", GrassLeaves::new);
+    public static RegistryObject<Item> SOFT_LEAVES = ITEMS.register("soft_leaves", SoftLeaves::new);
+    public static RegistryObject<Item> SWEET_HONEY = ITEMS.register("sweet_honey", SweetHoney::new);
+    public static RegistryObject<Item> SOFT_LEATHER = ITEMS.register("soft_leather", SoftLeather::new);
     //素材矿石
     public static RegistryObject<Item> IRON_ORE = ITEMS.register("iron_ore", IronOre::new);
     public static RegistryObject<Item> SLANDER_ORE = ITEMS.register("slander_ore", SlanderOre::new);

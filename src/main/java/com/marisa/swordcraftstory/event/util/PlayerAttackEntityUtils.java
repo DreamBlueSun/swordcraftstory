@@ -17,7 +17,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.Vec3;
 
@@ -45,7 +44,7 @@ public class PlayerAttackEntityUtils {
         //基础伤害
         float f = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
         //锻造伤害
-        if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
+        if (SmithNbtUtils.isRangedWeapon(player.getMainHandItem().getItem())) {
             f = SmithNbtUtils.getAtk(player.getMainHandItem()) * 0.5F;
         } else {
             f += SmithNbtUtils.getAtk(player.getMainHandItem());
