@@ -25,13 +25,12 @@ public class LivingHurtUtils {
         //伤害计算
         Damage damage = new Damage(event.getAmount(), source, target);
         float amount = damage.totalAll();
-        if (!source.isBypassMagic() && source != DamageSource.OUT_OF_WORLD) {
+        if (source != DamageSource.OUT_OF_WORLD) {
             Absorb absorb = new Absorb(target, source);
-            damage.addP(-absorb.getP()).addM(-absorb.getM()).addR(-absorb.getR());
-            float v = damage.totalAll();
-            amount = v * Math.max(1.0F - absorb.getEnchantAbsorb() - absorb.getBuffAbsorb(), 0);
+            float f1 = amount = damage.addP(-absorb.getP()).addM(-absorb.getM()).addR(-absorb.getR()).totalAll();
+            amount *= Math.max(1.0F - absorb.getEnchantAbsorb() - absorb.getBuffAbsorb(), 0);
             //抗性生效时效果
-            float f2 = v * absorb.getBuffAbsorb();
+            float f2 = f1 * absorb.getBuffAbsorb();
             if (f2 > 0.0F && f2 < 3.4028235E37F) {
                 if (target instanceof ServerPlayer) {
                     ((ServerPlayer) target).awardStat(Stats.CUSTOM.get(Stats.DAMAGE_RESISTED), Math.round(f2 * 10.0F));

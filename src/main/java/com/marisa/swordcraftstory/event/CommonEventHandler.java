@@ -238,10 +238,13 @@ public class CommonEventHandler {
 
     @SubscribeEvent
     public void itemAttributeModifier(ItemAttributeModifierEvent event) {
+        ItemStack itemStack = event.getItemStack();
+        if (itemStack.getItem() instanceof ArmorItem && itemStack.isDamageableItem()) {
+            itemStack.getOrCreateTag().putBoolean("Unbreakable", true);
+        }
         if (event.getSlotType() != EquipmentSlot.MAINHAND) {
             return;
         }
-        ItemStack itemStack = event.getItemStack();
         if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem || itemStack.getItem() instanceof ProjectileWeaponItem) {
             //攻击速度、移动速度
             double v = 0;
@@ -266,7 +269,6 @@ public class CommonEventHandler {
             }
         }
     }
-
 
     @SubscribeEvent
     public void itemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
