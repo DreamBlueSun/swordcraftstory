@@ -36,5 +36,9 @@ public class ArmorQualityAttr extends AbstractQualityAttr {
     public void modifyBase(ItemStack itemStack) {
         SmithNbtUtils.setDef(itemStack, this.def);
         SmithNbtUtils.setPhy(itemStack, this.phy);
+        if (itemStack.isDamageableItem()) {
+            itemStack.getOrCreateTag().putInt("HideFlags", 4);
+            itemStack.getOrCreateTag().putBoolean("Unbreakable", true);
+        }
     }
 }

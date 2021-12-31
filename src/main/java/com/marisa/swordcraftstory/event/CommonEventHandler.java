@@ -22,7 +22,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
@@ -94,7 +93,7 @@ public class CommonEventHandler {
                 if (50 > new Random().nextInt(1000)) {
                     atk *= 1.25D;
                     arrow.setCritArrow(true);
-                    player.level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
+                    player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
                 }
                 arrow.setBaseDamage(atk);
             } else if (owner instanceof Mob mob) {
@@ -131,10 +130,9 @@ public class CommonEventHandler {
                                 remTip.add(i);
                                 if (c.getArgs().length > 1) {
                                     String key = ((TranslatableComponent) c.getArgs()[1]).getKey();
-                                    if ("attribute.name.generic.attack_damage".equals(key)) {
-                                        atk = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
-                                    } else if ("attribute.name.generic.attack_speed".equals(key)) {
-                                        atk_s = String.valueOf(c.getArgs()[0]);
+                                    switch (key) {
+                                        case "attribute.name.generic.attack_damage" -> atk = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
+                                        case "attribute.name.generic.attack_speed" -> atk_s = String.valueOf(c.getArgs()[0]);
                                     }
                                 }
                             }
@@ -182,12 +180,10 @@ public class CommonEventHandler {
                         remTip.add(i);
                         if (c.getArgs().length > 1) {
                             String key = ((TranslatableComponent) c.getArgs()[1]).getKey();
-                            if ("attribute.name.generic.armor".equals(key)) {
-                                armor = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
-                            } else if ("attribute.name.generic.armor_toughness".equals(key)) {
-                                toughness = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
-                            } else if ("attribute.name.generic.knockback_resistance".equals(key)) {
-                                resistance = String.valueOf(c.getArgs()[0]);
+                            switch (key) {
+                                case "attribute.name.generic.armor" -> armor = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
+                                case "attribute.name.generic.armor_toughness" -> toughness = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
+                                case "attribute.name.generic.knockback_resistance" -> resistance = String.valueOf(c.getArgs()[0]);
                             }
                         }
                     }
@@ -238,13 +234,10 @@ public class CommonEventHandler {
 
     @SubscribeEvent
     public void itemAttributeModifier(ItemAttributeModifierEvent event) {
-        ItemStack itemStack = event.getItemStack();
-        if (itemStack.getItem() instanceof ArmorItem && itemStack.isDamageableItem()) {
-            itemStack.getOrCreateTag().putBoolean("Unbreakable", true);
-        }
         if (event.getSlotType() != EquipmentSlot.MAINHAND) {
             return;
         }
+        ItemStack itemStack = event.getItemStack();
         if (itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof DiggerItem || itemStack.getItem() instanceof ProjectileWeaponItem) {
             //攻击速度、移动速度
             double v = 0;
