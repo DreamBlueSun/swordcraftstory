@@ -62,16 +62,12 @@ public class PlayerDataPack {
                         PlayerDataManager.put(new PlayerData(this));
                         PlayerStatusScreen.open(Minecraft.getInstance().player);
                     }
-                    default -> {
-                    }
                 }
             } else {
                 switch (this.message) {
                     case "story.player.status.open" -> {
-                        PlayerDataPack pack1 = new PlayerDataPack("story.player.status.client", PlayerDataManager.get(sender.getStringUUID()));
-                        Networking.PLAYER_DATA.send(PacketDistributor.PLAYER.with(() -> sender), pack1);
-                    }
-                    default -> {
+                        PlayerDataPack pack = new PlayerDataPack("story.player.status.client", PlayerDataManager.get(sender.getStringUUID()));
+                        Networking.PLAYER_DATA.send(PacketDistributor.PLAYER.with(() -> sender), pack);
                     }
                 }
             }

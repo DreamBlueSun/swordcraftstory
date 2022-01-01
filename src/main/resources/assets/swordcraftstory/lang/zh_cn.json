@@ -144,6 +144,8 @@
   "item.swordcraftstory.elements_mana_axe": "元素之斧",
   "msg.swordcraftstory.smithery.repairAll.no_safe": "附近有怪物在游荡",
   "msg.swordcraftstory.smithery.repairAll.ok": "装备修理完毕",
+  "msg.online.players.friends.tp.not_in_target_friends": "你还不是对方的好友",
+  "msg.online.players.friends.tp.target_no_safe": "对方游戏模式或所处的环境不安全",
   "advancements.swordcraftstory.root.title": "铸剑物语",
   "advancements.swordcraftstory.root.description": "锻冶的起点",
   "advancements.swordcraftstory.get_repair_item.title": "叮叮",

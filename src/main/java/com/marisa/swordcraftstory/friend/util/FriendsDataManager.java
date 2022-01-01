@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.save.util;
+package com.marisa.swordcraftstory.friend.util;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.save.PlayerData;
@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 玩家信息管理
+ * 玩家好友信息管理
  */
 
-public class PlayerDataManager {
+public class FriendsDataManager {
 
     private static final Map<String, PlayerData> MAP = new HashMap(8);
 
@@ -24,14 +24,6 @@ public class PlayerDataManager {
         return MAP.put(data.getPlayerUUID(), data);
     }
 
-    public static void update(PlayerData data) {
-        if (MAP.containsKey(data.getPlayerUUID())) {
-            PlayerData playerData = MAP.get(data.getPlayerUUID());
-            playerData.update(data);
-        } else {
-            MAP.put(data.getPlayerUUID(), data);
-        }
-    }
 
     public static final int LV_NEED_XP_BASE = 202191;
     public static final int LV_NEED_XP_OFFSET = 1126;

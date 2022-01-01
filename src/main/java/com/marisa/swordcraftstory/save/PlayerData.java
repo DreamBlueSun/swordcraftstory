@@ -1,10 +1,13 @@
 package com.marisa.swordcraftstory.save;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.friend.net.pack.FriendsDataPack;
 import com.marisa.swordcraftstory.net.pack.PlayerDataPack;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 玩家信息
@@ -19,6 +22,8 @@ public class PlayerData implements Serializable {
     private int xpLast;
     private int xp;
 
+    private List<String> friendsUUID;
+
     public String getPlayerUUID() {
         return playerUUID;
     }
@@ -31,16 +36,47 @@ public class PlayerData implements Serializable {
         return xp;
     }
 
+    public List<String> getFriendsUUID() {
+        if (friendsUUID == null) {
+            friendsUUID = new ArrayList<>();
+        }
+        return friendsUUID;
+    }
+
     public PlayerData(String playerUUID) {
         this.playerUUID = playerUUID;
         this.xpLast = 0;
         this.xp = 0;
+        this.friendsUUID = new ArrayList<>();
     }
 
     public PlayerData(PlayerDataPack pack) {
         this.playerUUID = pack.getPlayerUUID();
         this.xpLast = pack.getXpLast();
         this.xp = pack.getXp();
+        this.friendsUUID = new ArrayList<>();
+    }
+
+    public PlayerData(FriendsDataPack pack) {
+        this.playerUUID = pack.getPlayerUUID();
+        this.xpLast = 0;
+        this.xp = 0;
+        this.friendsUUID = pack.getFriends();
+    }
+
+    public void update(PlayerData data) {
+        if (data != null && this.playerUUID.equals(data.playerUUID)) {
+            if (data.getXpLast() > 0) {
+                this.xpLast = data.getXpLast();
+            }
+            if (data.getXp() > 0) {
+                this.xp = data.getXp();
+            }
+            if (data.getFriendsUUID() != null && data.getFriendsUUID().size() > 0) {
+                this.friendsUUID = data.getFriendsUUID();
+            }
+        }
+
     }
 
     /**
