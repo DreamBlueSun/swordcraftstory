@@ -22,11 +22,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
-import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
@@ -70,39 +70,46 @@ public class CommonEventHandler {
     @SubscribeEvent
     public void arrowShoot(EntityJoinWorldEvent event) {
         //修改弓箭实体生成属性
-        if (!event.getWorld().isClientSide() && event.getEntity() instanceof AbstractArrow arrow) {
-            if (arrow instanceof SpectralArrow || arrow instanceof ThrownTrident) {
-                //光灵箭、药水箭：基础伤害固定值0
-                arrow.setBaseDamage(0);
+        if (!event.getWorld().isClientSide()) {
+            if (event.getEntity() instanceof SpectralArrow spectralArrow) {
+                //光灵箭：基础伤害固定值0
+                spectralArrow.setBaseDamage(0);
                 return;
             }
-            Entity owner = arrow.getOwner();
-            if (owner == null) {
-                //发射器、投掷器、找不到发射者的箭矢：伤害为基础固定值
-                arrow.setBaseDamage(5.0D);
-                return;
-            }
-            if (owner instanceof ServerPlayer player && SmithNbtUtils.isRangedWeapon(player.getMainHandItem().getItem())) {
-                float atk = (float) SmithNbtUtils.getAtk(player.getMainHandItem());
-                //重新计算力量附魔：基础物理伤害+(0.5+0.5*lv)，再+(4%*lv)，最高20%
-                int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, player.getMainHandItem());
-                if (j > 0) {
-                    atk += (0.5D * j + 0.5D);
-                    atk *= 1.0D + (Math.min(j, 5) * 0.04D);
+            if (event.getEntity() instanceof Arrow arrow) {
+                if (arrow.getPickupItem().getItem() == Items.TIPPED_ARROW) {
+                    //药水箭：基础伤害固定值0
+                    arrow.setBaseDamage(0);
+                    return;
                 }
-                //暴击
-                if (50 > new Random().nextInt(1000)) {
-                    atk *= 1.25D;
-                    arrow.setCritArrow(true);
-                    player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
+                Entity owner = arrow.getOwner();
+                if (owner == null) {
+                    //发射器、投掷器、找不到发射者的箭矢：伤害为基础固定值
+                    arrow.setBaseDamage(4.0D);
+                    return;
                 }
-                arrow.setBaseDamage(atk);
-            } else if (owner instanceof Mob mob) {
-                //mob射箭
-                int lv = MobAttributesUtils.getMobLv((ServerLevel) mob.level, mob.getStringUUID());
-                arrow.setBaseDamage(5.0D + (lv * 3.0D));
-            } else {
-                arrow.setBaseDamage(5.0D);
+                if (owner instanceof ServerPlayer player && SmithNbtUtils.isRangedWeapon(player.getMainHandItem().getItem())) {
+                    float atk = (float) SmithNbtUtils.getAtk(player.getMainHandItem());
+                    //重新计算力量附魔：基础物理伤害+(0.5+0.5*lv)，再+(4%*lv)，最高20%
+                    int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, player.getMainHandItem());
+                    if (j > 0) {
+                        atk += (0.5D * j + 0.5D);
+                        atk *= 1.0D + (Math.min(j, 5) * 0.04D);
+                    }
+                    //暴击
+                    if (50 > new Random().nextInt(1000)) {
+                        atk *= 1.25D;
+                        arrow.setCritArrow(true);
+                        player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
+                    }
+                    arrow.setBaseDamage(atk);
+                } else if (owner instanceof Mob mob) {
+                    //mob射箭
+                    int lv = MobAttributesUtils.getMobLv((ServerLevel) mob.level, mob.getStringUUID());
+                    arrow.setBaseDamage(4.0D + (lv * 3.0D));
+                } else {
+                    arrow.setBaseDamage(4.0D);
+                }
             }
         }
     }
