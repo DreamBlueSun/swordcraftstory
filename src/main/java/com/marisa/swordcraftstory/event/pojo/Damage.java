@@ -62,15 +62,19 @@ public class Damage {
                 break;
             case "arrow":
                 try {
-                    AbstractArrow arrow = (AbstractArrow) this.source.getDirectEntity();
-                    this.p = arrow != null ? (float) arrow.getBaseDamage() : 5.0F;
+                    if (this.amount > 0.0F) {
+                        AbstractArrow arrow = (AbstractArrow) this.source.getDirectEntity();
+                        this.p = arrow != null ? (float) arrow.getBaseDamage() : 5.0F;
+                    } else {
+                        this.p = amount;
+                    }
                 } catch (Exception e) {
                     Story.LOG.error("ARROW伤害异常：" + this.source, e);
                 }
                 break;
             case "mob":
                 try {
-                    if (this.source.getEntity() != null && this.source.getEntity() instanceof Mob mob) {
+                    if (this.amount > 0.0F && this.source.getEntity() != null && this.source.getEntity() instanceof Mob mob) {
                         int lv = MobAttributesUtils.getMobLv((ServerLevel) mob.level, mob.getStringUUID());
                         this.p = Mth.clamp(this.amount, 2.0F, 20.0F) * (1 + lv * 0.6F);
                     } else {
