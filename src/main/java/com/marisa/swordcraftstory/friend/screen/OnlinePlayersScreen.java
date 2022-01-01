@@ -3,13 +3,13 @@ package com.marisa.swordcraftstory.friend.screen;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.friend.btn.FriendsAddBtn;
 import com.marisa.swordcraftstory.friend.net.pack.FriendsDataPack;
+import com.marisa.swordcraftstory.friend.pojo.PlayerVO;
 import com.marisa.swordcraftstory.net.Networking;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -24,19 +24,19 @@ public class OnlinePlayersScreen extends Screen {
 
     ResourceLocation resourceLocation = new ResourceLocation(Story.MOD_ID, "textures/gui/friend/window.png");
 
-    private List<AbstractClientPlayer> players;
+    private final List<PlayerVO> onlinePlayer;
     private final static int PAGE_SIZE = 5;
     private int pageMax = 0;
     private int page = 0;
 
-    protected OnlinePlayersScreen() {
+    protected OnlinePlayersScreen(List<PlayerVO> onlinePlayer) {
         super(new TextComponent("online_players_screen"));
+        this.onlinePlayer = onlinePlayer;
     }
 
     private void update() {
-        if (Minecraft.getInstance().level != null) {
-            this.players = Minecraft.getInstance().level.players();
-            this.pageMax = players.size() % PAGE_SIZE == 0 ? Math.max(players.size() / PAGE_SIZE - 1, 0) : players.size() / PAGE_SIZE;
+        if (this.onlinePlayer != null) {
+            this.pageMax = this.onlinePlayer.size() % PAGE_SIZE == 0 ? Math.max(this.onlinePlayer.size() / PAGE_SIZE - 1, 0) : this.onlinePlayer.size() / PAGE_SIZE;
             if (this.page > this.pageMax) {
                 this.page = this.pageMax;
             }
@@ -67,9 +67,9 @@ public class OnlinePlayersScreen extends Screen {
         //列表
         int x = this.width / 2 - 51;
         int y = this.height / 2 - 53;
-        for (int i = PAGE_SIZE * this.page; i < this.players.size(); i++) {
-            drawString(matrixStack, this.font, this.players.get(i).getDisplayName().getString(), x, y + 6, 0x00FF7F);
-            this.addRenderableWidget(new FriendsAddBtn(x + 70, y, 32, 20, new TextComponent("加好友"), this.players.get(i).getStringUUID()));
+        for (int i = PAGE_SIZE * this.page; i < this.onlinePlayer.size(); i++) {
+            drawString(matrixStack, this.font, this.onlinePlayer.get(i).getName(), x, y + 6, 0x00FF7F);
+            this.addRenderableWidget(new FriendsAddBtn(x + 70, y, 32, 20, new TextComponent("加好友"), this.onlinePlayer.get(i).getUuid()));
             y += 22;
         }
         //上一页
@@ -98,8 +98,8 @@ public class OnlinePlayersScreen extends Screen {
         super.render(matrixStack, mouseX, mouseY, particleTick);
     }
 
-    public static void open() {
-        Minecraft.getInstance().setScreen(new OnlinePlayersScreen());
+    public static void open(List<PlayerVO> onlinePlayer) {
+        Minecraft.getInstance().setScreen(new OnlinePlayersScreen(onlinePlayer));
     }
 
 }

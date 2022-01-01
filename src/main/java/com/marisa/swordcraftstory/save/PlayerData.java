@@ -61,7 +61,7 @@ public class PlayerData implements Serializable {
         this.playerUUID = pack.getPlayerUUID();
         this.xpLast = 0;
         this.xp = 0;
-        this.friendsUUID = pack.getFriends();
+        this.friendsUUID = pack.getFriendsUUID();
     }
 
     public void update(PlayerData data) {
