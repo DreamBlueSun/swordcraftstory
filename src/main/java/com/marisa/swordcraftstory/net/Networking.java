@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.net;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.friend.net.pack.FriendsDataPack;
+import com.marisa.swordcraftstory.net.pack.ItemUnbreakablePack;
 import com.marisa.swordcraftstory.net.pack.PlayerDataPack;
 import com.marisa.swordcraftstory.net.pack.QualityIdentificationPack;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +23,7 @@ public class Networking {
     public static SimpleChannel PLAYER_DATA;
     public static SimpleChannel QUALITY_IDENTIFICATION;
     public static SimpleChannel FRIENDS_DATA;
+    public static SimpleChannel ITEM_UNBREAKABLE;
 
     public static void registerPlayerData() {
         PLAYER_DATA = NetworkRegistry.newSimpleChannel(
@@ -42,6 +44,13 @@ public class Networking {
                 new ResourceLocation(Story.MOD_ID + ":networking_friends_data"),
                 () -> "1.0", (s) -> true, (s) -> true);
         FRIENDS_DATA.registerMessage(nextID(), FriendsDataPack.class, FriendsDataPack::toBytes, FriendsDataPack::new, FriendsDataPack::handler);
+    }
+
+    public static void registerItemUnbreakable() {
+        ITEM_UNBREAKABLE = NetworkRegistry.newSimpleChannel(
+                new ResourceLocation(Story.MOD_ID + ":networking_item_unbreakable"),
+                () -> "1.0", (s) -> true, (s) -> true);
+        ITEM_UNBREAKABLE.registerMessage(nextID(), ItemUnbreakablePack.class, ItemUnbreakablePack::toBytes, ItemUnbreakablePack::new, ItemUnbreakablePack::handler);
     }
 
 }

@@ -18,5 +18,6 @@ public class NetEventHandler {
         event.enqueueWork(Networking::registerPlayerData);
         event.enqueueWork(Networking::registerQualityIdentification);
         event.enqueueWork(Networking::registerFriendsData);
+        event.enqueueWork(Networking::registerItemUnbreakable);
     }
 }

@@ -8,8 +8,6 @@ import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.save.SaveEventHandler;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ShieldItem;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -38,7 +36,6 @@ public class Story {
         MinecraftForge.EVENT_BUS.register(new OreGenEventHandler());
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::attributeFix);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::itemFix);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::renderBars);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -52,17 +49,6 @@ public class Story {
             if (attribute instanceof RangedAttribute rangedAttribute) {
                 rangedAttribute.minValue = -65535.0F;
                 rangedAttribute.maxValue = 65535.0F;
-            }
-        }
-    }
-
-    /**
-     * 物品修改
-     */
-    private void itemFix(FMLLoadCompleteEvent event) {
-        for (Item item : ForgeRegistries.ITEMS) {
-            if (item instanceof ShieldItem shield) {
-                shield.maxDamage *= 20;
             }
         }
     }

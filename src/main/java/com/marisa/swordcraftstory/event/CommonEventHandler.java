@@ -3,6 +3,7 @@ package com.marisa.swordcraftstory.event;
 import com.marisa.swordcraftstory.event.util.LivingHurtUtils;
 import com.marisa.swordcraftstory.event.util.PlayerAttackEntityUtils;
 import com.marisa.swordcraftstory.net.Networking;
+import com.marisa.swordcraftstory.net.pack.ItemUnbreakablePack;
 import com.marisa.swordcraftstory.net.pack.QualityIdentificationPack;
 import com.marisa.swordcraftstory.save.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.smith.util.Quality;
@@ -27,6 +28,7 @@ import net.minecraft.world.entity.projectile.SpectralArrow;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
@@ -213,6 +215,8 @@ public class CommonEventHandler {
             toolTip.add(++index, new TranslatableComponent("抵抗").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(resistance).withStyle(ChatFormatting.LIGHT_PURPLE)));
             toolTip.add(++index, new TextComponent(""));
+        } else if (itemStack.getItem() instanceof ShieldItem && itemStack.isDamageableItem()) {
+            Networking.ITEM_UNBREAKABLE.sendToServer(new ItemUnbreakablePack(itemStack));
         }
     }
 
