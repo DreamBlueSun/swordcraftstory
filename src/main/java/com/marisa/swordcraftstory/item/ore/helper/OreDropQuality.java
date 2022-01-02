@@ -61,9 +61,9 @@ public class OreDropQuality {
         LIST_ORE_RANK_9.add(ItemRegistry.LUMINOSITY_ORE.get().getDefaultInstance());
     }
 
-    private static final int RANK_MATERIAL_0 = 85;
-    private static final int RANK_MATERIAL_1 = 35;
-    private static final int RANK_MATERIAL_2 = 35;
+    private static final int RANK_MATERIAL_0 = 90;
+    private static final int RANK_MATERIAL_1 = 50;
+    private static final int RANK_MATERIAL_2 = 15;
     private static final int RANK_ORE_1 = 9;
     private static final int RANK_ORE_2 = 8;
     private static final int RANK_ORE_3 = 7;
@@ -111,10 +111,10 @@ public class OreDropQuality {
             return LIST_ORE_RANK_1.get(new Random().nextInt(LIST_ORE_RANK_1.size())).copy();
         }
         if (r > (drop -= RANK_MATERIAL_2)) {
-            return Items.RAW_IRON.getDefaultInstance();
+            return Items.RAW_GOLD.getDefaultInstance();
         }
         if (r > (drop - RANK_MATERIAL_1)) {
-            return Items.RAW_COPPER.getDefaultInstance();
+            return Items.RAW_IRON.getDefaultInstance();
         }
         //RANK_MATERIAL_0
         return Items.COAL.getDefaultInstance();

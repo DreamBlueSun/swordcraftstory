@@ -54,7 +54,7 @@ public class StoryOreBlock extends OreBlock {
             ItemStack random = OreDropQuality.random(SmithNbtUtils.getRank(stack));
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), random);
             //根据掉落物品掉落经验
-            int rank = random.getItem() instanceof AbstractOre ore ? ore.rank() : 1;
+            int rank = random.getItem() instanceof AbstractOre ore ? ore.rank() : 3;
             if (0 < rank && rank <= this.xpDropList.size()) {
                 state.getBlock().popExperience(level, pos, this.xpDropList.get(rank - 1).sample(RANDOM));
             }

@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RankUpMenu extends ItemCombinerMenu {
 
-    private final static int RANK_LV_NEED_ONCE = 4;
+    public final static int RANK_LV_NEED_ONCE = 4;
 
     public RankUpMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
         this(containerId, inventory);

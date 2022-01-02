@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.save.util;
 
 import com.google.common.collect.ImmutableMultimap;
+import com.marisa.swordcraftstory.block.craft.menu.RankUpMenu;
 import com.marisa.swordcraftstory.event.pojo.MobAttr;
 import com.marisa.swordcraftstory.save.MobAttrSaveData;
 import net.minecraft.server.level.ServerLevel;
@@ -66,12 +67,15 @@ public class MobAttributesUtils {
      */
     private static int mobSpanLv(Player closestPlayer) {
         int lv = PlayerDataManager.getLv(PlayerDataManager.get(closestPlayer.getStringUUID()).getXp());
+        if (lv < RankUpMenu.RANK_LV_NEED_ONCE) {
+            return 0;
+        }
         //随机+-1~3LV
         int offset = new Random().nextInt(4);
         if (new Random().nextInt(2) > 0) {
             lv += offset;
-        } else if (lv >= offset) {
-            lv -= offset;
+        } else {
+            lv = Math.max(lv - offset, 0);
         }
         return lv;
     }
