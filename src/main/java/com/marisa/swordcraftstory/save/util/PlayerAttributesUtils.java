@@ -17,18 +17,19 @@ public class PlayerAttributesUtils {
         upMaxHp(player, PlayerDataManager.getLv(data.getXp()), heal);
     }
 
-    public static void checkLvUp(Player player,PlayerData playerData) {
+    public static void checkLvUp(Player player, PlayerData playerData) {
         final int lv = PlayerDataManager.getLv(playerData.getXp());
         if (lv - PlayerDataManager.getLv(playerData.getXpLast()) > 0) {
             PlayerAttributesUtils.upMaxHp(player, lv, true);
         }
     }
 
-    private static final int HP_MAX_BASE = 20;
+    private static final int HP_MAX_BASE = 120;
+    private static final int HP_MAX_OFFSET = 20;
 
     public static void upMaxHp(Player player, final int lv, boolean heal) {
         //血量
-        int maxHealth = HP_MAX_BASE * (lv + 1);
+        int maxHealth = HP_MAX_BASE + HP_MAX_OFFSET * lv;
         int maxHealthAdd = maxHealth - (int) player.getAttributeValue(Attributes.MAX_HEALTH);
         //执行
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();

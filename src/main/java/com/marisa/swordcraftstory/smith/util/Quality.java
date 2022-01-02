@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.smith.util;
 
+import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.smith.util.pojo.AbstractQualityAttr;
 import com.marisa.swordcraftstory.smith.util.pojo.ArmorQualityAttr;
 import com.marisa.swordcraftstory.smith.util.pojo.ShootQualityAttr;
@@ -35,7 +36,7 @@ public enum Quality implements QualityAttr {
             if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(0, -0.1D, 0);
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(4, -5);
+                return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE - 1, -5);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(-1, 0);
             }
@@ -48,7 +49,7 @@ public enum Quality implements QualityAttr {
             if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(0, 0, 0);
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(4, 0);
+                return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE, 0);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(0, 0);
             }
@@ -59,9 +60,9 @@ public enum Quality implements QualityAttr {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (SmithNbtUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(1, 0.05D, 0);
+                return new SwordQualityAttr(1, 0.03D, 0);
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(5, 0);
+                return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE + 1, 0);
             } else if (item instanceof ArmorItem) {
                 return new ArmorQualityAttr(1, 0);
             }
@@ -72,11 +73,11 @@ public enum Quality implements QualityAttr {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (SmithNbtUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(2, 0.1D, 0);
+                return new SwordQualityAttr(2, 0.05D, 0);
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(6, 5);
+                return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE + 2, 5);
             } else if (item instanceof ArmorItem) {
-                return new ArmorQualityAttr(2, 1);
+                return new ArmorQualityAttr(1, 1);
             }
             return null;
         }
@@ -85,11 +86,11 @@ public enum Quality implements QualityAttr {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (SmithNbtUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(3, 0.15D, 5);
+                return new SwordQualityAttr(3, 0.07D, 5);
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(7, 5);
+                return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE + 3, 5);
             } else if (item instanceof ArmorItem) {
-                return new ArmorQualityAttr(3, 2);
+                return new ArmorQualityAttr(2, 2);
             }
             return null;
         }
@@ -98,11 +99,11 @@ public enum Quality implements QualityAttr {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (SmithNbtUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(4, 0.25D, 5);
+                return new SwordQualityAttr(4, 0.15D, 5);
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(7, 10);
+                return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE + 4, 7);
             } else if (item instanceof ArmorItem) {
-                return new ArmorQualityAttr(4, 3);
+                return new ArmorQualityAttr(3, 3);
             }
             return null;
         }

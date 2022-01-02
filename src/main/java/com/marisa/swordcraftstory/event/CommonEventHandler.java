@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.event;
 
+import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.event.util.LivingHurtUtils;
 import com.marisa.swordcraftstory.event.util.PlayerAttackEntityUtils;
 import com.marisa.swordcraftstory.net.Networking;
@@ -87,7 +88,7 @@ public class CommonEventHandler {
                 Entity owner = arrow.getOwner();
                 if (owner == null) {
                     //发射器、投掷器、找不到发射者的箭矢：伤害为基础固定值
-                    arrow.setBaseDamage(4.0D);
+                    arrow.setBaseDamage(Damage.ARROW_BASE_DAMAGE);
                     return;
                 }
                 if (owner instanceof ServerPlayer player && SmithNbtUtils.isRangedWeapon(player.getMainHandItem().getItem())) {
@@ -108,9 +109,9 @@ public class CommonEventHandler {
                 } else if (owner instanceof Mob mob) {
                     //mob射箭
                     int lv = MobAttributesUtils.getMobLv((ServerLevel) mob.level, mob.getStringUUID());
-                    arrow.setBaseDamage(4.0D + (lv * 3.0D));
+                    arrow.setBaseDamage(Damage.ARROW_BASE_DAMAGE * (lv + 1));
                 } else {
-                    arrow.setBaseDamage(4.0D);
+                    arrow.setBaseDamage(Damage.ARROW_BASE_DAMAGE);
                 }
             }
         }

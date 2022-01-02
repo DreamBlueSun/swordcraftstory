@@ -8,6 +8,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 
@@ -52,6 +53,8 @@ public class Damage {
         init();
     }
 
+    public final static double ARROW_BASE_DAMAGE = 7.0D;
+
     /**
      * 伤害属性初始化
      */
@@ -64,7 +67,7 @@ public class Damage {
                 try {
                     if (this.amount > 0.0F) {
                         AbstractArrow arrow = (AbstractArrow) this.source.getDirectEntity();
-                        this.p = arrow != null ? (float) arrow.getBaseDamage() : 5.0F;
+                        this.p = arrow != null ? (float) arrow.getBaseDamage() : (float) ARROW_BASE_DAMAGE;
                     } else {
                         this.p = amount;
                     }
@@ -75,8 +78,13 @@ public class Damage {
             case "mob":
                 try {
                     if (this.amount > 0.0F && this.source.getEntity() != null && this.source.getEntity() instanceof Mob mob) {
+                        float baseDamage = (float) Math.max(mob.getAttributeValue(Attributes.ATTACK_DAMAGE), 1.0D);
+                        switch (mob.level.getDifficulty()) {
+                            case EASY -> baseDamage *= 0.7F;
+                            case HARD -> baseDamage *= 1.5F;
+                        }
                         int lv = MobAttributesUtils.getMobLv((ServerLevel) mob.level, mob.getStringUUID());
-                        this.p = Mth.clamp(this.amount, 2.0F, 20.0F) * (1 + lv * 0.6F);
+                        this.p = Mth.clamp(baseDamage, 1.0F, 16.0F) * (1 + lv * 0.8F);
                     } else {
                         this.p = this.amount;
                     }
@@ -86,10 +94,10 @@ public class Damage {
                 break;
             case "inFire":
             case "onFire":
-                this.m = fixedDamageUp(2.0F, 0.5F);
+                this.m = fixedDamageUp(4.5F, 0.5F);
                 break;
             case "fireball":
-                this.m = fixedDamageUp(10.0F, 2.0F);
+                this.m = fixedDamageUp(20.0F, 2.0F);
                 break;
             case "lightningBolt":
                 this.p = 64.0F;
@@ -101,22 +109,22 @@ public class Damage {
             case "dragonBreath":
                 //无来源魔法
                 float clamp = Mth.clamp(this.amount, 2.0F, 12.0F);
-                this.m = fixedDamageUp(clamp, Math.max(clamp * 0.3F, 1.0F));
+                this.m = fixedDamageUp(clamp * 2.5F, Math.max(clamp * 0.3F, 1.0F));
                 break;
             case "wither":
                 //凋零
-                this.r = fixedDamageUp(1.0F, 1.0F);
+                this.r = fixedDamageUp(6.0F, 1.0F);
                 break;
             case "lava":
                 //岩浆
-                this.m = fixedDamageUp(1.0F, 1.0F);
-                this.r = fixedDamageUp(4.0F, 0.5F);
+                this.m = fixedDamageUp(6.0F, 1.0F);
+                this.r = fixedDamageUp(6.5F, 0.5F);
                 break;
             case "explosion.player":
                 //爆炸
-                this.p = fixedDamageUp(12.0F, 2.0F);
-                this.m = fixedDamageUp(8.0F, 1.0F);
-                this.r = fixedDamageUp(20.0F, 4.0F);
+                this.p = fixedDamageUp(20.0F, 2.0F);
+                this.m = fixedDamageUp(16.0F, 1.0F);
+                this.r = fixedDamageUp(40.0F, 4.0F);
                 break;
             case "outOfWorld":
                 this.r = 9999.0F;
@@ -143,7 +151,7 @@ public class Damage {
                 //墙内
             case "cramming":
                 //拥挤
-                this.r = fixedDamageUp(2.0F, 2.0F);
+                this.r = fixedDamageUp(12.0F, 2.0F);
                 break;
             case "sweetBerryBush":
                 //浆果
@@ -156,7 +164,7 @@ public class Damage {
             case "cactus":
                 //仙人掌
             default:
-                this.r = 1.0F;
+                this.r = 2.0F;
                 break;
         }
     }
