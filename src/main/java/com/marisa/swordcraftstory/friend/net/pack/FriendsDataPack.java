@@ -11,6 +11,7 @@ import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.network.NetworkEvent;
@@ -68,8 +69,10 @@ public class FriendsDataPack {
         this.message = buffer.readUtf(Short.MAX_VALUE);
         this.playerUUID = buffer.readUtf(Short.MAX_VALUE);
         this.targetUUID = buffer.readUtf(Short.MAX_VALUE);
-        this.friendsUUID = GSON.fromJson(buffer.readUtf(Short.MAX_VALUE), new TypeToken<ArrayList<String>>() {}.getType());
-        this.onlinePlayer = GSON.fromJson(buffer.readUtf(Short.MAX_VALUE), new TypeToken<ArrayList<PlayerVO>>() {}.getType());
+        this.friendsUUID = GSON.fromJson(buffer.readUtf(Short.MAX_VALUE), new TypeToken<ArrayList<String>>() {
+        }.getType());
+        this.onlinePlayer = GSON.fromJson(buffer.readUtf(Short.MAX_VALUE), new TypeToken<ArrayList<PlayerVO>>() {
+        }.getType());
     }
 
     public void toBytes(FriendlyByteBuf buffer) {
@@ -92,7 +95,13 @@ public class FriendsDataPack {
             } else {
                 switch (this.message) {
                     case "online.players.screen.open" -> {
-                        List<PlayerVO> collect = sender.getLevel().players().stream().map(PlayerVO::of).collect(Collectors.toList());
+                        if (sender.getServer() == null) {
+                            return;
+                        }
+                        List<PlayerVO> collect = new ArrayList<>();
+                        for (ServerLevel level : sender.getServer().getAllLevels()) {
+                            collect.addAll(level.players().stream().map(PlayerVO::of).collect(Collectors.toList()));
+                        }
                         FriendsDataPack pack = new FriendsDataPack("online.players.screen.client", PlayerDataManager.get(sender.getStringUUID()), collect);
                         Networking.FRIENDS_DATA.send(PacketDistributor.PLAYER.with(() -> sender), pack);
                     }
@@ -103,16 +112,35 @@ public class FriendsDataPack {
                         }
                     }
                     case "online.friends.screen.open" -> {
-                        List<PlayerVO> collect = sender.getLevel().players().stream().map(PlayerVO::of).collect(Collectors.toList());
+                        if (sender.getServer() == null) {
+                            return;
+                        }
+                        List<PlayerVO> collect = new ArrayList<>();
+                        for (ServerLevel level : sender.getServer().getAllLevels()) {
+                            collect.addAll(level.players().stream().map(PlayerVO::of).collect(Collectors.toList()));
+                        }
                         FriendsDataPack pack = new FriendsDataPack("online.friends.screen.client", PlayerDataManager.get(sender.getStringUUID()), collect);
                         Networking.FRIENDS_DATA.send(PacketDistributor.PLAYER.with(() -> sender), pack);
                     }
                     case "online.players.friends.tp" -> {
-                        ServerPlayer target = (ServerPlayer) sender.level.getPlayerByUUID(UUID.fromString(this.targetUUID));
-                        if (target != null && GameType.SPECTATOR != target.gameMode.getGameModeForPlayer() && target.isAlive()) {
+                        if (sender.getServer() == null) {
+                            return;
+                        }
+                        ServerPlayer target = null;
+                        for (ServerLevel level : sender.getServer().getAllLevels()) {
+                            target = (ServerPlayer) level.getPlayerByUUID(UUID.fromString(this.targetUUID));
+                            if (target != null) {
+                                break;
+                            }
+                        }
+                        if (target == null) {
+                            sender.displayClientMessage(new TranslatableComponent("msg.online.players.friends.tp.target_not_find").withStyle(ChatFormatting.RED), true);
+                            return;
+                        }
+                        if (GameType.SPECTATOR != target.gameMode.getGameModeForPlayer() && target.isAlive()) {
                             List<String> canUUID = PlayerDataManager.get(this.targetUUID).getFriendsUUID();
                             if (canUUID != null && canUUID.contains(sender.getStringUUID())) {
-                                sender.teleportTo(target.getX(), target.getY(), target.getZ());
+                                sender.teleportTo(target.getLevel(), target.getX(), target.getY(), target.getZ(), target.getYRot(), target.getXRot());
                             } else {
                                 sender.displayClientMessage(new TranslatableComponent("msg.online.players.friends.tp.not_in_target_friends").withStyle(ChatFormatting.RED), true);
                             }
