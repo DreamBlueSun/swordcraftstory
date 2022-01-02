@@ -39,8 +39,8 @@ public class QualityIdentificationPack {
                 int slot = inventory.findSlotMatchingItem(this.itemStack);
                 if (slot >= 0) {
                     ItemStack stack = inventory.getItem(slot);
-                    if (SmithNbtUtils.getQuality(stack) == Quality.UNKNOWN) {
-                        SmithNbtUtils.setQuality(stack, Quality.randomOne());
+                    if (SmithNbtUtils.QualityUtils.getQuality(stack) == Quality.UNKNOWN) {
+                        SmithNbtUtils.QualityUtils.setQuality(stack, Quality.randomOne());
                     }
                 }
             }

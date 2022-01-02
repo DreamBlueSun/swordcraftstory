@@ -43,7 +43,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -92,15 +91,16 @@ public class CommonEventHandler {
                     return;
                 }
                 if (owner instanceof ServerPlayer player && SmithNbtUtils.isRangedWeapon(player.getMainHandItem().getItem())) {
-                    float atk = (float) SmithNbtUtils.getAtk(player.getMainHandItem());
+                    ItemStack stack = player.getMainHandItem();
+                    float atk = (float) SmithNbtUtils.getAtk(stack);
                     //重新计算力量附魔：基础物理伤害+(0.5+0.5*lv)，再+(4%*lv)，最高20%
-                    int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, player.getMainHandItem());
+                    int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
                     if (j > 0) {
                         atk += (0.5D * j + 0.5D);
                         atk *= 1.0D + (Math.min(j, 5) * 0.04D);
                     }
                     //暴击
-                    if (50 > new Random().nextInt(1000)) {
+                    if (SmithNbtUtils.isCri(stack)) {
                         atk *= 1.25D;
                         arrow.setCritArrow(true);
                         player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
@@ -168,10 +168,11 @@ public class CommonEventHandler {
             }
             toolTip.add(++index, new TranslatableComponent("敏捷").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getAgl(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            float critical = (float) SmithNbtUtils.getCri(itemStack) / 10;
             toolTip.add(++index, new TranslatableComponent("暴击").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent("5.0%").withStyle(ChatFormatting.LIGHT_PURPLE)));
-//            toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
-//                    .append(new TranslatableComponent("0/255").withStyle(ChatFormatting.GREEN)));
+                    .append(new TranslatableComponent(critical + "%").withStyle(ChatFormatting.LIGHT_PURPLE)));
+            toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
+                    .append(new TranslatableComponent(SmithNbtUtils.getTec(itemStack) + " / 255").withStyle(ChatFormatting.GREEN)));
             toolTip.add(++index, new TextComponent(""));
         } else if (itemStack.getItem() instanceof ArmorItem) {
             List<Component> toolTip = event.getToolTip();
@@ -227,7 +228,7 @@ public class CommonEventHandler {
     private Quality quality(ItemTooltipEvent event) {
         ItemStack itemStack = event.getItemStack();
         //品质
-        Quality quality = SmithNbtUtils.getQuality(itemStack);
+        Quality quality = SmithNbtUtils.QualityUtils.getQuality(itemStack);
         if (quality == Quality.UNKNOWN && event.getPlayer() != null) {
             //鉴定品质
             Inventory inventory = event.getPlayer().getInventory();

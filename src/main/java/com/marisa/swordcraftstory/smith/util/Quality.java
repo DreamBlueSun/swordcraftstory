@@ -77,7 +77,7 @@ public enum Quality implements QualityAttr {
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE + 2, 5);
             } else if (item instanceof ArmorItem) {
-                return new ArmorQualityAttr(1, 1);
+                return new ArmorQualityAttr(2, 0);
             }
             return null;
         }
@@ -90,7 +90,7 @@ public enum Quality implements QualityAttr {
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE + 3, 5);
             } else if (item instanceof ArmorItem) {
-                return new ArmorQualityAttr(2, 2);
+                return new ArmorQualityAttr(3, 1);
             }
             return null;
         }
@@ -103,7 +103,7 @@ public enum Quality implements QualityAttr {
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
                 return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE + 4, 7);
             } else if (item instanceof ArmorItem) {
-                return new ArmorQualityAttr(3, 3);
+                return new ArmorQualityAttr(4, 2);
             }
             return null;
         }

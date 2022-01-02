@@ -6,26 +6,13 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 
+import java.util.Random;
+
 /**
  * 武器锻造NBT工具类
  */
 
 public class SmithNbtUtils {
-
-    public static class NBT {
-        public final static String QUALITY = "story_combat_quality";
-        public final static String ATK = "story_combat_atk";
-        public final static String ATK_S = "story_combat_atk_s";
-        public final static String DEF = "story_combat_def";
-        public final static String PHY = "story_combat_phy";
-        public final static String AGL = "story_combat_agl";
-        public final static String DUR = "story_combat_dur";
-        public final static String DUR_MAX = "story_combat_dur_max";
-        public final static String TEC = "story_combat_tec";
-        public final static String RANK = "story_combat_rank";
-        public final static String RANK_ATTR = "story_combat_rank_attr";
-        public final static String RANK_ATTR_ARMOR = "story_combat_rank_attr_armor";
-    }
 
     public static boolean isMeleeWeapon(Item item) {
         return item instanceof SwordItem || item instanceof AxeItem || item instanceof PickaxeItem;
@@ -39,16 +26,38 @@ public class SmithNbtUtils {
         return isMeleeWeapon(item) || isRangedWeapon(item);
     }
 
-    public static Quality getQuality(ItemStack stack) {
-        if (stack.getTag() == null) {
-            return Quality.UNKNOWN;
-        }
-        return Quality.getById(stack.getTag().getInt(NBT.QUALITY));
+    public static class NBT {
+        public final static String ATK = "story_combat_atk";
+        public final static String ATK_S = "story_combat_atk_s";
+        public final static String DEF = "story_combat_def";
+        public final static String PHY = "story_combat_phy";
+        public final static String AGL = "story_combat_agl";
+        public final static String CRI = "story_combat_cri";
+        public final static String DUR = "story_combat_dur";
+        public final static String DUR_MAX = "story_combat_dur_max";
+        public final static String TEC = "story_combat_tec";
+        public final static String RANK = "story_combat_rank";
+        public final static String RANK_ATTR = "story_combat_rank_attr";
+        public final static String RANK_ATTR_ARMOR = "story_combat_rank_attr_armor";
     }
 
-    public static void setQuality(ItemStack stack, Quality quality) {
-        stack.getOrCreateTag().put(NBT.QUALITY, IntTag.valueOf(quality.getId()));
-        quality.getAttr(stack.getItem()).modifyBase(stack);
+
+    public static class QualityUtils {
+
+        private final static String QUALITY = "story_combat_quality";
+
+        public static Quality getQuality(ItemStack stack) {
+            if (stack.getTag() == null) {
+                return Quality.UNKNOWN;
+            }
+            return Quality.getById(stack.getTag().getInt(QUALITY));
+        }
+
+        public static void setQuality(ItemStack stack, Quality quality) {
+            stack.getOrCreateTag().put(QUALITY, IntTag.valueOf(quality.getId()));
+            quality.getAttr(stack.getItem()).modifyBase(stack);
+        }
+
     }
 
     public static int getAtk(ItemStack stack) {
@@ -120,6 +129,50 @@ public class SmithNbtUtils {
 
     public static void setAgl(ItemStack stack, int amount) {
         stack.getOrCreateTag().put(NBT.AGL, IntTag.valueOf(amount));
+    }
+
+    /**
+     * 最大暴击率
+     */
+    public static final int MAX_CRI = 1000;
+
+    /**
+     * 武器基础暴击率
+     */
+    public static final int BASE_CRI = 50;
+
+    /**
+     * 武器基础暴击率--斧头
+     */
+    public static final int BASE_CRI_AXE = 150;
+
+    /**
+     * 武器基础暴击率--镐子
+     */
+    public static final int BASE_CRI_PICKAXE = 100;
+
+    public static boolean isCri(ItemStack stack) {
+        return SmithNbtUtils.getCri(stack) > new Random().nextInt(MAX_CRI);
+    }
+
+    public static int getCri(ItemStack stack) {
+        int cri;
+        if (stack.getItem() instanceof AxeItem) {
+            cri = BASE_CRI_AXE;
+        } else if (stack.getItem() instanceof PickaxeItem) {
+            cri = BASE_CRI_PICKAXE;
+        } else {
+            cri = BASE_CRI;
+        }
+        if (stack.getTag() == null) {
+            return cri;
+        } else {
+            return cri + ((Math.min(getTec(stack), 250)) / 5) + stack.getTag().getInt(NBT.CRI);
+        }
+    }
+
+    public static void setCri(ItemStack stack, int amount) {
+        stack.getOrCreateTag().put(NBT.CRI, IntTag.valueOf(amount));
     }
 
     public static int getDur(ItemStack stack) {

@@ -20,8 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
-
 /**
  *
  */
@@ -44,17 +42,18 @@ public class PlayerAttackEntityUtils {
         //基础伤害
         float f = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
         //锻造伤害
-        if (SmithNbtUtils.isRangedWeapon(player.getMainHandItem().getItem())) {
-            f = SmithNbtUtils.getAtk(player.getMainHandItem()) * 0.5F;
+        ItemStack stack = player.getMainHandItem();
+        if (SmithNbtUtils.isRangedWeapon(stack.getItem())) {
+            f = SmithNbtUtils.getAtk(stack) * 0.5F;
         } else {
-            f += SmithNbtUtils.getAtk(player.getMainHandItem());
+            f += SmithNbtUtils.getAtk(stack);
         }
         //附魔伤害
         float f1;
         if (target instanceof LivingEntity) {
-            f1 = EnchantmentHelper.getDamageBonus(player.getMainHandItem(), ((LivingEntity) target).getMobType());
+            f1 = EnchantmentHelper.getDamageBonus(stack, ((LivingEntity) target).getMobType());
         } else {
-            f1 = EnchantmentHelper.getDamageBonus(player.getMainHandItem(), MobType.UNDEFINED);
+            f1 = EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
         }
         //攻击速度伤害偏移
         float f2 = player.getAttackStrengthScale(0.5F);
@@ -82,7 +81,7 @@ public class PlayerAttackEntityUtils {
             f *= (1.0F + (Math.min((int) f1, 5) * 0.04F));
         }
         //暴击
-        boolean flag2 = 50 > new Random().nextInt(1000);
+        boolean flag2 = SmithNbtUtils.isCri(stack);
         if (flag2) {
             f *= 1.25F;
         }
@@ -164,16 +163,15 @@ public class PlayerAttackEntityUtils {
             }
             //???
             EnchantmentHelper.doPostDamageEffects(player, target);
-            ItemStack itemstack1 = player.getMainHandItem();
             Entity entity = target;
             if (target instanceof net.minecraftforge.entity.PartEntity) {
                 entity = ((net.minecraftforge.entity.PartEntity<?>) target).getParent();
             }
             //武器损伤计算
-            if (!player.level.isClientSide && !itemstack1.isEmpty() && entity instanceof LivingEntity) {
-                ItemStack copy = itemstack1.copy();
-                itemstack1.hurtEnemy((LivingEntity) entity, player);
-                if (itemstack1.isEmpty()) {
+            if (!player.level.isClientSide && !stack.isEmpty() && entity instanceof LivingEntity) {
+                ItemStack copy = stack.copy();
+                stack.hurtEnemy((LivingEntity) entity, player);
+                if (stack.isEmpty()) {
                     net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, copy, InteractionHand.MAIN_HAND);
                     player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
                 }
@@ -189,7 +187,7 @@ public class PlayerAttackEntityUtils {
 
                 if (player.level instanceof ServerLevel && f5 > 2.0F) {
                     int k = (int) ((double) f5 * 0.5D);
-                    ((ServerLevel) player.level).sendParticles(ParticleTypes.DAMAGE_INDICATOR, target.getX(), target.getY(0.5D), target.getZ(), k, 0.1D, 0.0D, 0.1D, 0.2D);
+                    ((ServerLevel) player.level).sendParticles(ParticleTypes.DAMAGE_INDICATOR, target.getX(), target.getY(0.5D), target.getZ(), Math.min(k / 20, 3), 0.1D, 0.0D, 0.1D, 0.2D);
                 }
             }
             //???

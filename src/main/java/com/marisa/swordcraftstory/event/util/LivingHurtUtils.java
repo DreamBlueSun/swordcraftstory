@@ -3,6 +3,7 @@ package com.marisa.swordcraftstory.event.util;
 import com.marisa.swordcraftstory.event.pojo.Absorb;
 import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.save.MobAttrSaveData;
+import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -10,6 +11,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -37,6 +39,16 @@ public class LivingHurtUtils {
                 } else if (source.getEntity() instanceof ServerPlayer) {
                     ((ServerPlayer) source.getEntity()).awardStat(Stats.CUSTOM.get(Stats.DAMAGE_DEALT_RESISTED), Math.round(f2 * 10.0F));
                 }
+            }
+        }
+        if (amount <= 0.0F) {
+            return;
+        }
+        //累积武器熟练度
+        if (source.getEntity() instanceof ServerPlayer player) {
+            ItemStack stack = player.getMainHandItem();
+            if (SmithNbtUtils.isWeapon(stack.getItem())) {
+                SmithNbtUtils.incrTec(stack);
             }
         }
         //扣减护盾
