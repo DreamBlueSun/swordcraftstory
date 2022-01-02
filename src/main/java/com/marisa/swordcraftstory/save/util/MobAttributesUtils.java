@@ -46,12 +46,12 @@ public class MobAttributesUtils {
     public static MobAttr newAttr(Mob Mob, Player closestPlayer) {
         //mob实体加入世界时，根据最近玩家等级增加属性
         int lv = closestPlayer != null ? mobSpanLv(closestPlayer) : 0;
-        int maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 2.0F, 20.0F);
+        int maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 2.0F, 80.0F);
         int armorAdd = lv;
         //如果mob原血量大于等于100(判定为BOSS生物)，则血量额外增加、防御额外增加
         boolean isBoos = Mob.getMaxHealth() >= 100;
         if (isBoos) {
-            maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 20.0F, 200.0F);
+            maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 20.0F, 400.0F);
             armorAdd += lv;
         }
         MobAttr mobAttr = new MobAttr(Mob.getStringUUID(), lv, maxHealthAdd, armorAdd);

@@ -40,11 +40,13 @@ public class BigIronOre extends AbstractOre {
     @Override
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
-            return new int[]{32, -10};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{38, -30};
+            return new int[]{32, -5};
+        } else if (item instanceof AxeItem) {
+            return new int[]{38, -20};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{35, -15};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{32, -20};
+            return new int[]{32, -10};
         } else {
             return null;
         }
@@ -53,7 +55,7 @@ public class BigIronOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{4, 1};
+            return new int[]{3, 0};
         } else {
             return null;
         }

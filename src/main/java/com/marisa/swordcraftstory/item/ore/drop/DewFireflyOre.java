@@ -41,8 +41,10 @@ public class DewFireflyOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{84, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{108, -25};
+        } else if (item instanceof AxeItem) {
+            return new int[]{108, -15};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{96, -10};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
             return new int[]{84, -5};
         } else {
@@ -53,7 +55,7 @@ public class DewFireflyOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{7, 7};
+            return new int[]{15, 3};
         } else {
             return null;
         }

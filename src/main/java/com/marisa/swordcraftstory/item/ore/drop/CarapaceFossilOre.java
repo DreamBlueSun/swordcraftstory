@@ -41,10 +41,12 @@ public class CarapaceFossilOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{42, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{56, -30};
+        } else if (item instanceof AxeItem) {
+            return new int[]{56, -20};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{49, -15};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{44, -20};
+            return new int[]{44, -10};
         } else {
             return null;
         }
@@ -53,7 +55,7 @@ public class CarapaceFossilOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{5, 2};
+            return new int[]{6, 1};
         } else {
             return null;
         }

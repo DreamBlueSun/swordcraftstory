@@ -41,10 +41,12 @@ public class IronOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{7, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{8, -25};
+        } else if (item instanceof AxeItem) {
+            return new int[]{9, -15};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{8, -10};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{4, -5};
+            return new int[]{6, -5};
         } else {
             return null;
         }

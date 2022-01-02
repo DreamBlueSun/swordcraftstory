@@ -41,8 +41,10 @@ public class XcelOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{70, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{90, -25};
+        } else if (item instanceof AxeItem) {
+            return new int[]{90, -15};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{80, -10};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
             return new int[]{70, -5};
         } else {
@@ -53,7 +55,7 @@ public class XcelOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{6, 6};
+            return new int[]{12, 2};
         } else {
             return null;
         }

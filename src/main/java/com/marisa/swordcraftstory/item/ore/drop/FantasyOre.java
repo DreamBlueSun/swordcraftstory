@@ -41,8 +41,10 @@ public class FantasyOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{46, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{58, -25};
+        } else if (item instanceof AxeItem) {
+            return new int[]{58, -15};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{52, -10};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
             return new int[]{46, -5};
         } else {
@@ -53,7 +55,7 @@ public class FantasyOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{3, 3};
+            return new int[]{6, 1};
         } else {
             return null;
         }

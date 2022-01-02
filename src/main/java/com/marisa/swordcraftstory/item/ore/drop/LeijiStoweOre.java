@@ -40,11 +40,13 @@ public class LeijiStoweOre extends AbstractOre {
     @Override
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
-            return new int[]{79, -10};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{101, -30};
+            return new int[]{79, -5};
+        } else if (item instanceof AxeItem) {
+            return new int[]{101, -20};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{90, -15};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{79, -20};
+            return new int[]{79, -10};
         } else {
             return null;
         }
@@ -53,7 +55,7 @@ public class LeijiStoweOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{10, 4};
+            return new int[]{12, 2};
         } else {
             return null;
         }

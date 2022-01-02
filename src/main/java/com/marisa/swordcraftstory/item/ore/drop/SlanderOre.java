@@ -41,10 +41,12 @@ public class SlanderOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{9, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{11, -25};
+        } else if (item instanceof AxeItem) {
+            return new int[]{11, -15};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{10, -10};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{9, -5};
+            return new int[]{8, -5};
         } else {
             return null;
         }
@@ -53,7 +55,7 @@ public class SlanderOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{0, 1};
+            return new int[]{1, 0};
         } else {
             return null;
         }

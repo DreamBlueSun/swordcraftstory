@@ -41,8 +41,10 @@ public class WingsFossilOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{22, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{31, -25};
+        } else if (item instanceof AxeItem) {
+            return new int[]{31, -15};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{27, -10};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
             return new int[]{25, -5};
         } else {
@@ -53,7 +55,7 @@ public class WingsFossilOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{0, 2};
+            return new int[]{2, 0};
         } else {
             return null;
         }

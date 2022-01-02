@@ -41,8 +41,10 @@ public class CuisineOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{56, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{72, -25};
+        } else if (item instanceof AxeItem) {
+            return new int[]{72, -15};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{66, -10};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
             return new int[]{56, -5};
         } else {
@@ -53,7 +55,7 @@ public class CuisineOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{4, 4};
+            return new int[]{8, 1};
         } else {
             return null;
         }

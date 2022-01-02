@@ -40,11 +40,13 @@ public class SprintOre extends AbstractOre {
     @Override
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
-            return new int[]{67, -10};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{85, -30};
+            return new int[]{67, -5};
+        } else if (item instanceof AxeItem) {
+            return new int[]{85, -20};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{76, -15};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{67, -20};
+            return new int[]{67, -10};
         } else {
             return null;
         }
@@ -53,7 +55,7 @@ public class SprintOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{9, 3};
+            return new int[]{10, 2};
         } else {
             return null;
         }

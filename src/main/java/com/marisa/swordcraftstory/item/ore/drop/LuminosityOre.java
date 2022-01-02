@@ -41,8 +41,10 @@ public class LuminosityOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{100, 5};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{130, -15};
+        } else if (item instanceof AxeItem) {
+            return new int[]{130, -10};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{115, -5};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
             return new int[]{100, 0};
         } else {
@@ -53,7 +55,7 @@ public class LuminosityOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{8, 8};
+            return new int[]{18, 4};
         } else {
             return null;
         }

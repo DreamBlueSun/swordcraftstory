@@ -40,8 +40,10 @@ public class SteelTeethOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{90, -5};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{114, -25};
+        } else if (item instanceof AxeItem) {
+            return new int[]{114, -20};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{102, -15};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
             return new int[]{90, -10};
         } else {
@@ -52,7 +54,7 @@ public class SteelTeethOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{11, 5};
+            return new int[]{15, 3};
         } else {
             return null;
         }

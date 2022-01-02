@@ -40,11 +40,13 @@ public class GaliaOre extends AbstractOre {
     @Override
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
-            return new int[]{58, -10};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{74, -30};
+            return new int[]{58, -5};
+        } else if (item instanceof AxeItem) {
+            return new int[]{74, -20};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{66, -15};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{58, -20};
+            return new int[]{58, -10};
         } else {
             return null;
         }
@@ -53,7 +55,7 @@ public class GaliaOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{8, 2};
+            return new int[]{8, 1};
         } else {
             return null;
         }

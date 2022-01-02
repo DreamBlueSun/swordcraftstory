@@ -41,10 +41,12 @@ public class UkaOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{37, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{47, -30};
+        } else if (item instanceof AxeItem) {
+            return new int[]{47, -20};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{42, -15};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{39, -20};
+            return new int[]{39, -10};
         } else {
             return null;
         }
@@ -53,7 +55,7 @@ public class UkaOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{2, 2};
+            return new int[]{5, 0};
         } else {
             return null;
         }

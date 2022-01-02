@@ -41,10 +41,12 @@ public class HardOre extends AbstractOre {
     protected int[] rankAttr(Item item) {
         if (item instanceof SwordItem) {
             return new int[]{14, 0};
-        } else if (item instanceof AxeItem || item instanceof PickaxeItem) {
-            return new int[]{18, -25};
+        } else if (item instanceof AxeItem) {
+            return new int[]{18, -15};
+        } else if (item instanceof PickaxeItem) {
+            return new int[]{16, -10};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{14, -5};
+            return new int[]{12, -5};
         } else {
             return null;
         }
@@ -53,7 +55,7 @@ public class HardOre extends AbstractOre {
     @Override
     protected int[] rankAttrArmor(Item item) {
         if (item instanceof ArmorItem) {
-            return new int[]{2, 0};
+            return new int[]{1, 0};
         } else {
             return null;
         }
