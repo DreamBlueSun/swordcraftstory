@@ -27,7 +27,7 @@ public class LivingHurtUtils {
         //伤害计算
         Damage damage = new Damage(event.getAmount(), source, target);
         float amount = damage.totalAll();
-        if (source != DamageSource.OUT_OF_WORLD) {
+        if (amount > 0.0F && source != DamageSource.OUT_OF_WORLD) {
             Absorb absorb = new Absorb(target, source);
             float f1 = amount = damage.addP(-absorb.getP()).addM(-absorb.getM()).addR(-absorb.getR()).totalAll();
             amount = Math.max(amount * Math.max(1.0F - absorb.getEnchantAbsorb() - absorb.getBuffAbsorb(), 0), 1.0F);
@@ -41,15 +41,15 @@ public class LivingHurtUtils {
                 }
             }
         }
-        if (amount <= 0.0F) {
-            return;
-        }
         //累积武器熟练度
         if (source.getEntity() instanceof ServerPlayer player) {
             ItemStack stack = player.getMainHandItem();
             if (SmithNbtUtils.isWeapon(stack.getItem())) {
                 SmithNbtUtils.incrTec(stack);
             }
+        }
+        if (amount <= 0.0F) {
+            return;
         }
         //扣减护盾
         float f2 = Math.max(amount - target.getAbsorptionAmount(), 0.0F);

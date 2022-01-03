@@ -73,15 +73,13 @@ public class CommonEventHandler {
     public void arrowShoot(EntityJoinWorldEvent event) {
         //修改弓箭实体生成属性
         if (!event.getWorld().isClientSide()) {
-            if (event.getEntity() instanceof SpectralArrow spectralArrow) {
-                //光灵箭：基础伤害固定值0
-                spectralArrow.setBaseDamage(0);
+            if (event.getEntity() instanceof SpectralArrow) {
+                //光灵箭
                 return;
             }
             if (event.getEntity() instanceof Arrow arrow) {
                 if (arrow.getPickupItem().getItem() == Items.TIPPED_ARROW) {
-                    //药水箭：基础伤害固定值0
-                    arrow.setBaseDamage(0);
+                    //药水箭
                     return;
                 }
                 Entity owner = arrow.getOwner();

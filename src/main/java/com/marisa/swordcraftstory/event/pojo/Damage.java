@@ -11,6 +11,9 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.SpectralArrow;
+import net.minecraft.world.item.Items;
 
 /**
  * 伤害
@@ -66,8 +69,17 @@ public class Damage {
             case "arrow":
                 try {
                     if (this.amount > 0.0F) {
-                        AbstractArrow arrow = (AbstractArrow) this.source.getDirectEntity();
-                        this.p = arrow != null ? (float) arrow.getBaseDamage() : (float) ARROW_BASE_DAMAGE;
+                        AbstractArrow abstractArrow = (AbstractArrow) this.source.getDirectEntity();
+                        if (abstractArrow instanceof SpectralArrow) {
+                            //光灵箭：伤害固定值0
+                            abstractArrow.setBaseDamage(0.0D);
+                            return;
+                        } else if (abstractArrow instanceof Arrow arrow && arrow.getPickupItem().getItem() == Items.TIPPED_ARROW) {
+                            //药水箭：伤害固定值0
+                            abstractArrow.setBaseDamage(0.0D);
+                            return;
+                        }
+                        this.p = abstractArrow != null ? (float) abstractArrow.getBaseDamage() : (float) ARROW_BASE_DAMAGE;
                     } else {
                         this.p = amount;
                     }
