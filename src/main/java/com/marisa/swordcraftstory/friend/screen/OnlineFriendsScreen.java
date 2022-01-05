@@ -72,10 +72,14 @@ public class OnlineFriendsScreen extends Screen {
         //列表
         int x = this.width / 2 - 51;
         int y = this.height / 2 - 53;
+        int count = 0;
         for (int i = PAGE_SIZE * this.page; i < this.friends.size(); i++) {
             drawString(matrixStack, this.font, this.friends.get(i).getName(), x, y + 6, 0x00FF7F);
             this.addRenderableWidget(new FriendsTpBtn(x + 70, y, 32, 20, new TextComponent("传送"), this.friends.get(i).getUuid()));
             y += 22;
+            if (++count == PAGE_SIZE) {
+                break;
+            }
         }
         //上一页
         Button btnLastPage = new Button(x - 2, this.height / 2 + 58, 53, 20, new TextComponent("上一页"), (btn) -> {
