@@ -106,6 +106,10 @@ public class SmithNbtUtils {
 
     }
 
+    public static int getAtkBase(ItemStack stack) {
+        return stack.getOrCreateTag().getInt(NBT.ATK);
+    }
+
     public static int getAtk(ItemStack stack) {
         if (stack.getTag() == null) {
             return 0;
@@ -126,6 +130,10 @@ public class SmithNbtUtils {
         stack.getOrCreateTag().put(NBT.ATK, IntTag.valueOf(amount));
     }
 
+    public static int getDefBase(ItemStack stack) {
+        return stack.getOrCreateTag().getInt(NBT.DEF);
+    }
+
     public static int getDef(ItemStack stack) {
         if (stack.getTag() == null) {
             return 0;
@@ -144,6 +152,10 @@ public class SmithNbtUtils {
 
     public static void setDef(ItemStack stack, int amount) {
         stack.getOrCreateTag().put(NBT.DEF, IntTag.valueOf(amount));
+    }
+
+    public static int getPhyBase(ItemStack stack) {
+        return stack.getOrCreateTag().getInt(NBT.PHY);
     }
 
     public static int getPhy(ItemStack stack) {
@@ -175,6 +187,10 @@ public class SmithNbtUtils {
 
     public static void setAtkS(ItemStack stack, double amount) {
         stack.getOrCreateTag().put(NBT.ATK_S, DoubleTag.valueOf(amount));
+    }
+
+    public static int getAglBase(ItemStack stack) {
+        return stack.getOrCreateTag().getInt(NBT.AGL);
     }
 
     public static int getAgl(ItemStack stack) {

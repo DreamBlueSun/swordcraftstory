@@ -24,6 +24,8 @@ public class OreDropQuality {
     private static final List<ItemStack> LIST_ORE_RANK_8;
     private static final List<ItemStack> LIST_ORE_RANK_9;
 
+    private static final List<ItemStack> LIST_ORE_EDGE;
+
     static {
         LIST_ORE_RANK_1 = new ArrayList<>();
         LIST_ORE_RANK_1.add(ItemRegistry.HARD_ORE.get().getDefaultInstance());
@@ -59,11 +61,18 @@ public class OreDropQuality {
         LIST_ORE_RANK_9 = new ArrayList<>();
         LIST_ORE_RANK_9.add(ItemRegistry.LUMINOSITY_ORE.get().getDefaultInstance());
         LIST_ORE_RANK_9.add(ItemRegistry.CATS_PAW_ORE.get().getDefaultInstance());
+
+        LIST_ORE_EDGE = new ArrayList<>();
+        LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_PHY.get().getDefaultInstance());
+        LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_AGL.get().getDefaultInstance());
+        LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_DEF.get().getDefaultInstance());
+        LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_ATK.get().getDefaultInstance());
+
     }
 
-    private static final int RANK_MATERIAL_0 = 90;
-    private static final int RANK_MATERIAL_1 = 50;
-    private static final int RANK_MATERIAL_2 = 15;
+    private static final int RANK_MATERIAL_0 = 100;
+    private static final int RANK_MATERIAL_1 = 52;
+    private static final int RANK_MATERIAL_2 = 3;
     private static final int RANK_ORE_1 = 9;
     private static final int RANK_ORE_2 = 8;
     private static final int RANK_ORE_3 = 7;
@@ -111,13 +120,13 @@ public class OreDropQuality {
             return LIST_ORE_RANK_1.get(randomIndex(LIST_ORE_RANK_1.size())).copy();
         }
         if (r > (drop -= RANK_MATERIAL_2)) {
-            return Items.RAW_GOLD.getDefaultInstance();
+            return LIST_ORE_EDGE.get(randomIndex(LIST_ORE_EDGE.size())).copy();
         }
         if (r > (drop - RANK_MATERIAL_1)) {
-            return Items.RAW_IRON.getDefaultInstance();
+            return Items.RAW_GOLD.getDefaultInstance();
         }
         //RANK_MATERIAL_0
-        return Items.COAL.getDefaultInstance();
+        return Items.RAW_IRON.getDefaultInstance();
     }
 
     private static int randomIndex(int size) {

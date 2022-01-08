@@ -3,6 +3,10 @@ package com.marisa.swordcraftstory.item;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
+import com.marisa.swordcraftstory.item.edge.OreEdgeAgl;
+import com.marisa.swordcraftstory.item.edge.OreEdgeAtk;
+import com.marisa.swordcraftstory.item.edge.OreEdgeDef;
+import com.marisa.swordcraftstory.item.edge.OreEdgePhy;
 import com.marisa.swordcraftstory.item.material.*;
 import com.marisa.swordcraftstory.item.mould.*;
 import com.marisa.swordcraftstory.item.ore.drop.*;
@@ -28,11 +32,17 @@ public class ItemRegistry {
     public static RegistryObject<Item> RANK_UP_BLOCK = ITEMS.register("rank_up_block", () -> new BlockItem(BlockRegistry.RANK_UP_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> ITEM_MAKE_BLOCK = ITEMS.register("item_make_block", () -> new BlockItem(BlockRegistry.ITEM_MAKE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> ITEM_COLLAPSE_BLOCK = ITEMS.register("item_collapse_block", () -> new BlockItem(BlockRegistry.ITEM_COLLAPSE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    public static RegistryObject<Item> ITEM_EDGE_BLOCK = ITEMS.register("item_edge_block", () -> new BlockItem(BlockRegistry.ITEM_EDGE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     //回复道具
     public static RegistryObject<Item> WOUNDPLAST = ITEMS.register("woundplast", Woundplast::new);
     public static RegistryObject<Item> JI_JA_MEDICINE = ITEMS.register("ji_ja_medicine", JiJaMedicine::new);
     public static RegistryObject<Item> JU_YU_MEDICINE = ITEMS.register("ju_yu_medicine", JuYuMedicine::new);
+    //强刃道具
+    public static RegistryObject<Item> ORE_EDGE_ATK = ITEMS.register("ore_edge_atk", OreEdgeAtk::new);
+    public static RegistryObject<Item> ORE_EDGE_DEF = ITEMS.register("ore_edge_def", OreEdgeDef::new);
+    public static RegistryObject<Item> ORE_EDGE_PHY = ITEMS.register("ore_edge_phy", OreEdgePhy::new);
+    public static RegistryObject<Item> ORE_EDGE_AGL = ITEMS.register("ore_edge_agl", OreEdgeAgl::new);
     //素材道具
     public static RegistryObject<Item> JI_JA_FRUIT = ITEMS.register("ji_ja_fruit", JiJaFruit::new);
     public static RegistryObject<Item> JU_YU_FRUIT = ITEMS.register("ju_yu_fruit", JuYuFruit::new);
