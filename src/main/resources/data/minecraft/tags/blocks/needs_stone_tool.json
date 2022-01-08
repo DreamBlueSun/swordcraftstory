@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "swordcraftstory:story_ore_block",
+    "swordcraftstory:item_make_block",
+    "swordcraftstory:item_collapse_block",
+    "swordcraftstory:item_edge_block",
     "swordcraftstory:repair_block"
   ]
 }

@@ -17,7 +17,6 @@ import java.lang.reflect.Field;
 public class BlockRegistry {
 
     public static final Block STORY_ORE_BLOCK = new StoryOreBlock();
-    public static final Block RANK_UP_BLOCK = new RankUpBlock();
     public static final Block ITEM_MAKE_BLOCK = new ItemMakeBlock();
     public static final Block ITEM_COLLAPSE_BLOCK = new ItemCollapseBlock();
     public static final Block ITEM_EDGE_BLOCK = new ItemEdgeBlock();

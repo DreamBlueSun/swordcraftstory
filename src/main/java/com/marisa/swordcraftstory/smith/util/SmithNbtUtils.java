@@ -358,4 +358,14 @@ public class SmithNbtUtils {
         }
     }
 
+    /**
+     * 移除物品的附魔
+     */
+    public static void remEnchantmentTag(ItemStack target) {
+        CompoundTag tag = target.getOrCreateTag();
+        if (tag.contains("Enchantments", 9)) {
+            tag.remove("Enchantments");
+        }
+    }
+
 }
