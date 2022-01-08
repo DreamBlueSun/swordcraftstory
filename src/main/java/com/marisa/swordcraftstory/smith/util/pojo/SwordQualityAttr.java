@@ -30,22 +30,9 @@ public class SwordQualityAttr extends AbstractQualityAttr {
         this.agl = agl;
     }
 
-    public int getAtk() {
-        return atk;
-    }
-
-    public double getAtkS() {
-        return atkS;
-    }
-
-    public int getAgl() {
-        return agl;
-    }
-
     @Override
     public void modifyBase(ItemStack itemStack) {
-        SmithNbtUtils.setAtk(itemStack, this.atk);
+        SmithNbtUtils.QualityUtils.setQualityAttr(itemStack, new int[]{this.atk, this.agl});
         SmithNbtUtils.setAtkS(itemStack, this.atkS);
-        SmithNbtUtils.setAgl(itemStack, this.agl);
     }
 }

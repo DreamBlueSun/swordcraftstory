@@ -1,6 +1,8 @@
 package com.marisa.swordcraftstory.block;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.block.craft.ItemCollapseBlock;
+import com.marisa.swordcraftstory.block.craft.ItemMakeBlock;
 import com.marisa.swordcraftstory.block.craft.RankUpBlock;
 import com.marisa.swordcraftstory.block.craft.RepairBlock;
 import com.marisa.swordcraftstory.block.ore.StoryOreBlock;
@@ -19,6 +21,8 @@ public class BlockRegistry {
 
     public static final Block STORY_ORE_BLOCK = new StoryOreBlock();
     public static final Block RANK_UP_BLOCK = new RankUpBlock();
+    public static final Block ITEM_MAKE_BLOCK = new ItemMakeBlock();
+    public static final Block ITEM_COLLAPSE_BLOCK = new ItemCollapseBlock();
     public static final Block REPAIR_BLOCK = new RepairBlock();
 
     @SubscribeEvent

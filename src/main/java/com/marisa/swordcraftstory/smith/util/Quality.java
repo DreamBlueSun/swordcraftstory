@@ -6,8 +6,7 @@ import com.marisa.swordcraftstory.smith.util.pojo.ArmorQualityAttr;
 import com.marisa.swordcraftstory.smith.util.pojo.ShootQualityAttr;
 import com.marisa.swordcraftstory.smith.util.pojo.SwordQualityAttr;
 import net.minecraft.ChatFormatting;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 
 import java.util.Random;
 
@@ -101,9 +100,9 @@ public enum Quality implements QualityAttr {
             if (SmithNbtUtils.isMeleeWeapon(item)) {
                 return new SwordQualityAttr(4, 0.15D, 5);
             } else if (SmithNbtUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE + 4, 7);
+                return new ShootQualityAttr((int) Damage.ARROW_BASE_DAMAGE + 5, 7);
             } else if (item instanceof ArmorItem) {
-                return new ArmorQualityAttr(4, 2);
+                return new ArmorQualityAttr(4, 1);
             }
             return null;
         }

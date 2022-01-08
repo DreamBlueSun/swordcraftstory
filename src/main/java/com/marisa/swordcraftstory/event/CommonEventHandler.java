@@ -227,7 +227,7 @@ public class CommonEventHandler {
         ItemStack itemStack = event.getItemStack();
         //品质
         Quality quality = SmithNbtUtils.QualityUtils.getQuality(itemStack);
-        if (quality == Quality.UNKNOWN && event.getPlayer() != null) {
+        if (SmithNbtUtils.getRank(itemStack) > 0 && quality == Quality.UNKNOWN && event.getPlayer() != null) {
             //鉴定品质
             Inventory inventory = event.getPlayer().getInventory();
             int slot = -1;
@@ -255,11 +255,11 @@ public class CommonEventHandler {
         ItemStack itemStack = event.getItemStack();
         if (SmithNbtUtils.isWeapon(itemStack.getItem())) {
             //攻击速度、移动速度
-            double v = 0;
             int agl = SmithNbtUtils.getAgl(itemStack);
             if (agl != 0) {
                 final double baseSpeed = 0.01D;
                 final double offset = 50.0D;
+                double v;
                 if (agl > offset) {
                     v = baseSpeed * offset + (baseSpeed * (agl - offset)) / 4;
                 } else if (agl < -offset) {
@@ -270,7 +270,7 @@ public class CommonEventHandler {
                 event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID_MOVEMENT_SPEED, "main hand modifier", v, AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
             if (SmithNbtUtils.isMeleeWeapon(itemStack.getItem())) {
-                double atkS = v + SmithNbtUtils.getAtkS(itemStack);
+                double atkS = SmithNbtUtils.getAtkS(itemStack);
                 if (atkS != 0) {
                     event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(UUID_ATTACK_SPEED, "main hand modifier", atkS, AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }

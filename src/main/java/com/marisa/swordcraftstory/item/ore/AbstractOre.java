@@ -45,22 +45,19 @@ public abstract class AbstractOre extends Item {
 
     public ItemStack itemRankUp(ItemStack stack) {
         ItemStack copy = stack.copy();
-        int rank = SmithNbtUtils.getRank(copy);
-        if (rank + 1 == rank()) {
-            if (copy.getItem() instanceof ArmorItem) {
-                int[] attr = rankAttrArmor(copy.getItem());
-                if (attr != null) {
-                    SmithNbtUtils.setRank(copy, rank());
-                    SmithNbtUtils.setRankAttrArmor(copy, attr);
-                    return copy;
-                }
-            } else {
-                int[] attr = rankAttr(copy.getItem());
-                if (attr != null) {
-                    SmithNbtUtils.setRank(copy, rank());
-                    SmithNbtUtils.setRankAttr(copy, attr);
-                    return copy;
-                }
+        if (copy.getItem() instanceof ArmorItem) {
+            int[] attr = rankAttrArmor(copy.getItem());
+            if (attr != null) {
+                SmithNbtUtils.setRank(copy, rank());
+                SmithNbtUtils.setRankAttrArmor(copy, attr);
+                return copy;
+            }
+        } else {
+            int[] attr = rankAttr(copy.getItem());
+            if (attr != null) {
+                SmithNbtUtils.setRank(copy, rank());
+                SmithNbtUtils.setRankAttr(copy, attr);
+                return copy;
             }
         }
         return Items.AIR.getDefaultInstance();

@@ -42,11 +42,11 @@ public class ArgenirOre extends AbstractOre {
         if (item instanceof SwordItem) {
             return new int[]{16, 0};
         } else if (item instanceof AxeItem) {
-            return new int[]{20, -15};
+            return new int[]{20, -20};
         } else if (item instanceof PickaxeItem) {
-            return new int[]{18, -25};
+            return new int[]{18, -15};
         } else if (SmithNbtUtils.isRangedWeapon(item)) {
-            return new int[]{14, -5};
+            return new int[]{14, -10};
         } else {
             return null;
         }

@@ -1,6 +1,6 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "swordcraftstory:item/axe_mould"
+    "layer0": "swordcraftstory:item/mould/axe"
   }
 }

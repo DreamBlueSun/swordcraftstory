@@ -1,6 +1,6 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "swordcraftstory:item/mould/bow"
+    "layer0": "swordcraftstory:item/mould/legs"
   }
 }

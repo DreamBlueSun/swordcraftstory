@@ -4,6 +4,7 @@ import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.material.*;
+import com.marisa.swordcraftstory.item.mould.*;
 import com.marisa.swordcraftstory.item.ore.drop.*;
 import com.marisa.swordcraftstory.item.reply.JiJaMedicine;
 import com.marisa.swordcraftstory.item.reply.JuYuMedicine;
@@ -25,6 +26,8 @@ public class ItemRegistry {
     //方块物品
     public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> RANK_UP_BLOCK = ITEMS.register("rank_up_block", () -> new BlockItem(BlockRegistry.RANK_UP_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    public static RegistryObject<Item> ITEM_MAKE_BLOCK = ITEMS.register("item_make_block", () -> new BlockItem(BlockRegistry.ITEM_MAKE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    public static RegistryObject<Item> ITEM_COLLAPSE_BLOCK = ITEMS.register("item_collapse_block", () -> new BlockItem(BlockRegistry.ITEM_COLLAPSE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     //回复道具
     public static RegistryObject<Item> WOUNDPLAST = ITEMS.register("woundplast", Woundplast::new);
@@ -37,6 +40,16 @@ public class ItemRegistry {
     public static RegistryObject<Item> SOFT_LEAVES = ITEMS.register("soft_leaves", SoftLeaves::new);
     public static RegistryObject<Item> SWEET_HONEY = ITEMS.register("sweet_honey", SweetHoney::new);
     public static RegistryObject<Item> SOFT_LEATHER = ITEMS.register("soft_leather", SoftLeather::new);
+    //模具
+    public static RegistryObject<Item> SWORD_MOULD = ITEMS.register("sword_mould", SwordMould::new);
+    public static RegistryObject<Item> AXE_MOULD = ITEMS.register("axe_mould", AxeMould::new);
+    public static RegistryObject<Item> PICKAXE_MOULD = ITEMS.register("pickaxe_mould", PickaxeMould::new);
+    public static RegistryObject<Item> BOW_MOULD = ITEMS.register("bow_mould", BowMould::new);
+    public static RegistryObject<Item> CROSSBOW_MOULD = ITEMS.register("crossbow_mould", CrossbowMould::new);
+    public static RegistryObject<Item> HEAD_MOULD = ITEMS.register("head_mould", HeadMould::new);
+    public static RegistryObject<Item> CHEST_MOULD = ITEMS.register("chest_mould", ChestMould::new);
+    public static RegistryObject<Item> LEGS_MOULD = ITEMS.register("legs_mould", LegsMould::new);
+    public static RegistryObject<Item> FEET_MOULD = ITEMS.register("feet_mould", FeetMould::new);
     //素材矿石
     public static RegistryObject<Item> IRON_ORE = ITEMS.register("iron_ore", IronOre::new);
     public static RegistryObject<Item> SLANDER_ORE = ITEMS.register("slander_ore", SlanderOre::new);
