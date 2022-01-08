@@ -53,7 +53,7 @@ public class PlayerPanelAttr {
         this.hp = new TranslatableComponent("血量").withStyle(ChatFormatting.LIGHT_PURPLE)
                 .append(" ").append(new TranslatableComponent(HP).withStyle(ChatFormatting.GREEN));
         //ATK
-        int ATK = (int) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        int ATK = SmithNbtUtils.isMeleeWeapon(player.getMainHandItem().getItem()) ? (int) player.getAttributeValue(Attributes.ATTACK_DAMAGE) : 0;
         ATK += SmithNbtUtils.getAtk(player.getMainHandItem());
         if (player.getMainHandItem().getItem() instanceof SwordItem swordItem) {
             ATK += (int) swordItem.getDamage();
