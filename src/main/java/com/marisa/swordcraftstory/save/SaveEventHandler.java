@@ -1,5 +1,7 @@
 package com.marisa.swordcraftstory.save;
 
+import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.block.craft.menu.ItemMakeMenu;
 import com.marisa.swordcraftstory.event.pojo.MobAttr;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.pack.PlayerDataPack;
@@ -12,6 +14,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityLeaveWorldEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
@@ -19,6 +23,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.network.PacketDistributor;
+
+import java.util.List;
 
 /**
  * 监听事件处理器
@@ -80,8 +86,27 @@ public class SaveEventHandler {
             if (mobAttr != null) {
                 MobAttributesUtils.loadAttr((Mob) entity, mobAttr);
             } else {
-                //未读取到属性，则根据最近玩家(128范围)等级新增属性
-                mobAttr = MobAttributesUtils.newAttr((Mob) entity, level.getNearestPlayer(entity, 128));
+                int playerLv = 0;
+                //未读取到属性，先根据最近(128的xz半径范围、32的y半径范围)的所有玩家等级新增属性
+                Vec3 vec3 = entity.position();
+                List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(vec3.x() - 256.0D, vec3.y() - 128.0D, vec3.z() - 256.0D, vec3.x() + 256.0D, vec3.y() + 128.0D, vec3.z() + 256.0D), (p_9062_) -> true);
+                int size = players.size();
+                if (size > 0) {
+                    int countLv = 0, minLv = Story.LV_MAX;
+                    for (Player player : players) {
+                        int lv = PlayerDataManager.getLv(PlayerDataManager.get(player.getStringUUID()).getXp());
+                        countLv += lv;
+                        if (lv < minLv) {
+                            minLv = lv;
+                        }
+                    }
+                    if (minLv <= ItemMakeMenu.RANK_LV_NEED_ONCE) {
+                        playerLv = minLv;
+                    } else {
+                        playerLv = countLv / size;
+                    }
+                }
+                mobAttr = MobAttributesUtils.newAttr((Mob) entity, playerLv);
                 //保存Mob属性
                 saveData.mark(mobAttr);
             }

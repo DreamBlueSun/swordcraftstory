@@ -107,7 +107,6 @@ public class ItemMakeMenu extends AbstractItemMakeMenu {
         if (make.isEmpty()) {
             return;
         }
-        SmithNbtUtils.copyEnchantmentTag(stack1, make);
         this.resultSlots.setItem(0, make);
     }
 }

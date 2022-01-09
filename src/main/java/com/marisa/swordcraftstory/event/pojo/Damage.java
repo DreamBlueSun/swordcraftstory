@@ -46,7 +46,7 @@ public class Damage {
         if (target instanceof Player player) {
             this.lvWeight = PlayerDataManager.getLv(PlayerDataManager.get(player.getStringUUID()).getXp());
         } else if (target instanceof Mob) {
-            this.lvWeight = MobAttributesUtils.getMobLv((ServerLevel) target.level, target.getStringUUID()) * 0.5F;
+            this.lvWeight = MobAttributesUtils.getMobLv((ServerLevel) target.level, target.getStringUUID()) * 0.3F;
         } else {
             this.lvWeight = 0.0F;
         }
@@ -215,12 +215,23 @@ public class Damage {
         return this;
     }
 
-    public float totalAll() {
-        return Math.max(this.p + this.m + this.r, 0.0F);
+    public Damage applyDef(float def) {
+        this.p *= 1.0F - def / (100 + def);
+        return this;
     }
 
-    public float totalPM() {
-        return Math.max(this.p + this.m, 0.0F);
+    public Damage applyPhy(float phy) {
+        this.m *= 1.0F - phy / (100 + phy);
+        return this;
+    }
+
+    public Damage applyRea(float rea) {
+        this.r = Math.max(this.r - rea, 0.0F);
+        return this;
+    }
+
+    public float totalAll() {
+        return Math.max(this.p + this.m + this.r, 0.0F);
     }
 
 }

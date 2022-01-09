@@ -42,13 +42,13 @@ public class Absorb {
     private final float r;
 
     public Absorb(LivingEntity target, DamageSource source) {
-        //附魔伤害减免：每级1%免伤，最高30级
-        this.enchantAbsorb = Mth.clamp(EnchantmentHelper.getDamageProtection(target.getArmorSlots(), source), 0, 30) * 0.01F;
-        //每级抗性5%(1/25)免伤、最高5级
+        //附魔伤害减免：每级2%免伤，最高20级
+        this.enchantAbsorb = Mth.clamp(EnchantmentHelper.getDamageProtection(target.getArmorSlots(), source), 0, 20) * 0.02F;
+        //每级抗性10%(1/10)免伤、最高4级
         MobEffectInstance effect = target.getEffect(MobEffects.DAMAGE_RESISTANCE);
         if (effect != null) {
-            int i = Mth.clamp(effect.getAmplifier() + 1, 1, 5);
-            this.buffAbsorb = Math.max(i / 25.0F, 0.0F);
+            int i = Mth.clamp(effect.getAmplifier() + 1, 1, 4);
+            this.buffAbsorb = Math.max(i / 10.0F, 0.0F);
         } else {
             this.buffAbsorb = 0.0F;
         }

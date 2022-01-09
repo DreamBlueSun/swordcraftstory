@@ -10,7 +10,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 
 import java.util.Random;
 
@@ -43,15 +42,15 @@ public class MobAttributesUtils {
     /**
      * 新增属性
      */
-    public static MobAttr newAttr(Mob Mob, Player closestPlayer) {
+    public static MobAttr newAttr(Mob Mob, int playerLv) {
         //mob实体加入世界时，根据最近玩家等级增加属性
-        int lv = closestPlayer != null ? mobSpanLv(closestPlayer) : 0;
-        int maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 2.0F, 80.0F);
-        int armorAdd = lv;
+        int lv = mobSpanLv(playerLv);
+        int maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 2.0F, 30.0F);
+        int armorAdd = lv * 3;
         //如果mob原血量大于等于100(判定为BOSS生物)，则血量额外增加、防御额外增加
         boolean isBoos = Mob.getMaxHealth() >= 100;
         if (isBoos) {
-            maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 20.0F, 400.0F);
+            maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 20.0F, 200.0F);
             armorAdd += lv;
         }
         MobAttr mobAttr = new MobAttr(Mob.getStringUUID(), lv, maxHealthAdd, armorAdd);
@@ -65,13 +64,15 @@ public class MobAttributesUtils {
     /**
      * Mob出生等级
      */
-    private static int mobSpanLv(Player closestPlayer) {
-        int lv = PlayerDataManager.getLv(PlayerDataManager.get(closestPlayer.getStringUUID()).getXp());
-        if (lv < ItemMakeMenu.RANK_LV_NEED_ONCE) {
+    private static int mobSpanLv(int lv) {
+        if (lv <= ItemMakeMenu.RANK_LV_NEED_ONCE) {
             return 0;
         }
-        //随机+-1~3LV
-        int offset = new Random().nextInt(4);
+        //随机+-0~5LV
+        int offset = new Random().nextInt(6);
+        if (offset == 0) {
+            return lv;
+        }
         if (new Random().nextInt(2) > 0) {
             lv += offset;
         } else {

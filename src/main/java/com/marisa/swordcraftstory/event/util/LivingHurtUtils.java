@@ -15,6 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import java.util.Random;
+
 /**
  * 伤害结算
  */
@@ -29,7 +31,7 @@ public class LivingHurtUtils {
         float amount = damage.totalAll();
         if (amount > 0.0F && source != DamageSource.OUT_OF_WORLD) {
             Absorb absorb = new Absorb(target, source);
-            float f1 = amount = damage.addP(-absorb.getP()).addM(-absorb.getM()).addR(-absorb.getR()).totalAll();
+            float f1 = amount = damage.applyDef(absorb.getP()).applyPhy(absorb.getM()).applyRea(absorb.getR()).totalAll();
             amount = Math.max(amount * Math.max(1.0F - absorb.getEnchantAbsorb() - absorb.getBuffAbsorb(), 0), 1.0F);
             //抗性生效时效果
             float f2 = f1 * absorb.getBuffAbsorb();
@@ -46,6 +48,14 @@ public class LivingHurtUtils {
             ItemStack stack = player.getMainHandItem();
             if (SmithNbtUtils.isWeapon(stack.getItem())) {
                 SmithNbtUtils.incrTec(stack);
+            }
+        }
+        //累积盔甲熟练度
+        if (source.getEntity() != null && target instanceof ServerPlayer player) {
+            for (ItemStack armor : player.getArmorSlots()) {
+                if (SmithNbtUtils.isModItem(armor.getItem()) && new Random().nextInt(4) > 0) {
+                    SmithNbtUtils.incrTec(armor);
+                }
             }
         }
         if (amount <= 0.0F) {

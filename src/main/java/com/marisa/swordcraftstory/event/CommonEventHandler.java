@@ -214,6 +214,8 @@ public class CommonEventHandler {
                     .append(new TranslatableComponent(String.valueOf(toughness + SmithNbtUtils.getPhy(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
             toolTip.add(++index, new TranslatableComponent("抵抗").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(resistance).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
+                    .append(new TranslatableComponent(SmithNbtUtils.getTec(itemStack) + " / 255").withStyle(ChatFormatting.GREEN)));
             toolTip.add(++index, new TextComponent(""));
         } else if (itemStack.getItem() instanceof ShieldItem && itemStack.isDamageableItem()) {
             Networking.ITEM_UNBREAKABLE.sendToServer(new ItemUnbreakablePack(itemStack));

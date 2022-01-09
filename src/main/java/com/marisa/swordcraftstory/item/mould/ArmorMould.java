@@ -40,9 +40,11 @@ public abstract class ArmorMould extends Mould {
     public ItemStack make(ItemStack stack, ItemStack mould, AbstractOre ore) {
         ItemStack copy = stack.copy();
         if (SmithNbtUtils.getRank(copy) == 0) {
-            copy = ore.itemRankUp(copy);
+            SmithNbtUtils.remEnchantmentTag(copy);
+            SmithNbtUtils.copyEnchantmentTag(mould, copy);
             SmithNbtUtils.setDef(copy, SmithNbtUtils.getDef(copy) + SmithNbtUtils.getDef(mould));
             SmithNbtUtils.setPhy(copy, SmithNbtUtils.getPhy(copy) + SmithNbtUtils.getPhy(mould));
+            copy = ore.itemRankUp(copy);
         }
         return copy;
     }

@@ -39,8 +39,9 @@ public abstract class WeaponMould extends Mould {
     @Override
     public ItemStack make(ItemStack stack, ItemStack mould, AbstractOre ore) {
         ItemStack copy = stack.copy();
-        SmithNbtUtils.remEnchantmentTag(copy);
         if (SmithNbtUtils.getRank(copy) == 0) {
+            SmithNbtUtils.remEnchantmentTag(copy);
+            SmithNbtUtils.copyEnchantmentTag(mould, copy);
             SmithNbtUtils.setAtk(copy, SmithNbtUtils.getAtk(copy) + SmithNbtUtils.getAtk(mould));
             SmithNbtUtils.setAgl(copy, SmithNbtUtils.getAgl(copy) + SmithNbtUtils.getAgl(mould));
             copy = ore.itemRankUp(copy);
