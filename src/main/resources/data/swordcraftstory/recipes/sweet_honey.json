@@ -7,11 +7,11 @@
     },
     {
       "item": "minecraft:sugar",
-      "count": 1
+      "count": 3
     }
   ],
   "result": {
     "item": "swordcraftstory:sweet_honey",
-    "count": 1
+    "count": 3
   }
 }

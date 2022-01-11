@@ -4,6 +4,10 @@
     {
       "item": "minecraft:sweet_berries",
       "count": 1
+    },
+    {
+      "item": "swordcraftstory:beetroot",
+      "count": 1
     }
   ],
   "result": {
