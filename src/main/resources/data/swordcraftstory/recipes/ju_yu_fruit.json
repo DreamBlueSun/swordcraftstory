@@ -7,7 +7,15 @@
     },
     {
       "item": "minecraft:honeycomb",
-      "count": 3
+      "count": 1
+    },
+    {
+      "item": "minecraft:honeycomb",
+      "count": 1
+    },
+    {
+      "item": "minecraft:honeycomb",
+      "count": 1
     }
   ],
   "result": {

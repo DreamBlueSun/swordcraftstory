@@ -63,16 +63,16 @@ public class OreDropQuality {
         LIST_ORE_RANK_9.add(ItemRegistry.CATS_PAW_ORE.get().getDefaultInstance());
 
         LIST_ORE_EDGE = new ArrayList<>();
-        LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_PHY.get().getDefaultInstance());
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_AGL.get().getDefaultInstance());
+        LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_PHY.get().getDefaultInstance());
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_DEF.get().getDefaultInstance());
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_ATK.get().getDefaultInstance());
 
     }
 
     private static final int RANK_MATERIAL_0 = 100;
-    private static final int RANK_MATERIAL_1 = 52;
-    private static final int RANK_MATERIAL_2 = 3;
+    private static final int RANK_MATERIAL_1 = 40;
+    private static final int RANK_MATERIAL_2 = 10;
     private static final int RANK_ORE_1 = 9;
     private static final int RANK_ORE_2 = 8;
     private static final int RANK_ORE_3 = 7;

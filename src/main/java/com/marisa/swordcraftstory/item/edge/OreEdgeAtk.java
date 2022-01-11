@@ -35,7 +35,7 @@ public class OreEdgeAtk extends EdgeItem {
     @Override
     public ItemStack edge(ItemStack stack) {
         ItemStack copy = stack.copy();
-        SmithNbtUtils.setAtk(copy, SmithNbtUtils.getAtkBase(stack) + 1);
+        SmithNbtUtils.setAtk(copy, SmithNbtUtils.getAtkBase(stack) + 2);
         SmithNbtUtils.clearTec(copy);
         return copy;
     }
