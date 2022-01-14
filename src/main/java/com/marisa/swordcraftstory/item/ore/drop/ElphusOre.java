@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.item.ore.drop;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
+import com.marisa.swordcraftstory.smith.util.EStrengthen;
 import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -59,5 +60,30 @@ public class ElphusOre extends AbstractOre {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public int strengthenId() {
+        return EStrengthen.ELPHUS_ORE.getId();
+    }
+
+    @Override
+    public int strengthenAtk() {
+        return 5;
+    }
+
+    @Override
+    public int strengthenDef() {
+        return 2;
+    }
+
+    @Override
+    public int strengthenPhy() {
+        return 0;
+    }
+
+    @Override
+    public int strengthenAgl() {
+        return 1;
     }
 }

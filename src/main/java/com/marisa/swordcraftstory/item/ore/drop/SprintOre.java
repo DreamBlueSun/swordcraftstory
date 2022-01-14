@@ -60,4 +60,29 @@ public class SprintOre extends AbstractOre {
             return null;
         }
     }
+
+    @Override
+    public int strengthenId() {
+        return 0;
+    }
+
+    @Override
+    public int strengthenAtk() {
+        return 15;
+    }
+
+    @Override
+    public int strengthenDef() {
+        return 6;
+    }
+
+    @Override
+    public int strengthenPhy() {
+        return 0;
+    }
+
+    @Override
+    public int strengthenAgl() {
+        return 0;
+    }
 }

@@ -1,6 +1,8 @@
 package com.marisa.swordcraftstory.item.ore;
 
+import com.marisa.swordcraftstory.smith.IStrengthen;
 import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.StrengthenHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -17,7 +19,7 @@ import java.util.List;
  * 抽象矿石类
  */
 
-public abstract class AbstractOre extends Item {
+public abstract class AbstractOre extends Item implements IStrengthen {
 
     public AbstractOre(Properties properties) {
         super(properties);
@@ -61,5 +63,20 @@ public abstract class AbstractOre extends Item {
             }
         }
         return Items.AIR.getDefaultInstance();
+    }
+
+    @Override
+    public ItemStack doStrengthen(ItemStack stack) {
+        ItemStack copy = stack.copy();
+        int[] ints = StrengthenHelper.getStrengthenIds(copy);
+        if (ints == null) {
+            StrengthenHelper.setStrengthen(copy, new int[]{this.strengthenId()});
+        } else {
+            int[] intsNew = new int[ints.length + 1];
+            System.arraycopy(ints, 0, intsNew, 0, ints.length);
+            intsNew[ints.length] = this.strengthenId();
+            StrengthenHelper.setStrengthen(copy, intsNew);
+        }
+        return copy;
     }
 }

@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.smith.util;
 
 import com.marisa.swordcraftstory.event.pojo.Damage;
+import com.marisa.swordcraftstory.smith.IStrengthen;
 import net.minecraft.nbt.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.*;
@@ -32,7 +33,6 @@ public class SmithNbtUtils {
     }
 
     public static class NBT {
-        public final static String ATK = "story_combat_atk";
         public final static String ATK_S = "story_combat_atk_s";
         public final static String DEF = "story_combat_def";
         public final static String PHY = "story_combat_phy";
@@ -106,30 +106,6 @@ public class SmithNbtUtils {
 
     }
 
-    public static int getAtkBase(ItemStack stack) {
-        return stack.getOrCreateTag().getInt(NBT.ATK);
-    }
-
-    public static int getAtk(ItemStack stack) {
-        if (stack.getTag() == null) {
-            return 0;
-        }
-        int i = stack.getTag().getInt(NBT.ATK);
-        int[] rankAttr = getRankAttr(stack);
-        if (rankAttr != null) {
-            i += rankAttr[0];
-        }
-        int[] qualityAttr = QualityUtils.getQualityAttr(stack);
-        if (qualityAttr != null) {
-            i += qualityAttr[0];
-        }
-        return i;
-    }
-
-    public static void setAtk(ItemStack stack, int amount) {
-        stack.getOrCreateTag().put(NBT.ATK, IntTag.valueOf(amount));
-    }
-
     public static int getDefBase(ItemStack stack) {
         return stack.getOrCreateTag().getInt(NBT.DEF);
     }
@@ -146,6 +122,13 @@ public class SmithNbtUtils {
         int[] qualityAttr = QualityUtils.getQualityAttrArmor(stack);
         if (qualityAttr != null) {
             i += qualityAttr[0];
+        }
+        //强化属性
+        IStrengthen[] strengthens = StrengthenHelper.getStrengthens(stack);
+        if (strengthens != null) {
+            for (IStrengthen strengthen : strengthens) {
+                i += strengthen.strengthenDef();
+            }
         }
         return i;
     }
@@ -170,6 +153,13 @@ public class SmithNbtUtils {
         int[] qualityAttr = QualityUtils.getQualityAttrArmor(stack);
         if (qualityAttr != null) {
             i += qualityAttr[1];
+        }
+        //强化属性
+        IStrengthen[] strengthens = StrengthenHelper.getStrengthens(stack);
+        if (strengthens != null) {
+            for (IStrengthen strengthen : strengthens) {
+                i += strengthen.strengthenPhy();
+            }
         }
         return i;
     }
@@ -205,6 +195,13 @@ public class SmithNbtUtils {
         int[] qualityAttr = QualityUtils.getQualityAttr(stack);
         if (qualityAttr != null) {
             i += qualityAttr[1];
+        }
+        //强化属性
+        IStrengthen[] strengthens = StrengthenHelper.getStrengthens(stack);
+        if (strengthens != null) {
+            for (IStrengthen strengthen : strengthens) {
+                i += strengthen.strengthenAgl();
+            }
         }
         return i;
     }

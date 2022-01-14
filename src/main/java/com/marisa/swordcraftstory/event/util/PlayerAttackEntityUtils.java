@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.event.util;
 
+import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
@@ -44,9 +45,9 @@ public class PlayerAttackEntityUtils {
         //锻造伤害
         ItemStack stack = player.getMainHandItem();
         if (SmithNbtUtils.isRangedWeapon(stack.getItem())) {
-            f = SmithNbtUtils.getAtk(stack) * 0.5F;
+            f = SmithHelper.getDamageAtk(stack) * 0.5F;
         } else {
-            f += SmithNbtUtils.getAtk(stack);
+            f += SmithHelper.getSmithAtk(stack);
         }
         //附魔伤害
         float f1;

@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.item.ore.drop;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
+import com.marisa.swordcraftstory.smith.util.EStrengthen;
 import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -58,5 +59,30 @@ public class SteelTeethOre extends AbstractOre {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public int strengthenId() {
+        return EStrengthen.STEEL_TEETH_ORE.getId();
+    }
+
+    @Override
+    public int strengthenAtk() {
+        return 20;
+    }
+
+    @Override
+    public int strengthenDef() {
+        return 8;
+    }
+
+    @Override
+    public int strengthenPhy() {
+        return 2;
+    }
+
+    @Override
+    public int strengthenAgl() {
+        return 5;
     }
 }

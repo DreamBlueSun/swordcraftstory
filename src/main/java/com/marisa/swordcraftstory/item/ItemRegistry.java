@@ -30,6 +30,7 @@ public class ItemRegistry {
     //方块物品
     public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> ITEM_MAKE_BLOCK = ITEMS.register("item_make_block", () -> new BlockItem(BlockRegistry.ITEM_MAKE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    public static RegistryObject<Item> ITEM_STRENGTHEN_BLOCK = ITEMS.register("item_strengthen_block", () -> new BlockItem(BlockRegistry.ITEM_STRENGTHEN_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> ITEM_COLLAPSE_BLOCK = ITEMS.register("item_collapse_block", () -> new BlockItem(BlockRegistry.ITEM_COLLAPSE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> ITEM_EDGE_BLOCK = ITEMS.register("item_edge_block", () -> new BlockItem(BlockRegistry.ITEM_EDGE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));

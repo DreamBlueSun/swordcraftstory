@@ -18,6 +18,7 @@ public class BlockRegistry {
 
     public static final Block STORY_ORE_BLOCK = new StoryOreBlock();
     public static final Block ITEM_MAKE_BLOCK = new ItemMakeBlock();
+    public static final Block ITEM_STRENGTHEN_BLOCK = new ItemStrengthenBlock();
     public static final Block ITEM_COLLAPSE_BLOCK = new ItemCollapseBlock();
     public static final Block ITEM_EDGE_BLOCK = new ItemEdgeBlock();
     public static final Block REPAIR_BLOCK = new RepairBlock();

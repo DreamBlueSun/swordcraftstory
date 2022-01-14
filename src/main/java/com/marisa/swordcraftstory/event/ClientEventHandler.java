@@ -3,6 +3,7 @@ package com.marisa.swordcraftstory.event;
 import com.marisa.swordcraftstory.block.craft.screen.ItemCollapseScreen;
 import com.marisa.swordcraftstory.block.craft.screen.ItemEdgeScreen;
 import com.marisa.swordcraftstory.block.craft.screen.ItemMakeScreen;
+import com.marisa.swordcraftstory.block.craft.screen.ItemStrengthenScreen;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,5 +23,6 @@ public class ClientEventHandler {
         event.enqueueWork(() -> MenuScreens.register(MenuTypeRegistry.TYPE_ITEM_MAKE.get(), ItemMakeScreen::new));
         event.enqueueWork(() -> MenuScreens.register(MenuTypeRegistry.TYPE_ITEM_COLLAPSE.get(), ItemCollapseScreen::new));
         event.enqueueWork(() -> MenuScreens.register(MenuTypeRegistry.TYPE_ITEM_EDGE.get(), ItemEdgeScreen::new));
+        event.enqueueWork(() -> MenuScreens.register(MenuTypeRegistry.TYPE_ITEM_STRENGTHEN.get(), ItemStrengthenScreen::new));
     }
 }

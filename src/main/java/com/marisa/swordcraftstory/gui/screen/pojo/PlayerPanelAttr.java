@@ -3,15 +3,14 @@ package com.marisa.swordcraftstory.gui.screen.pojo;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.save.PlayerData;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
+import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
 
 /**
  * 玩家面板属性
@@ -53,19 +52,13 @@ public class PlayerPanelAttr {
         this.hp = new TranslatableComponent("血量").withStyle(ChatFormatting.LIGHT_PURPLE)
                 .append(" ").append(new TranslatableComponent(HP).withStyle(ChatFormatting.GREEN));
         //ATK
-        int ATK = SmithNbtUtils.isMeleeWeapon(player.getMainHandItem().getItem()) ? (int) player.getAttributeValue(Attributes.ATTACK_DAMAGE) : 0;
-        ATK += SmithNbtUtils.getAtk(player.getMainHandItem());
-        if (player.getMainHandItem().getItem() instanceof SwordItem swordItem) {
-            ATK += (int) swordItem.getDamage();
-        } else if (player.getMainHandItem().getItem() instanceof DiggerItem diggerItem) {
-            ATK += (int) diggerItem.getAttackDamage();
-        }
+        int ATK = SmithHelper.getDamageAtk(player.getMainHandItem());
         this.atk = new TranslatableComponent("攻击").withStyle(ChatFormatting.LIGHT_PURPLE)
                 .append(" ").append(new TranslatableComponent(String.valueOf(ATK)).withStyle(ChatFormatting.GREEN));
         //DEF
         int DEF = 0;
-        for (ItemStack stack : player.getArmorSlots()) {
-            DEF += SmithNbtUtils.getDef(stack);
+        for (ItemStack armor : player.getArmorSlots()) {
+            DEF += SmithNbtUtils.getDef(armor);
         }
         DEF += player.getArmorValue();
         this.def = new TranslatableComponent("护甲").withStyle(ChatFormatting.LIGHT_PURPLE)
