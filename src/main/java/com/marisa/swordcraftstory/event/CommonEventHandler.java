@@ -3,6 +3,7 @@ package com.marisa.swordcraftstory.event;
 import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.event.util.LivingHurtUtils;
 import com.marisa.swordcraftstory.event.util.PlayerAttackEntityUtils;
+import com.marisa.swordcraftstory.item.reply.ReplyItem;
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.pack.ItemUnbreakablePack;
 import com.marisa.swordcraftstory.net.pack.QualityIdentificationPack;
@@ -18,9 +19,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringUtil;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
@@ -37,10 +36,7 @@ import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
@@ -329,18 +325,20 @@ public class CommonEventHandler {
     }
 
     @SubscribeEvent
-    public void itemPickupEvent(PlayerEvent.ItemPickupEvent event) {
-        //拦截玩家拾取物品
-    }
-
-    @SubscribeEvent
-    public void itemSmeltedEvent(PlayerEvent.ItemSmeltedEvent event) {
-        //拦截玩家熔炼物品
-    }
-
-    @SubscribeEvent
-    public void playerDestroyItem(PlayerDestroyItemEvent event) {
-        //拦截玩家损坏物品
+    public void playerDestroyItem(PlayerInteractEvent.EntityInteract event) {
+        //拦截玩家与实体交互实现给生物使用回复道具
+        if (event.getPlayer() instanceof ServerPlayer player && event.getTarget() instanceof LivingEntity living && living.getHealth() < living.getMaxHealth()) {
+            ItemStack stack = event.getItemStack();
+            if (stack.getItem() instanceof ReplyItem reply && (living instanceof AgeableMob || living instanceof OwnableEntity)) {
+                ItemStack copy = stack.copy();
+                copy.setCount(1);
+                reply.finishUsingItem(copy, player.level, living);
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
+                event.setCanceled(true);
+            }
+        }
     }
 
 }
