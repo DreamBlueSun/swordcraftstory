@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.event.pojo;
 
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -54,12 +54,12 @@ public class Absorb {
         }
         int def = 0;
         for (ItemStack stack : target.getArmorSlots()) {
-            def += SmithNbtUtils.getDef(stack);
+            def += SmithHelper.getSmithDef(stack);
         }
         this.p = (float) target.getArmorValue() + def;
         int phy = 0;
         for (ItemStack stack : target.getArmorSlots()) {
-            phy += SmithNbtUtils.getPhy(stack);
+            phy += SmithHelper.getSmithPhy(stack);
         }
         this.m = (float) target.getAttributeValue(Attributes.ARMOR_TOUGHNESS) + phy;
         this.r = 0;

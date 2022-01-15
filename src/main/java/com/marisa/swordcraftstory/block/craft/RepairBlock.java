@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.block.craft;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -48,7 +48,7 @@ public class RepairBlock extends Block {
                 Inventory inv = player.getInventory();
                 for (int i = 0; i < inv.items.size(); i++) {
                     ItemStack stack = inv.items.get(i);
-                    if (!stack.isEmpty() && SmithNbtUtils.isWeapon(stack.getItem())) {
+                    if (!stack.isEmpty() && StoryUtils.isWeapon(stack.getItem())) {
                         stack.setDamageValue(0);
                     }
                 }

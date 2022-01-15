@@ -24,6 +24,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
 import net.minecraft.world.item.ArmorItem;
@@ -34,6 +35,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -88,7 +90,7 @@ public class CommonEventHandler {
                     arrow.setBaseDamage(Damage.ARROW_BASE_DAMAGE);
                     return;
                 }
-                if (owner instanceof ServerPlayer player && SmithNbtUtils.isRangedWeapon(player.getMainHandItem().getItem())) {
+                if (owner instanceof ServerPlayer player && StoryUtils.isRangedWeapon(player.getMainHandItem().getItem())) {
                     ItemStack stack = player.getMainHandItem();
                     float atk = (float) SmithHelper.getDamageAtk(stack);
                     //重新计算力量附魔：基础物理伤害+(0.5+0.5*lv)，再+(4%*lv)，最高20%
@@ -98,7 +100,7 @@ public class CommonEventHandler {
                         atk *= 1.0D + (Math.min(j, 5) * 0.04D);
                     }
                     //暴击
-                    if (SmithNbtUtils.isCri(stack)) {
+                    if (SmithHelper.isCri(stack)) {
                         atk *= 1.25D;
                         arrow.setCritArrow(true);
                         player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
@@ -117,8 +119,8 @@ public class CommonEventHandler {
 
     @SubscribeEvent
     public void itemTooltip(ItemTooltipEvent event) {
-        ItemStack itemStack = event.getItemStack();
-        if (SmithNbtUtils.isWeapon(itemStack.getItem())) {
+        ItemStack stack = event.getItemStack();
+        if (StoryUtils.isWeapon(stack.getItem())) {
             List<Component> toolTip = event.getToolTip();
             String atk_s = "4.0";
             List<Component> remTip = new ArrayList<>();
@@ -131,7 +133,7 @@ public class CommonEventHandler {
                     remTip.add(i);
                     continue;
                 }
-                if (SmithNbtUtils.isMeleeWeapon(itemStack.getItem())) {
+                if (StoryUtils.isMeleeWeapon(stack.getItem())) {
                     if (i instanceof TextComponent && i.getSiblings().size() > 0) {
                         for (Component j : i.getSiblings()) {
                             if (j instanceof TranslatableComponent c && c.getKey().equals("attribute.modifier.equals.0")) {
@@ -148,41 +150,21 @@ public class CommonEventHandler {
                 }
             }
             toolTip.removeAll(remTip);
-            //鉴定品质
-            Quality quality = quality(event);
             int index = 0;
-            toolTip.add(++index, new TranslatableComponent(quality.getName()).withStyle(quality.getChatFormatting()));
-            //属性
-            toolTip.add(++index, new TranslatableComponent("等阶").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getRank(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
-            toolTip.add(++index, new TextComponent(""));
+            index = addTips1(index, toolTip, stack, event.getPlayer());
             toolTip.add(++index, new TranslatableComponent("攻击").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent(String.valueOf(SmithHelper.getDamageAtk(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
-            if (SmithNbtUtils.isMeleeWeapon(itemStack.getItem())) {
+                    .append(new TranslatableComponent(String.valueOf(SmithHelper.getDamageAtk(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            if (StoryUtils.isMeleeWeapon(stack.getItem())) {
                 toolTip.add(++index, new TranslatableComponent("攻速").withStyle(ChatFormatting.YELLOW).append("     ")
                         .append(new TranslatableComponent(atk_s).withStyle(ChatFormatting.LIGHT_PURPLE)));
             }
             toolTip.add(++index, new TranslatableComponent("敏捷").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getAgl(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
-            float critical = (float) SmithNbtUtils.getCri(itemStack) / 10;
+                    .append(new TranslatableComponent(String.valueOf(SmithHelper.getSmithAgl(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+            float critical = (float) SmithHelper.getCri(stack) / 10;
             toolTip.add(++index, new TranslatableComponent("暴击").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(critical + "%").withStyle(ChatFormatting.LIGHT_PURPLE)));
-            toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent(SmithNbtUtils.getTec(itemStack) + " / 255").withStyle(ChatFormatting.GREEN)));
-            toolTip.add(++index, new TextComponent(""));
-            //强化字段显示
-            int[] strengthenIds = StrengthenHelper.getStrengthenIds(itemStack);
-            if (strengthenIds != null) {
-                MutableComponent component = new TranslatableComponent("强化").withStyle(ChatFormatting.AQUA).append("     ");
-                for (int id : strengthenIds) {
-                    component.append(new TranslatableComponent("[").withStyle(ChatFormatting.RED))
-                            .append(new TranslatableComponent(EStrengthen.getById(id).getName()).withStyle(ChatFormatting.AQUA))
-                            .append(new TranslatableComponent("]").withStyle(ChatFormatting.RED));
-                }
-                toolTip.add(++index, component);
-            }
-            toolTip.add(++index, new TextComponent(""));
-        } else if (itemStack.getItem() instanceof ArmorItem) {
+            addTips2(index, toolTip, stack);
+        } else if (stack.getItem() instanceof ArmorItem) {
             List<Component> toolTip = event.getToolTip();
             int armor = 0;
             int toughness = 0;
@@ -197,89 +179,116 @@ public class CommonEventHandler {
                     if (c.getKey().contains("item.modifiers.")) {
                         remTip.add(i);
                     } else if (c.getKey().equals("attribute.modifier.plus.0")) {
-                        remTip.add(i);
                         if (c.getArgs().length > 1) {
                             String key = ((TranslatableComponent) c.getArgs()[1]).getKey();
                             switch (key) {
-                                case "attribute.name.generic.armor" -> armor = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
-                                case "attribute.name.generic.armor_toughness" -> toughness = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
-                                case "attribute.name.generic.knockback_resistance" -> resistance = String.valueOf(c.getArgs()[0]);
+                                case "attribute.name.generic.armor" -> {
+                                    armor = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
+                                    remTip.add(i);
+                                }
+                                case "attribute.name.generic.armor_toughness" -> {
+                                    toughness = (int) Double.parseDouble(String.valueOf(c.getArgs()[0]));
+                                    remTip.add(i);
+                                }
+                                case "attribute.name.generic.knockback_resistance" -> {
+                                    resistance = String.valueOf(c.getArgs()[0]);
+                                    remTip.add(i);
+                                }
                             }
                         }
                     }
                 }
             }
             toolTip.removeAll(remTip);
-            //鉴定品质
-            Quality quality = quality(event);
             int index = 0;
-            toolTip.add(++index, new TranslatableComponent(quality.getName()).withStyle(quality.getChatFormatting()));
-            //属性
-            toolTip.add(++index, new TranslatableComponent("等阶").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getRank(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
-            toolTip.add(++index, new TextComponent(""));
+            index = addTips1(index, toolTip, stack, event.getPlayer());
             toolTip.add(++index, new TranslatableComponent("护甲").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent(String.valueOf(armor + SmithNbtUtils.getDef(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                    .append(new TranslatableComponent(String.valueOf(armor + SmithHelper.getSmithDef(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
             toolTip.add(++index, new TranslatableComponent("韧性").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent(String.valueOf(toughness + SmithNbtUtils.getPhy(itemStack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                    .append(new TranslatableComponent(String.valueOf(toughness + SmithHelper.getSmithPhy(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
             toolTip.add(++index, new TranslatableComponent("抵抗").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(resistance).withStyle(ChatFormatting.LIGHT_PURPLE)));
-            toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
-                    .append(new TranslatableComponent(SmithNbtUtils.getTec(itemStack) + " / 255").withStyle(ChatFormatting.GREEN)));
-            toolTip.add(++index, new TextComponent(""));
-            //强化字段显示
-            int[] strengthenIds = StrengthenHelper.getStrengthenIds(itemStack);
-            if (strengthenIds != null) {
-                MutableComponent component = new TranslatableComponent("强化").withStyle(ChatFormatting.AQUA).append("     ");
-                for (int id : strengthenIds) {
-                    component.append(new TranslatableComponent("[").withStyle(ChatFormatting.RED))
-                            .append(new TranslatableComponent(EStrengthen.getById(id).getName()).withStyle(ChatFormatting.AQUA))
-                            .append(new TranslatableComponent("]").withStyle(ChatFormatting.RED));
-                }
-                toolTip.add(++index, component);
+            addTips2(index, toolTip, stack);
+        } else if (stack.getItem() instanceof ShieldItem && stack.isDamageableItem()) {
+            Networking.ITEM_UNBREAKABLE.sendToServer(new ItemUnbreakablePack(stack));
+        }
+    }
+
+    private int addTips1(int index, List<Component> toolTip, ItemStack stack, Player player) {
+        //品质
+        EQuality quality = quality(stack, player);
+        toolTip.add(++index, new TranslatableComponent(quality.getName()).withStyle(quality.getChatFormatting()));
+        //等阶
+        toolTip.add(++index, new TranslatableComponent("等阶").withStyle(ChatFormatting.YELLOW).append("     ")
+                .append(new TranslatableComponent(String.valueOf(RankHelper.getRank(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+        toolTip.add(++index, new TextComponent(""));
+        return index;
+    }
+
+    private void addTips2(int index, List<Component> toolTip, ItemStack stack) {
+        toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
+                .append(new TranslatableComponent(EdgeHelper.getTec(stack) + " / 255").withStyle(ChatFormatting.GREEN)));
+        toolTip.add(++index, new TextComponent(""));
+        //强化字段显示
+        int[] strengthenIds = StrengthenHelper.getStrengthenIds(stack);
+        if (strengthenIds != null) {
+            MutableComponent component = new TranslatableComponent("强化").withStyle(ChatFormatting.AQUA).append("     ");
+            for (int id : strengthenIds) {
+                component.append(new TranslatableComponent("[").withStyle(ChatFormatting.RED))
+                        .append(new TranslatableComponent(EStrengthen.getById(id).getName()).withStyle(ChatFormatting.AQUA))
+                        .append(new TranslatableComponent("]").withStyle(ChatFormatting.RED));
             }
+            toolTip.add(++index, component);
             toolTip.add(++index, new TextComponent(""));
-        } else if (itemStack.getItem() instanceof ShieldItem && itemStack.isDamageableItem()) {
-            Networking.ITEM_UNBREAKABLE.sendToServer(new ItemUnbreakablePack(itemStack));
         }
     }
 
     /**
      * 鉴定品质
      */
-    private Quality quality(ItemTooltipEvent event) {
-        ItemStack itemStack = event.getItemStack();
+    private EQuality quality(ItemStack stack, Player player) {
         //品质
-        Quality quality = SmithNbtUtils.QualityUtils.getQuality(itemStack);
-        if (SmithNbtUtils.getRank(itemStack) > 0 && quality == Quality.UNKNOWN && event.getPlayer() != null) {
+        EQuality quality = QualityHelper.getQuality(stack);
+        if (quality == EQuality.UNKNOWN && player != null) {
             //鉴定品质
-            Inventory inventory = event.getPlayer().getInventory();
+            Inventory inventory = player.getInventory();
             int slot = -1;
             for (int i = 0; i < inventory.items.size(); ++i) {
-                if (!inventory.items.get(i).isEmpty() && inventory.items.get(i) == itemStack) {
+                if (!inventory.items.get(i).isEmpty() && inventory.items.get(i) == stack) {
                     slot = i;
                     break;
                 }
             }
             if (slot >= 0 && Minecraft.getInstance().player != null) {
-                Networking.QUALITY_IDENTIFICATION.sendToServer(new QualityIdentificationPack(itemStack));
+                Networking.QUALITY_IDENTIFICATION.sendToServer(new QualityIdentificationPack(stack));
             }
         }
         return quality;
     }
 
     private static final UUID UUID_MOVEMENT_SPEED = UUID.randomUUID();
-    private static final UUID UUID_ATTACK_SPEED = UUID.randomUUID();
 
     @SubscribeEvent
     public void itemAttributeModifier(ItemAttributeModifierEvent event) {
-        if (event.getSlotType() != EquipmentSlot.MAINHAND) {
+        ItemStack stack = event.getItemStack();
+        //判断主手或盔甲槽位
+        EquipmentSlot slot;
+        if (stack.getItem() instanceof ArmorItem armor) {
+            slot = armor.getSlot();
+        } else {
+            slot = EquipmentSlot.MAINHAND;
+        }
+        if (slot != event.getSlotType()) {
             return;
         }
-        ItemStack itemStack = event.getItemStack();
-        if (SmithNbtUtils.isWeapon(itemStack.getItem())) {
-            //攻击速度、移动速度
-            int agl = SmithNbtUtils.getAgl(itemStack);
+        //鉴定属性
+        EQuality quality = QualityHelper.getQuality(stack);
+        if (quality != EQuality.UNKNOWN) {
+            quality.getAttr(stack.getItem()).addAttributeModifier(event);
+        }
+        //武器敏捷属性
+        if (StoryUtils.isWeapon(stack.getItem())) {
+            int agl = SmithHelper.getSmithAgl(stack);
             if (agl != 0) {
                 final double baseSpeed = 0.01D;
                 final double offset = 50.0D;
@@ -293,18 +302,30 @@ public class CommonEventHandler {
                 }
                 event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID_MOVEMENT_SPEED, "main hand modifier", v, AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
-            if (SmithNbtUtils.isMeleeWeapon(itemStack.getItem())) {
-                double atkS = SmithNbtUtils.getAtkS(itemStack);
-                if (atkS != 0) {
-                    event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(UUID_ATTACK_SPEED, "main hand modifier", atkS, AttributeModifier.Operation.MULTIPLY_TOTAL));
-                }
+        }
+    }
+
+    @SubscribeEvent
+    public void livingUpdate(LivingEvent.LivingUpdateEvent event) {
+        //拦截实体tick
+        if (event.getEntity() instanceof ServerPlayer player) {
+            int value = (int) player.getAttributeValue(Attributes.MAX_HEALTH);
+            if (player.getHealth() > value) {
+                player.setHealth(value);
             }
         }
     }
 
     @SubscribeEvent
     public void itemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
-        //拦截玩家制作物品
+        //拦截玩家制作物品进行鉴定品质
+        ItemStack stack = event.getCrafting();
+        if (StoryUtils.isModItem(stack.getItem()) && QualityHelper.getQuality(stack) == EQuality.UNKNOWN) {
+            QualityHelper.setQuality(stack, EQuality.randomOne(false));
+        } else if (stack.getItem() instanceof ShieldItem && stack.isDamageableItem()) {
+            stack.getOrCreateTag().putInt("HideFlags", 4);
+            stack.getOrCreateTag().putBoolean("Unbreakable", true);
+        }
     }
 
     @SubscribeEvent

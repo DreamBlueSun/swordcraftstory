@@ -7,6 +7,7 @@ import com.marisa.swordcraftstory.event.CommonEventHandler;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.save.SaveEventHandler;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -49,6 +50,9 @@ public class Story {
             if (attribute instanceof RangedAttribute rangedAttribute) {
                 rangedAttribute.minValue = -65535.0F;
                 rangedAttribute.maxValue = 65535.0F;
+                if (rangedAttribute == Attributes.MAX_HEALTH) {
+                    rangedAttribute.minValue = 1.0F;
+                }
             }
         }
     }

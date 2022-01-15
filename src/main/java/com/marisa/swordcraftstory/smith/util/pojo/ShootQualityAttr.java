@@ -1,31 +1,29 @@
 package com.marisa.swordcraftstory.smith.util.pojo;
 
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.ItemAttributeModifierEvent;
+
+import java.util.UUID;
 
 /**
  * 射击类武器品质属性
  */
 
-public class ShootQualityAttr extends AbstractQualityAttr {
+public class ShootQualityAttr extends WeaponQualityAttr {
 
-    /**
-     * 攻击力
-     */
-    private final int atk;
+    private static final UUID UUID_LUCK = UUID.randomUUID();
 
-    /**
-     * 敏捷
-     */
-    private final int agl;
-
-    public ShootQualityAttr(int atk, int agl) {
-        this.atk = atk;
-        this.agl = agl;
+    public ShootQualityAttr(int luck, int atk, int agl, int cri) {
+        super(UUID_LUCK, luck, atk, agl, cri);
     }
 
     @Override
-    public void modifyBase(ItemStack itemStack) {
-        SmithNbtUtils.QualityUtils.setQualityAttr(itemStack, new int[]{this.atk, this.agl});
+    public void smithModify(ItemStack stack) {
+        super.smithModify(stack);
+    }
+
+    @Override
+    public void addAttributeModifier(ItemAttributeModifierEvent event) {
+        super.addAttributeModifier(event);
     }
 }

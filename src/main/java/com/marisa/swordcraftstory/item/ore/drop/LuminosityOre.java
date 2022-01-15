@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.item.ore.drop;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.smith.util.EStrengthen;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -46,7 +46,7 @@ public class LuminosityOre extends AbstractOre {
             return new int[]{130, -10};
         } else if (item instanceof PickaxeItem) {
             return new int[]{115, -5};
-        } else if (SmithNbtUtils.isRangedWeapon(item)) {
+        } else if (StoryUtils.isRangedWeapon(item)) {
             return new int[]{100, 0};
         } else {
             return null;

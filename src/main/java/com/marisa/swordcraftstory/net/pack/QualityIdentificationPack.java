@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.net.pack;
 
-import com.marisa.swordcraftstory.smith.util.Quality;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.EQuality;
+import com.marisa.swordcraftstory.smith.util.QualityHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
@@ -39,8 +39,8 @@ public class QualityIdentificationPack {
                 int slot = inventory.findSlotMatchingItem(this.itemStack);
                 if (slot >= 0) {
                     ItemStack stack = inventory.getItem(slot);
-                    if (SmithNbtUtils.QualityUtils.getQuality(stack) == Quality.UNKNOWN) {
-                        SmithNbtUtils.QualityUtils.setQuality(stack, Quality.randomOne());
+                    if (QualityHelper.getQuality(stack) == EQuality.UNKNOWN) {
+                        QualityHelper.setQuality(stack, EQuality.randomOne(true));
                     }
                 }
             }

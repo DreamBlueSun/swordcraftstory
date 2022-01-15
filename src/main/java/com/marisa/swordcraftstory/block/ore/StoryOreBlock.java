@@ -1,10 +1,10 @@
 package com.marisa.swordcraftstory.block.ore;
 
 import com.marisa.swordcraftstory.Story;
+import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.ore.helper.OreDropQuality;
-import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.RankHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -51,7 +51,7 @@ public class StoryOreBlock extends OreBlock {
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
         } else {
             //根据工具等阶掉落素材
-            ItemStack random = OreDropQuality.random(SmithNbtUtils.getRank(stack));
+            ItemStack random = OreDropQuality.random(RankHelper.getRank(stack));
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), random);
             //根据掉落物品掉落经验
             int rank = random.getItem() instanceof AbstractOre ore ? ore.rank() : 3;

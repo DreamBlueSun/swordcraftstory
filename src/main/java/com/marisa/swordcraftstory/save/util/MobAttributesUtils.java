@@ -1,7 +1,6 @@
 package com.marisa.swordcraftstory.save.util;
 
 import com.google.common.collect.ImmutableMultimap;
-import com.marisa.swordcraftstory.block.craft.menu.ItemMakeMenu;
 import com.marisa.swordcraftstory.event.pojo.MobAttr;
 import com.marisa.swordcraftstory.save.MobAttrSaveData;
 import net.minecraft.server.level.ServerLevel;
@@ -46,12 +45,12 @@ public class MobAttributesUtils {
         //mob实体加入世界时，根据最近玩家等级增加属性
         int lv = mobSpanLv(playerLv);
         int maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 2.0F, 30.0F);
-        int armorAdd = lv * 3;
+        int armorAdd = lv;
         //如果mob原血量大于等于100(判定为BOSS生物)，则血量额外增加、防御额外增加
         boolean isBoos = Mob.getMaxHealth() >= 100;
         if (isBoos) {
             maxHealthAdd = lv * (int) Mth.clamp(Mob.getMaxHealth(), 20.0F, 200.0F);
-            armorAdd += lv;
+            armorAdd += lv / 2;
         }
         MobAttr mobAttr = new MobAttr(Mob.getStringUUID(), lv, maxHealthAdd, armorAdd);
         //设置mob属性值
@@ -65,7 +64,7 @@ public class MobAttributesUtils {
      * Mob出生等级
      */
     private static int mobSpanLv(int lv) {
-        if (lv <= ItemMakeMenu.RANK_LV_NEED_ONCE) {
+        if (lv < 2) {
             return 0;
         }
         //随机+-0~5LV

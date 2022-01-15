@@ -4,7 +4,6 @@ import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.save.PlayerData;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
@@ -58,7 +57,7 @@ public class PlayerPanelAttr {
         //DEF
         int DEF = 0;
         for (ItemStack armor : player.getArmorSlots()) {
-            DEF += SmithNbtUtils.getDef(armor);
+            DEF += SmithHelper.getSmithDef(armor);
         }
         DEF += player.getArmorValue();
         this.def = new TranslatableComponent("护甲").withStyle(ChatFormatting.LIGHT_PURPLE)
@@ -66,13 +65,13 @@ public class PlayerPanelAttr {
         //PHY
         int PHY = 0;
         for (ItemStack stack : player.getArmorSlots()) {
-            PHY += SmithNbtUtils.getPhy(stack);
+            PHY += SmithHelper.getSmithPhy(stack);
         }
         PHY += (int) player.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
         this.phy = new TranslatableComponent("韧性").withStyle(ChatFormatting.LIGHT_PURPLE)
                 .append(" ").append(new TranslatableComponent(String.valueOf(PHY)).withStyle(ChatFormatting.GREEN));
         //AGL
-        int AGL = SmithNbtUtils.getAgl(player.getMainHandItem());
+        int AGL = SmithHelper.getSmithAgl(player.getMainHandItem());
         this.agl = new TranslatableComponent("敏捷").withStyle(ChatFormatting.LIGHT_PURPLE)
                 .append(" ").append(new TranslatableComponent(String.valueOf(AGL)).withStyle(ChatFormatting.GREEN));
     }

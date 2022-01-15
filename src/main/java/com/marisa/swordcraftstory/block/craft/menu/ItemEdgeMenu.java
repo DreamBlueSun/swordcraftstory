@@ -3,7 +3,8 @@ package com.marisa.swordcraftstory.block.craft.menu;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import com.marisa.swordcraftstory.item.edge.*;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.EdgeHelper;
+import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -58,7 +59,7 @@ public class ItemEdgeMenu extends ItemCombinerMenu {
     public void createResult() {
         ItemStack stack0 = this.inputSlots.getItem(0);
         Item item0 = stack0.getItem();
-        if (stack0.isEmpty() || !SmithNbtUtils.isModItem(item0)) {
+        if (stack0.isEmpty() || !StoryUtils.isModItem(item0)) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
@@ -68,7 +69,7 @@ public class ItemEdgeMenu extends ItemCombinerMenu {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
-        if (SmithNbtUtils.isWeapon(item0)) {
+        if (StoryUtils.isWeapon(item0)) {
             if (item1 instanceof OreEdgeDef || item1 instanceof OreEdgePhy) {
                 return;
             }
@@ -77,7 +78,7 @@ public class ItemEdgeMenu extends ItemCombinerMenu {
                 return;
             }
         }
-        if (SmithNbtUtils.getTec(stack0) < 255) {
+        if (EdgeHelper.getTec(stack0) < 255) {
             return;
         }
         ItemStack edge = ((EdgeItem) item1).edge(stack0);

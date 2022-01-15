@@ -10,17 +10,17 @@ import net.minecraft.world.item.ItemStack;
 
 public class StrengthenHelper {
 
-    private final static String STRENGTHEN = "story_smith_strengthen";
+    private final static String ID = "story_smith_strengthen";
 
     public static void setStrengthen(ItemStack stack, int[] ints) {
-        stack.getOrCreateTag().put(STRENGTHEN, new IntArrayTag(ints));
+        stack.getOrCreateTag().put(ID, new IntArrayTag(ints));
     }
 
     public static int[] getStrengthenIds(ItemStack stack) {
         if (stack.getTag() == null) {
             return null;
         }
-        int[] ints = stack.getTag().getIntArray(STRENGTHEN);
+        int[] ints = stack.getTag().getIntArray(ID);
         return ints.length > 0 ? ints : null;
     }
 
@@ -28,7 +28,7 @@ public class StrengthenHelper {
         if (stack.getTag() == null) {
             return null;
         }
-        int[] ints = stack.getTag().getIntArray(STRENGTHEN);
+        int[] ints = stack.getTag().getIntArray(ID);
         if (ints.length > 0) {
             IStrengthen[] strengthens = new IStrengthen[ints.length];
             for (int i = 0; i < ints.length; i++) {
@@ -37,6 +37,50 @@ public class StrengthenHelper {
             return strengthens;
         }
         return null;
+    }
+
+    public static int getAtk(ItemStack stack) {
+        int i = 0;
+        IStrengthen[] strengthens = getStrengthens(stack);
+        if (strengthens != null) {
+            for (IStrengthen strengthen : strengthens) {
+                i += strengthen.strengthenAtk();
+            }
+        }
+        return i;
+    }
+
+    public static int getDef(ItemStack stack) {
+        int i = 0;
+        IStrengthen[] strengthens = getStrengthens(stack);
+        if (strengthens != null) {
+            for (IStrengthen strengthen : strengthens) {
+                i += strengthen.strengthenDef();
+            }
+        }
+        return i;
+    }
+
+    public static int getPhy(ItemStack stack) {
+        int i = 0;
+        IStrengthen[] strengthens = getStrengthens(stack);
+        if (strengthens != null) {
+            for (IStrengthen strengthen : strengthens) {
+                i += strengthen.strengthenPhy();
+            }
+        }
+        return i;
+    }
+
+    public static int getAgl(ItemStack stack) {
+        int i = 0;
+        IStrengthen[] strengthens = getStrengthens(stack);
+        if (strengthens != null) {
+            for (IStrengthen strengthen : strengthens) {
+                i += strengthen.strengthenAgl();
+            }
+        }
+        return i;
     }
 
 }

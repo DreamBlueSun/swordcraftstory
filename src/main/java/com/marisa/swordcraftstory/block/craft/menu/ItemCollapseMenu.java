@@ -4,7 +4,8 @@ import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.mould.Mould;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.EnchantHelper;
+import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -56,7 +57,7 @@ public class ItemCollapseMenu extends AbstractItemCollapseMenu {
     public void createResult() {
         ItemStack stack = this.inputSlots.getItem(0);
         Item item = stack.getItem();
-        if (stack.isEmpty() || !SmithNbtUtils.isModItem(item)) {
+        if (stack.isEmpty() || !StoryUtils.isModItem(item)) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
@@ -79,7 +80,7 @@ public class ItemCollapseMenu extends AbstractItemCollapseMenu {
                 case FEET -> collapse = ((Mould) ItemRegistry.FEET_MOULD.get()).collapse(stack);
             }
         }
-        SmithNbtUtils.copyEnchantmentTag(stack, collapse);
+        EnchantHelper.copyEnchantmentTag(stack, collapse);
         if (!collapse.isEmpty()) {
             this.resultSlots.setItem(0, collapse);
         }

@@ -1,8 +1,7 @@
 package com.marisa.swordcraftstory.item.mould;
 
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
-import com.marisa.swordcraftstory.smith.util.SmithHelper;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -31,27 +30,29 @@ public abstract class WeaponMould extends Mould {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> toolTip, @NotNull TooltipFlag flagIn) {
         super.appendHoverText(stack, level, toolTip, flagIn);
         toolTip.add(new TranslatableComponent("攻击").withStyle(ChatFormatting.YELLOW).append("     ")
-                .append(new TranslatableComponent(String.valueOf(SmithHelper.Collapse.getAtk(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                .append(new TranslatableComponent(String.valueOf(CollapseHelper.getAtk(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
         toolTip.add(new TranslatableComponent("敏捷").withStyle(ChatFormatting.YELLOW).append("     ")
-                .append(new TranslatableComponent(String.valueOf(SmithHelper.Collapse.getAgl(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                .append(new TranslatableComponent(String.valueOf(CollapseHelper.getAgl(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
     }
 
     @Override
     public ItemStack make(ItemStack stack, ItemStack mould, AbstractOre ore) {
         ItemStack copy = stack.copy();
-        if (SmithNbtUtils.getRank(copy) == 0) {
-            SmithNbtUtils.remEnchantmentTag(copy);
-            SmithNbtUtils.copyEnchantmentTag(mould, copy);
-            SmithHelper.Edge.setAtk(copy, SmithHelper.Collapse.getAtk(mould));
-            SmithNbtUtils.setAgl(copy, SmithHelper.Collapse.getAgl(mould));
+        if (RankHelper.getRank(copy) == 0) {
+            EnchantHelper.remEnchantmentTag(copy);
+            EnchantHelper.copyEnchantmentTag(mould, copy);
+            //模具属性添加至强刃属性
+            EdgeHelper.setAtk(copy, EdgeHelper.getAtk(stack) + CollapseHelper.getAtk(mould));
+            EdgeHelper.setAgl(copy, EdgeHelper.getAgl(stack) + CollapseHelper.getAgl(mould));
+            //升阶属性
             copy = ore.itemRankUp(copy);
         }
         return copy;
     }
 
     protected ItemStack collapseWeapon(ItemStack mould, ItemStack stack, int offset) {
-        SmithHelper.Collapse.setAtk(mould, Math.max(SmithHelper.getDamageAtk(stack) / offset, 0));
-        SmithHelper.Collapse.setAgl(mould, Math.max(SmithNbtUtils.getAgl(stack) / offset, 0));
+        CollapseHelper.setAtk(mould, Math.max(SmithHelper.getDamageAtk(stack) / offset, 0));
+        CollapseHelper.setAgl(mould, Math.max(SmithHelper.getSmithAgl(stack) / offset, 0));
         return mould;
     }
 }

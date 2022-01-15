@@ -3,7 +3,8 @@ package com.marisa.swordcraftstory.event.util;
 import com.marisa.swordcraftstory.event.pojo.Absorb;
 import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.save.MobAttrSaveData;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.EdgeHelper;
+import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -46,15 +47,15 @@ public class LivingHurtUtils {
         //累积武器熟练度
         if (source.getEntity() instanceof ServerPlayer player) {
             ItemStack stack = player.getMainHandItem();
-            if (SmithNbtUtils.isWeapon(stack.getItem())) {
-                SmithNbtUtils.incrTec(stack);
+            if (StoryUtils.isWeapon(stack.getItem())) {
+                EdgeHelper.incrTec(stack);
             }
         }
         //累积盔甲熟练度
         if (source.getEntity() != null && target instanceof ServerPlayer player) {
             for (ItemStack armor : player.getArmorSlots()) {
-                if (SmithNbtUtils.isModItem(armor.getItem()) && new Random().nextInt(4) > 0) {
-                    SmithNbtUtils.incrTec(armor);
+                if (StoryUtils.isModItem(armor.getItem()) && new Random().nextInt(4) > 0) {
+                    EdgeHelper.incrTec(armor);
                 }
             }
         }

@@ -8,22 +8,22 @@ import net.minecraftforge.event.ItemAttributeModifierEvent;
 import java.util.UUID;
 
 /**
- * 剑类武器品质属性
+ * 鞋子类品质属性
  */
 
-public class SwordQualityAttr extends WeaponQualityAttr {
+public class FeetQualityAttr extends ArmorQualityAttr {
 
     private static final UUID UUID_LUCK = UUID.randomUUID();
-    private static final UUID UUID_ATTACK_SPEED = UUID.randomUUID();
+    private static final UUID UUID_MOVE_SPEED = UUID.randomUUID();
 
     /**
-     * 攻速
+     * 百分比移速
      */
-    private final double atkS;
+    private final double moveSpeed;
 
-    public SwordQualityAttr(int luck, int atk, int agl, int cri, double atkS) {
-        super(UUID_LUCK, luck, atk, agl, cri);
-        this.atkS = atkS;
+    public FeetQualityAttr(int luck, int def, int phy, double moveSpeed) {
+        super(UUID_LUCK, luck, def, phy);
+        this.moveSpeed = moveSpeed;
     }
 
     @Override
@@ -33,8 +33,8 @@ public class SwordQualityAttr extends WeaponQualityAttr {
 
     @Override
     public void addAttributeModifier(ItemAttributeModifierEvent event) {
-        if (this.atkS != 0.0D) {
-            event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(UUID_ATTACK_SPEED, "quality attr modifier", this.atkS, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        if (this.moveSpeed != 0.0D) {
+            event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID_MOVE_SPEED, "quality attr modifier", this.moveSpeed, AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
         super.addAttributeModifier(event);
     }

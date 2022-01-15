@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.item.ore.drop;
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.smith.util.EStrengthen;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -45,7 +45,7 @@ public class SteelTeethOre extends AbstractOre {
             return new int[]{114, -20};
         } else if (item instanceof PickaxeItem) {
             return new int[]{102, -15};
-        } else if (SmithNbtUtils.isRangedWeapon(item)) {
+        } else if (StoryUtils.isRangedWeapon(item)) {
             return new int[]{90, -10};
         } else {
             return null;

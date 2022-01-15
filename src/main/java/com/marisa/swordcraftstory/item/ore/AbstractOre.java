@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.smith.IStrengthen;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.RankHelper;
 import com.marisa.swordcraftstory.smith.util.StrengthenHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -50,15 +50,15 @@ public abstract class AbstractOre extends Item implements IStrengthen {
         if (copy.getItem() instanceof ArmorItem) {
             int[] attr = rankAttrArmor(copy.getItem());
             if (attr != null) {
-                SmithNbtUtils.setRank(copy, rank());
-                SmithNbtUtils.setRankAttrArmor(copy, attr);
+                RankHelper.setRank(copy, rank());
+                RankHelper.setRankAttrArmor(copy, attr);
                 return copy;
             }
         } else {
             int[] attr = rankAttr(copy.getItem());
             if (attr != null) {
-                SmithNbtUtils.setRank(copy, rank());
-                SmithNbtUtils.setRankAttr(copy, attr);
+                RankHelper.setRank(copy, rank());
+                RankHelper.setRankAttr(copy, attr);
                 return copy;
             }
         }

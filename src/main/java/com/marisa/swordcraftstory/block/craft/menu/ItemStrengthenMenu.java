@@ -4,7 +4,7 @@ import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 import com.marisa.swordcraftstory.smith.IStrengthen;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import com.marisa.swordcraftstory.smith.util.StrengthenHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -61,7 +61,7 @@ public class ItemStrengthenMenu extends OneAddThreeGetOneMenu {
     public void createResult() {
         ItemStack stack0 = this.inputSlots.getItem(INPUT_SLOT_1);
         Item item0 = stack0.getItem();
-        if (stack0.isEmpty() || !SmithNbtUtils.isModItem(item0)) {
+        if (stack0.isEmpty() || !StoryUtils.isModItem(item0)) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
@@ -79,15 +79,15 @@ public class ItemStrengthenMenu extends OneAddThreeGetOneMenu {
         }
         int max = 0;
         int lv = PlayerDataManager.getLv(PlayerDataManager.get(super.player.getStringUUID()).getXp());
-        if (lv >= 20) {
+        if (lv >= 18) {
             max = IStrengthen.MAX_SIZE;
-        } else if (lv >= 12) {
+        } else if (lv >= 9) {
             max = 2;
-        } else if (lv >= 4) {
+        } else if (lv >= 2) {
             max = 1;
         }
         int[] ints = StrengthenHelper.getStrengthenIds(stack0);
-        if (ints != null && ints.length + count > max) {
+        if (max == 0 || (ints != null && ints.length + count > max)) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }

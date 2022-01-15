@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.item.edge;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.EdgeHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -35,8 +35,8 @@ public class OreEdgeDef extends EdgeItem {
     @Override
     public ItemStack edge(ItemStack stack) {
         ItemStack copy = stack.copy();
-        SmithNbtUtils.setDef(copy, SmithNbtUtils.getDefBase(stack) + 1);
-        SmithNbtUtils.clearTec(copy);
+        EdgeHelper.setDef(copy, EdgeHelper.getDef(stack) + 1);
+        EdgeHelper.clearTec(copy);
         return copy;
     }
 }

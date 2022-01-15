@@ -8,22 +8,22 @@ import net.minecraftforge.event.ItemAttributeModifierEvent;
 import java.util.UUID;
 
 /**
- * 剑类武器品质属性
+ * 头盔类品质属性
  */
 
-public class SwordQualityAttr extends WeaponQualityAttr {
+public class HeadQualityAttr extends ArmorQualityAttr {
 
     private static final UUID UUID_LUCK = UUID.randomUUID();
-    private static final UUID UUID_ATTACK_SPEED = UUID.randomUUID();
+    private static final UUID UUID_MAX_HEALTH = UUID.randomUUID();
 
     /**
-     * 攻速
+     * 血量
      */
-    private final double atkS;
+    private final int hp;
 
-    public SwordQualityAttr(int luck, int atk, int agl, int cri, double atkS) {
-        super(UUID_LUCK, luck, atk, agl, cri);
-        this.atkS = atkS;
+    public HeadQualityAttr(int luck, int def, int phy, int hp) {
+        super(UUID_LUCK, luck, def, phy);
+        this.hp = hp;
     }
 
     @Override
@@ -33,8 +33,8 @@ public class SwordQualityAttr extends WeaponQualityAttr {
 
     @Override
     public void addAttributeModifier(ItemAttributeModifierEvent event) {
-        if (this.atkS != 0.0D) {
-            event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(UUID_ATTACK_SPEED, "quality attr modifier", this.atkS, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        if (this.hp != 0) {
+            event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID_MAX_HEALTH, "quality attr modifier", this.hp, AttributeModifier.Operation.ADDITION));
         }
         super.addAttributeModifier(event);
     }

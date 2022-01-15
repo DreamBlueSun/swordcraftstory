@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.item.mould;
 
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
-import com.marisa.swordcraftstory.smith.util.SmithNbtUtils;
+import com.marisa.swordcraftstory.smith.util.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -31,19 +31,21 @@ public abstract class ArmorMould extends Mould {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> toolTip, @NotNull TooltipFlag flagIn) {
         super.appendHoverText(stack, level, toolTip, flagIn);
         toolTip.add(new TranslatableComponent("护甲").withStyle(ChatFormatting.YELLOW).append("     ")
-                .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getDef(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                .append(new TranslatableComponent(String.valueOf(CollapseHelper.getDef(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
         toolTip.add(new TranslatableComponent("韧性").withStyle(ChatFormatting.YELLOW).append("     ")
-                .append(new TranslatableComponent(String.valueOf(SmithNbtUtils.getPhy(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                .append(new TranslatableComponent(String.valueOf(CollapseHelper.getPhy(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
     }
 
     @Override
     public ItemStack make(ItemStack stack, ItemStack mould, AbstractOre ore) {
         ItemStack copy = stack.copy();
-        if (SmithNbtUtils.getRank(copy) == 0) {
-            SmithNbtUtils.remEnchantmentTag(copy);
-            SmithNbtUtils.copyEnchantmentTag(mould, copy);
-            SmithNbtUtils.setDef(copy, SmithNbtUtils.getDef(copy) + SmithNbtUtils.getDef(mould));
-            SmithNbtUtils.setPhy(copy, SmithNbtUtils.getPhy(copy) + SmithNbtUtils.getPhy(mould));
+        if (RankHelper.getRank(copy) == 0) {
+            EnchantHelper.remEnchantmentTag(copy);
+            EnchantHelper.copyEnchantmentTag(mould, copy);
+            //模具属性添加至强刃属性
+            EdgeHelper.setDef(copy, EdgeHelper.getDef(stack) + CollapseHelper.getDef(mould));
+            EdgeHelper.setPhy(copy, EdgeHelper.getPhy(stack) + CollapseHelper.getPhy(mould));
+            //升阶属性
             copy = ore.itemRankUp(copy);
         }
         return copy;
@@ -52,11 +54,11 @@ public abstract class ArmorMould extends Mould {
     protected ItemStack collapseArmor(ItemStack mould, ItemStack stack, int offset) {
         ArmorItem armor = (ArmorItem) stack.getItem();
         int def = armor.getDefense();
-        def += SmithNbtUtils.getDef(stack);
+        def += SmithHelper.getSmithDef(stack);
+        CollapseHelper.setDef(mould, Math.max(def / offset, 0));
         int phy = (int) armor.getToughness();
-        phy += SmithNbtUtils.getPhy(stack);
-        SmithNbtUtils.setDef(mould, Math.max(def / offset, 0));
-        SmithNbtUtils.setPhy(mould, Math.max(phy / offset, 0));
+        phy += SmithHelper.getSmithPhy(stack);
+        CollapseHelper.setPhy(mould, Math.max(phy / offset, 0));
         return mould;
     }
 }
