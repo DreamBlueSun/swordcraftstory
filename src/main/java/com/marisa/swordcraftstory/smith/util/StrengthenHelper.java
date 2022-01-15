@@ -1,7 +1,9 @@
 package com.marisa.swordcraftstory.smith.util;
 
+import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 import com.marisa.swordcraftstory.smith.IStrengthen;
 import net.minecraft.nbt.IntArrayTag;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -9,6 +11,19 @@ import net.minecraft.world.item.ItemStack;
  */
 
 public class StrengthenHelper {
+
+    public static int getStrengthenRank(Player player) {
+        int strengthenLv = 0;
+        int lv = PlayerDataManager.getLv(PlayerDataManager.get(player.getStringUUID()).getXp());
+        if (lv >= 18) {
+            strengthenLv = IStrengthen.MAX_SIZE;
+        } else if (lv >= 9) {
+            strengthenLv = 2;
+        } else if (lv >= 2) {
+            strengthenLv = 1;
+        }
+        return strengthenLv;
+    }
 
     private final static String ID = "story_smith_strengthen";
 

@@ -15,6 +15,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,8 @@ public class OnlineFriendsScreen extends Screen {
     private final static int PAGE_SIZE = 5;
     private int pageMax = 0;
     private int page = 0;
+
+    private List<FriendsTpBtn> btnList;
 
     protected OnlineFriendsScreen(List<PlayerVO> onlinePlayer) {
         super(new TextComponent("online_friends_screen"));
@@ -72,14 +75,24 @@ public class OnlineFriendsScreen extends Screen {
         //列表
         int x = this.width / 2 - 51;
         int y = this.height / 2 - 53;
+        //移除上一页按钮
         int count = 0;
+        if (this.btnList != null && this.btnList.size() > 0) {
+            this.btnList.forEach(this::removeWidget);
+        }
+        //渲染玩家名称
+        this.btnList = new ArrayList<>();
         for (int i = PAGE_SIZE * this.page; i < this.friends.size(); i++) {
             drawString(matrixStack, this.font, this.friends.get(i).getName(), x, y + 6, 0x00FF7F);
-            this.addRenderableWidget(new FriendsTpBtn(x + 70, y, 32, 20, new TextComponent("传送"), this.friends.get(i).getUuid()));
+            this.btnList.add(new FriendsTpBtn(x + 70, y, 32, 20, new TextComponent("传送"), this.friends.get(i).getUuid()));
             y += 22;
             if (++count == PAGE_SIZE) {
                 break;
             }
+        }
+        //添加按钮
+        if (this.btnList.size() > 0) {
+            this.btnList.forEach(this::addRenderableWidget);
         }
         //上一页
         Button btnLastPage = new Button(x - 2, this.height / 2 + 58, 53, 20, new TextComponent("上一页"), (btn) -> {
