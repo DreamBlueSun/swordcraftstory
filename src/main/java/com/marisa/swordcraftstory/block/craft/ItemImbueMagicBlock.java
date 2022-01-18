@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.block.craft;
 
 import com.marisa.swordcraftstory.Story;
-import com.marisa.swordcraftstory.block.craft.menu.ItemEdgeMenu;
+import com.marisa.swordcraftstory.block.craft.menu.ItemImbueMagicMenu;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -22,14 +22,14 @@ import javax.annotation.Nullable;
 
 
 /**
- * 强刃锻冶台
+ * 注魔锻冶台
  */
 
-public class ItemEdgeBlock extends Block {
+public class ItemImbueMagicBlock extends Block {
 
-    public ItemEdgeBlock() {
+    public ItemImbueMagicBlock() {
         super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(7.0F, 7.0F));
-        this.setRegistryName(Story.MOD_ID + ":item_edge_block");
+        this.setRegistryName(Story.MOD_ID + ":item_imbue_magic_block");
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ItemEdgeBlock extends Block {
             return InteractionResult.SUCCESS;
         } else {
             player.openMenu(state.getMenuProvider(level, pos));
-            player.awardStat(Stats.INTERACT_WITH_ANVIL);
+            player.awardStat(Stats.INTERACT_WITH_SMITHING_TABLE);
             return InteractionResult.CONSUME;
         }
     }
@@ -47,13 +47,13 @@ public class ItemEdgeBlock extends Block {
     @Override
     public MenuProvider getMenuProvider(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
         return new SimpleMenuProvider((openContainerId, inventory, player) ->
-                new ItemEdgeMenu(openContainerId, inventory, ContainerLevelAccess.create(level, pos)),
-                new TranslatableComponent("强刃锻冶台"));
+                new ItemImbueMagicMenu(openContainerId, inventory, ContainerLevelAccess.create(level, pos)),
+                new TranslatableComponent("注魔锻冶台"));
     }
 
     @Override
     public void spawnAfterBreak(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull ItemStack stack) {
-        Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.ITEM_EDGE_BLOCK.get().getDefaultInstance());
+        Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.ITEM_IMBUE_MAGIC_BLOCK.get().getDefaultInstance());
         super.spawnAfterBreak(state, level, pos, stack);
     }
 }

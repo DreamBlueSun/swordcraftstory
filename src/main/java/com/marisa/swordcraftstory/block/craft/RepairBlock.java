@@ -33,7 +33,7 @@ import java.util.List;
 public class RepairBlock extends Block {
 
     public RepairBlock() {
-        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F));
+        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(7.0F, 7.0F));
         this.setRegistryName(Story.MOD_ID + ":repair_block");
     }
 

@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 public class ItemMakeBlock extends Block {
 
     public ItemMakeBlock() {
-        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F));
+        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(7.0F, 7.0F));
         this.setRegistryName(Story.MOD_ID + ":item_make_block");
     }
 

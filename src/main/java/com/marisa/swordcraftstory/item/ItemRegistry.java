@@ -31,9 +31,10 @@ public class ItemRegistry {
     public static RegistryObject<Item> STORY_ORE_BLOCK = ITEMS.register("story_ore_block", () -> new BlockItem(BlockRegistry.STORY_ORE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> ITEM_MAKE_BLOCK = ITEMS.register("item_make_block", () -> new BlockItem(BlockRegistry.ITEM_MAKE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> ITEM_STRENGTHEN_BLOCK = ITEMS.register("item_strengthen_block", () -> new BlockItem(BlockRegistry.ITEM_STRENGTHEN_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
-    public static RegistryObject<Item> ITEM_COLLAPSE_BLOCK = ITEMS.register("item_collapse_block", () -> new BlockItem(BlockRegistry.ITEM_COLLAPSE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> ITEM_EDGE_BLOCK = ITEMS.register("item_edge_block", () -> new BlockItem(BlockRegistry.ITEM_EDGE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    public static RegistryObject<Item> ITEM_COLLAPSE_BLOCK = ITEMS.register("item_collapse_block", () -> new BlockItem(BlockRegistry.ITEM_COLLAPSE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    public static RegistryObject<Item> ITEM_IMBUE_MAGIC_BLOCK = ITEMS.register("item_imbue_magic_block", () -> new BlockItem(BlockRegistry.ITEM_IMBUE_MAGIC_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     //回复道具
     public static RegistryObject<Item> WOUNDPLAST = ITEMS.register("woundplast", Woundplast::new);
     public static RegistryObject<Item> JI_JA_MEDICINE = ITEMS.register("ji_ja_medicine", JiJaMedicine::new);

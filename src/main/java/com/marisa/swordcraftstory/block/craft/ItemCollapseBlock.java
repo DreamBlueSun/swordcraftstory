@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 public class ItemCollapseBlock extends Block {
 
     public ItemCollapseBlock() {
-        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F));
+        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(7.0F, 7.0F));
         this.setRegistryName(Story.MOD_ID + ":item_collapse_block");
     }
 
