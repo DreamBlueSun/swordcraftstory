@@ -41,7 +41,7 @@ public class PlayerPanelAttr {
         if (LV < Story.LV_MAX) {
             exp = XP + "/" + PlayerDataManager.getLvNextXpPoint(LV);
         } else {
-            exp = XP + "/∞";
+            exp = XP + "/" + XP;
         }
         this.exp = new TranslatableComponent("Exp").withStyle(ChatFormatting.LIGHT_PURPLE)
                 .append(" ").append(new TranslatableComponent(exp).withStyle(ChatFormatting.GREEN));

@@ -98,8 +98,8 @@ public class PlayerData implements Serializable {
         this.xp += amount;
         //限制最高等级
         int lvPoint = PlayerDataManager.getLvNextXpPoint(Story.LV_MAX - 1);
-        if (lvPoint != 0 && this.xp >= lvPoint) {
-            this.xp = lvPoint - 1;
+        if (lvPoint != 0 && this.xp > lvPoint) {
+            this.xp = lvPoint;
         }
     }
 
