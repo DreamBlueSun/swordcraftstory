@@ -46,6 +46,7 @@ public abstract class WeaponMould extends Mould {
             //模具属性添加至强刃属性
             EdgeHelper.setAtk(copy, EdgeHelper.getAtk(stack) + CollapseHelper.getAtk(mould));
             EdgeHelper.setAgl(copy, EdgeHelper.getAgl(stack) + CollapseHelper.getAgl(mould));
+            EdgeHelper.setDur(copy, EdgeHelper.getDur(stack) + CollapseHelper.getDur(mould));
         }
         return copy;
     }
@@ -53,6 +54,7 @@ public abstract class WeaponMould extends Mould {
     protected ItemStack collapseWeapon(ItemStack mould, ItemStack stack, int offset) {
         CollapseHelper.setAtk(mould, Math.max(SmithHelper.getDamageAtk(stack) / offset, 0));
         CollapseHelper.setAgl(mould, Math.max(SmithHelper.getSmithAgl(stack) / offset, 0));
+        CollapseHelper.setDur(mould, Math.max(SmithHelper.getDurMax(stack) / offset, 0));
         return mould;
     }
 }

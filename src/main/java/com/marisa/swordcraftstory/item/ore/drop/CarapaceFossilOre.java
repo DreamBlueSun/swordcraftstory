@@ -65,7 +65,7 @@ public class CarapaceFossilOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 6 : 0;
+        return item instanceof ArmorItem ? 7 : 0;
     }
 
     @Override
@@ -80,7 +80,23 @@ public class CarapaceFossilOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 85;
+            }
+            case AXE -> {
+                return 100;
+            }
+            case PICKAXE -> {
+                return 110;
+            }
+            case RANGED_WEAPON -> {
+                return 75;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -90,21 +106,26 @@ public class CarapaceFossilOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 0;
+        return 12;
     }
 
     @Override
     public int strengthenDef() {
-        return 4;
+        return 7;
     }
 
     @Override
     public int strengthenPhy() {
-        return 0;
+        return 1;
     }
 
     @Override
     public int strengthenAgl() {
-        return 0;
+        return 1;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 5;
     }
 }

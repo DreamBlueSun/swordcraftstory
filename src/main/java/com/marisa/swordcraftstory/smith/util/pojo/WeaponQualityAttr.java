@@ -22,14 +22,20 @@ public abstract class WeaponQualityAttr extends AbstractQualityAttr {
     private final int agl;
 
     /**
+     * 耐久
+     */
+    private final int dur;
+
+    /**
      * 暴击率
      */
     protected final int cri;
 
-    public WeaponQualityAttr(UUID uuidLuck, int luck, int atk, int agl, int cri) {
+    public WeaponQualityAttr(UUID uuidLuck, int luck, int atk, int agl, int dur, int cri) {
         super(uuidLuck, luck);
         this.atk = atk;
         this.agl = agl;
+        this.dur = dur;
         this.cri = cri;
     }
 
@@ -39,6 +45,10 @@ public abstract class WeaponQualityAttr extends AbstractQualityAttr {
 
     public int getAgl() {
         return agl;
+    }
+
+    public int getDur() {
+        return dur;
     }
 
     public int getCri() {

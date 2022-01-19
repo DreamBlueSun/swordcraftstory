@@ -65,12 +65,12 @@ public class CatsPawOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 18 : 0;
+        return item instanceof ArmorItem ? 7 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return item instanceof ArmorItem ? 4 : 0;
+        return item instanceof ArmorItem ? 12 : 0;
     }
 
     @Override
@@ -93,7 +93,14 @@ public class CatsPawOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD, AXE, PICKAXE, RANGED_WEAPON -> {
+                return 100;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -108,16 +115,21 @@ public class CatsPawOre extends AbstractOre {
 
     @Override
     public int strengthenDef() {
-        return 0;
+        return 7;
     }
 
     @Override
     public int strengthenPhy() {
-        return 0;
+        return 12;
     }
 
     @Override
     public int strengthenAgl() {
-        return 20;
+        return 25;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return -10;
     }
 }

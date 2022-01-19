@@ -62,12 +62,12 @@ public class RegiaOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 4 : 0;
+        return item instanceof ArmorItem ? 2 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return 0;
+        return item instanceof ArmorItem ? 4 : 0;
     }
 
     @Override
@@ -77,7 +77,23 @@ public class RegiaOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 80;
+            }
+            case AXE -> {
+                return 95;
+            }
+            case PICKAXE -> {
+                return 110;
+            }
+            case RANGED_WEAPON -> {
+                return 70;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -87,21 +103,26 @@ public class RegiaOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 6;
-    }
-
-    @Override
-    public int strengthenDef() {
-        return 1;
-    }
-
-    @Override
-    public int strengthenPhy() {
         return 2;
     }
 
     @Override
+    public int strengthenDef() {
+        return 2;
+    }
+
+    @Override
+    public int strengthenPhy() {
+        return 4;
+    }
+
+    @Override
     public int strengthenAgl() {
+        return 5;
+    }
+
+    @Override
+    public int strengthenDur() {
         return 0;
     }
 }

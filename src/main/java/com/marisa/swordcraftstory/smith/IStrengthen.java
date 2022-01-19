@@ -39,4 +39,9 @@ public interface IStrengthen {
      * 不同材料对应强化AGL的值
      */
     int strengthenAgl();
+
+    /**
+     * 不同材料对应强化DUR的值
+     */
+    int strengthenDur();
 }

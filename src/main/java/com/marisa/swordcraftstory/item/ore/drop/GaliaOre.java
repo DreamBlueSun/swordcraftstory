@@ -62,12 +62,12 @@ public class GaliaOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 8 : 0;
+        return item instanceof ArmorItem ? 7 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return item instanceof ArmorItem ? 1 : 0;
+        return item instanceof ArmorItem ? 3 : 0;
     }
 
     @Override
@@ -77,7 +77,23 @@ public class GaliaOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 95;
+            }
+            case AXE -> {
+                return 110;
+            }
+            case PICKAXE -> {
+                return 120;
+            }
+            case RANGED_WEAPON -> {
+                return 85;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -87,21 +103,26 @@ public class GaliaOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 8;
+        return 12;
     }
 
     @Override
     public int strengthenDef() {
-        return 2;
+        return 7;
     }
 
     @Override
     public int strengthenPhy() {
-        return 0;
+        return 3;
     }
 
     @Override
     public int strengthenAgl() {
         return 0;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 20;
     }
 }

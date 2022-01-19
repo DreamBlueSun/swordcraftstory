@@ -65,7 +65,7 @@ public class BigOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 2 : 0;
+        return item instanceof ArmorItem ? 4 : 0;
     }
 
     @Override
@@ -80,7 +80,23 @@ public class BigOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 70;
+            }
+            case AXE -> {
+                return 85;
+            }
+            case PICKAXE -> {
+                return 96;
+            }
+            case RANGED_WEAPON -> {
+                return 50;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -90,21 +106,26 @@ public class BigOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 0;
+        return 4;
     }
 
     @Override
     public int strengthenDef() {
-        return 2;
+        return 4;
     }
 
     @Override
     public int strengthenPhy() {
-        return 1;
+        return 0;
     }
 
     @Override
     public int strengthenAgl() {
-        return 0;
+        return -2;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 20;
     }
 }

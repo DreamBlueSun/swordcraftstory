@@ -62,12 +62,12 @@ public class CutIronOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 3 : 0;
+        return item instanceof ArmorItem ? 4 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return 0;
+        return item instanceof ArmorItem ? 2 : 0;
     }
 
     @Override
@@ -77,7 +77,23 @@ public class CutIronOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 75;
+            }
+            case AXE -> {
+                return 90;
+            }
+            case PICKAXE -> {
+                return 105;
+            }
+            case RANGED_WEAPON -> {
+                return 65;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -87,21 +103,26 @@ public class CutIronOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 7;
+        return 12;
     }
 
     @Override
     public int strengthenDef() {
-        return 0;
+        return 4;
     }
 
     @Override
     public int strengthenPhy() {
-        return 0;
+        return 2;
     }
 
     @Override
     public int strengthenAgl() {
+        return 0;
+    }
+
+    @Override
+    public int strengthenDur() {
         return 0;
     }
 }

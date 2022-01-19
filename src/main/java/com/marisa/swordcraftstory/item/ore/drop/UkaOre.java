@@ -65,12 +65,12 @@ public class UkaOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 5 : 0;
+        return item instanceof ArmorItem ? 1 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return 0;
+        return item instanceof ArmorItem ? 5 : 0;
     }
 
     @Override
@@ -80,7 +80,23 @@ public class UkaOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 82;
+            }
+            case AXE -> {
+                return 96;
+            }
+            case PICKAXE -> {
+                return 108;
+            }
+            case RANGED_WEAPON -> {
+                return 71;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -90,21 +106,26 @@ public class UkaOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 3;
+        return 10;
     }
 
     @Override
     public int strengthenDef() {
-        return 2;
+        return 1;
     }
 
     @Override
     public int strengthenPhy() {
-        return 1;
+        return 5;
     }
 
     @Override
     public int strengthenAgl() {
         return 0;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 10;
     }
 }

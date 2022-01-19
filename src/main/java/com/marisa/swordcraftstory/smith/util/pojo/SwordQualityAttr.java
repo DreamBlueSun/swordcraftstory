@@ -21,8 +21,8 @@ public class SwordQualityAttr extends WeaponQualityAttr {
      */
     private final double atkS;
 
-    public SwordQualityAttr(int luck, int atk, int agl, int cri, double atkS) {
-        super(UUID_LUCK, luck, atk, agl, cri);
+    public SwordQualityAttr(int luck, int atk, int agl, int dur, int cri, double atkS) {
+        super(UUID_LUCK, luck, atk, agl, dur, cri);
         this.atkS = atkS;
     }
 

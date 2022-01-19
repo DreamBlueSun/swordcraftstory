@@ -62,12 +62,12 @@ public class LeijiStoweOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 12 : 0;
+        return item instanceof ArmorItem ? 10 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return item instanceof ArmorItem ? 2 : 0;
+        return item instanceof ArmorItem ? 4 : 0;
     }
 
     @Override
@@ -77,7 +77,23 @@ public class LeijiStoweOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 111;
+            }
+            case AXE -> {
+                return 126;
+            }
+            case PICKAXE -> {
+                return 136;
+            }
+            case RANGED_WEAPON -> {
+                return 101;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -87,21 +103,26 @@ public class LeijiStoweOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 15;
+        return 36;
     }
 
     @Override
     public int strengthenDef() {
-        return 8;
+        return 10;
     }
 
     @Override
     public int strengthenPhy() {
-        return 0;
+        return 4;
     }
 
     @Override
     public int strengthenAgl() {
         return -10;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 30;
     }
 }

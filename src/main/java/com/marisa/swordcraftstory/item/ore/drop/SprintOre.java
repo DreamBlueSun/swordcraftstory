@@ -77,7 +77,23 @@ public class SprintOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 102;
+            }
+            case AXE -> {
+                return 117;
+            }
+            case PICKAXE -> {
+                return 128;
+            }
+            case RANGED_WEAPON -> {
+                return 92;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -87,21 +103,26 @@ public class SprintOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 15;
+        return 18;
     }
 
     @Override
     public int strengthenDef() {
-        return 6;
+        return 10;
     }
 
     @Override
     public int strengthenPhy() {
-        return 0;
+        return 2;
     }
 
     @Override
     public int strengthenAgl() {
         return 0;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 15;
     }
 }

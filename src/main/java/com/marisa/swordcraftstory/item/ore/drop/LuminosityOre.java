@@ -62,12 +62,12 @@ public class LuminosityOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 18 : 0;
+        return item instanceof ArmorItem ? 12 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return item instanceof ArmorItem ? 4 : 0;
+        return item instanceof ArmorItem ? 12 : 0;
     }
 
     @Override
@@ -90,7 +90,23 @@ public class LuminosityOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 135;
+            }
+            case AXE -> {
+                return 145;
+            }
+            case PICKAXE -> {
+                return 155;
+            }
+            case RANGED_WEAPON -> {
+                return 125;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -100,7 +116,7 @@ public class LuminosityOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 45;
+        return 42;
     }
 
     @Override
@@ -110,11 +126,16 @@ public class LuminosityOre extends AbstractOre {
 
     @Override
     public int strengthenPhy() {
-        return 4;
+        return 12;
     }
 
     @Override
     public int strengthenAgl() {
-        return 10;
+        return 0;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 15;
     }
 }

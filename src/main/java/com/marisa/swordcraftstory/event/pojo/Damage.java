@@ -215,13 +215,15 @@ public class Damage {
         return this;
     }
 
+    private final static float APPLY_ARMOR_FIXED = 100.0F;
+
     public Damage applyDef(float def) {
-        this.p *= 1.0F - def / (100 + def);
+        this.p *= 1.0F - def / (APPLY_ARMOR_FIXED + def);
         return this;
     }
 
     public Damage applyPhy(float phy) {
-        this.m *= 1.0F - phy / (100 + phy);
+        this.m *= 1.0F - phy / (APPLY_ARMOR_FIXED + phy);
         return this;
     }
 

@@ -98,4 +98,15 @@ public class StrengthenHelper {
         return i;
     }
 
+    public static int getDur(ItemStack stack) {
+        int i = 0;
+        IStrengthen[] strengthens = getStrengthens(stack);
+        if (strengthens != null) {
+            for (IStrengthen strengthen : strengthens) {
+                i += strengthen.strengthenDur();
+            }
+        }
+        return i;
+    }
+
 }

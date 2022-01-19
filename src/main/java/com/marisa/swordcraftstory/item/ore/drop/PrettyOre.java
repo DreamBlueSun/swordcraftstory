@@ -65,12 +65,12 @@ public class PrettyOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 5 : 0;
+        return 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return 0;
+        return item instanceof ArmorItem ? 6 : 0;
     }
 
     @Override
@@ -80,7 +80,23 @@ public class PrettyOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 84;
+            }
+            case AXE -> {
+                return 97;
+            }
+            case PICKAXE -> {
+                return 111;
+            }
+            case RANGED_WEAPON -> {
+                return 72;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -100,11 +116,16 @@ public class PrettyOre extends AbstractOre {
 
     @Override
     public int strengthenPhy() {
-        return 3;
+        return 6;
     }
 
     @Override
     public int strengthenAgl() {
-        return 2;
+        return 0;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 20;
     }
 }

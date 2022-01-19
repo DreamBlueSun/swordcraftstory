@@ -13,8 +13,8 @@ public class ShootQualityAttr extends WeaponQualityAttr {
 
     private static final UUID UUID_LUCK = UUID.randomUUID();
 
-    public ShootQualityAttr(int luck, int atk, int agl, int cri) {
-        super(UUID_LUCK, luck, atk, agl, cri);
+    public ShootQualityAttr(int luck, int atk, int agl, int dur, int cri) {
+        super(UUID_LUCK, luck, atk, agl, dur, cri);
     }
 
     @Override

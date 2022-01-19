@@ -62,12 +62,12 @@ public class DoubleSnakeOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 10 : 0;
+        return item instanceof ArmorItem ? 6 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return item instanceof ArmorItem ? 2 : 0;
+        return item instanceof ArmorItem ? 6 : 0;
     }
 
     @Override
@@ -93,7 +93,23 @@ public class DoubleSnakeOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 101;
+            }
+            case AXE -> {
+                return 116;
+            }
+            case PICKAXE -> {
+                return 127;
+            }
+            case RANGED_WEAPON -> {
+                return 91;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -103,21 +119,26 @@ public class DoubleSnakeOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 8;
+        return 16;
     }
 
     @Override
     public int strengthenDef() {
-        return 3;
+        return 6;
     }
 
     @Override
     public int strengthenPhy() {
-        return 3;
+        return 6;
     }
 
     @Override
     public int strengthenAgl() {
-        return -5;
+        return 3;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 10;
     }
 }

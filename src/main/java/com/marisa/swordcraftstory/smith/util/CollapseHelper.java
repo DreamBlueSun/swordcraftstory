@@ -49,4 +49,14 @@ public class CollapseHelper {
         return stack.getOrCreateTag().getInt(AGL);
     }
 
+    private final static String DUR = "story_smith_collapse_dur";
+
+    public static void setDur(ItemStack stack, int value) {
+        stack.getOrCreateTag().put(DUR, IntTag.valueOf(value));
+    }
+
+    public static int getDur(ItemStack stack) {
+        return stack.getOrCreateTag().getInt(DUR);
+    }
+
 }

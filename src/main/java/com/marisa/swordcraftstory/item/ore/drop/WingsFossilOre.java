@@ -65,12 +65,12 @@ public class WingsFossilOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 2 : 0;
+        return 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return 0;
+        return item instanceof ArmorItem ? 4 : 0;
     }
 
     @Override
@@ -80,7 +80,23 @@ public class WingsFossilOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 72;
+            }
+            case AXE -> {
+                return 87;
+            }
+            case PICKAXE -> {
+                return 101;
+            }
+            case RANGED_WEAPON -> {
+                return 62;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -100,11 +116,16 @@ public class WingsFossilOre extends AbstractOre {
 
     @Override
     public int strengthenPhy() {
-        return 0;
+        return 4;
     }
 
     @Override
     public int strengthenAgl() {
-        return 3;
+        return 5;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return -5;
     }
 }

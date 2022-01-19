@@ -62,12 +62,12 @@ public class HeavyGoldOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 4 : 0;
+        return item instanceof ArmorItem ? 3 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return 0;
+        return item instanceof ArmorItem ? 3 : 0;
     }
 
     @Override
@@ -77,7 +77,23 @@ public class HeavyGoldOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 76;
+            }
+            case AXE -> {
+                return 92;
+            }
+            case PICKAXE -> {
+                return 103;
+            }
+            case RANGED_WEAPON -> {
+                return 67;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -87,21 +103,26 @@ public class HeavyGoldOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 7;
+        return 16;
     }
 
     @Override
     public int strengthenDef() {
-        return 1;
+        return 3;
     }
 
     @Override
     public int strengthenPhy() {
-        return 2;
+        return 3;
     }
 
     @Override
     public int strengthenAgl() {
         return -7;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 25;
     }
 }

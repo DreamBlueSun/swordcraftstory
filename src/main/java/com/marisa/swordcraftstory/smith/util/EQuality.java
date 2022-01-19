@@ -18,9 +18,9 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(0, 0, 0, 0, 0);
+                return new SwordQualityAttr(0, 0, 0, 0, 0, 0);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(0, 0, 0, 0);
+                return new ShootQualityAttr(0, 0, 0, 0, 0);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
@@ -44,9 +44,9 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(0, 0, 0, 0, -0.1D);
+                return new SwordQualityAttr(0, 0, 0, 0, 0, -0.1D);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE - 2, -5, 0);
+                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE - 2, -5, 0, 0);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
@@ -70,9 +70,9 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(0, 0, 0, 0, 0);
+                return new SwordQualityAttr(0, 0, 0, 0, 0, 0);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE, 0, 0);
+                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE, 0, 0, 0);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
@@ -96,9 +96,9 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(0, 1, 0, 0, 0.03D);
+                return new SwordQualityAttr(0, 1, 0, 5, 0, 0.03D);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE + 1, 0, 0);
+                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE + 1, 0, 0, 0);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
@@ -122,9 +122,9 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(0, 2, 0, 0, 0.05D);
+                return new SwordQualityAttr(0, 2, 0, 10, 0, 0.05D);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE + 2, 5, 0);
+                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE + 2, 5, 0, 0);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
@@ -148,9 +148,9 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(0, 3, 5, 0, 0.07D);
+                return new SwordQualityAttr(0, 3, 5, 15, 0, 0.07D);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE + 3, 5, 0);
+                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE + 3, 5, 0, 0);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
@@ -174,9 +174,9 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(0, 4, 5, 0, 0.15D);
+                return new SwordQualityAttr(0, 4, 5, 20, 0, 0.15D);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE + 5, 7, 0);
+                return new ShootQualityAttr(0, (int) Damage.ARROW_BASE_DAMAGE + 5, 7, 0, 0);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
@@ -200,9 +200,9 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(3, -3, 0, 30, 0);
+                return new SwordQualityAttr(3, -3, 0, -30, 30, 0);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(3, (int) Damage.ARROW_BASE_DAMAGE - 5, 0, 20);
+                return new ShootQualityAttr(3, (int) Damage.ARROW_BASE_DAMAGE - 5, 0, 0, 20);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
@@ -226,9 +226,9 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(5, -2, 0, 50, 0.03D);
+                return new SwordQualityAttr(5, -2, 0, -20, 50, 0.03D);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(5, (int) Damage.ARROW_BASE_DAMAGE - 2, 0, 50);
+                return new ShootQualityAttr(5, (int) Damage.ARROW_BASE_DAMAGE - 2, 0, 0, 50);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
@@ -252,22 +252,22 @@ public enum EQuality implements IQuality {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(7, -1, 0, 70, 0.1D);
+                return new SwordQualityAttr(7, -1, 0, -10, 70, 0.1D);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(7, (int) Damage.ARROW_BASE_DAMAGE, 0, 100);
+                return new ShootQualityAttr(7, (int) Damage.ARROW_BASE_DAMAGE, 0, 0, 100);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
-                        return new HeadQualityAttr(7, -3, 1, -40);
+                        return new HeadQualityAttr(5, -3, 1, -40);
                     }
                     case CHEST -> {
-                        return new ChestQualityAttr(7, -1, 1, -60);
+                        return new ChestQualityAttr(5, -1, 1, -60);
                     }
                     case LEGS -> {
-                        return new LegsQualityAttr(7, -2, 1, 0);
+                        return new LegsQualityAttr(5, -2, 1, 0);
                     }
                     case FEET -> {
-                        return new FeetQualityAttr(7, -4, 1, 0);
+                        return new FeetQualityAttr(5, -4, 1, 0);
                     }
                 }
             }

@@ -58,6 +58,14 @@ public class QualityHelper {
         return 0;
     }
 
+    public static int getDur(ItemStack stack) {
+        AbstractQualityAttr attr = QualityHelper.getQuality(stack).getAttr(stack.getItem());
+        if (attr instanceof WeaponQualityAttr weaponQualityAttr) {
+            return weaponQualityAttr.getDur();
+        }
+        return 0;
+    }
+
     public static int getCri(ItemStack stack) {
         AbstractQualityAttr attr = QualityHelper.getQuality(stack).getAttr(stack.getItem());
         if (attr instanceof WeaponQualityAttr weaponQualityAttr) {

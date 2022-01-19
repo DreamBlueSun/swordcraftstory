@@ -1,5 +1,7 @@
 package com.marisa.swordcraftstory.smith.util;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntTag;
 import net.minecraft.world.item.*;
 
 import java.util.Random;
@@ -96,21 +98,51 @@ public class SmithHelper {
         return i;
     }
 
+    private final static String DUR = "story_smith_dur";
+
     /**
-     * 锻冶增加的DUR
+     * 消耗物品的DUR
      */
-    public static int getSmithDur(ItemStack stack) {
-        if (stack.getTag() == null) return 0;
+    public static void minusDur(ItemStack stack) {
+        CompoundTag tag = stack.getOrCreateTag();
+        int v = tag.getInt(DUR);
+        if (v > 0) {
+            tag.put(DUR, IntTag.valueOf(v - 1));
+        }
+    }
+
+    public static void minusDur(ItemStack stack, int amount) {
+        CompoundTag tag = stack.getOrCreateTag();
+        int v = tag.getInt(DUR);
+        if (v >= amount) {
+            tag.put(DUR, IntTag.valueOf(v - amount));
+        } else {
+            tag.put(DUR, IntTag.valueOf(0));
+        }
+    }
+
+    /**
+     * 物品的当前DUR
+     */
+    public static int getDur(ItemStack stack) {
+        return Math.max(stack.getOrCreateTag().getInt(DUR), 0);
+    }
+
+    /**
+     * 物品的最大DUR
+     */
+    public static int getDurMax(ItemStack stack) {
+        if (stack.getTag() == null) return 1;
         int i = 0;
         //鉴定属性
-//        i += QualityHelper.getAgl(stack);
+        i += QualityHelper.getDur(stack);
         //制作属性
         i += MakeHelper.getDur(stack);
         //强化属性
-//        i += StrengthenHelper.getAgl(stack);
+        i += StrengthenHelper.getDur(stack);
         //强刃属性
-//        i += EdgeHelper.getAgl(stack);
-        return i;
+        i += EdgeHelper.getDur(stack);
+        return Math.max(i, 1);
     }
 
     /**

@@ -65,12 +65,12 @@ public class ElphusOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 2 : 0;
+        return item instanceof ArmorItem ? 1 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return 0;
+        return item instanceof ArmorItem ? 3 : 0;
     }
 
     @Override
@@ -80,7 +80,23 @@ public class ElphusOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 74;
+            }
+            case AXE -> {
+                return 86;
+            }
+            case PICKAXE -> {
+                return 99;
+            }
+            case RANGED_WEAPON -> {
+                return 61;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -90,21 +106,26 @@ public class ElphusOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 5;
+        return 4;
     }
 
     @Override
     public int strengthenDef() {
-        return 2;
+        return 1;
     }
 
     @Override
     public int strengthenPhy() {
-        return 0;
+        return 3;
     }
 
     @Override
     public int strengthenAgl() {
-        return 1;
+        return 2;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 0;
     }
 }

@@ -65,12 +65,12 @@ public class SlanderOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 1 : 0;
+        return 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return 0;
+        return item instanceof ArmorItem ? 2 : 0;
     }
 
     @Override
@@ -80,7 +80,23 @@ public class SlanderOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 63;
+            }
+            case AXE -> {
+                return 76;
+            }
+            case PICKAXE -> {
+                return 83;
+            }
+            case RANGED_WEAPON -> {
+                return 51;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -95,16 +111,21 @@ public class SlanderOre extends AbstractOre {
 
     @Override
     public int strengthenDef() {
-        return 1;
-    }
-
-    @Override
-    public int strengthenPhy() {
         return 0;
     }
 
     @Override
+    public int strengthenPhy() {
+        return 2;
+    }
+
+    @Override
     public int strengthenAgl() {
+        return 2;
+    }
+
+    @Override
+    public int strengthenDur() {
         return 0;
     }
 }

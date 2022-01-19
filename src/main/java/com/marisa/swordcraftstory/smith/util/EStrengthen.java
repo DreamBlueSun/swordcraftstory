@@ -27,17 +27,22 @@ public enum EStrengthen {
         }
 
         @Override
-        public int strengthenAgl() {
-            return 0;
-        }
-
-        @Override
         public int strengthenDef() {
             return 0;
         }
 
         @Override
         public int strengthenPhy() {
+            return 0;
+        }
+
+        @Override
+        public int strengthenAgl() {
+            return 0;
+        }
+
+        @Override
+        public int strengthenDur() {
             return 0;
         }
     }),

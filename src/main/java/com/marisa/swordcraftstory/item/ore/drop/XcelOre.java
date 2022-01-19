@@ -62,12 +62,12 @@ public class XcelOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 12 : 0;
+        return item instanceof ArmorItem ? 7 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return item instanceof ArmorItem ? 2 : 0;
+        return item instanceof ArmorItem ? 7 : 0;
     }
 
     @Override
@@ -77,7 +77,23 @@ public class XcelOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 105;
+            }
+            case AXE -> {
+                return 120;
+            }
+            case PICKAXE -> {
+                return 130;
+            }
+            case RANGED_WEAPON -> {
+                return 95;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -87,21 +103,26 @@ public class XcelOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 15;
+        return 10;
     }
 
     @Override
     public int strengthenDef() {
-        return 5;
+        return 7;
     }
 
     @Override
     public int strengthenPhy() {
-        return 5;
+        return 7;
     }
 
     @Override
     public int strengthenAgl() {
         return 5;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 20;
     }
 }

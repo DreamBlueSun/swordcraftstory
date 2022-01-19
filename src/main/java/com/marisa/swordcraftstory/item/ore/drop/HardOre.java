@@ -65,7 +65,7 @@ public class HardOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 1 : 0;
+        return item instanceof ArmorItem ? 2 : 0;
     }
 
     @Override
@@ -80,7 +80,23 @@ public class HardOre extends AbstractOre {
 
     @Override
     public int makeDur(Item item) {
-        return 0;
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 65;
+            }
+            case AXE -> {
+                return 80;
+            }
+            case PICKAXE -> {
+                return 92;
+            }
+            case RANGED_WEAPON -> {
+                return 55;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     @Override
@@ -90,12 +106,12 @@ public class HardOre extends AbstractOre {
 
     @Override
     public int strengthenAtk() {
-        return 3;
+        return 0;
     }
 
     @Override
     public int strengthenDef() {
-        return 0;
+        return 2;
     }
 
     @Override
@@ -105,6 +121,11 @@ public class HardOre extends AbstractOre {
 
     @Override
     public int strengthenAgl() {
-        return 1;
+        return 0;
+    }
+
+    @Override
+    public int strengthenDur() {
+        return 10;
     }
 }
