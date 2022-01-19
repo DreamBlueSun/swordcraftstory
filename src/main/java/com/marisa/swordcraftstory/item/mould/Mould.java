@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.item.mould;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.ore.AbstractOre;
+import com.marisa.swordcraftstory.smith.IMake;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -35,6 +35,6 @@ public abstract class Mould extends Item {
 
     public abstract ItemStack collapse(ItemStack stack);
 
-    public abstract ItemStack make(ItemStack stack, ItemStack mould, AbstractOre ore);
+    public abstract ItemStack make(ItemStack stack, ItemStack mould, IMake iMake);
 
 }

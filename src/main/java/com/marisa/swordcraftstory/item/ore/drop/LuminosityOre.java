@@ -2,12 +2,16 @@ package com.marisa.swordcraftstory.item.ore.drop;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
+import com.marisa.swordcraftstory.smith.util.EMake;
+import com.marisa.swordcraftstory.smith.util.EMakeType;
 import com.marisa.swordcraftstory.smith.util.EStrengthen;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,7 +27,7 @@ import java.util.List;
 public class LuminosityOre extends AbstractOre {
 
     public LuminosityOre() {
-        super(new Properties().tab(StoryGroup.MAIN));
+        super(new Properties().tab(StoryGroup.MAIN), 9);
     }
 
     @Override
@@ -34,32 +38,59 @@ public class LuminosityOre extends AbstractOre {
     }
 
     @Override
-    public int rank() {
-        return 9;
+    public int makeId() {
+        return EMake.LUMINOSITY_ORE.getId();
     }
 
     @Override
-    protected int[] rankAttr(Item item) {
-        if (item instanceof SwordItem) {
-            return new int[]{100, 5};
-        } else if (item instanceof AxeItem) {
-            return new int[]{130, -10};
-        } else if (item instanceof PickaxeItem) {
-            return new int[]{115, -5};
-        } else if (StoryUtils.isRangedWeapon(item)) {
-            return new int[]{100, 0};
-        } else {
-            return null;
+    public int makeAtk(Item item) {
+        switch (EMakeType.getByItem(item)) {
+            case SWORD, RANGED_WEAPON -> {
+                return 100;
+            }
+            case AXE -> {
+                return 130;
+            }
+            case PICKAXE -> {
+                return 115;
+            }
+            default -> {
+                return 0;
+            }
         }
     }
 
     @Override
-    protected int[] rankAttrArmor(Item item) {
-        if (item instanceof ArmorItem) {
-            return new int[]{18, 4};
-        } else {
-            return null;
+    public int makeDef(Item item) {
+        return item instanceof ArmorItem ? 18 : 0;
+    }
+
+    @Override
+    public int makePhy(Item item) {
+        return item instanceof ArmorItem ? 4 : 0;
+    }
+
+    @Override
+    public int makeAgl(Item item) {
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return 5;
+            }
+            case AXE -> {
+                return -10;
+            }
+            case PICKAXE -> {
+                return -5;
+            }
+            default -> {
+                return 0;
+            }
         }
+    }
+
+    @Override
+    public int makeDur(Item item) {
+        return 0;
     }
 
     @Override

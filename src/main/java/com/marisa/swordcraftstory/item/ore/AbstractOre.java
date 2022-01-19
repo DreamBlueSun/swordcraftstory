@@ -1,12 +1,16 @@
 package com.marisa.swordcraftstory.item.ore;
 
+import com.marisa.swordcraftstory.smith.IMake;
 import com.marisa.swordcraftstory.smith.IStrengthen;
-import com.marisa.swordcraftstory.smith.util.RankHelper;
+import com.marisa.swordcraftstory.smith.util.EMakeType;
+import com.marisa.swordcraftstory.smith.util.MakeHelper;
 import com.marisa.swordcraftstory.smith.util.StrengthenHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -19,10 +23,13 @@ import java.util.List;
  * 抽象矿石类
  */
 
-public abstract class AbstractOre extends Item implements IStrengthen {
+public abstract class AbstractOre extends Item implements IMake, IStrengthen {
 
-    public AbstractOre(Properties properties) {
+    private final int rank;
+
+    public AbstractOre(Properties properties, int rank) {
         super(properties);
+        this.rank = rank;
     }
 
     @Override
@@ -30,39 +37,21 @@ public abstract class AbstractOre extends Item implements IStrengthen {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, @NotNull TooltipFlag flagIn) {
         tooltip.add(new TranslatableComponent("矿石").withStyle(ChatFormatting.LIGHT_PURPLE));
         tooltip.add(new TranslatableComponent("稀有度").withStyle(ChatFormatting.YELLOW)
-                .append("     ").append(new TranslatableComponent(String.valueOf(rank())).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                .append("     ").append(new TranslatableComponent(String.valueOf(this.rank)).withStyle(ChatFormatting.LIGHT_PURPLE)));
     }
 
-    public abstract int rank();
+    public int getRank() {
+        return rank;
+    }
 
-    /**
-     * 不同矿石返回其等阶对应的属性数组{ATK,AGL}
-     */
-    protected abstract int[] rankAttr(Item item);
+    @Override
+    public int makeRank() {
+        return this.rank;
+    }
 
-    /**
-     * 不同矿石返回其等阶对应的属性数组{DEF,PHY}
-     */
-    protected abstract int[] rankAttrArmor(Item item);
-
-    public ItemStack itemRankUp(ItemStack stack) {
-        ItemStack copy = stack.copy();
-        if (copy.getItem() instanceof ArmorItem) {
-            int[] attr = rankAttrArmor(copy.getItem());
-            if (attr != null) {
-                RankHelper.setRank(copy, rank());
-                RankHelper.setRankAttrArmor(copy, attr);
-                return copy;
-            }
-        } else {
-            int[] attr = rankAttr(copy.getItem());
-            if (attr != null) {
-                RankHelper.setRank(copy, rank());
-                RankHelper.setRankAttr(copy, attr);
-                return copy;
-            }
-        }
-        return Items.AIR.getDefaultInstance();
+    @Override
+    public void doMake(ItemStack stack) {
+        MakeHelper.setMake(stack, makeId());
     }
 
     @Override
@@ -78,5 +67,59 @@ public abstract class AbstractOre extends Item implements IStrengthen {
             StrengthenHelper.setStrengthen(copy, intsNew);
         }
         return copy;
+    }
+
+    protected int aglType1(Item item) {
+        switch (EMakeType.getByItem(item)) {
+            case AXE -> {
+                return -20;
+            }
+            case PICKAXE -> {
+                return -15;
+            }
+            case RANGED_WEAPON -> {
+                return -10;
+            }
+            default -> {
+                return 0;
+            }
+        }
+    }
+
+    protected int aglType2(Item item) {
+        switch (EMakeType.getByItem(item)) {
+            case AXE -> {
+                return -15;
+            }
+            case PICKAXE -> {
+                return -10;
+            }
+            case RANGED_WEAPON -> {
+                return -5;
+            }
+            default -> {
+                return 0;
+            }
+        }
+    }
+
+    protected int aglType3(Item item) {
+        switch (EMakeType.getByItem(item)) {
+            case SWORD -> {
+                return -5;
+            }
+            case AXE -> {
+                return -20;
+            }
+            case PICKAXE -> {
+                return -15;
+            }
+            case RANGED_WEAPON -> {
+                return -10;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 }

@@ -32,17 +32,12 @@ public class SmithHelper {
      * 锻冶增加的ATK
      */
     public static int getSmithAtk(ItemStack stack) {
-        if (stack.getTag() == null) {
-            return 0;
-        }
+        if (stack.getTag() == null) return 0;
         int i = 0;
         //鉴定属性
         i += QualityHelper.getAtk(stack);
         //制作属性
-        int[] rankAttr = RankHelper.getRankAttr(stack);
-        if (rankAttr != null) {
-            i += rankAttr[0];
-        }
+        i += MakeHelper.getAtk(stack);
         //强化属性
         i += StrengthenHelper.getAtk(stack);
         //强刃属性
@@ -54,17 +49,12 @@ public class SmithHelper {
      * 锻冶增加的DEF
      */
     public static int getSmithDef(ItemStack stack) {
-        if (stack.getTag() == null) {
-            return 0;
-        }
+        if (stack.getTag() == null) return 0;
         int i = 0;
         //鉴定属性
         i += QualityHelper.getDef(stack);
         //制作属性
-        int[] rankAttr = RankHelper.getRankAttrArmor(stack);
-        if (rankAttr != null) {
-            i += rankAttr[0];
-        }
+        i += MakeHelper.getDef(stack);
         //强化属性
         i += StrengthenHelper.getDef(stack);
         //强刃属性
@@ -76,17 +66,12 @@ public class SmithHelper {
      * 锻冶增加的PHY
      */
     public static int getSmithPhy(ItemStack stack) {
-        if (stack.getTag() == null) {
-            return 0;
-        }
+        if (stack.getTag() == null) return 0;
         int i = 0;
         //鉴定属性
         i += QualityHelper.getPhy(stack);
         //制作属性
-        int[] rankAttr = RankHelper.getRankAttrArmor(stack);
-        if (rankAttr != null) {
-            i += rankAttr[1];
-        }
+        i += MakeHelper.getPhy(stack);
         //强化属性
         i += StrengthenHelper.getPhy(stack);
         //强刃属性
@@ -98,21 +83,33 @@ public class SmithHelper {
      * 锻冶增加的AGL
      */
     public static int getSmithAgl(ItemStack stack) {
-        if (stack.getTag() == null) {
-            return 0;
-        }
+        if (stack.getTag() == null) return 0;
         int i = 0;
         //鉴定属性
         i += QualityHelper.getAgl(stack);
         //制作属性
-        int[] rankAttr = RankHelper.getRankAttr(stack);
-        if (rankAttr != null) {
-            i += rankAttr[1];
-        }
+        i += MakeHelper.getAgl(stack);
         //强化属性
         i += StrengthenHelper.getAgl(stack);
         //强刃属性
         i += EdgeHelper.getAgl(stack);
+        return i;
+    }
+
+    /**
+     * 锻冶增加的DUR
+     */
+    public static int getSmithDur(ItemStack stack) {
+        if (stack.getTag() == null) return 0;
+        int i = 0;
+        //鉴定属性
+//        i += QualityHelper.getAgl(stack);
+        //制作属性
+        i += MakeHelper.getDur(stack);
+        //强化属性
+//        i += StrengthenHelper.getAgl(stack);
+        //强刃属性
+//        i += EdgeHelper.getAgl(stack);
         return i;
     }
 

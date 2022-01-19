@@ -3,9 +3,9 @@ package com.marisa.swordcraftstory.block.craft.menu;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import com.marisa.swordcraftstory.item.mould.*;
-import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
-import com.marisa.swordcraftstory.smith.util.RankHelper;
+import com.marisa.swordcraftstory.smith.IMake;
+import com.marisa.swordcraftstory.smith.util.MakeHelper;
 import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -42,7 +42,7 @@ public class ItemMakeMenu extends AbstractItemMakeMenu {
             return false;
         }
         int lv = PlayerDataManager.getLv(PlayerDataManager.get(player.getStringUUID()).getXp());
-        return RankHelper.getRank(stack) <= (lv / RANK_LV_NEED_ONCE) + 1;
+        return MakeHelper.getMakeRank(stack) <= (lv / RANK_LV_NEED_ONCE) + 1;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ItemMakeMenu extends AbstractItemMakeMenu {
     public void createResult() {
         ItemStack stack0 = this.inputSlots.getItem(0);
         Item item0 = stack0.getItem();
-        if (stack0.isEmpty() || !StoryUtils.isModItem(item0) || RankHelper.getRank(stack0) != 0) {
+        if (stack0.isEmpty() || !StoryUtils.isModItem(item0) || MakeHelper.getMakeRank(stack0) != 0) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
@@ -100,11 +100,11 @@ public class ItemMakeMenu extends AbstractItemMakeMenu {
             return;
         }
         ItemStack stack2 = this.inputSlots.getItem(2);
-        if (stack2.isEmpty() || !(stack2.getItem() instanceof AbstractOre)) {
+        if (stack2.isEmpty() || !(stack2.getItem() instanceof IMake)) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
-        ItemStack make = ((Mould) item1).make(stack0, stack1, (AbstractOre) stack2.getItem());
+        ItemStack make = ((Mould) item1).make(stack0, stack1, (IMake) stack2.getItem());
         if (make.isEmpty()) {
             return;
         }

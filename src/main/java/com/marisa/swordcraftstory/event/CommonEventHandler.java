@@ -216,7 +216,7 @@ public class CommonEventHandler {
         toolTip.add(++index, new TranslatableComponent(quality.getName()).withStyle(quality.getChatFormatting()));
         //等阶
         toolTip.add(++index, new TranslatableComponent("等阶").withStyle(ChatFormatting.YELLOW).append("     ")
-                .append(new TranslatableComponent(String.valueOf(RankHelper.getRank(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+                .append(new TranslatableComponent(String.valueOf(MakeHelper.getMakeRank(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
         toolTip.add(++index, new TextComponent(""));
         return index;
     }

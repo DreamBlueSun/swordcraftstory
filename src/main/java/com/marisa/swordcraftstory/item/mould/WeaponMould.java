@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.item.mould;
 
-import com.marisa.swordcraftstory.item.ore.AbstractOre;
+import com.marisa.swordcraftstory.smith.IMake;
 import com.marisa.swordcraftstory.smith.util.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -36,16 +36,16 @@ public abstract class WeaponMould extends Mould {
     }
 
     @Override
-    public ItemStack make(ItemStack stack, ItemStack mould, AbstractOre ore) {
+    public ItemStack make(ItemStack stack, ItemStack mould, IMake iMake) {
         ItemStack copy = stack.copy();
-        if (RankHelper.getRank(copy) == 0) {
+        if (MakeHelper.getMakeRank(copy) == 0) {
             EnchantHelper.remEnchantmentTag(copy);
             EnchantHelper.copyEnchantmentTag(mould, copy);
+            //升阶属性
+            iMake.doMake(copy);
             //模具属性添加至强刃属性
             EdgeHelper.setAtk(copy, EdgeHelper.getAtk(stack) + CollapseHelper.getAtk(mould));
             EdgeHelper.setAgl(copy, EdgeHelper.getAgl(stack) + CollapseHelper.getAgl(mould));
-            //升阶属性
-            copy = ore.itemRankUp(copy);
         }
         return copy;
     }
