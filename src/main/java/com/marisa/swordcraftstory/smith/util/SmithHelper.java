@@ -100,6 +100,10 @@ public class SmithHelper {
 
     private final static String DUR = "story_smith_dur";
 
+    public static boolean isBroken(ItemStack stack) {
+        return getDur(stack) == 0;
+    }
+
     /**
      * 消耗物品的DUR
      */
@@ -113,12 +117,13 @@ public class SmithHelper {
 
     public static void minusDur(ItemStack stack, int amount) {
         CompoundTag tag = stack.getOrCreateTag();
-        int v = tag.getInt(DUR);
-        if (v >= amount) {
-            tag.put(DUR, IntTag.valueOf(v - amount));
-        } else {
-            tag.put(DUR, IntTag.valueOf(0));
-        }
+        tag.put(DUR, IntTag.valueOf(Math.max(tag.getInt(DUR) - amount, 0)));
+    }
+
+    public static void plusDur(ItemStack stack, int amount) {
+        CompoundTag tag = stack.getOrCreateTag();
+        int v = Math.min(tag.getInt(DUR) + amount, getDurMax(stack));
+        tag.put(DUR, IntTag.valueOf(v));
     }
 
     /**
@@ -128,10 +133,13 @@ public class SmithHelper {
         return Math.max(stack.getOrCreateTag().getInt(DUR), 0);
     }
 
+    private final static int DUR_BASE = 50;
+
     /**
      * 物品的最大DUR
      */
     public static int getDurMax(ItemStack stack) {
+        if (MakeHelper.getMakeRank(stack) < 1) return DUR_BASE;
         if (stack.getTag() == null) return 1;
         int i = 0;
         //鉴定属性

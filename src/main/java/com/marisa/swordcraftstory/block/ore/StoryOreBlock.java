@@ -4,12 +4,15 @@ import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.ore.helper.OreDropQuality;
+import com.marisa.swordcraftstory.smith.util.EdgeHelper;
 import com.marisa.swordcraftstory.smith.util.MakeHelper;
+import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.OreBlock;
@@ -46,17 +49,21 @@ public class StoryOreBlock extends OreBlock {
 
     @Override
     public void spawnAfterBreak(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull ItemStack stack) {
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
-            //精准采集掉落方块本身
-            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
-        } else {
-            //根据工具等阶掉落素材
-            ItemStack random = OreDropQuality.random(MakeHelper.getMakeRank(stack));
-            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), random);
-            //根据掉落物品掉落经验
-            int rank = random.getItem() instanceof AbstractOre ore ? ore.getRank() : 3;
-            if (0 < rank && rank <= this.xpDropList.size()) {
-                state.getBlock().popExperience(level, pos, this.xpDropList.get(rank - 1).sample(RANDOM));
+        if (stack.getItem() instanceof PickaxeItem && !SmithHelper.isBroken(stack)) {
+            SmithHelper.minusDur(stack);
+            if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
+                //精准采集掉落方块本身
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
+            } else {
+                EdgeHelper.incrTec(stack);
+                //根据工具等阶掉落素材
+                ItemStack random = OreDropQuality.random(MakeHelper.getMakeRank(stack));
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), random);
+                //根据掉落物品掉落经验
+                int rank = random.getItem() instanceof AbstractOre ore ? ore.getRank() : 3;
+                if (0 < rank && rank <= this.xpDropList.size()) {
+                    state.getBlock().popExperience(level, pos, this.xpDropList.get(rank - 1).sample(RANDOM));
+                }
             }
         }
         super.spawnAfterBreak(state, level, pos, stack);

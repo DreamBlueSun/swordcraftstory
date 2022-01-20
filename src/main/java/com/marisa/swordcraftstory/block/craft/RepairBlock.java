@@ -2,6 +2,7 @@ package com.marisa.swordcraftstory.block.craft;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.ItemRegistry;
+import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -39,21 +40,20 @@ public class RepairBlock extends Block {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
-        if (!level.isClientSide) {
-            Vec3 vec3 = Vec3.atBottomCenterOf(pos);
-            List<Monster> list = level.getEntitiesOfClass(Monster.class, new AABB(vec3.x() - 8.0D, vec3.y() - 5.0D, vec3.z() - 8.0D, vec3.x() + 8.0D, vec3.y() + 5.0D, vec3.z() + 8.0D), (p_9062_) -> p_9062_.isPreventingPlayerRest(player));
-            if (!list.isEmpty()) {
-                player.displayClientMessage(new TranslatableComponent("msg.swordcraftstory.smithery.repairAll.no_safe").withStyle(ChatFormatting.RED), true);
-            } else {
-                Inventory inv = player.getInventory();
-                for (int i = 0; i < inv.items.size(); i++) {
-                    ItemStack stack = inv.items.get(i);
-                    if (!stack.isEmpty() && StoryUtils.isWeapon(stack.getItem())) {
-                        stack.setDamageValue(0);
-                    }
+        if (level.isClientSide) return InteractionResult.SUCCESS;
+        Vec3 vec3 = Vec3.atBottomCenterOf(pos);
+        List<Monster> list = level.getEntitiesOfClass(Monster.class, new AABB(vec3.x() - 8.0D, vec3.y() - 5.0D, vec3.z() - 8.0D, vec3.x() + 8.0D, vec3.y() + 5.0D, vec3.z() + 8.0D), (p_9062_) -> p_9062_.isPreventingPlayerRest(player));
+        if (!list.isEmpty()) {
+            player.displayClientMessage(new TranslatableComponent("msg.swordcraftstory.smithery.repairAll.no_safe").withStyle(ChatFormatting.RED), true);
+        } else {
+            Inventory inv = player.getInventory();
+            for (int i = 0; i < inv.items.size(); i++) {
+                ItemStack stack = inv.items.get(i);
+                if (!stack.isEmpty() && StoryUtils.isWeapon(stack.getItem())) {
+                    SmithHelper.plusDur(stack, SmithHelper.getDurMax(stack));
                 }
-                player.displayClientMessage(new TranslatableComponent("msg.swordcraftstory.smithery.repairAll.ok").withStyle(ChatFormatting.GREEN), true);
             }
+            player.displayClientMessage(new TranslatableComponent("msg.swordcraftstory.smithery.repairAll.ok").withStyle(ChatFormatting.GREEN), true);
         }
         return InteractionResult.SUCCESS;
     }

@@ -1,10 +1,12 @@
 package com.marisa.swordcraftstory.bar;
 
+import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -69,20 +71,28 @@ public class BarEventHandler {
 
     private void renderSlotDur(int x, int y, ItemStack stack) {
         if (stack.isEmpty()) return;
-        if (!StoryUtils.isWeapon(stack.getItem())) return;
-        boolean f = (stack.getCount() > 0 && stack.getItem().isDamageable(stack)) && stack.getItem().isDamaged(stack);
+        if (!StoryUtils.isWeapon(stack.getItem()) || SmithHelper.getDur(stack) >= SmithHelper.getDurMax(stack)) return;
         RenderSystem.disableDepthTest();
         RenderSystem.disableTexture();
         RenderSystem.disableBlend();
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
-        int i = stack.getBarWidth();
-        int j = stack.getBarColor();
+        int i = getBarWidth(stack);
+        int j = getBarColor(stack);
         this.fillRect(bufferbuilder, x + 2, y + 13, 13, 2, 0, 0, 0);
         this.fillRect(bufferbuilder, x + 2, y + 13, i, 1, j >> 16 & 255, j >> 8 & 255, j & 255);
         RenderSystem.enableBlend();
         RenderSystem.enableTexture();
         RenderSystem.enableDepthTest();
+    }
+
+    private int getBarWidth(ItemStack stack) {
+        return Math.round(13.0F * SmithHelper.getDur(stack) / SmithHelper.getDurMax(stack));
+    }
+
+    private int getBarColor(ItemStack stack) {
+        float f = Math.max(0.0F, ((float) SmithHelper.getDur(stack)) / (float) SmithHelper.getDurMax(stack));
+        return Mth.hsvToRgb(f / 3.0F, 1.0F, 1.0F);
     }
 
     private void fillRect(BufferBuilder builder, int p_115154_, int p_115155_, int p_115156_, int p_115157_, int p_115158_, int p_115159_, int p_115160_) {

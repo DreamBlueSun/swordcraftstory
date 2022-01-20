@@ -2,7 +2,6 @@ package com.marisa.swordcraftstory.smith.util.pojo;
 
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 
 import java.util.UUID;
@@ -24,11 +23,6 @@ public class LegsQualityAttr extends ArmorQualityAttr {
     public LegsQualityAttr(int luck, int def, int phy, double moveSpeed) {
         super(UUID_LUCK, luck, def, phy);
         this.moveSpeed = moveSpeed;
-    }
-
-    @Override
-    public void smithModify(ItemStack stack) {
-        super.smithModify(stack);
     }
 
     @Override

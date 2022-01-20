@@ -2,7 +2,6 @@ package com.marisa.swordcraftstory.smith.util.pojo;
 
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 
 import java.util.UUID;
@@ -24,11 +23,6 @@ public class SwordQualityAttr extends WeaponQualityAttr {
     public SwordQualityAttr(int luck, int atk, int agl, int dur, int cri, double atkS) {
         super(UUID_LUCK, luck, atk, agl, dur, cri);
         this.atkS = atkS;
-    }
-
-    @Override
-    public void smithModify(ItemStack stack) {
-        super.smithModify(stack);
     }
 
     @Override

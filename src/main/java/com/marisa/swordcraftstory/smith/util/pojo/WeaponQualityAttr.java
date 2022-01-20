@@ -1,6 +1,5 @@
 package com.marisa.swordcraftstory.smith.util.pojo;
 
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 
 import java.util.UUID;
@@ -53,11 +52,6 @@ public abstract class WeaponQualityAttr extends AbstractQualityAttr {
 
     public int getCri() {
         return cri;
-    }
-
-    @Override
-    public void smithModify(ItemStack stack) {
-        super.smithModify(stack);
     }
 
     @Override

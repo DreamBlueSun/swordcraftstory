@@ -1,6 +1,5 @@
 package com.marisa.swordcraftstory.smith.util.pojo;
 
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 
 import java.util.UUID;
@@ -33,15 +32,6 @@ public abstract class ArmorQualityAttr extends AbstractQualityAttr {
 
     public int getPhy() {
         return phy;
-    }
-
-    @Override
-    public void smithModify(ItemStack stack) {
-        if (stack.isDamageableItem()) {
-            stack.getOrCreateTag().putInt("HideFlags", 4);
-            stack.getOrCreateTag().putBoolean("Unbreakable", true);
-        }
-        super.smithModify(stack);
     }
 
     @Override

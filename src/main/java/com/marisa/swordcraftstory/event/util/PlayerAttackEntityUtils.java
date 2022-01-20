@@ -1,5 +1,7 @@
 package com.marisa.swordcraftstory.event.util;
 
+import com.marisa.swordcraftstory.smith.util.EQuality;
+import com.marisa.swordcraftstory.smith.util.QualityHelper;
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.core.particles.ParticleTypes;
@@ -19,6 +21,7 @@ import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -42,21 +45,21 @@ public class PlayerAttackEntityUtils {
         }
         //基础伤害
         float f = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
-        //锻造伤害
-        ItemStack stack = player.getMainHandItem();
-        if (StoryUtils.isRangedWeapon(stack.getItem())) {
-            f = SmithHelper.getDamageAtk(stack) * 0.5F;
+        //判断损坏的武器
+        ItemStack stack;
+        ItemStack mainHandItem = player.getMainHandItem();
+        if (SmithHelper.isBroken(mainHandItem)) {
+            stack = ItemStack.EMPTY;
+            f -= SmithHelper.getItemAtk(mainHandItem.getItem());
         } else {
-            f += SmithHelper.getSmithAtk(stack);
+            stack = mainHandItem;
         }
+        //锻造伤害
+        f += StoryUtils.isRangedWeapon(stack.getItem()) ? SmithHelper.getSmithAtk(stack) * 0.5F : SmithHelper.getSmithAtk(stack);
         f = Math.max(f, 1.0F);
         //附魔伤害
-        float f1;
-        if (target instanceof LivingEntity) {
-            f1 = EnchantmentHelper.getDamageBonus(stack, ((LivingEntity) target).getMobType());
-        } else {
-            f1 = EnchantmentHelper.getDamageBonus(stack, MobType.UNDEFINED);
-        }
+        MobType mobType = target instanceof LivingEntity ? ((LivingEntity) target).getMobType() : MobType.UNDEFINED;
+        float f1 = EnchantmentHelper.getDamageBonus(stack, mobType);
         //攻击速度伤害偏移
         float f2 = player.getAttackStrengthScale(0.5F);
         f *= 0.2F + f2 * f2 * 0.8F;
@@ -72,7 +75,7 @@ public class PlayerAttackEntityUtils {
         float i = (float) player.getAttributeValue(Attributes.ATTACK_KNOCKBACK); // Forge: Initialize player value to the attack knockback attribute of the player, which is by default 0
         i += EnchantmentHelper.getKnockbackBonus(player);
         if (player.isSprinting() && flag) {
-            player.level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_KNOCKBACK, player.getSoundSource(), 1.0F, 1.0F);
+            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_KNOCKBACK, player.getSoundSource(), 1.0F, 1.0F);
             ++i;
             flag1 = true;
         }
@@ -80,7 +83,7 @@ public class PlayerAttackEntityUtils {
         f += f1;
         //额外计算近战伤害附魔：额外再+(4%*lv)，最高20%
         if (f1 > 0) {
-            f *= (1.0F + (Math.min((int) f1, 5) * 0.04F));
+            f *= (1.0F + (Mth.clamp(getItemEnchantmentLevelByMobType(mobType, stack), 0, 5) * 0.04F));
         }
         //暴击
         boolean flag2 = SmithHelper.isCri(stack);
@@ -89,7 +92,7 @@ public class PlayerAttackEntityUtils {
         }
         //横扫攻击
         boolean flag3 = false;
-        double d0 = (double) (player.walkDist - player.walkDistO);
+        double d0 = player.walkDist - player.walkDistO;
         if (flag && !flag2 && !flag1 && player.isOnGround() && d0 < (double) player.getSpeed()) {
             ItemStack itemstack = player.getItemInHand(InteractionHand.MAIN_HAND);
             flag3 = itemstack.canPerformAction(net.minecraftforge.common.ToolActions.SWORD_SWEEP);
@@ -113,9 +116,9 @@ public class PlayerAttackEntityUtils {
             //击退伤害特效
             if (i > 0) {
                 if (target instanceof LivingEntity) {
-                    ((LivingEntity) target).knockback((double) ((float) i * 0.5F), (double) Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), (double) (-Mth.cos(player.getYRot() * ((float) Math.PI / 180F))));
+                    ((LivingEntity) target).knockback(i * 0.5F, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
                 } else {
-                    target.push((double) (-Mth.sin(player.getYRot() * ((float) Math.PI / 180F)) * (float) i * 0.5F), 0.1D, (double) (Mth.cos(player.getYRot() * ((float) Math.PI / 180F)) * (float) i * 0.5F));
+                    target.push(-Mth.sin(player.getYRot() * ((float) Math.PI / 180F)) * i * 0.5F, 0.1D, Mth.cos(player.getYRot() * ((float) Math.PI / 180F)) * i * 0.5F);
                 }
 
                 player.setDeltaMovement(player.getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
@@ -127,12 +130,12 @@ public class PlayerAttackEntityUtils {
 
                 for (LivingEntity livingentity : player.level.getEntitiesOfClass(LivingEntity.class, player.getItemInHand(InteractionHand.MAIN_HAND).getSweepHitBox(player, target))) {
                     if (livingentity != player && livingentity != target && !player.isAlliedTo(livingentity) && (!(livingentity instanceof ArmorStand) || !((ArmorStand) livingentity).isMarker()) && player.distanceToSqr(livingentity) < 9.0D) {
-                        livingentity.knockback((double) 0.4F, (double) Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), (double) (-Mth.cos(player.getYRot() * ((float) Math.PI / 180F))));
+                        livingentity.knockback(0.4F, Mth.sin(player.getYRot() * ((float) Math.PI / 180F)), -Mth.cos(player.getYRot() * ((float) Math.PI / 180F)));
                         livingentity.hurt(DamageSource.playerAttack(player), f3);
                     }
                 }
 
-                player.level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
+                player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
                 player.sweepAttack();
             }
 
@@ -143,15 +146,15 @@ public class PlayerAttackEntityUtils {
             }
             //暴击伤害特效
             if (flag2) {
-                player.level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
+                player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
                 player.crit(target);
             }
             //攻速阈值伤害特效
             if (!flag2 && !flag3) {
                 if (flag) {
-                    player.level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_STRONG, player.getSoundSource(), 1.0F, 1.0F);
+                    player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_STRONG, player.getSoundSource(), 1.0F, 1.0F);
                 } else {
-                    player.level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_WEAK, player.getSoundSource(), 1.0F, 1.0F);
+                    player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_WEAK, player.getSoundSource(), 1.0F, 1.0F);
                 }
             }
             //附魔伤害特效
@@ -171,11 +174,15 @@ public class PlayerAttackEntityUtils {
             }
             //武器损伤计算
             if (!player.level.isClientSide && !stack.isEmpty() && entity instanceof LivingEntity) {
-                ItemStack copy = stack.copy();
-                stack.hurtEnemy((LivingEntity) entity, player);
-                if (stack.isEmpty()) {
-                    net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, copy, InteractionHand.MAIN_HAND);
-                    player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+                if (StoryUtils.isWeapon(stack.getItem()) && QualityHelper.getQuality(stack) != EQuality.UNKNOWN) {
+                    SmithHelper.minusDur(stack);
+                } else {
+                    ItemStack copy = stack.copy();
+                    stack.hurtEnemy((LivingEntity) entity, player);
+                    if (stack.isEmpty()) {
+                        net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, copy, InteractionHand.MAIN_HAND);
+                        player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+                    }
                 }
             }
             //扣血心数量特效
@@ -195,11 +202,24 @@ public class PlayerAttackEntityUtils {
             //???
             player.causeFoodExhaustion(0.1F);
         } else {
-            player.level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_NODAMAGE, player.getSoundSource(), 1.0F, 1.0F);
+            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_NODAMAGE, player.getSoundSource(), 1.0F, 1.0F);
             //火焰附加结束
             if (flag4) {
                 target.clearFire();
             }
+        }
+    }
+
+    private static int getItemEnchantmentLevelByMobType(MobType mobType, ItemStack stack) {
+        int sharpness = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SHARPNESS, stack);
+        if (mobType == MobType.UNDEAD) {
+            return Math.max(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SMITE, stack), sharpness);
+        } else if (mobType == MobType.ARTHROPOD) {
+            return Math.max(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, stack), sharpness);
+        } else if (mobType == MobType.WATER) {
+            return Math.max(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.IMPALING, stack), sharpness);
+        } else {
+            return sharpness;
         }
     }
 

@@ -26,6 +26,10 @@ public abstract class AbstractQualityAttr {
     }
 
     public void smithModify(ItemStack stack) {
+        if (stack.isDamageableItem()) {
+            stack.getOrCreateTag().putInt("HideFlags", 4);
+            stack.getOrCreateTag().putBoolean("Unbreakable", true);
+        }
     }
 
     public void addAttributeModifier(ItemAttributeModifierEvent event) {
