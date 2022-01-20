@@ -32,13 +32,13 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDestroyBlockEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
@@ -151,6 +151,10 @@ public class CommonEventHandler {
             }
             toolTip.removeAll(remTip);
             int index = 0;
+            if (SmithHelper.isBroken(stack)) {
+                toolTip.add(++index, new TranslatableComponent("已损坏").withStyle(ChatFormatting.DARK_RED));
+                toolTip.add(++index, new TextComponent(""));
+            }
             index = addTips1(index, toolTip, stack, event.getPlayer());
             toolTip.add(++index, new TranslatableComponent("攻击").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(String.valueOf(SmithHelper.getDamageAtk(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
@@ -163,6 +167,8 @@ public class CommonEventHandler {
             float critical = (float) SmithHelper.getCri(stack) / 10;
             toolTip.add(++index, new TranslatableComponent("暴击").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(critical + "%").withStyle(ChatFormatting.LIGHT_PURPLE)));
+            toolTip.add(++index, new TranslatableComponent("耐久").withStyle(ChatFormatting.YELLOW).append("     ")
+                    .append(new TranslatableComponent(SmithHelper.getDur(stack) + " / " + SmithHelper.getDurMax(stack)).withStyle(ChatFormatting.GREEN)));
             addTips2(index, toolTip, stack);
         } else if (stack.getItem() instanceof ArmorItem) {
             List<Component> toolTip = event.getToolTip();
@@ -215,10 +221,6 @@ public class CommonEventHandler {
     }
 
     private int addTips1(int index, List<Component> toolTip, ItemStack stack, Player player) {
-        if (SmithHelper.isBroken(stack)) {
-            toolTip.add(++index, new TranslatableComponent("已损坏").withStyle(ChatFormatting.DARK_RED));
-            toolTip.add(++index, new TextComponent(""));
-        }
         //品质
         EQuality quality = quality(stack, player);
         toolTip.add(++index, new TranslatableComponent(quality.getName()).withStyle(quality.getChatFormatting()));
@@ -233,8 +235,6 @@ public class CommonEventHandler {
     }
 
     private void addTips2(int index, List<Component> toolTip, ItemStack stack) {
-        toolTip.add(++index, new TranslatableComponent("耐久").withStyle(ChatFormatting.YELLOW).append("     ")
-                .append(new TranslatableComponent(SmithHelper.getDur(stack) + " / " + SmithHelper.getDurMax(stack)).withStyle(ChatFormatting.GREEN)));
         toolTip.add(++index, new TranslatableComponent("熟练").withStyle(ChatFormatting.YELLOW).append("     ")
                 .append(new TranslatableComponent(EdgeHelper.getTec(stack) + " / 255").withStyle(ChatFormatting.GREEN)));
         toolTip.add(++index, new TextComponent(""));
@@ -330,8 +330,8 @@ public class CommonEventHandler {
     }
 
     @SubscribeEvent
-    public void livingDestroyBlock(LivingDestroyBlockEvent event) {
-        if (event.getEntityLiving() instanceof ServerPlayer player) {
+    public void livingDestroyBlock(BlockEvent.BreakEvent event) {
+        if (event.getPlayer() instanceof ServerPlayer player) {
             ItemStack stack = player.getMainHandItem();
             if (!StoryUtils.isWeapon(stack.getItem()) || stack.getItem() instanceof PickaxeItem) return;
             if (stack.getItem() instanceof AxeItem && !SmithHelper.isBroken(stack)) {

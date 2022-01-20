@@ -108,29 +108,23 @@ public class SmithHelper {
      * 消耗物品的DUR
      */
     public static void minusDur(ItemStack stack) {
-        CompoundTag tag = stack.getOrCreateTag();
-        int v = tag.getInt(DUR);
-        if (v > 0) {
-            tag.put(DUR, IntTag.valueOf(v - 1));
-        }
+        minusDur(stack, 1);
     }
 
     public static void minusDur(ItemStack stack, int amount) {
-        CompoundTag tag = stack.getOrCreateTag();
-        tag.put(DUR, IntTag.valueOf(Math.max(tag.getInt(DUR) - amount, 0)));
+        stack.getOrCreateTag().put(DUR, IntTag.valueOf(Math.max(getDur(stack) - amount, 0)));
     }
 
     public static void plusDur(ItemStack stack, int amount) {
-        CompoundTag tag = stack.getOrCreateTag();
-        int v = Math.min(tag.getInt(DUR) + amount, getDurMax(stack));
-        tag.put(DUR, IntTag.valueOf(v));
+        stack.getOrCreateTag().put(DUR, IntTag.valueOf(Math.min(getDur(stack) + amount, getDurMax(stack))));
     }
 
     /**
      * 物品的当前DUR
      */
     public static int getDur(ItemStack stack) {
-        return Math.max(stack.getOrCreateTag().getInt(DUR), 0);
+        CompoundTag tag = stack.getOrCreateTag();
+        return tag.contains(DUR) ? Math.max(tag.getInt(DUR), 0) : DUR_BASE;
     }
 
     private final static int DUR_BASE = 50;
@@ -139,13 +133,13 @@ public class SmithHelper {
      * 物品的最大DUR
      */
     public static int getDurMax(ItemStack stack) {
-        if (MakeHelper.getMakeRank(stack) < 1) return DUR_BASE;
         if (stack.getTag() == null) return 1;
         int i = 0;
         //鉴定属性
         i += QualityHelper.getDur(stack);
         //制作属性
-        i += MakeHelper.getDur(stack);
+        int make = MakeHelper.getDur(stack);
+        i += make == 0 ? DUR_BASE : make;
         //强化属性
         i += StrengthenHelper.getDur(stack);
         //强刃属性

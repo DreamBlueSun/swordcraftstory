@@ -48,7 +48,7 @@ public class BarEventHandler {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.noRender || minecraft.level == null) return;
         if (minecraft.options.hideGui || minecraft.screen != null) return;
-        if (minecraft.gameMode == null || !minecraft.gameMode.canHurtPlayer()) return;
+        if (minecraft.gameMode == null || minecraft.gameMode.isAlwaysFlying()) return;
         if (minecraft.getCameraEntity() instanceof Player player) {
             int screenHeight = minecraft.getWindow().getGuiScaledHeight();
             int i = minecraft.getWindow().getGuiScaledWidth() / 2;
