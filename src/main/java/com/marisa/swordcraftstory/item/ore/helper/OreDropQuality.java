@@ -67,6 +67,7 @@ public class OreDropQuality {
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_PHY.get().getDefaultInstance());
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_DEF.get().getDefaultInstance());
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_ATK.get().getDefaultInstance());
+        LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_DUR.get().getDefaultInstance());
 
     }
 

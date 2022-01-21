@@ -3,6 +3,8 @@ package com.marisa.swordcraftstory.smith.util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 import java.util.Random;
 
@@ -144,6 +146,8 @@ public class SmithHelper {
         i += StrengthenHelper.getDur(stack);
         //强刃属性
         i += EdgeHelper.getDur(stack);
+        //附魔属性
+        i += Math.max(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, stack), 0) * 5;
         return Math.max(i, 1);
     }
 

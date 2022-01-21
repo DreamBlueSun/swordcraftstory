@@ -3,10 +3,7 @@ package com.marisa.swordcraftstory.item;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.group.StoryGroup;
-import com.marisa.swordcraftstory.item.edge.OreEdgeAgl;
-import com.marisa.swordcraftstory.item.edge.OreEdgeAtk;
-import com.marisa.swordcraftstory.item.edge.OreEdgeDef;
-import com.marisa.swordcraftstory.item.edge.OreEdgePhy;
+import com.marisa.swordcraftstory.item.edge.*;
 import com.marisa.swordcraftstory.item.material.*;
 import com.marisa.swordcraftstory.item.mould.*;
 import com.marisa.swordcraftstory.item.ore.drop.*;
@@ -44,6 +41,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> ORE_EDGE_DEF = ITEMS.register("ore_edge_def", OreEdgeDef::new);
     public static RegistryObject<Item> ORE_EDGE_PHY = ITEMS.register("ore_edge_phy", OreEdgePhy::new);
     public static RegistryObject<Item> ORE_EDGE_AGL = ITEMS.register("ore_edge_agl", OreEdgeAgl::new);
+    public static RegistryObject<Item> ORE_EDGE_DUR = ITEMS.register("ore_edge_dur", OreEdgeDur::new);
     //素材道具
     public static RegistryObject<Item> JI_JA_FRUIT = ITEMS.register("ji_ja_fruit", JiJaFruit::new);
     public static RegistryObject<Item> JU_YU_FRUIT = ITEMS.register("ju_yu_fruit", JuYuFruit::new);
