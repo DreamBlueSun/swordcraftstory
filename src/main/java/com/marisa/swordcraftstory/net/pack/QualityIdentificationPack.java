@@ -40,7 +40,7 @@ public class QualityIdentificationPack {
                 if (slot >= 0) {
                     ItemStack stack = inventory.getItem(slot);
                     if (QualityHelper.getQuality(stack) == EQuality.UNKNOWN) {
-                        QualityHelper.setQuality(stack, EQuality.randomOne(true));
+                        QualityHelper.setQuality(stack, EQuality.randomOne(false));
                     }
                 }
             }

@@ -24,6 +24,7 @@ import net.minecraft.util.StringUtil;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -34,18 +35,20 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * 监听事件处理器
@@ -322,14 +325,16 @@ public class CommonEventHandler {
     }
 
     @SubscribeEvent
-    public void itemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
-        //拦截玩家制作物品进行鉴定品质
-        ItemStack stack = event.getCrafting();
-        if (StoryUtils.isModItem(stack.getItem()) && QualityHelper.getQuality(stack) == EQuality.UNKNOWN) {
-            QualityHelper.setQuality(stack, EQuality.randomOne(false));
-        } else if (stack.getItem() instanceof ShieldItem && stack.isDamageableItem()) {
-            stack.getOrCreateTag().putInt("HideFlags", 4);
-            stack.getOrCreateTag().putBoolean("Unbreakable", true);
+    public void livingDrops(LivingDropsEvent event) {
+        if (!(event.getEntityLiving() instanceof Mob)) return;
+        Collection<ItemEntity> drops = event.getDrops();
+        if (drops == null || drops.size() == 0) return;
+        List<ItemEntity> collect = drops.stream().filter(i -> StoryUtils.isModItem(i.getItem().getItem())).collect(Collectors.toList());
+        for (ItemEntity itemEntity : collect) {
+            ItemStack stack = itemEntity.getItem();
+            if (StoryUtils.isModItem(stack.getItem()) && QualityHelper.getQuality(stack) == EQuality.UNKNOWN) {
+                QualityHelper.setQuality(stack, EQuality.randomOne(true));
+            }
         }
     }
 
@@ -351,7 +356,7 @@ public class CommonEventHandler {
     }
 
     @SubscribeEvent
-    public void playerInteract(PlayerInteractEvent.LeftClickBlock event) {
+    public void playerInteractBlock(PlayerInteractEvent.LeftClickBlock event) {
         ItemStack stack = event.getPlayer().getMainHandItem();
         Item item = stack.getItem();
         if (stack.isEmpty() || !StoryUtils.isWeapon(item) || !SmithHelper.isBroken(stack)) return;

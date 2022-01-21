@@ -196,7 +196,7 @@ public enum EQuality implements IQuality {
             return null;
         }
     },
-    ROTTEN(7, 5, "腐朽", ChatFormatting.DARK_GREEN) {
+    ROTTEN(7, 12, "腐朽", ChatFormatting.DARK_GREEN) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
@@ -222,52 +222,52 @@ public enum EQuality implements IQuality {
             return null;
         }
     },
-    BROKEN(8, 2, "残破", ChatFormatting.DARK_BLUE) {
+    BROKEN(8, 6, "残破", ChatFormatting.DARK_BLUE) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(5, -2, 0, -20, 50, 0.03D);
+                return new SwordQualityAttr(4, -2, 0, -20, 50, 0.03D);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(5, (int) Damage.ARROW_BASE_DAMAGE - 2, 0, 0, 50);
+                return new ShootQualityAttr(4, (int) Damage.ARROW_BASE_DAMAGE - 2, 0, 0, 50);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
-                        return new HeadQualityAttr(3, -5, 0, -60);
+                        return new HeadQualityAttr(2, -5, 0, -60);
                     }
                     case CHEST -> {
-                        return new ChestQualityAttr(3, -3, 0, -90);
+                        return new ChestQualityAttr(2, -3, 0, -90);
                     }
                     case LEGS -> {
-                        return new LegsQualityAttr(3, -4, 0, -0.05D);
+                        return new LegsQualityAttr(2, -4, 0, -0.05D);
                     }
                     case FEET -> {
-                        return new FeetQualityAttr(3, -6, 0, -0.02D);
+                        return new FeetQualityAttr(2, -6, 0, -0.02D);
                     }
                 }
             }
             return null;
         }
     },
-    OLD(9, 1, "古老", ChatFormatting.DARK_PURPLE) {
+    OLD(9, 2, "古老", ChatFormatting.DARK_PURPLE) {
         @Override
         public AbstractQualityAttr getAttr(Item item) {
             if (StoryUtils.isMeleeWeapon(item)) {
-                return new SwordQualityAttr(7, -1, 0, -10, 70, 0.1D);
+                return new SwordQualityAttr(5, -1, 0, -10, 70, 0.1D);
             } else if (StoryUtils.isRangedWeapon(item)) {
-                return new ShootQualityAttr(7, (int) Damage.ARROW_BASE_DAMAGE, 0, 0, 100);
+                return new ShootQualityAttr(5, (int) Damage.ARROW_BASE_DAMAGE, 0, 0, 100);
             } else if (item instanceof ArmorItem armor) {
                 switch (armor.getSlot()) {
                     case HEAD -> {
-                        return new HeadQualityAttr(5, -3, 1, -40);
+                        return new HeadQualityAttr(3, -3, 1, -40);
                     }
                     case CHEST -> {
-                        return new ChestQualityAttr(5, -1, 1, -60);
+                        return new ChestQualityAttr(3, -1, 1, -60);
                     }
                     case LEGS -> {
-                        return new LegsQualityAttr(5, -2, 1, 0);
+                        return new LegsQualityAttr(3, -2, 1, 0);
                     }
                     case FEET -> {
-                        return new FeetQualityAttr(5, -4, 1, 0);
+                        return new FeetQualityAttr(3, -4, 1, 0);
                     }
                 }
             }
