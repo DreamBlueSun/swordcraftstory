@@ -50,7 +50,6 @@ public class StoryOreBlock extends OreBlock {
     @Override
     public void spawnAfterBreak(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull ItemStack stack) {
         if (stack.getItem() instanceof PickaxeItem && !SmithHelper.isBroken(stack)) {
-            SmithHelper.minusDur(stack);
             if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                 //精准采集掉落方块本身
                 Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());

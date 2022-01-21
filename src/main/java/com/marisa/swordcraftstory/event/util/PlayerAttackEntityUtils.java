@@ -175,7 +175,9 @@ public class PlayerAttackEntityUtils {
             //武器损伤计算
             if (!player.level.isClientSide && !stack.isEmpty() && entity instanceof LivingEntity) {
                 if (StoryUtils.isWeapon(stack.getItem()) && QualityHelper.getQuality(stack) != EQuality.UNKNOWN) {
-                    SmithHelper.minusDur(stack);
+                    if (player instanceof ServerPlayer serverPlayer && !serverPlayer.gameMode.isCreative()) {
+                        SmithHelper.minusDur(stack);
+                    }
                 } else {
                     ItemStack copy = stack.copy();
                     stack.hurtEnemy((LivingEntity) entity, player);

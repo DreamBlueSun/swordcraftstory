@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.event;
 
+import com.marisa.swordcraftstory.block.ore.StoryOreBlock;
 import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.event.util.LivingHurtUtils;
 import com.marisa.swordcraftstory.event.util.PlayerAttackEntityUtils;
@@ -105,7 +106,9 @@ public class CommonEventHandler {
                     player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
                 }
                 //消耗耐久
-                SmithHelper.minusDur(stack);
+                if (!player.gameMode.isCreative()) {
+                    SmithHelper.minusDur(stack);
+                }
                 arrow.setBaseDamage(atk);
             } else if (owner instanceof Mob mob) {
                 //mob射箭
@@ -333,14 +336,16 @@ public class CommonEventHandler {
     public void livingDestroyBlock(BlockEvent.BreakEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             ItemStack stack = player.getMainHandItem();
-            if (!StoryUtils.isWeapon(stack.getItem()) || stack.getItem() instanceof PickaxeItem) return;
-            if (stack.getItem() instanceof AxeItem && !SmithHelper.isBroken(stack)) {
+            if (!StoryUtils.isWeapon(stack.getItem()) || SmithHelper.isBroken(stack)) return;
+            if (stack.getItem() instanceof AxeItem) {
                 ResourceLocation registryName = event.getState().getBlock().getRegistryName();
                 if (registryName != null && registryName.getPath().contains("_log")) {
                     EdgeHelper.incrTec(stack);
                 }
             }
-            SmithHelper.minusDur(stack);
+            if (!player.gameMode.isCreative()) {
+                SmithHelper.minusDur(stack);
+            }
         }
     }
 
@@ -356,6 +361,16 @@ public class CommonEventHandler {
                 if (!player.isCreative()) {
                     stack.shrink(1);
                 }
+                event.setCanceled(true);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void playerInteract(PlayerInteractEvent.LeftClickBlock event) {
+        if (event.getPlayer().level.getBlockState(event.getPos()).getBlock() instanceof StoryOreBlock) {
+            ItemStack stack = event.getPlayer().getMainHandItem();
+            if (!(stack.getItem() instanceof PickaxeItem) || SmithHelper.isBroken(stack)) {
                 event.setCanceled(true);
             }
         }
