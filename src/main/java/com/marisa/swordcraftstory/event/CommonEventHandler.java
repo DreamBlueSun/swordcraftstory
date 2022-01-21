@@ -31,6 +31,7 @@ import net.minecraft.world.entity.projectile.SpectralArrow;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -336,17 +337,35 @@ public class CommonEventHandler {
     public void livingDestroyBlock(BlockEvent.BreakEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             ItemStack stack = player.getMainHandItem();
-            if (!StoryUtils.isWeapon(stack.getItem()) || SmithHelper.isBroken(stack)) return;
-            if (stack.getItem() instanceof AxeItem) {
-                ResourceLocation registryName = event.getState().getBlock().getRegistryName();
-                if (registryName != null && registryName.getPath().contains("_log")) {
+            if (stack.isEmpty() || !StoryUtils.isWeapon(stack.getItem()) || SmithHelper.isBroken(stack)) return;
+            if (!player.gameMode.isCreative()) {
+                SmithHelper.minusDur(stack);
+                Block block = event.getState().getBlock();
+                if (stack.getItem() instanceof AxeItem && isLogBlock(block)) {
+                    EdgeHelper.incrTec(stack);
+                } else if (stack.getItem() instanceof PickaxeItem && block instanceof StoryOreBlock) {
                     EdgeHelper.incrTec(stack);
                 }
             }
-            if (!player.gameMode.isCreative()) {
-                SmithHelper.minusDur(stack);
-            }
         }
+    }
+
+    @SubscribeEvent
+    public void playerInteract(PlayerInteractEvent.LeftClickBlock event) {
+        ItemStack stack = event.getPlayer().getMainHandItem();
+        Item item = stack.getItem();
+        if (stack.isEmpty() || !StoryUtils.isWeapon(item) || !SmithHelper.isBroken(stack)) return;
+        Block block = event.getPlayer().level.getBlockState(event.getPos()).getBlock();
+        if (stack.getItem() instanceof AxeItem && isLogBlock(block)) {
+            event.setCanceled(true);
+        } else if (item instanceof PickaxeItem && block instanceof StoryOreBlock) {
+            event.setCanceled(true);
+        }
+    }
+
+    private boolean isLogBlock(Block block) {
+        ResourceLocation registryName = block.getRegistryName();
+        return registryName != null && registryName.getPath().contains("_log");
     }
 
     @SubscribeEvent
@@ -361,16 +380,6 @@ public class CommonEventHandler {
                 if (!player.isCreative()) {
                     stack.shrink(1);
                 }
-                event.setCanceled(true);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void playerInteract(PlayerInteractEvent.LeftClickBlock event) {
-        if (event.getPlayer().level.getBlockState(event.getPos()).getBlock() instanceof StoryOreBlock) {
-            ItemStack stack = event.getPlayer().getMainHandItem();
-            if (!(stack.getItem() instanceof PickaxeItem) || SmithHelper.isBroken(stack)) {
                 event.setCanceled(true);
             }
         }

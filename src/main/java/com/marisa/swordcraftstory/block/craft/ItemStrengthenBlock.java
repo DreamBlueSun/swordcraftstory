@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 public class ItemStrengthenBlock extends Block {
 
     public ItemStrengthenBlock() {
-        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(7.0F, 7.0F));
+        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(32.0F, 32.0F));
         this.setRegistryName(Story.MOD_ID + ":item_strengthen_block");
     }
 

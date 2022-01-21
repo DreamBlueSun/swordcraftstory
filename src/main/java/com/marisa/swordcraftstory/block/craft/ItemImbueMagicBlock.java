@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 public class ItemImbueMagicBlock extends Block {
 
     public ItemImbueMagicBlock() {
-        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(7.0F, 7.0F));
+        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(32.0F, 32.0F));
         this.setRegistryName(Story.MOD_ID + ":item_imbue_magic_block");
     }
 

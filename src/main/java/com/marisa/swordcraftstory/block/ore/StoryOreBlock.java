@@ -4,7 +4,6 @@ import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
 import com.marisa.swordcraftstory.item.ore.helper.OreDropQuality;
-import com.marisa.swordcraftstory.smith.util.EdgeHelper;
 import com.marisa.swordcraftstory.smith.util.MakeHelper;
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import net.minecraft.core.BlockPos;
@@ -54,7 +53,6 @@ public class StoryOreBlock extends OreBlock {
                 //精准采集掉落方块本身
                 Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ItemRegistry.STORY_ORE_BLOCK.get().getDefaultInstance());
             } else {
-                EdgeHelper.incrTec(stack);
                 //根据工具等阶掉落素材
                 ItemStack random = OreDropQuality.random(MakeHelper.getMakeRank(stack));
                 Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), random);

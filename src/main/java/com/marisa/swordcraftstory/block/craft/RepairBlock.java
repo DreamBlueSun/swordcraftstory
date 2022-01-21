@@ -34,7 +34,7 @@ import java.util.List;
 public class RepairBlock extends Block {
 
     public RepairBlock() {
-        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(7.0F, 7.0F));
+        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(32.0F, 32.0F));
         this.setRegistryName(Story.MOD_ID + ":repair_block");
     }
 
