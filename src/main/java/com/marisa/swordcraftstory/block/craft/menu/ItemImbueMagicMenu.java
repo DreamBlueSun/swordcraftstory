@@ -84,19 +84,44 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
             return;
         }
         final int index = stack1.getCount();
-        if (index <= 0) return;
+        if (index <= 0) {
+            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            return;
+        }
         ItemStack copy = stack0.copy();
         ListTag listtag = copy.getEnchantmentTags();
-        if (listtag.size() < index) return;
+        if (listtag.size() < index) {
+            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            return;
+        }
         CompoundTag compoundtag = listtag.getCompound(index - 1);
-        int lv = EnchantmentHelper.getEnchantmentLevel(compoundtag);
-        if (lv >= 10) return;
-        if (stack2.getCount() < lv || stack3.getCount() < lv) return;
+        final int lv = EnchantmentHelper.getEnchantmentLevel(compoundtag);
+        if (lv >= 15) {
+            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            return;
+        }
+        if (stack2.getCount() < lv || stack3.getCount() < lv) {
+            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            return;
+        }
         Enchantment enchantment = Enchantment.byId(compoundtag.getInt("id"));
-        if (enchantment == null) return;
+        if (enchantment == null) {
+            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            return;
+        }
         int max = enchantment.getMaxLevel();
-        if (max == 1) return;
-        if ((max == 2 || max == 3) && lv >= 5) return;
+        if (max == 1) {
+            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            return;
+        }
+        if ((max == 3 || max == 4) && lv >= 10) {
+            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            return;
+        }
+        if (max == 2 && lv >= 5) {
+            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            return;
+        }
         this.access.execute((level, blockPos) -> {
             int power = 0;
             for (int k = -1; k <= 1; ++k) {
@@ -113,7 +138,10 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
                     }
                 }
             }
-            if (power < index) return;
+            if (power < index) {
+                this.resultSlots.setItem(0, ItemStack.EMPTY);
+                return;
+            }
             EnchantmentHelper.setEnchantmentLevel(compoundtag, lv + 1);
             this.resultSlots.setItem(0, copy);
         });
@@ -123,7 +151,7 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
         return item == Items.COPPER_BLOCK || item == Items.EXPOSED_COPPER || item == Items.WEATHERED_COPPER || item == Items.OXIDIZED_COPPER;
     }
 
-    private float getPower(Level world, BlockPos pos) {
-        return world.getBlockState(pos).getEnchantPowerBonus(world, pos);
+    private int getPower(Level world, BlockPos pos) {
+        return world.getBlockState(pos).getEnchantPowerBonus(world, pos) > 0.0F ? 1 : 0;
     }
 }
