@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -17,6 +18,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 /**
  * 注魔锻冶台menu
@@ -104,7 +107,14 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
-        Enchantment enchantment = Enchantment.byId(compoundtag.getInt("id"));
+        Enchantment enchantment = null;
+        Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(copy);
+        for (Map.Entry<Enchantment, Integer> entry : map.entrySet()) {
+            ResourceLocation registryName = entry.getKey().getRegistryName();
+            if (registryName != null && registryName.equals(EnchantmentHelper.getEnchantmentId(compoundtag))) {
+                enchantment = entry.getKey();
+            }
+        }
         if (enchantment == null) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
