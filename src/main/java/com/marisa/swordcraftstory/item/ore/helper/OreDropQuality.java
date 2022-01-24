@@ -123,9 +123,9 @@ public class OreDropQuality {
             return LIST_ORE_EDGE.get(randomIndex(LIST_ORE_EDGE.size())).copy();
         }
         if (r > (drop - RANK_MATERIAL_1)) {
-            return ItemRegistry.OMEGA_STONE.get().getDefaultInstance();
+            return ItemRegistry.DOPATIC_STONE.get().getDefaultInstance();
         }
-        return ItemRegistry.DOPATIC_STONE.get().getDefaultInstance();
+        return ItemRegistry.OMEGA_STONE.get().getDefaultInstance();
     }
 
     private static int randomIndex(int size) {

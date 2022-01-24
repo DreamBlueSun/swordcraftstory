@@ -56,8 +56,8 @@ public class ItemRegistry {
     public static RegistryObject<Item> SOFT_LEAVES = ITEMS.register("soft_leaves", SoftLeaves::new);
     public static RegistryObject<Item> SWEET_HONEY = ITEMS.register("sweet_honey", SweetHoney::new);
     public static RegistryObject<Item> SOFT_LEATHER = ITEMS.register("soft_leather", SoftLeather::new);
-    public static RegistryObject<Item> DOPATIC_STONE = ITEMS.register("dopatic_stone", DopaticStone::new);
     public static RegistryObject<Item> OMEGA_STONE = ITEMS.register("omega_stone", OmegaStone::new);
+    public static RegistryObject<Item> DOPATIC_STONE = ITEMS.register("dopatic_stone", DopaticStone::new);
     //模具
     public static RegistryObject<Item> SWORD_MOULD = ITEMS.register("sword_mould", SwordMould::new);
     public static RegistryObject<Item> AXE_MOULD = ITEMS.register("axe_mould", AxeMould::new);
