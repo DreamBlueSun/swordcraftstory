@@ -1,6 +1,5 @@
 package com.marisa.swordcraftstory.event;
 
-import com.marisa.swordcraftstory.block.ore.StoryOreBlock;
 import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.event.util.LivingHurtUtils;
 import com.marisa.swordcraftstory.event.util.PlayerAttackEntityUtils;
@@ -33,6 +32,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.OreBlock;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -44,10 +44,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -342,15 +339,15 @@ public class CommonEventHandler {
     public void livingDestroyBlock(BlockEvent.BreakEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             ItemStack stack = player.getMainHandItem();
-            if (stack.isEmpty() || !StoryUtils.isWeapon(stack.getItem()) || SmithHelper.isBroken(stack)) return;
-            if (!player.gameMode.isCreative()) {
-                SmithHelper.minusDur(stack);
-                Block block = event.getState().getBlock();
-                if (stack.getItem() instanceof AxeItem && isLogBlock(block)) {
-                    EdgeHelper.incrTec(stack);
-                } else if (stack.getItem() instanceof PickaxeItem && block instanceof StoryOreBlock) {
-                    EdgeHelper.incrTec(stack);
-                }
+            if (stack.isEmpty() || player.gameMode.isCreative()) return;
+            if (!StoryUtils.isWeapon(stack.getItem()) || SmithHelper.isBroken(stack)) return;
+            SmithHelper.minusDur(stack);
+            if (new Random().nextInt(4) == 0) return;
+            Block block = event.getState().getBlock();
+            if (stack.getItem() instanceof AxeItem && isLogBlock(block)) {
+                EdgeHelper.incrTec(stack);
+            } else if (stack.getItem() instanceof PickaxeItem && block instanceof OreBlock) {
+                EdgeHelper.incrTec(stack);
             }
         }
     }
@@ -358,12 +355,7 @@ public class CommonEventHandler {
     @SubscribeEvent
     public void playerInteractBlock(PlayerInteractEvent.LeftClickBlock event) {
         ItemStack stack = event.getPlayer().getMainHandItem();
-        Item item = stack.getItem();
-        if (stack.isEmpty() || !StoryUtils.isWeapon(item) || !SmithHelper.isBroken(stack)) return;
-        Block block = event.getPlayer().level.getBlockState(event.getPos()).getBlock();
-        if (stack.getItem() instanceof AxeItem && isLogBlock(block)) {
-            event.setCanceled(true);
-        } else if (item instanceof PickaxeItem && block instanceof StoryOreBlock) {
+        if (!stack.isEmpty() && StoryUtils.isWeapon(stack.getItem()) && SmithHelper.isBroken(stack)) {
             event.setCanceled(true);
         }
     }
