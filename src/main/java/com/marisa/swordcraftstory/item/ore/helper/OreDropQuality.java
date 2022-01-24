@@ -2,7 +2,6 @@ package com.marisa.swordcraftstory.item.ore.helper;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +70,8 @@ public class OreDropQuality {
 
     }
 
-    private static final int RANK_MATERIAL_0 = 100;
-    private static final int RANK_MATERIAL_1 = 40;
+    private static final int RANK_MATERIAL_0 = 95;
+    private static final int RANK_MATERIAL_1 = 45;
     private static final int RANK_MATERIAL_2 = 10;
     private static final int RANK_ORE_1 = 9;
     private static final int RANK_ORE_2 = 8;
@@ -124,10 +123,9 @@ public class OreDropQuality {
             return LIST_ORE_EDGE.get(randomIndex(LIST_ORE_EDGE.size())).copy();
         }
         if (r > (drop - RANK_MATERIAL_1)) {
-            return Items.RAW_GOLD.getDefaultInstance();
+            return ItemRegistry.OMEGA_STONE.get().getDefaultInstance();
         }
-        //RANK_MATERIAL_0
-        return Items.RAW_IRON.getDefaultInstance();
+        return ItemRegistry.DOPATIC_STONE.get().getDefaultInstance();
     }
 
     private static int randomIndex(int size) {

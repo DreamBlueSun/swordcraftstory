@@ -7,6 +7,9 @@ import com.marisa.swordcraftstory.item.edge.*;
 import com.marisa.swordcraftstory.item.material.*;
 import com.marisa.swordcraftstory.item.mould.*;
 import com.marisa.swordcraftstory.item.ore.drop.*;
+import com.marisa.swordcraftstory.item.repair.HardStone;
+import com.marisa.swordcraftstory.item.repair.SharpStone;
+import com.marisa.swordcraftstory.item.repair.knifeStone;
 import com.marisa.swordcraftstory.item.reply.JiJaMedicine;
 import com.marisa.swordcraftstory.item.reply.JuYuMedicine;
 import com.marisa.swordcraftstory.item.reply.Woundplast;
@@ -36,6 +39,10 @@ public class ItemRegistry {
     public static RegistryObject<Item> WOUNDPLAST = ITEMS.register("woundplast", Woundplast::new);
     public static RegistryObject<Item> JI_JA_MEDICINE = ITEMS.register("ji_ja_medicine", JiJaMedicine::new);
     public static RegistryObject<Item> JU_YU_MEDICINE = ITEMS.register("ju_yu_medicine", JuYuMedicine::new);
+    //修理道具
+    public static RegistryObject<Item> SHARP_STONE = ITEMS.register("sharp_stone", SharpStone::new);
+    public static RegistryObject<Item> KNIFE_STONE = ITEMS.register("knife_stone", knifeStone::new);
+    public static RegistryObject<Item> HARD_STONE = ITEMS.register("hard_stone", HardStone::new);
     //强刃道具
     public static RegistryObject<Item> ORE_EDGE_ATK = ITEMS.register("ore_edge_atk", OreEdgeAtk::new);
     public static RegistryObject<Item> ORE_EDGE_DEF = ITEMS.register("ore_edge_def", OreEdgeDef::new);
@@ -49,6 +56,8 @@ public class ItemRegistry {
     public static RegistryObject<Item> SOFT_LEAVES = ITEMS.register("soft_leaves", SoftLeaves::new);
     public static RegistryObject<Item> SWEET_HONEY = ITEMS.register("sweet_honey", SweetHoney::new);
     public static RegistryObject<Item> SOFT_LEATHER = ITEMS.register("soft_leather", SoftLeather::new);
+    public static RegistryObject<Item> DOPATIC_STONE = ITEMS.register("dopatic_stone", DopaticStone::new);
+    public static RegistryObject<Item> OMEGA_STONE = ITEMS.register("omega_stone", OmegaStone::new);
     //模具
     public static RegistryObject<Item> SWORD_MOULD = ITEMS.register("sword_mould", SwordMould::new);
     public static RegistryObject<Item> AXE_MOULD = ITEMS.register("axe_mould", AxeMould::new);
