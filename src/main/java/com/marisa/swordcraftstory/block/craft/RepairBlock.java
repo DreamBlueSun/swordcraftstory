@@ -16,9 +16,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -31,10 +29,10 @@ import java.util.List;
  * 修理锻冶台
  */
 
-public class RepairBlock extends Block {
+public class RepairBlock extends CraftBlock {
 
     public RepairBlock() {
-        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(32.0F, 32.0F));
+        super();
         this.setRegistryName(Story.MOD_ID + ":repair_block");
     }
 

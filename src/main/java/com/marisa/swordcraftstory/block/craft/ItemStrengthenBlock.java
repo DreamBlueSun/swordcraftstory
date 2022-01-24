@@ -12,9 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,10 +23,10 @@ import javax.annotation.Nullable;
  * 强化锻冶台
  */
 
-public class ItemStrengthenBlock extends Block {
+public class ItemStrengthenBlock extends CraftBlock {
 
     public ItemStrengthenBlock() {
-        super(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(32.0F, 32.0F));
+        super();
         this.setRegistryName(Story.MOD_ID + ":item_strengthen_block");
     }
 
