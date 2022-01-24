@@ -33,6 +33,8 @@ public abstract class WeaponMould extends Mould {
                 .append(new TranslatableComponent(String.valueOf(CollapseHelper.getAtk(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
         toolTip.add(new TranslatableComponent("敏捷").withStyle(ChatFormatting.YELLOW).append("     ")
                 .append(new TranslatableComponent(String.valueOf(CollapseHelper.getAgl(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
+        toolTip.add(new TranslatableComponent("耐久").withStyle(ChatFormatting.YELLOW).append("     ")
+                .append(new TranslatableComponent(String.valueOf(CollapseHelper.getDur(stack))).withStyle(ChatFormatting.LIGHT_PURPLE)));
     }
 
     @Override

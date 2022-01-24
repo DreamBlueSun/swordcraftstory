@@ -72,13 +72,14 @@ public class ItemStrengthenMenu extends OneAddThreeGetOneMenu {
                 count++;
             }
         }
-        if (count == 0) {
+        int max = StrengthenHelper.getStrengthenRank(super.player);
+        if (count == 0 || count > max) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
-        int max = StrengthenHelper.getStrengthenRank(super.player);
         int[] ints = StrengthenHelper.getStrengthenIds(stack0);
-        if (max == 0 || (ints != null && ints.length + count > max)) {
+        int next = (ints == null ? 0 : ints.length) + count;
+        if (next > max) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
