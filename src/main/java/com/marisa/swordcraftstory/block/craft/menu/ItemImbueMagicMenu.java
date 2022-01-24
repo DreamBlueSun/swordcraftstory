@@ -46,11 +46,12 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
 
     @Override
     protected void onTake(@NotNull Player player, @NotNull ItemStack stack) {
+        ListTag listtag = this.inputSlots.getItem(INPUT_SLOT_1).getEnchantmentTags();
         this.shrinkStackInSlot(INPUT_SLOT_1, 1);
         int index = this.inputSlots.getItem(ADDITIONAL_SLOT_1).getCount();
         this.shrinkStackInSlot(ADDITIONAL_SLOT_1, index);
-        this.shrinkStackInSlot(ADDITIONAL_SLOT_2, index);
-        this.shrinkStackInSlot(ADDITIONAL_SLOT_3, index);
+        this.shrinkStackInSlot(ADDITIONAL_SLOT_2, 1);
+        this.shrinkStackInSlot(ADDITIONAL_SLOT_3, EnchantmentHelper.getEnchantmentLevel(listtag.getCompound(index - 1)));
     }
 
     private void shrinkStackInSlot(int slot, int count) {
@@ -99,11 +100,11 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
         }
         CompoundTag compoundtag = listtag.getCompound(index - 1);
         final int lv = EnchantmentHelper.getEnchantmentLevel(compoundtag);
-        if (lv >= 15) {
+        if (lv >= 10) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
-        if (stack2.getCount() < lv || stack3.getCount() < lv) {
+        if (stack2.getCount() < 1 || stack3.getCount() < lv) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
@@ -121,10 +122,6 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
         }
         int max = enchantment.getMaxLevel();
         if (max == 1) {
-            this.resultSlots.setItem(0, ItemStack.EMPTY);
-            return;
-        }
-        if ((max == 3 || max == 4) && lv >= 10) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
