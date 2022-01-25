@@ -1,0 +1,14 @@
+{
+  "smith.block.craft": {
+    "subtitle": "subtitle.swordcraftstory.smith.block.craft",
+    "sounds": [
+      "swordcraftstory:block/smith_craft"
+    ]
+  },
+  "smith.block.repair": {
+    "subtitle": "subtitle.swordcraftstory.smith.block.repair",
+    "sounds": [
+      "swordcraftstory:block/smith_repair"
+    ]
+  }
+}

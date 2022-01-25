@@ -7,7 +7,9 @@ import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 import com.marisa.swordcraftstory.smith.IMake;
 import com.marisa.swordcraftstory.smith.util.MakeHelper;
 import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -50,6 +52,7 @@ public class ItemMakeMenu extends AbstractItemMakeMenu {
         this.shrinkStackInSlot(0);
         this.shrinkStackInSlot(1);
         this.shrinkStackInSlot(2);
+        this.access.execute((level, blockPos) -> level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.SMITH_BLOCK_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F));
     }
 
     private void shrinkStackInSlot(int slot) {

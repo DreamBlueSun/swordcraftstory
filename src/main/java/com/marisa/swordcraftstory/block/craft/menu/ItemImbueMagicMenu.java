@@ -2,11 +2,13 @@ package com.marisa.swordcraftstory.block.craft.menu;
 
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
+import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -52,6 +54,7 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
         this.shrinkStackInSlot(ADDITIONAL_SLOT_1, index);
         this.shrinkStackInSlot(ADDITIONAL_SLOT_2, 1);
         this.shrinkStackInSlot(ADDITIONAL_SLOT_3, EnchantmentHelper.getEnchantmentLevel(listtag.getCompound(index - 1)));
+        this.access.execute((level, blockPos) -> level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.SMITH_BLOCK_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F));
     }
 
     private void shrinkStackInSlot(int slot, int count) {
