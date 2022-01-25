@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "swordcraftstory:luck_ticket"
+    }
+  },
+  "result": {
+    "item": "swordcraftstory:luck_ticket_max",
+    "count": 1
+  }
+}

@@ -1,4 +1,4 @@
-package com.marisa.swordcraftstory.gui.screen.pojo;
+package com.marisa.swordcraftstory.save.screen.pojo;
 
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.block.craft.menu.ItemMakeMenu;

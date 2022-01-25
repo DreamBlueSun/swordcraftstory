@@ -23,6 +23,7 @@ public class BlockRegistry {
     public static final Block ITEM_EDGE_BLOCK = new ItemEdgeBlock();
     public static final Block REPAIR_BLOCK = new RepairBlock();
     public static final Block ITEM_IMBUE_MAGIC_BLOCK = new ItemImbueMagicBlock();
+    public static final Block MANUAL_LOTTERY_MACHINE_BLOCK = new ManualLotteryMachineBlock();
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {

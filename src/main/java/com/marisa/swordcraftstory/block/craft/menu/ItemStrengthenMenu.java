@@ -5,7 +5,9 @@ import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import com.marisa.swordcraftstory.smith.IStrengthen;
 import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import com.marisa.swordcraftstory.smith.util.StrengthenHelper;
+import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -43,6 +45,7 @@ public class ItemStrengthenMenu extends OneAddThreeGetOneMenu {
         this.shrinkStackInSlot(ADDITIONAL_SLOT_1);
         this.shrinkStackInSlot(ADDITIONAL_SLOT_2);
         this.shrinkStackInSlot(ADDITIONAL_SLOT_3);
+        this.access.execute((level, blockPos) -> level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.SMITH_BLOCK_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F));
     }
 
     private void shrinkStackInSlot(int slot) {

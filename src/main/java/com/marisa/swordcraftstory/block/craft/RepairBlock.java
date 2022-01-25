@@ -4,10 +4,12 @@ import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -52,6 +54,7 @@ public class RepairBlock extends CraftBlock {
                 }
             }
             player.displayClientMessage(new TranslatableComponent("msg.swordcraftstory.smithery.repairAll.ok").withStyle(ChatFormatting.GREEN), true);
+            level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundRegistry.SMITH_BLOCK_REPAIR, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
         return InteractionResult.SUCCESS;
     }

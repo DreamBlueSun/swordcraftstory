@@ -13,6 +13,8 @@ import com.marisa.swordcraftstory.item.repair.knifeStone;
 import com.marisa.swordcraftstory.item.reply.JiJaMedicine;
 import com.marisa.swordcraftstory.item.reply.JuYuMedicine;
 import com.marisa.swordcraftstory.item.reply.Woundplast;
+import com.marisa.swordcraftstory.item.special.LuckTicket;
+import com.marisa.swordcraftstory.item.special.LuckTicketMax;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -35,6 +37,10 @@ public class ItemRegistry {
     public static RegistryObject<Item> ITEM_COLLAPSE_BLOCK = ITEMS.register("item_collapse_block", () -> new BlockItem(BlockRegistry.ITEM_COLLAPSE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> REPAIR_BLOCK = ITEMS.register("repair_block", () -> new BlockItem(BlockRegistry.REPAIR_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
     public static RegistryObject<Item> ITEM_IMBUE_MAGIC_BLOCK = ITEMS.register("item_imbue_magic_block", () -> new BlockItem(BlockRegistry.ITEM_IMBUE_MAGIC_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    public static RegistryObject<Item> MANUAL_LOTTERY_MACHINE_BLOCK = ITEMS.register("manual_lottery_machine_block", () -> new BlockItem(BlockRegistry.MANUAL_LOTTERY_MACHINE_BLOCK, new Item.Properties().tab(StoryGroup.MAIN)));
+    //特殊道具
+    public static RegistryObject<Item> LUCK_TICKET = ITEMS.register("luck_ticket", LuckTicket::new);
+    public static RegistryObject<Item> LUCK_TICKET_MAX = ITEMS.register("luck_ticket_max", LuckTicketMax::new);
     //回复道具
     public static RegistryObject<Item> WOUNDPLAST = ITEMS.register("woundplast", Woundplast::new);
     public static RegistryObject<Item> JI_JA_MEDICINE = ITEMS.register("ji_ja_medicine", JiJaMedicine::new);

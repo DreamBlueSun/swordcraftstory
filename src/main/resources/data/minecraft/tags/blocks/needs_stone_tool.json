@@ -7,6 +7,7 @@
     "swordcraftstory:item_edge_block",
     "swordcraftstory:item_collapse_block",
     "swordcraftstory:repair_block",
-    "swordcraftstory:item_imbue_magic_block"
+    "swordcraftstory:item_imbue_magic_block",
+    "swordcraftstory:manual_lottery_machine_block"
   ]
 }
