@@ -17,9 +17,11 @@ public class SoundRegistry {
 
     public static final SoundEvent SMITH_BLOCK_CRAFT = new SoundEvent(new ResourceLocation(Story.MOD_ID, "smith.block.craft"));
     public static final SoundEvent SMITH_BLOCK_REPAIR = new SoundEvent(new ResourceLocation(Story.MOD_ID, "smith.block.repair"));
+    public static final SoundEvent RUNNING_BLOCK_MANUAL_LOTTERY_MACHINE = new SoundEvent(new ResourceLocation(Story.MOD_ID, "running.block.manual_lottery_machine"));
+    public static final SoundEvent DONE_BLOCK_MANUAL_LOTTERY_MACHINE = new SoundEvent(new ResourceLocation(Story.MOD_ID, "done.block.manual_lottery_machine"));
 
     @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<SoundEvent> event) {
+    public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
         try {
             for (Field f : SoundRegistry.class.getDeclaredFields()) {
                 if (f.get(null) instanceof SoundEvent soundEvent) {

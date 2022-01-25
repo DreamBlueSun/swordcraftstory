@@ -10,5 +10,17 @@
     "sounds": [
       "swordcraftstory:block/smith_repair"
     ]
+  },
+  "running.block.manual_lottery_machine": {
+    "subtitle": "subtitle.swordcraftstory.running.block.manual_lottery_machine",
+    "sounds": [
+      "swordcraftstory:block/manual_lottery_machine_running"
+    ]
+  },
+  "done.block.manual_lottery_machine": {
+    "subtitle": "subtitle.swordcraftstory.done.block.manual_lottery_machine",
+    "sounds": [
+      "swordcraftstory:block/manual_lottery_machine_done"
+    ]
   }
 }
