@@ -8,11 +8,16 @@ import com.marisa.swordcraftstory.net.pack.PlayerDataPack;
 import com.marisa.swordcraftstory.save.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.save.util.PlayerAttributesUtils;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
+import com.marisa.swordcraftstory.smith.util.SmithHelper;
+import com.marisa.swordcraftstory.smith.util.StoryUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -46,10 +51,27 @@ public class SaveEventHandler {
 
     @SubscribeEvent
     public void playerPickupXpEvent(PlayerXpEvent.PickupXp event) {
-        //玩家获取经验时，在物语等级系统也增加
         Player player = event.getPlayer();
+        final int value = event.getOrb().getValue();
+        //判断经验修补
+        ItemStack stack = player.getMainHandItem();
+        if (StoryUtils.isWeapon(stack.getItem())) {
+            int have = value / 5;
+            if (have > 0 && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MENDING, stack) > 0) {
+                int need = SmithHelper.getDurMax(stack) - SmithHelper.getDur(stack);
+                if (need > 0) {
+                    SmithHelper.plusDur(stack, have);
+                    event.getOrb().value = Math.max(value - (have - Math.max(have - need, 0)) * 5, 0);
+                    if (event.getOrb().value == 0) {
+                        event.setCanceled(true);
+                        return;
+                    }
+                }
+            }
+        }
+        //玩家获取经验时，在物语等级系统也增加
         PlayerData playerData = PlayerDataManager.get(player.getStringUUID());
-        playerData.addXp(event.getOrb().getValue());
+        playerData.addXp(event.getOrb().value);
         PlayerAttributesUtils.checkLvUp(player, playerData);
     }
 
