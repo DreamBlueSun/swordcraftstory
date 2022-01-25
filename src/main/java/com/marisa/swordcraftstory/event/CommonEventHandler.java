@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.event;
 
+import com.marisa.swordcraftstory.block.craft.ManualLotteryMachineBlock;
 import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.event.util.LivingHurtUtils;
 import com.marisa.swordcraftstory.event.util.PlayerAttackEntityUtils;
@@ -34,6 +35,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.OreBlock;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -379,6 +381,13 @@ public class CommonEventHandler {
                 }
                 event.setCanceled(true);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void worldTick(TickEvent.WorldTickEvent event) {
+        if (!event.world.isClientSide() && event.phase.ordinal() == 0) {
+            ManualLotteryMachineBlock.dropResult(event);
         }
     }
 

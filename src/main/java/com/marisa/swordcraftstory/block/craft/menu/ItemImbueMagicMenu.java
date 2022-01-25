@@ -54,7 +54,7 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
         this.shrinkStackInSlot(ADDITIONAL_SLOT_1, index);
         this.shrinkStackInSlot(ADDITIONAL_SLOT_2, 1);
         this.shrinkStackInSlot(ADDITIONAL_SLOT_3, EnchantmentHelper.getEnchantmentLevel(listtag.getCompound(index - 1)));
-        this.access.execute((level, blockPos) -> level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.SMITH_BLOCK_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F));
+        this.access.execute((level, blockPos) -> level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.SMITH_BLOCK_CRAFT.get(), SoundSource.BLOCKS, 1.0F, 1.0F));
     }
 
     private void shrinkStackInSlot(int slot, int count) {

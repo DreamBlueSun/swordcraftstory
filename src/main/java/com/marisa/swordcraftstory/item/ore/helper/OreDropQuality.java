@@ -65,8 +65,8 @@ public class OreDropQuality {
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_AGL.get().getDefaultInstance());
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_PHY.get().getDefaultInstance());
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_DEF.get().getDefaultInstance());
-        LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_ATK.get().getDefaultInstance());
         LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_DUR.get().getDefaultInstance());
+        LIST_ORE_EDGE.add(ItemRegistry.ORE_EDGE_ATK.get().getDefaultInstance());
 
     }
 
@@ -128,7 +128,7 @@ public class OreDropQuality {
         return ItemRegistry.OMEGA_STONE.get().getDefaultInstance();
     }
 
-    private static int randomIndex(int size) {
+    public static int randomIndex(int size) {
         final int lastSize = size;
         int max = 0;
         for (int i = 1; i <= size; i++) {

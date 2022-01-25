@@ -161,6 +161,7 @@
   "msg.online.players.friends.tp.target_not_find": "对方所处位置未找到",
   "subtitle.swordcraftstory.smith.block.craft": "锻冶台：使用",
   "subtitle.swordcraftstory.smith.block.repair": "锻冶台：修理",
+  "subtitle.swordcraftstory.smith.item.repair": "装备：修理",
   "subtitle.swordcraftstory.running.block.manual_lottery_machine": "抽奖机：运行",
   "subtitle.swordcraftstory.done.block.manual_lottery_machine": "抽奖机：奖品",
   "advancements.swordcraftstory.root.title": "铸剑物语",

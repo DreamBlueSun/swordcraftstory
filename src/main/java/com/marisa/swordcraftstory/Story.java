@@ -6,6 +6,7 @@ import com.marisa.swordcraftstory.block.event.OreGenEventHandler;
 import com.marisa.swordcraftstory.event.CommonEventHandler;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.save.SaveEventHandler;
+import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
@@ -31,6 +32,7 @@ public class Story {
 
         ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         MenuTypeRegistry.MENU_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        SoundRegistry.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
         MinecraftForge.EVENT_BUS.register(new SaveEventHandler());

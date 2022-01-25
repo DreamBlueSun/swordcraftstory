@@ -42,7 +42,7 @@ public class ItemCollapseMenu extends AbstractItemCollapseMenu {
     @Override
     protected void onTake(@NotNull Player player, @NotNull ItemStack stack) {
         this.shrinkStackInSlot(0);
-        this.access.execute((level, blockPos) -> level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.SMITH_BLOCK_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F));
+        this.access.execute((level, blockPos) -> level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.SMITH_BLOCK_CRAFT.get(), SoundSource.BLOCKS, 1.0F, 1.0F));
     }
 
     private void shrinkStackInSlot(int slot) {

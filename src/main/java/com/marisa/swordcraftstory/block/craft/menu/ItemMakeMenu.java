@@ -52,7 +52,7 @@ public class ItemMakeMenu extends AbstractItemMakeMenu {
         this.shrinkStackInSlot(0);
         this.shrinkStackInSlot(1);
         this.shrinkStackInSlot(2);
-        this.access.execute((level, blockPos) -> level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.SMITH_BLOCK_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F));
+        this.access.execute((level, blockPos) -> level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundRegistry.SMITH_BLOCK_CRAFT.get(), SoundSource.BLOCKS, 1.0F, 1.0F));
     }
 
     private void shrinkStackInSlot(int slot) {
