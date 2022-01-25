@@ -1,8 +1,9 @@
 package com.marisa.swordcraftstory.net.pack;
 
-import com.marisa.swordcraftstory.gui.screen.PlayerStatusScreen;
+
 import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.save.PlayerData;
+import com.marisa.swordcraftstory.save.screen.PlayerStatusScreen;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;

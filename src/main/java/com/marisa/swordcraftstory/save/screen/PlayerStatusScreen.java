@@ -1,7 +1,7 @@
-package com.marisa.swordcraftstory.gui.screen;
+package com.marisa.swordcraftstory.save.screen;
 
 import com.marisa.swordcraftstory.Story;
-import com.marisa.swordcraftstory.gui.screen.pojo.PlayerPanelAttr;
+import com.marisa.swordcraftstory.save.screen.pojo.PlayerPanelAttr;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
