@@ -8,10 +8,11 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -32,10 +33,8 @@ public abstract class RepairItem extends Item {
 
     private final int amount;
 
-    private static final FoodProperties BASE = new FoodProperties.Builder().nutrition(0).saturationMod(0).alwaysEat().build();
-
     public RepairItem(int amount) {
-        super(new Properties().food(BASE).tab(StoryGroup.MAIN));
+        super(new Properties().tab(StoryGroup.MAIN));
         this.amount = amount;
     }
 
@@ -47,6 +46,12 @@ public abstract class RepairItem extends Item {
     }
 
     @Override
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
+        player.startUsingItem(hand);
+        return InteractionResultHolder.consume(player.getItemInHand(hand));
+    }
+
+    @Override
     public int getUseDuration(@NotNull ItemStack stack) {
         return 40;
     }
@@ -54,11 +59,6 @@ public abstract class RepairItem extends Item {
     @Override
     public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
         return UseAnim.BOW;
-    }
-
-    @Override
-    public @NotNull SoundEvent getEatingSound() {
-        return SoundRegistry.SMITH_ITEM_REPAIR.get();
     }
 
     @Override
@@ -73,6 +73,7 @@ public abstract class RepairItem extends Item {
                 SmithHelper.plusDur(stack, repair);
                 if ((repair -= durDamage) <= 0) break;
             }
+            level.playSound(null, player, SoundRegistry.SMITH_ITEM_REPAIR.get(), SoundSource.NEUTRAL, 1.0F, 1.0F + (level.random.nextFloat() - level.random.nextFloat()) * 0.4F);
         }
         return super.finishUsingItem(itemStack, level, entityLiving);
     }

@@ -54,7 +54,7 @@ public class RepairBlock extends CraftBlock {
                 }
             }
             player.displayClientMessage(new TranslatableComponent("msg.swordcraftstory.smithery.repairAll.ok").withStyle(ChatFormatting.GREEN), true);
-            level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundRegistry.SMITH_BLOCK_REPAIR.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundRegistry.SMITH_BLOCK_REPAIR.get(), SoundSource.BLOCKS, 1.0F, 1.0F + (level.random.nextFloat() - level.random.nextFloat()) * 0.4F);
         }
         return InteractionResult.SUCCESS;
     }
