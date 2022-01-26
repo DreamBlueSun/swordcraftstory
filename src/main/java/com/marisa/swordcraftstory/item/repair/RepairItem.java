@@ -9,8 +9,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -60,7 +58,7 @@ public abstract class RepairItem extends Item {
 
     @Override
     public @NotNull SoundEvent getEatingSound() {
-        return SoundEvents.IRON_GOLEM_REPAIR;
+        return SoundRegistry.SMITH_ITEM_REPAIR.get();
     }
 
     @Override
@@ -75,7 +73,6 @@ public abstract class RepairItem extends Item {
                 SmithHelper.plusDur(stack, repair);
                 if ((repair -= durDamage) <= 0) break;
             }
-            level.playSound(null, player, SoundRegistry.SMITH_ITEM_REPAIR.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
         }
         return super.finishUsingItem(itemStack, level, entityLiving);
     }
