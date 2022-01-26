@@ -16,20 +16,24 @@ public class ManualLotteryMachineCache {
     private boolean isRunning;
     private int runningTick;
 
-    public ManualLotteryMachineCache(ServerLevel level, BlockPos blockPos, int runPower, boolean isRunning, int runningTick) {
+    public ManualLotteryMachineCache(ServerLevel level, BlockPos blockPos, int runPower) {
         this.level = level;
         this.blockPos = blockPos;
         this.runPower = runPower;
-        this.isRunning = isRunning;
-        this.runningTick = runningTick;
+        this.isRunning = false;
+        this.runningTick = 0;
     }
 
     public int incrRunningTack() {
         return ++this.runningTick;
     }
 
-    public void minusRunningTack() {
+    public void minusRunPower() {
         this.runPower--;
+    }
+
+    public void plusRunPower(int power) {
+        this.runPower += power;
     }
 
     public ServerLevel getLevel() {
@@ -50,10 +54,6 @@ public class ManualLotteryMachineCache {
 
     public int getRunPower() {
         return runPower;
-    }
-
-    public void setRunPower(int runPower) {
-        this.runPower = runPower;
     }
 
     public boolean isRunning() {

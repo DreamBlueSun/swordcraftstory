@@ -42,7 +42,7 @@ public class ManualLotteryMachineDataManager {
             cacheMap = MAP.get(level);
             if (cacheMap.containsKey(blockPos)) {
                 ManualLotteryMachineCache cache = cacheMap.get(blockPos);
-                cache.setRunPower(cache.getRunPower() + data.getRunPower());
+                cache.plusRunPower(data.getRunPower());
             } else {
                 cacheMap.put(blockPos, data);
             }

@@ -44,9 +44,9 @@ public class ManualLotteryMachineBlock extends Block {
         if (level.isClientSide) return InteractionResult.SUCCESS;
         ItemStack stack = player.getMainHandItem();
         if (!stack.isEmpty() && stack.getItem() instanceof LuckTicket) {
+            ManualLotteryMachineDataManager.put(new ManualLotteryMachineCache((ServerLevel) level, pos, stack.getItem() instanceof LuckTicketMax ? 10 : 1));
             //道具数量--
             stack.shrink(1);
-            ManualLotteryMachineDataManager.put(new ManualLotteryMachineCache((ServerLevel) level, pos, stack.getItem() instanceof LuckTicketMax ? 10 : 1, false, 0));
         } else {
             //TODO 展示栏板
 //            PacketDistributor.PacketTarget target = PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player);
@@ -80,7 +80,7 @@ public class ManualLotteryMachineBlock extends Block {
                 }
             } else if (cache.getRunPower() > 0) {
                 //start
-                cache.minusRunningTack();
+                cache.minusRunPower();
                 cache.setRunning(true);
                 level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundRegistry.RUNNING_BLOCK_MANUAL_LOTTERY_MACHINE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
             } else {
