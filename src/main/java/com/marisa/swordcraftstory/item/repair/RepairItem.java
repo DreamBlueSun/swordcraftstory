@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item.repair;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;

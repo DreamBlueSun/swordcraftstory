@@ -9,7 +9,10 @@ import com.marisa.swordcraftstory.net.Networking;
 import com.marisa.swordcraftstory.net.pack.ItemUnbreakablePack;
 import com.marisa.swordcraftstory.net.pack.QualityIdentificationPack;
 import com.marisa.swordcraftstory.save.util.MobAttributesUtils;
+import com.marisa.swordcraftstory.smith.EQuality;
+import com.marisa.swordcraftstory.smith.EStrengthen;
 import com.marisa.swordcraftstory.smith.util.*;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -176,7 +179,7 @@ public class CommonEventHandler {
             toolTip.add(++index, new TranslatableComponent("耐久").withStyle(ChatFormatting.YELLOW).append("     ")
                     .append(new TranslatableComponent(SmithHelper.getDur(stack) + " / " + SmithHelper.getDurMax(stack)).withStyle(ChatFormatting.GREEN)));
             addTips2(index, toolTip, stack);
-        } else if (stack.getItem() instanceof ArmorItem) {
+        } else if (StoryUtils.isArmor(stack.getItem())) {
             List<Component> toolTip = event.getToolTip();
             int armor = 0;
             int toughness = 0;

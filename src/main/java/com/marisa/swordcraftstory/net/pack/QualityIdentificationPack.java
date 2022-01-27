@@ -1,6 +1,6 @@
 package com.marisa.swordcraftstory.net.pack;
 
-import com.marisa.swordcraftstory.smith.util.EQuality;
+import com.marisa.swordcraftstory.smith.EQuality;
 import com.marisa.swordcraftstory.smith.util.QualityHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;

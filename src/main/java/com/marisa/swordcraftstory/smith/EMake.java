@@ -1,7 +1,7 @@
-package com.marisa.swordcraftstory.smith.util;
+package com.marisa.swordcraftstory.smith;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.smith.IMake;
+import com.marisa.swordcraftstory.util.StoryUtils;
 
 /**
  * 矿石枚举

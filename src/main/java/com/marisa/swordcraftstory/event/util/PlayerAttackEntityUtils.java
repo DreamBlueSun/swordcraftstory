@@ -1,9 +1,9 @@
 package com.marisa.swordcraftstory.event.util;
 
-import com.marisa.swordcraftstory.smith.util.EQuality;
+import com.marisa.swordcraftstory.smith.EQuality;
 import com.marisa.swordcraftstory.smith.util.QualityHelper;
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;

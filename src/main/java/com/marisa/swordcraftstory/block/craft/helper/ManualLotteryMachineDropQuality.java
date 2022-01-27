@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.block.craft.helper;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.item.ore.helper.OreDropQuality;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -60,20 +60,20 @@ public class ManualLotteryMachineDropQuality {
         int drop = RANK_RANDOM_MAX;
         int r = new Random().nextInt(RANK_RANDOM_MAX) + 1;
         if (r > (drop -= RANK_ORE_5)) {
-            return LIST_RANK_5.get(OreDropQuality.randomIndex(LIST_RANK_5.size())).copy();
+            return LIST_RANK_5.get(StoryUtils.randomListIndex(LIST_RANK_5.size())).copy();
         }
         if (r > (drop -= RANK_ORE_4)) {
-            ItemStack stack = LIST_RANK_4.get(OreDropQuality.randomIndex(LIST_RANK_4.size())).copy();
+            ItemStack stack = LIST_RANK_4.get(StoryUtils.randomListIndex(LIST_RANK_4.size())).copy();
             stack.setCount(2);
             return stack;
         }
         if (r > (drop -= RANK_ORE_3)) {
-            return LIST_RANK_3.get(OreDropQuality.randomIndex(LIST_RANK_3.size())).copy();
+            return LIST_RANK_3.get(StoryUtils.randomListIndex(LIST_RANK_3.size())).copy();
         }
         if (r > (drop - RANK_ORE_2)) {
-            return LIST_RANK_2.get(OreDropQuality.randomIndex(LIST_RANK_2.size())).copy();
+            return LIST_RANK_2.get(StoryUtils.randomListIndex(LIST_RANK_2.size())).copy();
         }
-        return LIST_RANK_1.get(OreDropQuality.randomIndex(LIST_RANK_1.size())).copy();
+        return LIST_RANK_1.get(StoryUtils.randomListIndex(LIST_RANK_1.size())).copy();
     }
 
 }

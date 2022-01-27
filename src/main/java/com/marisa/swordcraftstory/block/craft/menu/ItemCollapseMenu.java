@@ -5,7 +5,7 @@ import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.item.mould.Mould;
 import com.marisa.swordcraftstory.smith.util.EnchantHelper;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;

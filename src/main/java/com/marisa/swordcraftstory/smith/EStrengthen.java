@@ -1,7 +1,7 @@
-package com.marisa.swordcraftstory.smith.util;
+package com.marisa.swordcraftstory.smith;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
-import com.marisa.swordcraftstory.smith.IStrengthen;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.world.item.ItemStack;
 
 /**

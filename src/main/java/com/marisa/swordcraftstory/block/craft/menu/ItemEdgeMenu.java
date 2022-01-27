@@ -4,7 +4,7 @@ import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import com.marisa.swordcraftstory.item.edge.*;
 import com.marisa.swordcraftstory.smith.util.EdgeHelper;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;

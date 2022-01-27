@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.block.craft.menu;
 import com.marisa.swordcraftstory.block.BlockRegistry;
 import com.marisa.swordcraftstory.block.craft.type.MenuTypeRegistry;
 import com.marisa.swordcraftstory.smith.IStrengthen;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import com.marisa.swordcraftstory.smith.util.StrengthenHelper;
 import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.network.FriendlyByteBuf;

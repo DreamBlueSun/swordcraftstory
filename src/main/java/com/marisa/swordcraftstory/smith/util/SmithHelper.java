@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.smith.util;
 
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.world.item.*;

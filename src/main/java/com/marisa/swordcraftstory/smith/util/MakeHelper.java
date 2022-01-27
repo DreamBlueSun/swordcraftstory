@@ -1,5 +1,6 @@
 package com.marisa.swordcraftstory.smith.util;
 
+import com.marisa.swordcraftstory.smith.EMake;
 import com.marisa.swordcraftstory.smith.IMake;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.world.item.ItemStack;

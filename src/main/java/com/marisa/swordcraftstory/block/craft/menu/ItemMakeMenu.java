@@ -6,7 +6,7 @@ import com.marisa.swordcraftstory.item.mould.*;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 import com.marisa.swordcraftstory.smith.IMake;
 import com.marisa.swordcraftstory.smith.util.MakeHelper;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;

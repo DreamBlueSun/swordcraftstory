@@ -2,7 +2,7 @@ package com.marisa.swordcraftstory.item.ore;
 
 import com.marisa.swordcraftstory.smith.IMake;
 import com.marisa.swordcraftstory.smith.IStrengthen;
-import com.marisa.swordcraftstory.smith.util.EMakeType;
+import com.marisa.swordcraftstory.smith.EMakeType;
 import com.marisa.swordcraftstory.smith.util.MakeHelper;
 import com.marisa.swordcraftstory.smith.util.StrengthenHelper;
 import net.minecraft.ChatFormatting;

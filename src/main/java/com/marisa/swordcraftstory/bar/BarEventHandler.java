@@ -1,7 +1,7 @@
 package com.marisa.swordcraftstory.bar;
 
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;

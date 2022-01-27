@@ -1,7 +1,8 @@
-package com.marisa.swordcraftstory.smith.util;
+package com.marisa.swordcraftstory.smith;
 
 import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.smith.util.pojo.*;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;

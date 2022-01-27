@@ -2,13 +2,13 @@ package com.marisa.swordcraftstory.item.ore.drop;
 
 import com.marisa.swordcraftstory.group.StoryGroup;
 import com.marisa.swordcraftstory.item.ore.AbstractOre;
-import com.marisa.swordcraftstory.smith.util.EMake;
-import com.marisa.swordcraftstory.smith.util.EMakeType;
-import com.marisa.swordcraftstory.smith.util.EStrengthen;
+import com.marisa.swordcraftstory.smith.EMake;
+import com.marisa.swordcraftstory.smith.EMakeType;
+import com.marisa.swordcraftstory.smith.EStrengthen;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -62,12 +62,12 @@ public class FantasyOre extends AbstractOre {
 
     @Override
     public int makeDef(Item item) {
-        return item instanceof ArmorItem ? 1 : 0;
+        return StoryUtils.isArmor(item) ? 1 : 0;
     }
 
     @Override
     public int makePhy(Item item) {
-        return item instanceof ArmorItem ? 7 : 0;
+        return StoryUtils.isArmor(item) ? 7 : 0;
     }
 
     @Override

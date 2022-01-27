@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.smith.util;
 
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
+import com.marisa.swordcraftstory.smith.EStrengthen;
 import com.marisa.swordcraftstory.smith.IStrengthen;
 import net.minecraft.nbt.IntArrayTag;
 import net.minecraft.world.entity.player.Player;

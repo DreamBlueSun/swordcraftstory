@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.item.ore.helper;
 
 import com.marisa.swordcraftstory.item.ItemRegistry;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -93,54 +94,39 @@ public class OreDropQuality {
             r += 1;
         }
         if (r > (drop -= RANK_ORE_9) && rank >= 8) {
-            return LIST_ORE_RANK_9.get(randomIndex(LIST_ORE_RANK_9.size())).copy();
+            return LIST_ORE_RANK_9.get(StoryUtils.randomListIndex(LIST_ORE_RANK_9.size())).copy();
         }
         if (r > (drop -= RANK_ORE_8) && rank >= 7) {
-            return LIST_ORE_RANK_8.get(randomIndex(LIST_ORE_RANK_8.size())).copy();
+            return LIST_ORE_RANK_8.get(StoryUtils.randomListIndex(LIST_ORE_RANK_8.size())).copy();
         }
         if (r > (drop -= RANK_ORE_7) && rank >= 6) {
-            return LIST_ORE_RANK_7.get(randomIndex(LIST_ORE_RANK_7.size())).copy();
+            return LIST_ORE_RANK_7.get(StoryUtils.randomListIndex(LIST_ORE_RANK_7.size())).copy();
         }
         if (r > (drop -= RANK_ORE_6) && rank >= 5) {
-            return LIST_ORE_RANK_6.get(randomIndex(LIST_ORE_RANK_6.size())).copy();
+            return LIST_ORE_RANK_6.get(StoryUtils.randomListIndex(LIST_ORE_RANK_6.size())).copy();
         }
         if (r > (drop -= RANK_ORE_5) && rank >= 4) {
-            return LIST_ORE_RANK_5.get(randomIndex(LIST_ORE_RANK_5.size())).copy();
+            return LIST_ORE_RANK_5.get(StoryUtils.randomListIndex(LIST_ORE_RANK_5.size())).copy();
         }
         if (r > (drop -= RANK_ORE_4) && rank >= 3) {
-            return LIST_ORE_RANK_4.get(randomIndex(LIST_ORE_RANK_4.size())).copy();
+            return LIST_ORE_RANK_4.get(StoryUtils.randomListIndex(LIST_ORE_RANK_4.size())).copy();
         }
         if (r > (drop -= RANK_ORE_3) && rank >= 2) {
-            return LIST_ORE_RANK_3.get(randomIndex(LIST_ORE_RANK_3.size())).copy();
+            return LIST_ORE_RANK_3.get(StoryUtils.randomListIndex(LIST_ORE_RANK_3.size())).copy();
         }
         if (r > (drop -= RANK_ORE_2) && rank >= 1) {
-            return LIST_ORE_RANK_2.get(randomIndex(LIST_ORE_RANK_2.size())).copy();
+            return LIST_ORE_RANK_2.get(StoryUtils.randomListIndex(LIST_ORE_RANK_2.size())).copy();
         }
         if (r > (drop -= RANK_ORE_1)) {
-            return LIST_ORE_RANK_1.get(randomIndex(LIST_ORE_RANK_1.size())).copy();
+            return LIST_ORE_RANK_1.get(StoryUtils.randomListIndex(LIST_ORE_RANK_1.size())).copy();
         }
         if (r > (drop -= RANK_MATERIAL_2)) {
-            return LIST_ORE_EDGE.get(randomIndex(LIST_ORE_EDGE.size())).copy();
+            return LIST_ORE_EDGE.get(StoryUtils.randomListIndex(LIST_ORE_EDGE.size())).copy();
         }
         if (r > (drop - RANK_MATERIAL_1)) {
             return ItemRegistry.DOPATIC_STONE.get().getDefaultInstance();
         }
         return ItemRegistry.OMEGA_STONE.get().getDefaultInstance();
-    }
-
-    public static int randomIndex(int size) {
-        final int lastSize = size;
-        int max = 0;
-        for (int i = 1; i <= size; i++) {
-            max += i;
-        }
-        int r = new Random().nextInt(max) + 1;
-        while (size > 0) {
-            if (r > (max -= size--)) {
-                return size;
-            }
-        }
-        return lastSize;
     }
 
 }

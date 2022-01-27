@@ -9,7 +9,7 @@ import com.marisa.swordcraftstory.save.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.save.util.PlayerAttributesUtils;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;

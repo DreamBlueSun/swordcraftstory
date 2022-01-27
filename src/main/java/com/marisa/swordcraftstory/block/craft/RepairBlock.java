@@ -3,7 +3,7 @@ package com.marisa.swordcraftstory.block.craft;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.item.ItemRegistry;
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import com.marisa.swordcraftstory.sound.SoundRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;

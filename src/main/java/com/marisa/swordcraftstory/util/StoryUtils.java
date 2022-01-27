@@ -1,7 +1,9 @@
-package com.marisa.swordcraftstory.smith.util;
+package com.marisa.swordcraftstory.util;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+
+import java.util.Random;
 
 /**
  * 基本工具类
@@ -46,10 +48,29 @@ public class StoryUtils {
         return isMeleeWeapon(item) || isRangedWeapon(item);
     }
 
+    public static boolean isArmor(Item item) {
+        return item instanceof ArmorItem;
+    }
+
     /**
      * 判断是否算作此模组Item
      */
     public static boolean isModItem(Item item) {
-        return isMeleeWeapon(item) || isRangedWeapon(item) || item instanceof ArmorItem;
+        return isWeapon(item) || isArmor(item);
+    }
+
+    public static int randomListIndex(int size) {
+        final int lastSize = size;
+        int max = 0;
+        for (int i = 1; i <= size; i++) {
+            max += i;
+        }
+        int r = new Random().nextInt(max) + 1;
+        while (size > 0) {
+            if (r > (max -= size--)) {
+                return size;
+            }
+        }
+        return lastSize;
     }
 }

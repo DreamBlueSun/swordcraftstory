@@ -4,7 +4,7 @@ import com.marisa.swordcraftstory.event.pojo.Absorb;
 import com.marisa.swordcraftstory.event.pojo.Damage;
 import com.marisa.swordcraftstory.save.MobAttrSaveData;
 import com.marisa.swordcraftstory.smith.util.EdgeHelper;
-import com.marisa.swordcraftstory.smith.util.StoryUtils;
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;

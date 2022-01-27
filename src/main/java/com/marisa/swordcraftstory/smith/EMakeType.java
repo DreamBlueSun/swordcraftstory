@@ -1,5 +1,6 @@
-package com.marisa.swordcraftstory.smith.util;
+package com.marisa.swordcraftstory.smith;
 
+import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
