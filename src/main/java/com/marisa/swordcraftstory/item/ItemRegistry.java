@@ -70,6 +70,7 @@ public class ItemRegistry {
     public static RegistryObject<Item> PICKAXE_MOULD = ITEMS.register("pickaxe_mould", PickaxeMould::new);
     public static RegistryObject<Item> BOW_MOULD = ITEMS.register("bow_mould", BowMould::new);
     public static RegistryObject<Item> CROSSBOW_MOULD = ITEMS.register("crossbow_mould", CrossbowMould::new);
+    public static RegistryObject<Item> TRIDENT_MOULD = ITEMS.register("trident_mould", TridentMould::new);
     public static RegistryObject<Item> HEAD_MOULD = ITEMS.register("head_mould", HeadMould::new);
     public static RegistryObject<Item> CHEST_MOULD = ITEMS.register("chest_mould", ChestMould::new);
     public static RegistryObject<Item> LEGS_MOULD = ITEMS.register("legs_mould", LegsMould::new);

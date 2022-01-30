@@ -32,6 +32,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -122,6 +123,18 @@ public class CommonEventHandler {
                 arrow.setBaseDamage(Damage.ARROW_BASE_DAMAGE * (lv + 1));
             } else {
                 arrow.setBaseDamage(Damage.ARROW_BASE_DAMAGE);
+            }
+        } else if (event.getEntity() instanceof ThrownTrident trident) {
+            Entity owner = trident.getOwner();
+            if (owner == null) return;
+            if (owner instanceof ServerPlayer player && StoryUtils.isMeleeWeapon(player.getMainHandItem().getItem())) {
+                //玩家投掷
+                ItemStack stack = player.getMainHandItem();
+                if (SmithHelper.isBroken(stack)) return;
+                //消耗耐久
+                if (!player.gameMode.isCreative()) {
+                    SmithHelper.minusDur(stack);
+                }
             }
         }
     }

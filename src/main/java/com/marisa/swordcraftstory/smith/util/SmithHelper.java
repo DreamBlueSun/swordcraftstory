@@ -3,10 +3,14 @@ package com.marisa.swordcraftstory.smith.util;
 import com.marisa.swordcraftstory.util.StoryUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 
+import java.util.Collection;
 import java.util.Random;
 
 public class SmithHelper {
@@ -26,6 +30,15 @@ public class SmithHelper {
             return 0;
         } else if (item instanceof SwordItem swordItem) {
             return (int) swordItem.getDamage() + 1;
+        } else if (item instanceof TridentItem tridentItem) {
+            int i = 1;
+            Collection<AttributeModifier> modifiers = tridentItem.getDefaultInstance().getAttributeModifiers(EquipmentSlot.MAINHAND).get(Attributes.ATTACK_DAMAGE);
+            if (modifiers.size() > 0) {
+                for (AttributeModifier modifier : modifiers) {
+                    i += modifier.getAmount();
+                }
+            }
+            return i;
         } else if (item instanceof DiggerItem diggerItem) {
             return (int) diggerItem.getAttackDamage() + 1;
         } else {

@@ -1,10 +1,7 @@
 package com.marisa.swordcraftstory.smith;
 
 import com.marisa.swordcraftstory.util.StoryUtils;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.*;
 
 public enum EMakeType {
 
@@ -19,7 +16,7 @@ public enum EMakeType {
             return SWORD;
         } else if (item instanceof AxeItem) {
             return AXE;
-        } else if (item instanceof PickaxeItem) {
+        } else if (item instanceof PickaxeItem || item instanceof TridentItem) {
             return PICKAXE;
         } else if (StoryUtils.isRangedWeapon(item)) {
             return RANGED_WEAPON;

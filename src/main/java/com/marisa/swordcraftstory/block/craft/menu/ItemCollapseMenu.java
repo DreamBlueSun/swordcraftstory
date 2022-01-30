@@ -75,6 +75,8 @@ public class ItemCollapseMenu extends AbstractItemCollapseMenu {
             collapse = ((Mould) ItemRegistry.BOW_MOULD.get()).collapse(stack);
         } else if (item instanceof CrossbowItem) {
             collapse = ((Mould) ItemRegistry.CROSSBOW_MOULD.get()).collapse(stack);
+        } else if (item instanceof TridentItem) {
+            collapse = ((Mould) ItemRegistry.TRIDENT_MOULD.get()).collapse(stack);
         } else if (item instanceof ArmorItem armor) {
             switch (armor.getSlot()) {
                 case HEAD -> collapse = ((Mould) ItemRegistry.HEAD_MOULD.get()).collapse(stack);

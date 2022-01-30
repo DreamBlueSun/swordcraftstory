@@ -91,6 +91,8 @@ public class ItemMakeMenu extends AbstractItemMakeMenu {
             f = true;
         } else if (item0 instanceof CrossbowItem && item1 instanceof CrossbowMould) {
             f = true;
+        } else if (item0 instanceof TridentItem && item1 instanceof TridentMould) {
+            f = true;
         } else if (item0 instanceof ArmorItem armor) {
             switch (armor.getSlot()) {
                 case HEAD -> f = item1 instanceof HeadMould;

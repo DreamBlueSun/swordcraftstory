@@ -1,6 +1,7 @@
 package com.marisa.swordcraftstory.event.util;
 
 import com.marisa.swordcraftstory.smith.EQuality;
+import com.marisa.swordcraftstory.smith.util.EnchantHelper;
 import com.marisa.swordcraftstory.smith.util.QualityHelper;
 import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import com.marisa.swordcraftstory.util.StoryUtils;
@@ -21,7 +22,6 @@ import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -81,14 +81,14 @@ public class PlayerAttackEntityUtils {
         }
         //伤害总量
         f += f1;
-        //额外计算近战伤害附魔：额外再+(4%*lv)，最高20%
-        if (f1 > 0) {
-            f *= (1.0F + (Mth.clamp(getItemEnchantmentLevelByMobType(mobType, stack), 0, 5) * 0.04F));
-        }
         //暴击
         boolean flag2 = SmithHelper.isCri(stack);
         if (flag2) {
             f *= 1.25F;
+        }
+        //额外计算近战伤害附魔：额外再+(4%*lv)，最高20%
+        if (f1 > 0) {
+            f *= (1.0F + (Mth.clamp(EnchantHelper.getItemEnchantmentLevelByMobType(mobType, stack), 0, 5) * 0.04F));
         }
         //横扫攻击
         boolean flag3 = false;
@@ -209,19 +209,6 @@ public class PlayerAttackEntityUtils {
             if (flag4) {
                 target.clearFire();
             }
-        }
-    }
-
-    private static int getItemEnchantmentLevelByMobType(MobType mobType, ItemStack stack) {
-        int sharpness = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SHARPNESS, stack);
-        if (mobType == MobType.UNDEAD) {
-            return Math.max(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SMITE, stack), sharpness);
-        } else if (mobType == MobType.ARTHROPOD) {
-            return Math.max(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, stack), sharpness);
-        } else if (mobType == MobType.WATER) {
-            return Math.max(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.IMPALING, stack), sharpness);
-        } else {
-            return sharpness;
         }
     }
 

@@ -3,17 +3,25 @@ package com.marisa.swordcraftstory.event.pojo;
 import com.marisa.swordcraftstory.Story;
 import com.marisa.swordcraftstory.save.util.MobAttributesUtils;
 import com.marisa.swordcraftstory.save.util.PlayerDataManager;
+import com.marisa.swordcraftstory.smith.util.EnchantHelper;
+import com.marisa.swordcraftstory.smith.util.SmithHelper;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
+import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 /**
  * 伤害
@@ -23,6 +31,7 @@ public class Damage {
 
     private final float amount;
     private final DamageSource source;
+    private final LivingEntity target;
     private final float lvWeight;
 
     /**
@@ -43,6 +52,7 @@ public class Damage {
     public Damage(float amount, DamageSource source, LivingEntity target) {
         this.amount = amount;
         this.source = source;
+        this.target = target;
         if (target instanceof Player player) {
             this.lvWeight = PlayerDataManager.getLv(PlayerDataManager.get(player.getStringUUID()).getXp());
         } else if (target instanceof Mob) {
@@ -57,6 +67,7 @@ public class Damage {
     }
 
     public final static double ARROW_BASE_DAMAGE = 7.0D;
+    public final static double TRIDENT_BASE_DAMAGE = 9.0D;
 
     /**
      * 伤害属性初始化
@@ -87,10 +98,55 @@ public class Damage {
                     Story.LOG.error("ARROW伤害异常：" + this.source, e);
                 }
                 break;
+            case "trident":
+                try {
+                    this.p = amount;
+                    if (this.amount > 0.0F && this.source.getDirectEntity() instanceof ThrownTrident trident) {
+                        double baseDamage = trident.getPickResult() != null ? SmithHelper.getItemAtk(trident.getPickResult().getItem()) : Damage.TRIDENT_BASE_DAMAGE;
+                        if (this.source.getEntity() instanceof ServerPlayer player) {
+                            //玩家投掷
+                            ItemStack stack = player.getMainHandItem();
+                            if (SmithHelper.isBroken(stack)) {
+                                this.p = 1.0F;
+                                return;
+                            }
+                            float f = (float) SmithHelper.getDamageAtk(stack);
+                            //暴击
+                            if (SmithHelper.isCri(stack)) {
+                                f *= 1.25F;
+                                player.level.playSound(null, this.target.getX(), this.target.getY(), this.target.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
+                                player.crit(target);
+                            }
+                            //附魔伤害
+                            MobType mobType = this.target.getMobType();
+                            float f1 = EnchantmentHelper.getDamageBonus(stack, mobType);
+                            f += f1;
+                            //额外计算伤害附魔：额外再+(4%*lv)，最高20%
+                            if (f1 > 0) {
+                                f *= (1.0F + (Mth.clamp(EnchantHelper.getItemEnchantmentLevelByMobType(mobType, stack), 0, 5) * 0.04F));
+                            }
+                            this.p = f;
+                        } else if (this.source.getEntity() instanceof Mob mob) {
+                            //mob投掷
+                            int lv = MobAttributesUtils.getMobLv((ServerLevel) mob.level, mob.getStringUUID());
+                            this.p = (float) (baseDamage * (lv + 1));
+                        } else {
+                            this.p = (float) baseDamage;
+                        }
+                    }
+                } catch (Exception e) {
+                    Story.LOG.error("TRIDENT伤害异常：" + this.source, e);
+                }
+                break;
             case "mob":
                 try {
                     if (this.amount > 0.0F && this.source.getEntity() != null && this.source.getEntity() instanceof Mob mob) {
-                        float baseDamage = (float) Math.max(mob.getAttributeValue(Attributes.ATTACK_DAMAGE), 1.0D);
+                        float baseDamage = 1.0F;
+                        try {
+                            baseDamage = (float) Math.max(mob.getAttributeValue(Attributes.ATTACK_DAMAGE), 1.0D);
+                        } catch (Exception e) {
+                            Story.LOG.error("MOB伤害-Attributes.ATTACK_DAMAGE-异常：" + this.source, e);
+                        }
                         switch (mob.level.getDifficulty()) {
                             case EASY -> baseDamage *= 0.7F;
                             case HARD -> baseDamage *= 1.5F;

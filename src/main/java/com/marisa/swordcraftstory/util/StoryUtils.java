@@ -31,7 +31,7 @@ public class StoryUtils {
      * 判断是否为近战武器
      */
     public static boolean isMeleeWeapon(Item item) {
-        return item instanceof SwordItem || item instanceof AxeItem || item instanceof PickaxeItem;
+        return item instanceof SwordItem || item instanceof TridentItem || item instanceof AxeItem || item instanceof PickaxeItem;
     }
 
     /**
