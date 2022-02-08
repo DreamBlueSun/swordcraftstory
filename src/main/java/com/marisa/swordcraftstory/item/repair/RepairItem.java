@@ -75,6 +75,7 @@ public abstract class RepairItem extends Item {
             }
             level.playSound(null, player, SoundRegistry.SMITH_ITEM_REPAIR.get(), SoundSource.NEUTRAL, 1.0F, 1.0F + (level.random.nextFloat() - level.random.nextFloat()) * 0.4F);
         }
+        itemStack.shrink(1);
         return super.finishUsingItem(itemStack, level, entityLiving);
     }
 }
