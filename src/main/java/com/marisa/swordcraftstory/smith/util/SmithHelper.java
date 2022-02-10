@@ -161,7 +161,7 @@ public class SmithHelper {
         //强刃属性
         i += EdgeHelper.getDur(stack);
         //附魔属性
-        i += Math.max(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, stack), 0) * 5;
+        i += Math.max(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, stack), 0) * 10;
         return Math.max(i, 1);
     }
 

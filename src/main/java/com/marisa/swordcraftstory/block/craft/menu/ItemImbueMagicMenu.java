@@ -124,11 +124,7 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
             return;
         }
         int max = enchantment.getMaxLevel();
-        if (max == 1) {
-            this.resultSlots.setItem(0, ItemStack.EMPTY);
-            return;
-        }
-        if (max == 2 && lv >= 5) {
+        if (max == 1 || ((max == 2 || max == 3) && lv >= 5)) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
