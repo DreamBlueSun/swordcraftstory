@@ -86,7 +86,7 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
             return;
         }
         ItemStack stack3 = this.inputSlots.getItem(ADDITIONAL_SLOT_3);
-        if (stack3.isEmpty() || !(stack3.getItem() == Items.GOLD_BLOCK)) {
+        if (stack3.isEmpty() || !(stack3.getItem() == Items.GOLD_BLOCK || stack3.getItem() == Items.EMERALD_BLOCK)) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
@@ -103,30 +103,32 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
         }
         CompoundTag compoundtag = listtag.getCompound(index - 1);
         final int lv = EnchantmentHelper.getEnchantmentLevel(compoundtag);
-        if (lv >= 10) {
-            this.resultSlots.setItem(0, ItemStack.EMPTY);
-            return;
-        }
         if (stack2.getCount() < 1 || stack3.getCount() < lv) {
             this.resultSlots.setItem(0, ItemStack.EMPTY);
             return;
         }
-        Enchantment enchantment = null;
-        Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(copy);
-        for (Map.Entry<Enchantment, Integer> entry : map.entrySet()) {
-            ResourceLocation registryName = entry.getKey().getRegistryName();
-            if (registryName != null && registryName.equals(EnchantmentHelper.getEnchantmentId(compoundtag))) {
-                enchantment = entry.getKey();
+        if (stack3.getItem() == Items.GOLD_BLOCK) {
+            if (lv >= 10) {
+                this.resultSlots.setItem(0, ItemStack.EMPTY);
+                return;
             }
-        }
-        if (enchantment == null) {
-            this.resultSlots.setItem(0, ItemStack.EMPTY);
-            return;
-        }
-        int max = enchantment.getMaxLevel();
-        if (max == 1 || ((max == 2 || max == 3) && lv >= 5)) {
-            this.resultSlots.setItem(0, ItemStack.EMPTY);
-            return;
+            Enchantment enchantment = null;
+            Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(copy);
+            for (Map.Entry<Enchantment, Integer> entry : map.entrySet()) {
+                ResourceLocation registryName = entry.getKey().getRegistryName();
+                if (registryName != null && registryName.equals(EnchantmentHelper.getEnchantmentId(compoundtag))) {
+                    enchantment = entry.getKey();
+                }
+            }
+            if (enchantment == null) {
+                this.resultSlots.setItem(0, ItemStack.EMPTY);
+                return;
+            }
+            int max = enchantment.getMaxLevel();
+            if (max == 1 || ((max == 2 || max == 3) && lv >= 5)) {
+                this.resultSlots.setItem(0, ItemStack.EMPTY);
+                return;
+            }
         }
         this.access.execute((level, blockPos) -> {
             int power = 0;
@@ -148,7 +150,13 @@ public class ItemImbueMagicMenu extends OneAddThreeGetOneMenu {
                 this.resultSlots.setItem(0, ItemStack.EMPTY);
                 return;
             }
-            EnchantmentHelper.setEnchantmentLevel(compoundtag, lv + 1);
+            if (stack3.getItem() == Items.GOLD_BLOCK) {
+                EnchantmentHelper.setEnchantmentLevel(compoundtag, lv + 1);
+            } else if (lv <= 1) {
+                listtag.remove(index - 1);
+            } else {
+                EnchantmentHelper.setEnchantmentLevel(compoundtag, lv - 1);
+            }
             this.resultSlots.setItem(0, copy);
         });
     }

@@ -12,7 +12,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 
 group = 'com.marisa'
-version = '1.18.1.9'
+version = '1.18.1.10'
 
 java {
     archivesBaseName = 'swordcraftstory'
