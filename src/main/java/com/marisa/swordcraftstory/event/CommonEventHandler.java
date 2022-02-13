@@ -127,9 +127,9 @@ public class CommonEventHandler {
         } else if (event.getEntity() instanceof ThrownTrident trident) {
             Entity owner = trident.getOwner();
             if (owner == null) return;
-            if (owner instanceof ServerPlayer player && StoryUtils.isMeleeWeapon(player.getMainHandItem().getItem())) {
+            if (owner instanceof ServerPlayer player) {
+                ItemStack stack = trident.tridentItem;
                 //玩家投掷
-                ItemStack stack = player.getMainHandItem();
                 if (SmithHelper.isBroken(stack)) return;
                 //消耗耐久
                 if (!player.gameMode.isCreative()) {

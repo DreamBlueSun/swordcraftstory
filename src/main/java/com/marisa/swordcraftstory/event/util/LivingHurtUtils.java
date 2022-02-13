@@ -12,6 +12,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -46,7 +47,12 @@ public class LivingHurtUtils {
         }
         //累积武器熟练度
         if (source.getEntity() instanceof ServerPlayer player) {
-            ItemStack stack = player.getMainHandItem();
+            ItemStack stack;
+            if (source.getDirectEntity() instanceof ThrownTrident trident) {
+                stack = trident.tridentItem;
+            } else {
+                stack = player.getMainHandItem();
+            }
             if (StoryUtils.isWeapon(stack.getItem())) {
                 EdgeHelper.incrTec(stack);
             }

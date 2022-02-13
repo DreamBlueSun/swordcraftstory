@@ -67,7 +67,7 @@ public class Damage {
     }
 
     public final static double ARROW_BASE_DAMAGE = 7.0D;
-    public final static double TRIDENT_BASE_DAMAGE = 9.0D;
+//    public final static double TRIDENT_BASE_DAMAGE = 9.0D;
 
     /**
      * 伤害属性初始化
@@ -102,10 +102,10 @@ public class Damage {
                 try {
                     this.p = amount;
                     if (this.amount > 0.0F && this.source.getDirectEntity() instanceof ThrownTrident trident) {
-                        double baseDamage = trident.getPickResult() != null ? SmithHelper.getItemAtk(trident.getPickResult().getItem()) : Damage.TRIDENT_BASE_DAMAGE;
+                        ItemStack stack = trident.tridentItem;
+                        double baseDamage = SmithHelper.getItemAtk(stack.getItem());
                         if (this.source.getEntity() instanceof ServerPlayer player) {
                             //玩家投掷
-                            ItemStack stack = player.getMainHandItem();
                             if (SmithHelper.isBroken(stack)) {
                                 this.p = 1.0F;
                                 return;
